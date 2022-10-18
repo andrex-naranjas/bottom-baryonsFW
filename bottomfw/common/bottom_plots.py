@@ -7,6 +7,7 @@
           H. Garcia-Tecocoatzi
  ---------------------------------------------------------------
 '''
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
@@ -132,4 +133,6 @@ class BottomPlots:
         at = AnchoredText(baryon_name, prop=dict(size=17.5), frameon=False, loc='upper left')
         at.patch.set_boxstyle("round,pad=0.,rounding_size=0.2")
         ax.add_artist(at)
+        if not os.path.exists(self.m_workpath+"/plots/"):
+            os.mkdir(self.m_workpath+"/plots/")
         plt.savefig(self.m_workpath+'/plots/spectra_'+self.m_baryons+self.m_diquark+'.pdf')

@@ -1,31 +1,36 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''
+"""
 ---------------------------------------------------------------
-  Code to calculate heavy-baryon decay widths
- authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
-          H. Garcia-Tecocoatzi
- ---------------------------------------------------------------
-'''
-# decay width class
+  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
+           H. Garcia-Tecocoatzi
+---------------------------------------------------------------
+"""
 from decays.decay_wrapper import decay
 import decays.decay_utils as du
 import numpy as np
 
-# baryon FLAG: 1 -> omega, 2->cascade_6, 3->sigma,# 4 -> lambda, 5-> cascade_3
-# ModEx  FLAG: 0-> ground(grd), 1 -> lambda(lam), 2->rho, 3->rop_lam(rpl), 4->rop_rho(rpr), 5->mix  Excitation
-# decPr  FLAG: 3->Xi'+Pi, 5->Sigma+K  decayProduct Flag
 
 class DecayWidths:
+    """
+    Class that administrates the decay width calculations of the hevay baryon widths done by the C++ class
+    The class calls the python wrapper and feeds the functions with the needed quatumn numbers
+    and masses. 
 
+    baryon FLAG: 1 -> omega, 2->cascade_6, 3->sigma,# 4 -> lambda, 5-> cascade_3
+    ModEx  FLAG: 0-> ground(grd), 1 -> lambda(lam), 2->rho, 3->rop_lam(rpl), 4->rop_rho(rpr), 5->mix  Excitation
+    decPr  FLAG: 3->Xi'+Pi, 5->Sigma+K  decayProduct Flag
+    """
     def __init__(self, bootstrap=False, baryons='', workpath="."):
         self.m_width = decay(workpath)
         self.fetch_decay_masses(bootstrap)
         self.set_gamma_val(bootstrap)
-        self.channel_widths_vector = []
-        
+        self.channel_widths_vector = []        
         
     def total_decay_width(self, baryons, k_prim, massA, SA_val, L_val, JA_val, SL_val, ModEx_val, bootstrap=False, gamma_val=None, m1=0, m2=0, m3=0):
+        """
+        Method that calls the wrapper and sums the individual decay widths
+        """
         MassA = massA/1000.0
         SA_qm = SA_val
         LA_qm = L_val
@@ -69,23 +74,28 @@ class DecayWidths:
 
 
     def gamma_fitted(self, bootstrap=False):
-        # gamma=17.25/np.sqrt(7) # old value
+        """
+        gamma=17.25/np.sqrt(7) # old value
+        """
         if not bootstrap: return self.gamma_fit
         else:
             return np.random.choice(self.gauss_gamma, size=None)
-
         
     def baryon_flag(self, baryons):
-        #omegas,cascades,sigmas,lambdas,cascades_anti3
+        """
+        Method to parse the baryons names to integers
+        """
         if(baryons=='omegas'):           return 1
         elif(baryons=='cascades'):       return 2
         elif(baryons=='sigmas'):         return 3
         elif(baryons=='lambdas'):        return 4
         elif(baryons=='cascades_anti3'): return 5
         
-
     def ModEx_flag(self, ModEx_val):
-        # grd=0, lam =1 , rho=2, rpl=3, rpr=4, mix=5
+        """
+        Method to parse the h.o mode to integers
+        grd=0, lam =1 , rho=2, rpl=3, rpr=4, mix=5
+        """
         if(ModEx_val=='grd'):   return 0
         elif(ModEx_val=='lam'): return 1
         elif(ModEx_val=='rho'): return 2
@@ -93,19 +103,20 @@ class DecayWidths:
         elif(ModEx_val=='rpr'): return 4
         elif(ModEx_val=='mix'): return 5
 
-
     def n_channels(self, baryons):
-        # set number of decay channels has each baryon
-        # omegas,cascades,sigmas,lambdas,cascades_anti3
+        """
+        Method to set number of decay channels has each baryon
+        """
         if(baryons=='omegas'):           return 12  +2
         elif(baryons=='cascades'):       return 7+17+4
         elif(baryons=='sigmas'):         return 5+13+8
         elif(baryons=='lambdas'):        return 3+10+1
-        elif(baryons=='cascades_anti3'): return 7+17+4
-        
+        elif(baryons=='cascades_anti3'): return 7+17+4        
         
     def reduced_masses(self, baryons, m1_input, m2_input, m3_input):
-        # calculate reduced masses of the harmonic oscillator
+        """
+        Method to calculate reduced masses of the harmonic oscillator
+        """
         m_lam,m_rho=0,0
         if(baryons=='omegas'):
             m_rho = m2_input
@@ -118,16 +129,19 @@ class DecayWidths:
              m_lam = (3*m3_input*m1_input)/(2*m3_input+m1_input)
              
         return m_lam,m_rho
-            
-        
+                    
     def alphas(self, k_prim, m_lam_rho):
+        """
+        Method to calculate the decay alphas
+        """
         value1 = (np.sqrt(3./m_lam_rho)) * k_prim
         value2 = value1*m_lam_rho
         return np.sqrt(value2)/1000. # transform from GeV -> MeV
-
             
     def decay_masses(self, bootstrap, baryons, decPr):
-        # fetch mass of the decay products        
+        """
+        Method to fetch mass of the decay products
+        """
         if(baryons=='omegas'):
             if(decPr==1):
                 if not bootstrap: return self.xi_mass,   self.kaon_mass

@@ -26,12 +26,14 @@ class BottomTables:
         self.m_workpath = workpath
         self.m_baryons = baryons
         self.m_batch = batch_results
-        self.m_load_data(baryons)
-        
+        self.m_load_data(baryons)        
 
     def single_model_table(self):
-        # di or three quark to table to appear in the paper
-                            
+        """
+        Diquark or three quark to table to appear in the paper
+        """
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
         f_paper = open(self.m_workpath+'/tables/masses_'+self.m_baryons+'_paper.tex', "w")
         print("\\begin{tabular}{c | c  c c c }\hline \hline ", file=f_paper)
         print(" State     & Predicted Mass   & Experimental Mass & Predicted Width & Experimental Width   \\\ ", file=f_paper)
@@ -55,10 +57,14 @@ class BottomTables:
         print('\end{tabular}', file=f_paper)
         print("\caption{Every quantity is in MeV, except for percentage differences. States: $", self.m_baryons, "$}",file=f_paper)
         print("\label{tab:"+name+"_mass_"+label+"}", file=f_paper)
-        
 
+        
     def combined_model_table(self):
-        # combined three-quark and diquark
+        """
+        Combined three-quark and diquark
+        """
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
         f_paper = open(self.m_workpath+'/tables/masses_'+self.m_baryons+'_paper.tex', "w")
         baryon_name = du.baryon_name(self.m_baryons)
         flavor_name = du.flavor_label(self.m_baryons)
@@ -123,6 +129,8 @@ class BottomTables:
     def decay_indi_table(self):
         
         df = pd.read_csv(self.m_workpath+'/tables/decays_indi_'+self.m_baryons+'_summary.csv')
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
         f_decay_indi = open(self.m_workpath+'/tables/decay_indi_'+self.m_baryons+'_paper.tex', "w")
         n_decay_channels = int((len(df.columns)-8)/3)
         baryons = self.m_baryons
@@ -156,7 +164,9 @@ class BottomTables:
 
 
     def latex_string_value_error(self, value, decimals=2, units='Mev'):
-        # we calculate the mean value, the asymmetric error and return a latex string
+        """
+        Method to calculate the mean value, the asymmetric error and return a latex string
+        """
         N = len(value)
         qntl_up = int(N*0.975) # 95% C.L.
         qntl_dn = int(N*0.025)
@@ -168,8 +178,9 @@ class BottomTables:
 
         
     def parameter_combined(self):
-        # produce the combined parameter table
-        
+        """
+        Method to produce the combined parameter table
+        """     
         M1 = self.latex_string_value_error(self.m_sampled_m1, decimals=2, units='MeV')
         M2 = self.latex_string_value_error(self.m_sampled_m2, decimals=2, units='MeV')
         M3 = self.latex_string_value_error(self.m_sampled_m3, decimals=2, units='MeV')                                   
@@ -190,6 +201,8 @@ class BottomTables:
         G_di= self.latex_string_value_error(self.m_sampled_g_di, decimals=2, units='MeV')
 
         dd = '$\\dagger$'
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
         f = open(self.m_workpath+'/tables/fit_parameters_combined.tex', "w")
         print("\\begin{tabular}{c | c c}\hline \hline", file=f)
         print("            &  three-quark & diquark \\\ ", file=f)
@@ -211,9 +224,12 @@ class BottomTables:
         print("\label{tab:comb_fit}", file=f)
         f.close()
 
-
     def correlation_table_three(self):
-        # correlation matrix table for the three quark system    
+        """
+        Method to write correlation matrix table for the three quark system
+        """
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
         f = open(self.m_workpath+'/tables/correlation_3quark.tex', "w")
         print("\\begin{tabular}{c  c  c  c  c  c  c  c  c}\hline \hline", file=f)
         print("         &  $m_{b}$       &     $m_{s}$    &    $m_{n}$  &      $K_b$    & $P_S$ & $P_{SL}$ & $P_I$ & $P_f$ \\\ \hline", file=f)
@@ -231,11 +247,14 @@ class BottomTables:
         f.close()
 
     def correlation_table_di(self):
-        # correlation matrix table for the diquark system    
-                
+        """
+        Method to write correlation matrix table for the diquark system    
+        """                
         md1="$m_{D_{\\Omega}}$"
         md2="$m_{D_{\\Xi}}$"
         md3="$m_{D_{\\Sigma,\\Lambda}}$"
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
         f = open(self.m_workpath+'/tables/correlation_diquark.tex', "w")
         print("\\begin{tabular}{c | c c c c c c c c c}\hline \hline", file=f)
         print("         &  $m_{b}$",  "&",  md1, "&",  md2,  "&", md3  ,"&  $K_b$   & $P_S$ & $P_{SL}$ & $P_{I}$ & $P_f$ \\\ \hline", file=f)
@@ -255,8 +274,10 @@ class BottomTables:
 
 
     def m_load_data(self, baryons):
-        # load the data for all the tables
-        # three and diquark both already computed
+        """
+        Method to load the data for all the tables
+        -- three and diquark both already computed
+        """
         data_frame = pd.read_csv(self.m_workpath+"/tables/masses_" + baryons + "_summary.csv")
         self.m_mass=        data_frame['mass']
         self.m_error_up=    data_frame['error_up']

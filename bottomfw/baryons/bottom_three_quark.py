@@ -89,12 +89,12 @@ class BottomThreeQuark:
         Method to call the calculations and save them (paper latex tables, here we include all the states)
         The parameters are redifined. Will clean the input param
         """
-        self.reload_quantum_param(self.baryons) #available: baryons=omegas,cascades,sigmas,lambdas,cascades_anti3
+        self.reload_quantum_param(self.m_baryons) #available: baryons=omegas,cascades,sigmas,lambdas,cascades_anti3
         if prev_params: # use the parameters of the previous paper
             self.previous_parameters()
             self.previous_parameters_uncertainty(N_boots=len(self.sampled_k)) # set params. with previous-paper gauss shape (arbitrary error)
         # compute masses/decays and save them in csv files
-        self.compute_save_predictions(baryons, bootstrap=bootstrap, decay_width=decay_width, bootstrap_width=bootstrap_width)           
+        self.compute_save_predictions(self.m_baryons, bootstrap=bootstrap, decay_width=decay_width, bootstrap_width=bootstrap_width)           
 
     def compute_save_predictions(self, baryons='', bootstrap=False, decay_width=False, bootstrap_width=False):
         """
@@ -162,6 +162,8 @@ class BottomThreeQuark:
                         df_decays_indi[channel_names[k+1]]=decay_columns[k+1]                    
                     if self.m_batch_number is None:
                         if df_decays_indi is not None:
+                            if not os.path.exists(self.m_workpath+"/tables/decays_indi/"):
+                                os.mkdir(self.m_workpath+"/tables/decays_indi/")                            
                             df_decays_indi.to_csv(self.m_workpath+"/tables/decays_indi/decays_state_"+str(i)+"_"+self.m_baryons+".csv", index=False)
                     else:
                         if df_decays_indi is not None:  # save results for batch a given batch job
@@ -184,18 +186,28 @@ class BottomThreeQuark:
         if len(decays_csv) != 0:
             keys_names = [str(i)+"_state" for i in range(len(decays_csv))]
             df_decays = pd.concat(decays_csv, axis=1, keys=keys_names)
-            
+        # save in csv files
         if self.m_batch_number is None:
             if df_masses is not None:
+                if not os.path.exists(self.m_workpath+"/tables/"):
+                    os.mkdir(self.m_workpath+"/tables/")
                 df_masses.to_csv(self.m_workpath+"/tables/masses_states_"+self.m_baryons+".csv", index=False)
             if df_omegas is not None:
+                if not os.path.exists(self.m_workpath+"/tables/"):
+                    os.mkdir(self.m_workpath+"/tables/")
                 df_omegas.to_csv(self.m_workpath+"/tables/harmonic_states_"+self.m_baryons+".csv", index=False)
             if df_decays is not None:
+                if not os.path.exists(self.m_workpath+"/tables/"):
+                    os.mkdir(self.m_workpath+"/tables/")
                 df_decays.to_csv(self.m_workpath+"/tables/decays_states_"+self.m_baryons+".csv", index=False)                
         else:
             if df_masses is not None:  # save results for batch a given batch job
+                if not os.path.exists(self.m_workpath+"/batch_results/"+self.m_baryons+"/mass_states/"):
+                    os.mkdir(self.m_workpath+"/batch_results/"+self.m_baryons+"/mass_states/")
                 df_masses.to_csv(self.m_workpath+"/batch_results/"+self.m_baryons+"/mass_states/"+str(self.m_batch_number)+".csv", index=False)
             if df_decays is not None:
+                if not os.path.exists(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/"):
+                    os.mkdir(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/")
                 df_decays.to_csv(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/"+str(self.m_batch_number)+".csv", index=False)
     
     def fetch_values(self):

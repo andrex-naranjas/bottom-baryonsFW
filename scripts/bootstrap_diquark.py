@@ -2,22 +2,20 @@
 # -*- coding: utf-8 -*-
 """
 --------------------------------------------------------------------------
- Code to obtain uncertainties of heavy baryon mass spectrum via bootstrap
+ Script to obtain uncertainties of heavy baryon mass spectrum via bootstrap
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch) and
           H. Garcia-Tecocoatzi
  ------------------------------------------------------------------------
 """
 import sys
-from os import getcwd
+import os
 from iminuit import Minuit
 import numpy as np
 import datetime
 import pandas as pd
-
 # framework modules
-import bottomfw.common.data_visualization as dv
-import bottom.baryons.data_preparation as dp
-from bottom.baryons.bottom_diquark import BottomDiquark
+import bottomfw.baryons.data_preparation as dp
+from bottomfw.baryons.bottom_diquark import BottomDiquark
 
 
 if len(sys.argv) <= 1:
@@ -33,7 +31,7 @@ if len(sys.argv) == 4:
     batch_number = sys.argv[2]
     workpath = sys.argv[3]
 else:
-    workpath = getcwd()
+    workpath = os.getcwd()
 
 # input parameters
 param_v,param_w,param_x,param_y,param_z,\
@@ -124,7 +122,7 @@ gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # al
 # plug here the sigma_0 optimization lines from data_utils.py
 
 # construct the simulated sampling distribution (bootstrap technique)
-for _ in range(1000): # max 10000 with decays included, computationally expensive
+for _ in range(100): # max 10000 with decays included, computationally expensive
 
     exp_m = np.array([ # measured baryon masses
         # omegas
@@ -220,8 +218,12 @@ df = pd.DataFrame({"Md1" : sampled_md1,"Md2" : sampled_md2,"Md3" : sampled_md3,
                    "MB"  : sampled_mb,"K" : sampled_k, "A" : sampled_a,
                    "B": sampled_b,    "E" : sampled_e, "G" : sampled_g})
 if batch_number is None:
+    if not os.path.exists(workpath+"/tables/"):
+        os.mkdir(workpath+"/tables/")
     df.to_csv(workpath+"/tables/bootstrap_param_diquark_"+run_baryons+".csv", index=False)
 else:
+    if not os.path.exists(workpath+"/batch_results_diquark/"+run_baryons+"/parameters/"):
+        os.mkdir(workpath+"/batch_results_diquark/"+run_baryons+"/parameters/")
     df.to_csv(workpath+"/batch_results_diquark/"+run_baryons+"/parameters/"+str(batch_number)+".csv", index=False)
 
 # create dictionaries
@@ -241,15 +243,21 @@ corr_mat_diquark ={
 # save bootstrap correlation parameters
 df = pd.DataFrame(corr_mat_diquark)
 if batch_number is None:
+    if not os.path.exists(workpath+"/tables/"):
+        os.mkdir(workpath+"/tables/")
     df.to_csv(workpath+"/tables/bootstrap_correlation_diquark_"+run_baryons+".csv", index=False)
 else:
+    if not os.path.exists(workpath+"/batch_results_diquark/"+run_baryons+"/correlation/"):
+        os.mkdir(workpath+"/batch_results_diquark/"+run_baryons+"/correlation/")
     df.to_csv(workpath+"/batch_results_diquark/"+run_baryons+"/correlation/"+str(batch_number)+".csv", index=False)
 
 # calculate the results using bootstrap simulation above
-results = BottomResults(param, sampled, corr_mat_diquark, asymmetric=True, name='All', batch_number=batch_number, workpath=workpath)
+results = BottomDiquark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_diquark, asymmetric=True, batch_number=batch_number, workpath=workpath)
+results.fetch_values()
+
 print('Getting paper results for:', run_baryons)
 # # omegas,cascades,sigmas,lambdas,cascades_anti3
-results.paper_results_predictions(baryons=run_baryons, bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)
+results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)
 
 end = datetime.datetime.now()
 elapsed_time = end - start

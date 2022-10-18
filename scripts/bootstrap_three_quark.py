@@ -2,29 +2,26 @@
 # -*- coding: utf-8 -*-
 """
 ------------------------------------------------------------------------------
- Code to obtain uncertainties of heavy mass spectrum and widhts via bootstrap
+ Script to obtain uncertainties of heavy mass spectrum and widhts via bootstrap
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch) and
           H. Garcia-Tecocoatzi
  -----------------------------------------------------------------------------
 """
 import sys
-from os import getcwd
+import os
 from iminuit import Minuit
 import numpy as np
 import datetime
 import pandas as pd
-from sklearn.utils import resample
 # framework modules
 from bottomfw.baryons import data_preparation as dp
 from bottomfw.baryons.bottom_three_quark import BottomThreeQuark
 
-# bottomfw/baryons
 
 if len(sys.argv) <= 1:
     sys.exit('Provide bottom states group name. Try again!')
 
 #states = 'omega' # All, omega, cascades, sigmaLamb
-# states = sys.argv[1]
 run_baryons = sys.argv[1]
 
 # for running batch jobs with htcondor
@@ -33,7 +30,7 @@ if len(sys.argv) == 4:
     batch_number = sys.argv[2]
     workpath = sys.argv[3]
 else:
-    workpath = getcwd()
+    workpath = os.getcwd()
 
 # input parameters
 param_v,param_w,param_x,param_y,param_z,param_q1,param_q2,param_q3,\
@@ -66,11 +63,6 @@ def fit(least_squares):
     m.limits['m1'] = (4000,6000)
     m.limits['m2'] = (400,470)
     m.limits['m3'] = (250,300)
-    # # m.limits['k'] = (4000,6000)
-    # m.limits['a'] = (0,1000)
-    # m.limits['b'] = (1,1000)
-    # m.limits['e'] = (0,1000)
-    # m.limits['g'] = (0,1000)    
     m.errordef=Minuit.LEAST_SQUARES
     m.migrad()
     return m
@@ -128,7 +120,7 @@ gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # al
 # plug here the sigma_0 optimization lines from data_utils.py
 
 # construct the simulated sampling distribution (bootstrap technique)
-for i in range(1000): # max 10000 with decays included, computationally expensive
+for i in range(100): # max 10000 with decays included, computationally expensive
     #if(states=='All'):
     exp_m = np.array([ # measured baryon masses
         # omegas
@@ -214,9 +206,14 @@ for i in range(1000): # max 10000 with decays included, computationally expensiv
 df = pd.DataFrame({"M1" : sampled_m1,"M2" : sampled_m2,"M3" : sampled_m3,
                    "K" : sampled_k,   "A" : sampled_a,
                    "B": sampled_b,    "E" : sampled_e, "G" : sampled_g})
+
 if batch_number is None:
+    if not os.path.exists(workpath+"/tables/"):
+        os.mkdir(workpath+"/tables/")        
     df.to_csv(workpath+"/tables/bootstrap_param_"+run_baryons+".csv", index=False)
 else:
+    if not os.path.exists(workpath+"/batch_results/"+run_baryons+"/parameters/"):
+        os.mkdir(workpath+"/batch_results/"+run_baryons+"/parameters/")
     df.to_csv(workpath+"/batch_results/"+run_baryons+"/parameters/"+str(batch_number)+".csv", index=False)
 
 # create dictionaries
@@ -232,14 +229,18 @@ corr_mat_ext ={'rho_m2m1':rho_m2m1, 'rho_m3m1':rho_m3m1, 'rho_km1':rho_km1, 'rho
 
 df = pd.DataFrame(corr_mat_ext)
 if batch_number is None:
+    if not os.path.exists(workpath+"/tables/"):
+        os.mkdir(workpath+"/tables/")
     df.to_csv(workpath+"/tables/bootstrap_correlation_"+run_baryons+".csv", index=False)
 else:
+    if not os.path.exists(workpath+"/batch_results/"+run_baryons+"/parameters/"):
+        os.mkdir(workpath+"/batch_results/"+run_baryons+"/parameters/")
     df.to_csv(workpath+"/batch_results/"+run_baryons+"/correlation/"+str(batch_number)+".csv", index=False)
 
 # calculate the masses and decays using the bootstrap simulation above
-results = BottomThreeQuark(run_baryons, param, sampled, corr_mat_ext, asymmetric=True, name='All', batch_number=batch_number, workpath=workpath)
+results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=True,
+                           decay_width=False, bootstrap_width=False, batch_number=batch_number, workpath=workpath)
 results.fetch_values()
-
 
 print('Getting paper results for:', run_baryons)
 #input()

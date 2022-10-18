@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''
+"""
 ---------------------------------------------------------------
- code to obtain uncertainties of quarkonium mass spectrum
- authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
+ Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
           H. Garcia-Tecocoatzi
- ---------------------------------------------------------------
-'''
-# print results for journal
+---------------------------------------------------------------
+"""
 import sys
-from os import getcwd
-import data_visualization as dv
-from bottom_tables import BottomTables
-from bottom_plots import BottomPlots
 import pandas as pd
+from os import getcwd
+# framework includes
+import bottomfw.common.data_visualization as dv
+from bottomfw.common.bottom_tables import BottomTables
+from bottomfw.common.bottom_plots import BottomPlots
 
 
+# print results for journal
 if len(sys.argv) <= 1:
     sys.exit('Provide bottom states group name. Try again!')
 

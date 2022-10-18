@@ -6,10 +6,11 @@
           H. Garcia-Tecocoatzi
  ---------------------------------------------------------------
 """
+import os
 import numpy as np
 import pandas as pd
 # framework includes
-import data_preparation as dp
+from bottomfw.baryons import data_preparation as dp
 from decays.decay_width import DecayWidths
 from bottomfw.baryons import bottom_states as bs
 
@@ -18,18 +19,17 @@ class BottomDiquark:
     """
     Class that computes the mass and decay widths of three-quark heavy baryons.
     """    
-    def __init__(self, baryons, params, sampled, corr_mat, asymmetric, name, batch_number=None, workpath='.'):
+    def __init__(self, baryons, params, sampled, corr_mat, asymmetric, batch_number=None, workpath='.'):
         self.params = params
         self.sampled = sampled
         self.corr_mat = corr_mat
         self.asymmetric = asymmetric
-        self.name = name
         self.m_batch_number = batch_number
         self.m_baryons = baryons
         self.m_workpath = workpath
     
     def model_mass(self, i, j, sampled=False):
-         """
+        """
         Method that computes baryon masses according to model
         """
         if not sampled: # here the mass is calculated using the average value of parameters
@@ -62,17 +62,14 @@ class BottomDiquark:
         Method to call the calculations and save them (paper latex tables, here we include all the states)
         The parameters are redifined. Will clean the input param
         """
-        self.reload_quantum_param(self.baryons) #available: baryons=omegas,cascades,sigmas,lambdas,cascades_anti3
+        self.reload_quantum_param(self.m_baryons) #available: baryons=omegas,cascades,sigmas,lambdas,cascades_anti3
         
         if prev_params: # use the parameters of the previous paper
             self.previous_parameters()
             self.previous_parameters_uncertainty(N_boots=len(self.sampled_k)) # set params. with previous-paper gauss shape (arbitrary error)
 
-        # create decay class as a global object!
-        if decay_width: self.baryon_decay = DecayWidths(bootstrap_width, baryons)
-
         # compute masses/decays and save them in csv files
-        self.compute_save_predictions(baryons, bootstrap=bootstrap, decay_width=decay_width, bootstrap_width=bootstrap_width)           
+        self.compute_save_predictions(self.m_baryons, bootstrap=bootstrap, decay_width=decay_width, bootstrap_width=bootstrap_width)           
                     
         
     def compute_save_predictions(self, baryons='', bootstrap=False, decay_width=False, bootstrap_width=False):
@@ -121,18 +118,25 @@ class BottomDiquark:
 
         if len(decays_csv) != 0:
             keys_names = [str(i)+"_state" for i in range(len(decays_csv))]
-            df_decays = pd.concat(decays_csv, axis=1, keys=keys_names)
-            
-
-        if self.m_batch_number is None:  # save results for batch
+            df_decays = pd.concat(decays_csv, axis=1, keys=keys_names)            
+        # save results in cvs files
+        if self.m_batch_number is None:
             if df_masses is not None:
+                if not os.path.exists(self.m_workpath+"/tables/"):
+                    os.mkdir(self.m_workpath+"/tables/")
                 df_masses.to_csv(self.m_workpath+"/tables/masses_states_diquark_"+self.m_baryons+".csv", index=False)
             if df_decays is not None:
+                if not os.path.exists(self.m_workpath+"/tables/"):
+                    os.mkdir(self.m_workpath+"/tables/")
                 df_decays.to_csv(self.m_workpath+"/tables/decays_states_diquark_"+self.m_baryons+".csv", index=False)                
         else:
             if df_masses is not None:
+                if not os.path.exists(self.m_workpath+"/batch_results_diquark/"+self.m_baryons+"/mass_states/"):
+                    os.mkdir(self.m_workpath+"/batch_results_diquark/"+self.m_baryons+"/mass_states/")
                 df_masses.to_csv(self.m_workpath+"/batch_results_diquark/"+self.m_baryons+"/mass_states/"+str(self.m_batch_number)+".csv", index=False)
             if df_decays is not None:
+                if not os.path.exists(self.m_workpath+"/batch_results_diquark/"+self.m_baryons+"/decay_states/"):
+                    os.mkdir(self.m_workpath+"/batch_results_diquark/"+self.m_baryons+"/decay_states/")                
                 df_decays.to_csv(self.m_workpath+"/batch_results_diquark/"+self.m_baryons+"/decay_states/"+str(self.m_batch_number)+".csv", index=False)
                 
     def fetch_values(self):
@@ -218,7 +222,6 @@ class BottomDiquark:
         """
         # get the original quantum numbers and experimental data
         state,sum_mass,J_tot,S_tot,L_tot,I_tot,SU_tot,HO_n,SL,ModEx = bs.states_mass_diquark(baryons)
-
         # get the hamiltonian factors based on the quatum numbers
         param_v, param_q1, param_q2, param_q3, param_is_rho, param_is_lam,\
             param_is_omega, param_is_cascade, param_is_sigma,\
@@ -252,7 +255,7 @@ class BottomDiquark:
         self.ModEx  = ModEx
 
     def previous_parameters(self):
-                """
+        """
         Set parameters used in previous publication
         """
         self.Kp =  4847.67
