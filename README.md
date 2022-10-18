@@ -24,6 +24,7 @@ To install the framework you need anaconda and git on a linux machine. In a term
   cd ./decays/DecayWidths/
   make obj
   make
+  cd ../..
   ```
 5. Minimal run:
   ```
