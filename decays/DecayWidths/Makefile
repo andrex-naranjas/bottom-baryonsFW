@@ -4,7 +4,7 @@ INCDIR = -Iinc
 LIBS = -lstdc++ -L/usr/local/lib -lm #$(shell root-config --evelibs) -lMLP -lMinuit -lTreePlayer -lTMVA -lTMVAGui -lXMLIO -lMLP -lm -lRooFit -lRooFitCore
 CC = g++ -v
 
-CFLAGS = -g -ansi -pedantic -W -Wall -Wextra -std=c++17 -m64 -fPIC
+CFLAGS = -g -ansi -pedantic -W -Wall -Wextra -std=c++11 -m64 -fPIC #-std=c++17
 LDFLAGS= -shared
 
 TARGET = libbottomdecay.so

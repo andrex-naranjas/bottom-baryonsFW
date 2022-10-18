@@ -19,7 +19,7 @@ To install the framework you need anaconda and git on a linux machine. In the te
   conda activate bottom
   conda develop .
   ```
-4. Compile the decay widths C++ code (here we use C++17):
+4. Compile the decay widths C++ code (here we use C++11):
   ```
   cd ./decays/DecayWidths/
   make obj
