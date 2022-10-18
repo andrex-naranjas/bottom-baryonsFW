@@ -1,6 +1,6 @@
-# Bottom baryons phenomenology
+# Bottom baryons decay widths and mass spectra
 
-Codes to compute bottom baryon spectra and decay widths. A fit is performed to obtain the model parameters. Errors are propagate via bootstrap Monte Carlo Gaussian sampling
+Code to compute bottom baryon spectra and decay widths. A fit is performed to obtain the model parameters. Errors are propagate via bootstrap Monte Carlo Gaussian sampling
 
 ## Framework installation
 
@@ -19,7 +19,7 @@ To install the framework you need anaconda and git on a linux machine. In the te
   conda activate bottom
   conda develop .
   ```
-4. Compile the decays width C++ (here we use C++17):
+4. Compile the decay widths C++ code (here we use C++17):
   ```
   cd ./decays/DecayWidths/
   make obj
@@ -31,3 +31,4 @@ To install the framework you need anaconda and git on a linux machine. In the te
   python3 ./scripts/bootstrap_diquark.py omegas
   python3 ./scripts/print_results.py omegas
   ```
+X. Check that your plots ./plots directory
