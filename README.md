@@ -4,7 +4,7 @@ Code to compute bottom baryon spectra and decay widths. A fit is performed to ob
 
 ## Framework installation
 
-To install the framework you need anaconda and git on a linux machine. In the terminal(powershell):
+To install the framework you need anaconda and git on a linux machine. In a terminal type:
 1. Clone the repository:
   ```
   git clone git@github.com:andrex-naranjas/bottom-baryonsFW.git
@@ -31,4 +31,4 @@ To install the framework you need anaconda and git on a linux machine. In the te
   python3 ./scripts/bootstrap_diquark.py omegas
   python3 ./scripts/print_results.py omegas
   ```
-X. Check that your plots ./plots directory
+6. Check that your plots and tables are the newly created directories
