@@ -1,4 +1,4 @@
-# Bottom baryons decay widths and mass spectra
+# Bottom baryons decay widths and mass spectra Ailier prueba
 
 Code to compute bottom baryon spectra and decay widths. A fit is performed to obtain the model parameters. Errors are propagate via bootstrap Monte Carlo Gaussian sampling.
 
