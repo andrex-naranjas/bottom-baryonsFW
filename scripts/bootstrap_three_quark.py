@@ -5,7 +5,7 @@
  Script to obtain uncertainties of heavy mass spectrum and widhts via bootstrap
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch) and
           H. Garcia-Tecocoatzi
- -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 """
 import sys
 import os

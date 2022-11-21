@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 ---------------------------------------------------------------
   Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
@@ -516,14 +514,14 @@ class DecayWidths:
         self.Sigma_8_mass     = 1.11932
         self.Sigma_10_mass    = 1.38460
         # Bottom baryons
-        self.lambda_mass      = 2.28646
-        self.xi_mass          = 2.46908
-        self.xi_p_mass        = 2.57850
-        self.xi_s_mass        = 2.64563
-        self.sigma_mass       = 2.45350
-        self.sigma_s_mass     = 2.51813
-        self.omega_mass       = 2.69520
-        self.omega_s_mass     = 2.76590
+        self.lambda_mass      = 5.61960 # +- 0.00017
+        self.xi_mass          = 5.79700 # +- 0.00060.... Difference with Xb0=5.9 +- 0.6 MeV
+        self.xi_p_mass        = 5.93502 # +- 0.00005
+        self.xi_s_mass        = 5.95230 # +- 0.00006 (third state, not star)
+        self.sigma_mass       = 5.81056 # +- 0.00025.... Difference of + and - == 5.06+-0.18 MeV
+        self.sigma_s_mass     = 5.83032 # +- 0.00030.... Difference of + and - == 4.37+-0.33 OK
+        self.omega_mass       = 6.04520 # +- 0.00120
+        self.omega_s_mass     = 6.31560 # +- 0.00060 (third state, not star) 
         
         if(bootstrap):
             self.gauss_pion        = np.random.normal(0.13725, 0.00295, 10000)
@@ -550,17 +548,17 @@ class DecayWidths:
             self.gauss_Sigma_8     = np.random.normal(1.11932, 0.00340, 10000)
             self.gauss_Sigma_10    = np.random.normal(1.38460, 0.00460, 10000)
             # Bottom baryons
-            self.gauss_lambda      = np.random.normal(2.28646, 0.00014, 10000)
-            self.gauss_xi          = np.random.normal(2.46908, 0.00158, 10000)
-            self.gauss_xi_p        = np.random.normal(2.57850, 0.00100, 10000)
-            self.gauss_xi_s        = np.random.normal(2.64563, 0.00100, 10000)
-            self.gauss_sigma       = np.random.normal(2.45350, 0.00090, 10000)
-            self.gauss_sigma_s     = np.random.normal(2.51813, 0.00280, 10000)
-            self.gauss_omega       = np.random.normal(2.69520, 0.00170, 10000)
-            self.gauss_omega_s     = np.random.normal(2.76590, 0.00200, 10000)
+            self.gauss_lambda      = np.random.normal(5.61960, 0.00017, 10000)
+            self.gauss_xi          = np.random.normal(5.79700, 0.00060, 10000)
+            self.gauss_xi_p        = np.random.normal(5.93502, 0.00005, 10000)
+            self.gauss_xi_s        = np.random.normal(5.95230, 0.00006, 10000) # (third state, not star)
+            self.gauss_sigma       = np.random.normal(5.81056, 0.00025, 10000)
+            self.gauss_sigma_s     = np.random.normal(5.83032, 0.00030, 10000)
+            self.gauss_omega       = np.random.normal(6.04520, 0.00120, 10000)
+            self.gauss_omega_s     = np.random.normal(6.31560, 0.00060, 10000) # (third state, not star)
             
     def set_gamma_val(self, bootstrap):
         
-        self.gamma_fit = 19.600666667 # 12.886726481799654 * 1.5 #  old 12.786320816 # even older 11.97 0.46265562598890014 * 1.5 * 5
+        self.gamma_fit = 10 # 12.886726481799654 * 1.5 #  old 12.786320816 # even older 11.97 0.46265562598890014 * 1.5 * 5
         if(bootstrap):
             self.gauss_gamma = np.random.normal(19.600666667, np.power( 2.47**2 + 4.44**2, 0.5) , 10000)
