@@ -33,7 +33,7 @@ if len(sys.argv) == 4:
 else:
     workpath = os.getcwd()
 
-fit_type = "All"
+fit_type = "trip"
 # input parameters
 param_v,param_w,param_x,param_y,param_z,\
     param_is_omega,param_is_cascade,param_is_sigma = dp.fetch_data_diquark(fit_type=fit_type)
@@ -296,3 +296,7 @@ results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_pa
 end = datetime.datetime.now()
 elapsed_time = end - start
 print("Elapsed total time = " + str(elapsed_time))
+print(round(sampled_md1.mean()), "md1 omega")
+print(round(sampled_md2.mean()), "md2 cascade")
+print(round(sampled_md3.mean()), "md3 sigma, lambda")
+print(round(sampled_mb.mean()), "mb")
