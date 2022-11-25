@@ -271,7 +271,7 @@ corr_mat_diquark ={
     'rho_md2md1':rho_md2md1,'rho_md3md1':rho_md3md1,'rho_mbmd1':rho_mbmd1, 'rho_kmd1':rho_kmd1, 'rho_amd1':rho_amd1, 'rho_bmd1':rho_bmd1,
     'rho_emd1':rho_emd1, 'rho_gmd1':rho_gmd1, 'rho_md3md2':rho_md3md2, 'rho_mbmd2':rho_mbmd2, 'rho_kmd2':rho_kmd2, 'rho_amd2':rho_amd2,
     'rho_bmd2':rho_bmd2, 'rho_emd2':rho_emd2, 'rho_gmd2':rho_gmd2, 'rho_mbmd3':rho_mbmd3, 'rho_kmd3':rho_kmd3, 'rho_amd3':rho_amd3,
-    'rho_bmd3':rho_bmd3, 'rho_emd3':rho_emd3, 'rho_gmd3':rho_gmd3, 'rho_kmb':rho_kmb, 'rho_amb':rho_amb,'rho_bmb':rho_bmb,    
+    'rho_bmd3':rho_bmd3, 'rho_emd3':rho_emd3, 'rho_gmd3':rho_gmd3, 'rho_kmb':rho_kmb, 'rho_amb':rho_amb,'rho_bmb':rho_bmb,
     'rho_emb':rho_emb,'rho_gmb':rho_gmb,'rho_ak':rho_ak,'rho_bk':rho_bk,'rho_ek':rho_ek,'rho_gk':rho_gk,
     'rho_ba':rho_ba, 'rho_ea':rho_ea, 'rho_ga':rho_ga, 'rho_eb':rho_eb, 'rho_gb':rho_gb, 'rho_ge':rho_ge}
 
