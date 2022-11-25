@@ -34,6 +34,7 @@ else:
     workpath = os.getcwd()
 
 fit_type = "trip"
+
 # input parameters
 param_v,param_w,param_x,param_y,param_z,\
     param_is_omega,param_is_cascade,param_is_sigma = dp.fetch_data_diquark(fit_type=fit_type)
@@ -123,7 +124,7 @@ gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # al
 # plug here the sigma_0 optimization lines from data_utils.py
 
 # construct the simulated sampling distribution (bootstrap technique)
-for _ in range(100): # max 10000 with decays included, computationally expensive
+for _ in range(1000): # max 10000 with decays included, computationally expensive
 
     if fit_type=="All":
         exp_m = np.array([ # measured baryon masses        
