@@ -17,8 +17,8 @@ class decay(object):
         self.workpath = os.path.dirname(os.path.realpath(__file__))
         
     def decay_width(self, MA_val, MB_val, MC_val, GA_val, SA_val,
-                          LA_val, JA_val, SL_val, AL_val, AR_val,
-                          baryon, excMode, prodDecay):
+                    LA_val, JA_val, SL_val, AL_val, AR_val,
+                    baryon, excMode, prodDecay):
         """
         Method to convert the python variables to c++ objects
         """

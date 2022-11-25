@@ -127,7 +127,7 @@ def decay_coef():
     # sigmas
     baryons = 'sigmas'
     ModEx_val= 'grd'
-    MassA = 5.8131*1000  # gauss_5813 = 5813.1
+    MassA = 5.805 * 1000 # 5.8131*1000  # gauss_5813 = 5813.1
     JA_qm = 1/2
     SA_qm = 1/2
     LA_qm = 0
@@ -137,7 +137,7 @@ def decay_coef():
     coef_decay = np.append(coef_decay, decay_coef)
 
     ModEx_val= 'grd' 
-    MassA = 5.837*1000 # gauss_5837 = 5837.0
+    MassA = 5.835 * 1000 # 5.837*1000 # gauss_5837 = 5837.0
     JA_qm = 3/2
     SA_qm = 3/2
     LA_qm = 0
@@ -230,7 +230,7 @@ gauss_2818 = sample_gauss(2.48, 0.5) # OK paper table
 # insert optimization lines here decay_untils.py
 
 # construct the simulated sampling distribution (bootstrap technique)
-for _ in range(100):
+for _ in range(10000):
     # measured and quark-sum sampled masses
     exp_m = np.array([
         # # omegas

@@ -49,7 +49,7 @@ class BottomTables:
             exp_mass_val,exp_mass_err_val= du.exp_mass_val(self.m_baryons,  self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
 
             print(quantum_state,'$',round(self.m_mass[i]),'^{+',round(self.m_error_up[i]),'}_{-',round(self.m_error_dn[i]),'}$',  '& ', exp_mass, ' & $',
-                  round(self.m_decay[i],1),'^{+', round(self.m_decay_up[i],1),'}_{-', round(self.m_decay_dn[i],1),'}$', ' &', exp_width, '\\\ ', file=f_paper)
+                  round(self.m_decay[i], 1),'^{+', round(self.m_decay_up[i], 1),'}_{-', round(self.m_decay_dn[i], 1),'}$', ' &', exp_width, '\\\ ', file=f_paper)
 
         name = self.m_baryons
         label = 'three_quark'
@@ -133,9 +133,9 @@ class BottomTables:
         n_decay_channels = int((len(df.columns)-8)/3)
         baryons = self.m_baryons
 
-        import decay_utils as dec
+        from decays import decay_utils as dec
         baryon_symbol = dec.baryon_symbol(baryons)
-        baryon_quarks = "$" + baryon_symbol + "_c(" + dec.baryon_quarks(baryons) + ")$"
+        baryon_quarks = "$" + baryon_symbol + "_b(" + dec.baryon_quarks(baryons) + ")$"
         
         name_decays=[]
         mass_decs_B=[]
@@ -169,7 +169,7 @@ class BottomTables:
             quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i],
                                                   self.m_S_tot[i], self.m_L_tot[i],
                                                   self.m_ModEx[i], SU_tot_val)
-            wave_label= "$"+baryon_symbol+'_c('+str(abs(round(self.m_mass[i])))+')$ ' +du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])+'&'
+            wave_label= "$"+baryon_symbol+'_b('+str(abs(round(self.m_mass[i])))+')$ ' +du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])+'&'
             dec.print_row_latex(self.m_mass[i], mass_decs_B, mass_decs_C, wave_label, channel_widths, errors_up, errors_dn, f_decay_indi)
 
         dec.print_bottom_latex(baryons, f_decay_indi)
