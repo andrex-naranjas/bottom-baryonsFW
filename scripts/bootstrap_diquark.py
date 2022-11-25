@@ -33,9 +33,10 @@ if len(sys.argv) == 4:
 else:
     workpath = os.getcwd()
 
+fit_type = "All"
 # input parameters
 param_v,param_w,param_x,param_y,param_z,\
-    param_is_omega,param_is_cascade,param_is_sigma = dp.fetch_data_diquark()
+    param_is_omega,param_is_cascade,param_is_sigma = dp.fetch_data_diquark(fit_type=fit_type)
 
 
 def model(is_omega, is_cascade, is_sigma, v, w, x, y, z, md1, md2, md3, mb, k, a, b, e, g):
@@ -124,34 +125,67 @@ gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # al
 # construct the simulated sampling distribution (bootstrap technique)
 for _ in range(100): # max 10000 with decays included, computationally expensive
 
-    exp_m = np.array([ # measured baryon masses
-        # omegas
-        random(gauss_6061),
-        random(gauss_6316),
-        random(gauss_6330),
-        random(gauss_6340),
-        random(gauss_6350),
-        # Cascade 
-        random(gauss_5935),
-        random(gauss_5953),
-        random(gauss_6328),
-        # Sigma b         
-        random(gauss_5813),
-        random(gauss_5837),
-        random(gauss_6097),
-        # Lambda b
-        random(gauss_5617),
-        random(gauss_5912),
-        random(gauss_5920),
-        # random(gauss_6146),
-        # random(gauss_6152),
-        # Cascades
-        random(gauss_5794),
-        random(gauss_6100),
-        # random(gauss_6327),
-        # random(gauss_6333)        
-    ])
-    
+    if fit_type=="All":
+        exp_m = np.array([ # measured baryon masses        
+            # omegas
+            random(gauss_6061),
+            random(gauss_6316),
+            random(gauss_6330),
+            random(gauss_6340),
+            random(gauss_6350),
+            # Cascade 
+            random(gauss_5935),
+            random(gauss_5953),
+            random(gauss_6328),
+            # Sigma b         
+            random(gauss_5813),
+            random(gauss_5837),
+            random(gauss_6097),        
+            # Lambda b
+            random(gauss_5617),
+            random(gauss_5912),
+            random(gauss_5920),
+            # random(gauss_6146),
+            # random(gauss_6152),
+            # Cascades
+            random(gauss_5794),
+            random(gauss_6100),
+            # random(gauss_6327),
+            # random(gauss_6333)        
+        ])
+    elif fit_type=="sext":
+        exp_m = np.array([ # measured baryon masses        
+            # omegas
+            random(gauss_6061),
+            random(gauss_6316),
+            random(gauss_6330),
+            random(gauss_6340),
+            random(gauss_6350),
+            # Cascade 
+            random(gauss_5935),
+            random(gauss_5953),
+            random(gauss_6328),
+            # Sigma b         
+            random(gauss_5813),
+            random(gauss_5837),
+            random(gauss_6097),
+        ])
+    elif fit_type=="trip":
+        exp_m = np.array([ # measured baryon masses        
+            # Lambda b
+            random(gauss_5617),
+            random(gauss_5912),
+            random(gauss_5920),
+            # random(gauss_6146),
+            # random(gauss_6152),
+            # Cascades
+            random(gauss_5794),
+            random(gauss_6100),
+            # random(gauss_6327),
+            # random(gauss_6333)        
+        ])
+        
+                    
     # perform the parameter fitting (via minimizing squared distance)
     m = fit(least_squares)
 
