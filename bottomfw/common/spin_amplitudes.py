@@ -161,7 +161,3 @@ class SpinAmplitudes():
                             else:
                                 for j in [1/2,-1/2]:
                                     print([m(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
-
-    
-
-
