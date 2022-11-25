@@ -179,7 +179,7 @@ for _ in range(1000): # max 10000 with decays included, computationally expensiv
             random(gauss_5920),
             # random(gauss_6146),
             # random(gauss_6152),
-            # Cascades
+            # Cascades antitriplet
             random(gauss_5794),
             random(gauss_6100),
             # random(gauss_6327),
