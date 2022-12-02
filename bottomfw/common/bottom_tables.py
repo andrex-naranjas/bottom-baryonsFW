@@ -35,7 +35,7 @@ class BottomTables:
         if not os.path.exists(self.m_workpath+"/tables/"):
             os.mkdir(self.m_workpath+"/tables/")
         f_paper = open(self.m_workpath+'/tables/masses_'+self.m_baryons+'_paper.tex', "w")
-        print("\\begin{tabular}{c | c  c c c }\hline \hline ", file=f_paper)
+        print("\\begin{tabular}{c | c c c c }\hline \hline ", file=f_paper)
         print(" State     & Predicted Mass   & Experimental Mass & Predicted Width & Experimental Width   \\\ ", file=f_paper)
         print("           &      (MeV)       &    (MeV)          &      (MeV)      & $\Gamma_{tot}$ (MeV) \\\ \hline", file=f_paper)
 
@@ -69,7 +69,7 @@ class BottomTables:
         baryon_name = du.baryon_name(self.m_baryons)
         flavor_name = du.flavor_label(self.m_baryons)
         
-        print("\\begin{tabular}{c  c| c c c c c }\hline \hline", file=f_paper)
+        print("\\begin{tabular}{c c| c c c c c }\hline \hline", file=f_paper)
         print("            &  & Three-quark &  Quark-diquark    &               &              &  \\\ ", file=f_paper)
         print(baryon_name+"&  & Predicted   &    Predicted   &  Experimental &  Predicted            & Experimental \\\ ", file=f_paper)
         print(flavor_name+"  & $^{2S+1}L_{J}$ & Mass (MeV)  &   Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)

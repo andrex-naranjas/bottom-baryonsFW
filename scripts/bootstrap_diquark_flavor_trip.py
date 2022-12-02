@@ -33,40 +33,46 @@ if len(sys.argv) == 4:
 else:
     workpath = os.getcwd()
 
-fit_type = "All" # sext or trip
+fit_type = "sext" # sext or trip
 
 # input parameters
+
 param_v,param_w,param_x,param_y,param_z,\
-    param_is_omega,param_is_cascade,param_is_sigma = dp.fetch_data_diquark(fit_type=fit_type)
+    param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade = dp.fetch_data_diquark(fit_type=fit_type)
 
-
-def model(is_omega, is_cascade, is_sigma, v, w, x, y, z, md1, md2, md3, mb, k, a, b, e, g):
-    return is_omega*md1 + is_cascade*md2 + is_sigma*md3 + mb + \
-        v*k*np.sqrt(1./( (is_omega*md1 + is_cascade*md2 + is_sigma*md3)*mb / ( is_omega*md1 + is_cascade*md2 + is_sigma*md3 + mb ) ) ) +\
+def model(is_omega, is_cascade_p, is_sigma, is_lambda, is_cascade, v, w, x, y, z, md1, md2, md3, md4, md5, mb, k, a, b, e, g):
+    return is_omega*md1 + is_cascade_p*md2 + is_sigma*md3 + is_lambda*md4 + is_cascade*md5 + mb +\
+        v*k*np.sqrt(1./( ( is_omega*md1 + is_cascade_p*md2 + is_sigma*md3 + is_lambda*md4 + is_cascade*md5)*mb / ( is_omega*md1 + is_cascade_p*md2 + is_sigma*md3 + is_lambda*md4 + is_cascade*md5 + mb ) ) ) +\
         w*a + x*b + y*e + z*g
 
-def least_squares(md1, md2, md3, mb, k, a, b, e, g):
+def least_squares(md1, md2, md3, md4, md5, mb, k, a, b, e, g):
     # y_var_0 = sigma_0 # best sigma_0= 13.63
     # yvar_0 = y_var_0*np.ones(17)
     # yvar = y_errors_exp
     # yvar_2 = np.power(yvar_0, 2) + np.power(yvar, 2)
     yvar_2 = 0.001
-    pred_m = model(param_is_omega, param_is_cascade, param_is_sigma,
+    pred_m = model(param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade,
                    param_v, param_w, param_x, param_y, param_z,
-                   md1, md2, md3, mb, k, a, b, e, g)
+                   md1, md2, md3, md4 , md5, mb, k, a, b, e, g)
     yval_2 = np.power( (pred_m - exp_m), 2)
     return np.sum( np.divide(yval_2, yvar_2) )
     # return np.sum((pred_m - exp_m)**2 / (yvar_2**2)) #**2
 
 def fit(least_squares):
-    m = Minuit(least_squares, md1=900, md2=300, md3=250, mb=1400, k=0, a=0, b=0, e=0, g=0)
-    # m.limits['mb'] = (4000,6000)
-
+    m = Minuit(least_squares, md1=900, md2=300, md3=300, md4=300, md5=300, mb=1400, k=0, a=0, b=0, e=0, g=0)
+    m.limits['mb'] = (4900, 6000)
     # m.limits['md1'] = (850,950)
     # m.limits['md2'] = (650,850)
-    m.limits['md3'] = (500,700)
-    
-    
+    # m.limits['md3'] = (500,700)
+    # m.limits['md1'] =  (500, 1500)   # (850, 950) #omega (500, 1500)
+    # m.limits['md2'] =  (500, 1500)   # (650, 850) #cascade prime
+    # m.limits['md3'] =  (500, 1500)   # (500, 700) #sigma
+    # m.limits['md4'] =  (500, 1500)   # (500, 700) #lambda
+    # m.limits['md5'] =  (500, 1500)   # (650, 850) #cascade
+    # m.limits['a'] = (0, 100)
+    # m.limits['b'] = (0, 100)
+    # m.limits['e'] = (30, 100)
+    # m.limits['g'] = (50, 100)
     m.errordef=Minuit.LEAST_SQUARES
     m.migrad()
     return m
@@ -79,7 +85,7 @@ def random(sample):
 
 # arrays to store the sampled parameters
 sampled_k,sampled_a,sampled_b,sampled_e,sampled_g = ([]),([]),([]),([]),([])
-sampled_md1,sampled_md2,sampled_md3,sampled_mb = ([]),([]),([]),([])
+sampled_md1,sampled_md2,sampled_md3,sampled_md4,sampled_md5,sampled_mb = ([]),([]),([]),([]),([]),([])
 
 # arrays to store sampled correlation coeficients
 rho_md2md1,rho_md3md1,rho_mbmd1,rho_kmd1,rho_amd1,rho_bmd1 = ([]),([]),([]),([]),([]),([])
@@ -124,7 +130,7 @@ gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # al
 # plug here the sigma_0 optimization lines from data_utils.py
 
 # construct the simulated sampling distribution (bootstrap technique)
-for _ in range(1000): # max 10000 with decays included, computationally expensive
+for _ in range(10): # max 10000 with decays included, computationally expensive
 
     if fit_type=="All":
         exp_m = np.array([ # measured baryon masses        
@@ -141,7 +147,7 @@ for _ in range(1000): # max 10000 with decays included, computationally expensiv
             # Sigma b         
             random(gauss_5813),
             random(gauss_5837),
-            random(gauss_6097),        
+            random(gauss_6097),
             # Lambda b
             random(gauss_5617),
             random(gauss_5912),
@@ -194,6 +200,8 @@ for _ in range(1000): # max 10000 with decays included, computationally expensiv
     sampled_md1 = np.append(sampled_md1, m.values['md1'])
     sampled_md2 = np.append(sampled_md2, m.values['md2'])
     sampled_md3 = np.append(sampled_md3, m.values['md3'])
+    sampled_md4 = np.append(sampled_md4, m.values['md4'])
+    sampled_md5 = np.append(sampled_md5, m.values['md5'])
     sampled_mb  = np.append(sampled_mb,  m.values['mb'])
 
     sampled_k = np.append(sampled_k, m.values['k'])
@@ -205,50 +213,65 @@ for _ in range(1000): # max 10000 with decays included, computationally expensiv
     # correlation matrix
     corr = m.covariance.correlation()
 
-    rho_md2md1 = np.append(rho_md2md1, corr['md2','md1'])
-    rho_md3md1 = np.append(rho_md3md1, corr['md3','md1'])
-    rho_mbmd1  = np.append(rho_mbmd1, corr['mb','md1'])
-    rho_kmd1   = np.append(rho_kmd1,  corr['k','md1'])
-    rho_amd1   = np.append(rho_amd1,  corr['a','md1'])
-    rho_bmd1   = np.append(rho_bmd1,  corr['b','md1'])
-    rho_emd1   = np.append(rho_emd1,  corr['e','md1'])
-    rho_gmd1   = np.append(rho_gmd1,  corr['g','md1'])
+    # rho_md2md1 = np.append(rho_md2md1, corr['md2','md1'])
+    # rho_md3md1 = np.append(rho_md3md1, corr['md3','md1'])
+    # rho_mbmd1  = np.append(rho_mbmd1, corr['mb','md1'])
+    # rho_kmd1   = np.append(rho_kmd1,  corr['k','md1'])
+    # rho_amd1   = np.append(rho_amd1,  corr['a','md1'])
+    # rho_bmd1   = np.append(rho_bmd1,  corr['b','md1'])
+    # rho_emd1   = np.append(rho_emd1,  corr['e','md1'])
+    # rho_gmd1   = np.append(rho_gmd1,  corr['g','md1'])
 
-    rho_md3md2 = np.append(rho_md3md2, corr['md3','md2'])
-    rho_mbmd2  = np.append(rho_mbmd2,  corr['mb','md2'])
-    rho_kmd2   = np.append(rho_kmd2 , corr['k','md2'])
-    rho_amd2   = np.append(rho_amd2 , corr['a','md2'])
-    rho_bmd2   = np.append(rho_bmd2 , corr['b','md2'])
-    rho_emd2   = np.append(rho_emd2 , corr['e','md2'])
-    rho_gmd2   = np.append(rho_gmd2 , corr['g','md2'])
+    # rho_md3md2 = np.append(rho_md3md2, corr['md3','md2'])
+    # rho_mbmd2  = np.append(rho_mbmd2,  corr['mb','md2'])
+    # rho_kmd2   = np.append(rho_kmd2 , corr['k','md2'])
+    # rho_amd2   = np.append(rho_amd2 , corr['a','md2'])
+    # rho_bmd2   = np.append(rho_bmd2 , corr['b','md2'])
+    # rho_emd2   = np.append(rho_emd2 , corr['e','md2'])
+    # rho_gmd2   = np.append(rho_gmd2 , corr['g','md2'])
 
-    rho_mbmd3  = np.append(rho_kmd3, corr['mb','md3'])
-    rho_kmd3   = np.append(rho_kmd3, corr['k','md3'])
-    rho_amd3   = np.append(rho_amd3, corr['a','md3'])
-    rho_bmd3   = np.append(rho_bmd3, corr['b','md3'])
-    rho_emd3   = np.append(rho_emd3, corr['e','md3'])
-    rho_gmd3   = np.append(rho_gmd3, corr['g','md3'])
+    # rho_mbmd3  = np.append(rho_kmd3, corr['mb','md3'])
+    # rho_kmd3   = np.append(rho_kmd3, corr['k','md3'])
+    # rho_amd3   = np.append(rho_amd3, corr['a','md3'])
+    # rho_bmd3   = np.append(rho_bmd3, corr['b','md3'])
+    # rho_emd3   = np.append(rho_emd3, corr['e','md3'])
+    # rho_gmd3   = np.append(rho_gmd3, corr['g','md3'])
 
-    rho_kmb    = np.append(rho_kmb, corr['k','mb'])
-    rho_amb    = np.append(rho_amb, corr['a','mb'])
-    rho_bmb    = np.append(rho_bmb, corr['b','mb'])
-    rho_emb    = np.append(rho_emb, corr['e','mb'])
-    rho_gmb    = np.append(rho_gmb, corr['g','mb'])
+    # rho_kmb    = np.append(rho_kmb, corr['k','mb'])
+    # rho_amb    = np.append(rho_amb, corr['a','mb'])
+    # rho_bmb    = np.append(rho_bmb, corr['b','mb'])
+    # rho_emb    = np.append(rho_emb, corr['e','mb'])
+    # rho_gmb    = np.append(rho_gmb, corr['g','mb'])
     
-    rho_ak     = np.append(rho_ak, corr['a','k'])
-    rho_bk     = np.append(rho_bk, corr['b','k'])
-    rho_ek     = np.append(rho_ek, corr['e','k'])
-    rho_gk     = np.append(rho_gk, corr['g','k'])
+    # rho_ak     = np.append(rho_ak, corr['a','k'])
+    # rho_bk     = np.append(rho_bk, corr['b','k'])
+    # rho_ek     = np.append(rho_ek, corr['e','k'])
+    # rho_gk     = np.append(rho_gk, corr['g','k'])
 
-    rho_ba     = np.append(rho_ba, corr['b','a'])
-    rho_ea     = np.append(rho_ea, corr['e','a'])
-    rho_ga     = np.append(rho_ga, corr['g','a'])
+    # rho_ba     = np.append(rho_ba, corr['b','a'])
+    # rho_ea     = np.append(rho_ea, corr['e','a'])
+    # rho_ga     = np.append(rho_ga, corr['g','a'])
 
-    rho_eb     = np.append(rho_eb, corr['e','b'])
-    rho_gb     = np.append(rho_gb, corr['g','b'])
+    # rho_eb     = np.append(rho_eb, corr['e','b'])
+    # rho_gb     = np.append(rho_gb, corr['g','b'])
     
-    rho_ge     = np.append(rho_ge, corr['g','e'])
+    # rho_ge     = np.append(rho_ge, corr['g','e'])
+
     
+print(round(sampled_md1.mean()), "md1 omega")
+print(round(sampled_md2.mean()), "md2 cascade prime")
+print(round(sampled_md3.mean()), "md3 sigma")
+print(round(sampled_md4.mean()), "md4 lambda")
+print(round(sampled_md5.mean()), "md5 cascade")
+print(round(sampled_mb.mean()), "mb")
+
+print("K", sampled_k.mean())
+print("A", sampled_a.mean())
+print("B", sampled_b.mean())
+print("E", sampled_e.mean())
+print("G", sampled_g.mean())
+                   
+
 # save bootstrap results
 df = pd.DataFrame({"Md1" : sampled_md1,"Md2" : sampled_md2,"Md3" : sampled_md3,
                    "MB"  : sampled_mb,"K" : sampled_k, "A" : sampled_a,
@@ -297,14 +320,3 @@ results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_pa
 
 end = datetime.datetime.now()
 elapsed_time = end - start
-print("Elapsed total time = " + str(elapsed_time))
-print(round(sampled_md1.mean()), "md1 omega")
-print(round(sampled_md2.mean()), "md2 cascade")
-print(round(sampled_md3.mean()), "md3 sigma, lambda")
-print(round(sampled_mb.mean()), "mb")
-
-print("K", sampled_k.mean())
-print("A", sampled_a.mean())
-print("B", sampled_b.mean())
-print("E", sampled_e.mean())
-print("G", sampled_g.mean())

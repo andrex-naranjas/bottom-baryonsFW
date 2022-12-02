@@ -188,15 +188,15 @@ def flavor_label(baryons='omegas'):
     
 def baryon_name(baryons):
     if baryons=='omegas':
-        return "$\Omega_{b}(ssc)$"
+        return "$\Omega_{b}(ssb)$"
     elif baryons=='sigmas':
-        return "$\Sigma_{b}(nnc)$"
+        return "$\Sigma_{b}(nnb)$"
     elif baryons=='cascades':
-        return "$\Xi'_{b}(snc)$"
+        return "$\Xi'_{b}(snb)$"
     elif baryons=='cascades_anti3':
-        return "$\Xi_{b}(snc)$"
+        return "$\Xi_{b}(snb)$"
     elif baryons=='lambdas':
-        return "$\Lambda_{b}(snc)$"
+        return "$\Lambda_{b}(snb)$"
     else:
         return ''
 
@@ -217,11 +217,11 @@ def baryon_name_plots(baryons):
 def name_quantum_state(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
 
     if baryons=='omegas':
-        quarks = 'ssc'
+        quarks = 'ssb'
     elif baryons=='cascades' or baryons=='cascades_anti3':
-        quarks = 'snc'
+        quarks = 'snb'
     elif baryons=='lambdas' or baryons=='sigmas':
-        quarks = 'nnc'
+        quarks = 'nnb'
     else:
         quarks = 'x'
         
