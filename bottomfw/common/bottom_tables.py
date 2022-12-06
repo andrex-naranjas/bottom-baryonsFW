@@ -35,7 +35,7 @@ class BottomTables:
         if not os.path.exists(self.m_workpath+"/tables/"):
             os.mkdir(self.m_workpath+"/tables/")
         f_paper = open(self.m_workpath+'/tables/masses_'+self.m_baryons+'_paper.tex', "w")
-        print("\\begin{tabular}{c | c  c c c }\hline \hline ", file=f_paper)
+        print("\\begin{tabular}{c | c c c c }\hline \hline ", file=f_paper)
         print(" State     & Predicted Mass   & Experimental Mass & Predicted Width & Experimental Width   \\\ ", file=f_paper)
         print("           &      (MeV)       &    (MeV)          &      (MeV)      & $\Gamma_{tot}$ (MeV) \\\ \hline", file=f_paper)
 
@@ -49,7 +49,7 @@ class BottomTables:
             exp_mass_val,exp_mass_err_val= du.exp_mass_val(self.m_baryons,  self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
 
             print(quantum_state,'$',round(self.m_mass[i]),'^{+',round(self.m_error_up[i]),'}_{-',round(self.m_error_dn[i]),'}$',  '& ', exp_mass, ' & $',
-                  round(self.m_decay[i],1),'^{+', round(self.m_decay_up[i],1),'}_{-', round(self.m_decay_dn[i],1),'}$', ' &', exp_width, '\\\ ', file=f_paper)
+                  round(self.m_decay[i], 1),'^{+', round(self.m_decay_up[i], 1),'}_{-', round(self.m_decay_dn[i], 1),'}$', ' &', exp_width, '\\\ ', file=f_paper)
 
         name = self.m_baryons
         label = 'three_quark'
@@ -69,7 +69,7 @@ class BottomTables:
         baryon_name = du.baryon_name(self.m_baryons)
         flavor_name = du.flavor_label(self.m_baryons)
         
-        print("\\begin{tabular}{c  c| c c c c c }\hline \hline", file=f_paper)
+        print("\\begin{tabular}{c c| c c c c c }\hline \hline", file=f_paper)
         print("            &  & Three-quark &  Quark-diquark    &               &              &  \\\ ", file=f_paper)
         print(baryon_name+"&  & Predicted   &    Predicted   &  Experimental &  Predicted            & Experimental \\\ ", file=f_paper)
         print(flavor_name+"  & $^{2S+1}L_{J}$ & Mass (MeV)  &   Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)
@@ -129,19 +129,31 @@ class BottomTables:
     def decay_indi_table(self):
         
         df = pd.read_csv(self.m_workpath+'/tables/decays_indi_'+self.m_baryons+'_summary.csv')
-        if not os.path.exists(self.m_workpath+"/tables/"):
-            os.mkdir(self.m_workpath+"/tables/")
         f_decay_indi = open(self.m_workpath+'/tables/decay_indi_'+self.m_baryons+'_paper.tex', "w")
         n_decay_channels = int((len(df.columns)-8)/3)
         baryons = self.m_baryons
 
-        import decay_utils as dec
+        from decays import decay_utils as dec
+        baryon_symbol = dec.baryon_symbol(baryons)
+        baryon_quarks = "$" + baryon_symbol + "_b(" + dec.baryon_quarks(baryons) + ")$"
+        
         name_decays=[]
-        name_decays.append('State')
+        mass_decs_B=[]
+        mass_decs_C=[]
+        coulmn_sep = ""
+        name_decays.append(baryon_quarks)
         for k in range(n_decay_channels):
-            name_decays.append(dec.latex_decay_label(baryons,k+1))
+            name_decays.append(dec.latex_decay_label(baryons, k+1)[0])
+            mass_decs_B.append(dec.latex_decay_label(baryons, k+1)[1])
+            mass_decs_C.append(dec.latex_decay_label(baryons, k+1)[2])
+            coulmn_sep += "&"
         name_decays.append('Tot $\\Gamma$')
         dec.print_header_latex(name_decays, f_decay_indi)
+        
+        flavor = "$\\mathcal{F}={\\bf {6}}_{\\rm f}$ " # omegas, sigmas, cascades
+        if (baryons=="cascades_anti3" or baryons=="lambdas"): # cascades_anti3, lambdas
+            flavor = "$\\mathcal{F}={\\bf {\\bar{3}}}_{\\rm f}$"
+        print(flavor +  coulmn_sep  +"\\\\ \hline", file=f_decay_indi)
 
         for i in range(len(self.m_SU_tot)):
             channel_widths = []
@@ -157,10 +169,11 @@ class BottomTables:
             quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i],
                                                   self.m_S_tot[i], self.m_L_tot[i],
                                                   self.m_ModEx[i], SU_tot_val)
-            wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])+'&'
-            dec.print_row_latex(wave_label, channel_widths, errors_up, errors_dn, f_decay_indi)
+            wave_label= "$"+baryon_symbol+'_b('+str(abs(round(self.m_mass[i])))+')$ ' +du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])+'&'
+            dec.print_row_latex(self.m_mass[i], mass_decs_B, mass_decs_C, wave_label, channel_widths, errors_up, errors_dn, f_decay_indi)
 
         dec.print_bottom_latex(baryons, f_decay_indi)
+
 
 
     def latex_string_value_error(self, value, decimals=2, units='Mev'):
@@ -183,8 +196,8 @@ class BottomTables:
         """     
         M1 = self.latex_string_value_error(self.m_sampled_m1, decimals=2, units='MeV')
         M2 = self.latex_string_value_error(self.m_sampled_m2, decimals=2, units='MeV')
-        M3 = self.latex_string_value_error(self.m_sampled_m3, decimals=2, units='MeV')                                   
-        K  = self.latex_string_value_error(self.m_sampled_k,  decimals=4, units='GeV$^{3}$')                                  
+        M3 = self.latex_string_value_error(self.m_sampled_m3, decimals=2, units='MeV')
+        K  = self.latex_string_value_error(self.m_sampled_k,  decimals=4, units='GeV$^{3}$')           
         A  = self.latex_string_value_error(self.m_sampled_a, decimals=2, units='MeV')
         B  = self.latex_string_value_error(self.m_sampled_b, decimals=2, units='MeV')
         E  = self.latex_string_value_error(self.m_sampled_e, decimals=2, units='MeV')

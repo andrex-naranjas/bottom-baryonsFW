@@ -5,7 +5,7 @@
  Script to obtain uncertainties of heavy mass spectrum and widhts via bootstrap
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch) and
           H. Garcia-Tecocoatzi
- -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 """
 import sys
 import os
@@ -60,9 +60,9 @@ def least_squares(m1, m2, m3, k, a, b, e, g):
 
 def fit(least_squares):
     m = Minuit(least_squares, m1=1, m2=1, m3=1, k=0, a=0, b=0, e=0, g=0)#1400, m2=300, m3=250, k=0, a=0, b=0, e=0, g=0)
-    m.limits['m1'] = (4000,6000)
-    m.limits['m2'] = (400,470)
-    m.limits['m3'] = (250,300)
+    m.limits['m1'] = (4000, 6000)
+    m.limits['m2'] = (400, 470)
+    m.limits['m3'] = (250, 300)
     m.errordef=Minuit.LEAST_SQUARES
     m.migrad()
     return m
@@ -120,7 +120,7 @@ gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # al
 # plug here the sigma_0 optimization lines from data_utils.py
 
 # construct the simulated sampling distribution (bootstrap technique)
-for i in range(100): # max 10000 with decays included, computationally expensive
+for i in range(1000): # max 10000 with decays included, computationally expensive
     #if(states=='All'):
     exp_m = np.array([ # measured baryon masses
         # omegas
@@ -239,13 +239,13 @@ else:
 
 # calculate the masses and decays using the bootstrap simulation above
 results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=True,
-                           decay_width=False, bootstrap_width=False, batch_number=batch_number, workpath=workpath)
+                           decay_width=True, bootstrap_width=False, batch_number=batch_number, workpath=workpath)
 results.fetch_values()
 
 print('Getting paper results for:', run_baryons)
 #input()
 # omegas,cascades,sigmas,lambdas,cascades_anti3
-results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False) # all running for paper
+results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_params=False) # all running for paper
 #results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=True, prev_params=False, decay_width=True) # all running for paper
 # avoid time consuming decay widths calculations
 # results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)

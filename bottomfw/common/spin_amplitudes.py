@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 '''
 ---------------------------------------------------------------
- authors: A. Rivero ()
+ authors: C. A. Vaquera Araujo (vaquera@fisica.ugto.mx)
+          A. Rivero (ailierrivero@gmail.com)
           A. Ramirez Morales (andres@knu.ac.kr)
  ---------------------------------------------------------------
 '''
@@ -12,6 +13,10 @@ import sympy.physics.mechanics as mech
 from sympy import *
 from sympy.physics.quantum import TensorProduct
 from sympy.physics.matrices import msigma
+
+"""
+    Definitions of the spin states as uparrow (u) and downarrow (d) 
+    """ 
 
 u = Matrix([[1],[0]])
 d = Matrix([[0],[1]])
@@ -48,7 +53,7 @@ class SpinAmplitudes():
 
     def tensor_product(self, index, dim=2): # J(i):
         """
-        Method to calculate the tensor product
+        Method to calculate the direct product 2⊗2⊗2 generators
         """
         TP1 = TensorProduct(TensorProduct(self.su2_generator(index), self.identity_matrix(dim)), self.identity_matrix(dim)) 
         TP2 = TensorProduct(TensorProduct(self.identity_matrix(dim), self.su2_generator(index)), self.identity_matrix(dim))
@@ -89,11 +94,25 @@ class SpinAmplitudes():
         """
         if m_proj in [3/2,1/2,-1/2,-3/2]:
             i = 3/2-m_proj
-            st = spint_states(u, u, u)
+            st = self.spint_states(u, u, u)
             while i > 0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st = v1 / sqrt((transpose(v1)*v1)[0])
                 i = i - 1
+        return st
+
+
+    def rho_states(self, m_proj):
+        """
+        Method to calculate the rho states 
+        """
+        if m_proj in [1/2,-1/2]:
+            i=1/2-m_proj
+            st=(self.pint_states(u,d,u)-self.spint_states(d,u,u))/sqrt(2)
+            while i>0:
+                v1 = self.ladder_operator_tensor(sign=-1) * st
+                st=v1/sqrt((transpose(v1)*v1)[0])
+                i=i-1
         return st
 
 
@@ -103,26 +122,14 @@ class SpinAmplitudes():
         """
         if a in [1/2,-1/2]:
             i=1/2-a
-            st=(2*k(u,u,d)-k(u,d,u)-k(d,u,u))/sqrt(6)
+            st=(2*self.spint_states(u,u,d)-self.spint_states(u,d,u)-self.spint_states(d,u,u))/sqrt(6)
             while i>0:
-                v1=Jm*st
+                v1 = self.ladder_operator_tensor(sign=-1) * st
                 st=v1/sqrt((transpose(v1)*v1)[0])
                 i=i-1
         return st
 
-    def rho_states(self, a):
-        """
-        Method to calculate the rho states 
-        """
-        if a in [1/2,-1/2]:
-            i=1/2-a
-            st=(k(u,d,u)-k(d,u,u))/sqrt(2)
-            while i>0:
-                v1=Jm*st
-                st=v1/sqrt((transpose(v1)*v1)[0])
-                i=i-1
-        return st
-
+    
 
     def matrix_elements(self, n, x, i, y, j):
         """

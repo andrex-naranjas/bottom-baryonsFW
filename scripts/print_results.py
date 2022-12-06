@@ -20,10 +20,10 @@ if len(sys.argv) <= 1:
     sys.exit('Provide bottom states group name. Try again!')
 
 run_baryons = sys.argv[1]
-workpath=getcwd()
+workpath = getcwd()
 
 # create summary of the results and store in a csv file
-dv.paper_tables_results(run_baryons, di_three_quark='three_quark', decay_width=False,
+dv.paper_tables_results(run_baryons, di_three_quark='three_quark', decay_width=True,
                         asymmetric=True, prev_params=False, workpath=workpath, batch_number=None)
 print('three-quark')
 
@@ -32,10 +32,10 @@ dv.paper_tables_results(run_baryons, di_three_quark='diquark', decay_width=True,
                        asymmetric=True, prev_params=False, workpath=workpath, batch_number=None)
 print('diquark')
 
-# # create summary tables for 
-# dv.decay_indi_tables_results(run_baryons, asymmetric=True,
-#                              prev_params=False, workpath=workpath, batch_number=True)
-# print('individual decays')
+# create summary tables for 
+dv.decay_indi_tables_results(run_baryons, asymmetric=True,
+                             prev_params=False, workpath=workpath, batch_number=None) # change to batch_number to True
+print('individual decays')
 
 # tables
 bottom_tables = BottomTables(run_baryons, workpath=workpath, batch_results=False) # assume diquark never come from batch jobs (FIX this)
@@ -44,7 +44,7 @@ bottom_tables.combined_model_table()
 bottom_tables.parameter_combined()
 bottom_tables.correlation_table_three()
 bottom_tables.correlation_table_di()
-#bottom_tables.decay_indi_table()
+bottom_tables.decay_indi_table()
 
 # plots
 bottom_plots = BottomPlots(run_baryons, workpath=workpath)
