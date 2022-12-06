@@ -188,15 +188,15 @@ def flavor_label(baryons='omegas'):
     
 def baryon_name(baryons):
     if baryons=='omegas':
-        return "$\Omega_{b}(ssc)$"
+        return "$\Omega_{b}(ssb)$"
     elif baryons=='sigmas':
-        return "$\Sigma_{b}(nnc)$"
+        return "$\Sigma_{b}(nnb)$"
     elif baryons=='cascades':
-        return "$\Xi'_{b}(snc)$"
+        return "$\Xi'_{b}(snb)$"
     elif baryons=='cascades_anti3':
-        return "$\Xi_{b}(snc)$"
+        return "$\Xi_{b}(snb)$"
     elif baryons=='lambdas':
-        return "$\Lambda_{b}(snc)$"
+        return "$\Lambda_{b}(snb)$"
     else:
         return ''
 
@@ -217,11 +217,11 @@ def baryon_name_plots(baryons):
 def name_quantum_state(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
 
     if baryons=='omegas':
-        quarks = 'ssc'
+        quarks = 'ssb'
     elif baryons=='cascades' or baryons=='cascades_anti3':
-        quarks = 'snc'
+        quarks = 'snb'
     elif baryons=='lambdas' or baryons=='sigmas':
-        quarks = 'nnc'
+        quarks = 'nnb'
     else:
         quarks = 'x'
         
@@ -382,11 +382,11 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
             return '$\\dagger$', '$\\dagger$'
     if baryons=='sigmas':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$5813.1\\pm 1.0$' , '$xx$'
+            return '$5813.1\\pm 1.0$' , '$5.0\\pm 0.5$'
         elif J_tot==3/2 and S_tot==3/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$5837.03\\pm 1.0$' , '$xx$'
+            return '$5837.03\\pm 1.0$' , '$10.4\\pm 2.0$'
         elif J_tot==1/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6096.9\\pm 1.0$' , '$xx$'
+            return '$6096.9\\pm 1.0$' , '$31\\pm 6$'
         else:
             return '$\\dagger$', '$\\dagger$'
     elif baryons=='lambdas':

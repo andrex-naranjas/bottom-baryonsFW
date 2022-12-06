@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 ---------------------------------------------------------------
   Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
@@ -57,7 +55,7 @@ class DecayWidths:
                                                           LA_qm, JA_qm, SL_qm, alpha_lam, alpha_rho,
                                                           baryon, ModEx, decPr)
             channel_widths = np.append(channel_widths, single_decay_value)
-            baryon_name, ModEx_name, decPr_name = du.state_labels(baryon,ModEx,decPr,LA_qm)
+            baryon_name, ModEx_name, decPr_name = du.state_labels(baryon, ModEx, decPr, LA_qm)
             if not bootstrap:
                 print('%6s |  %10s | %12s |  %5.3f |  %5.3f | %5.3f |  %5.1f |  %5.1f |  %5.1f |  %5.1f | %5.6f '
                       %(baryon_name, ModEx_name, decPr_name, MassA, MassB, MassC, JA_qm, LA_qm, SA_qm, SL_qm, single_decay_value))
@@ -181,11 +179,11 @@ class DecayWidths:
                 else: return np.random.choice(self.gauss_omega_s, size=None), np.random.choice(self.gauss_eta_p, size=None)
             # START OF SECOND DIAGRAM DECAYS
             elif(decPr==13):
-                if not bootstrap: return self.Xi_8_mass, self.D0_mass
-                else: return np.random.choice(self.gauss_Xi_8, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.Xi_8_mass, self.B0_mass
+                else: return np.random.choice(self.gauss_Xi_8, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==14):
-                if not bootstrap: return self.Xi_10_mass, self.D0_mass
-                else: return np.random.choice(self.gauss_Xi_10, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.Xi_10_mass, self.B0_mass
+                else: return np.random.choice(self.gauss_Xi_10, size=None), np.random.choice(self.gauss_B0, size=None)
 
         elif(baryons=='cascades'):
             if(decPr==1):
@@ -262,17 +260,17 @@ class DecayWidths:
                 else: return np.random.choice(self.gauss_xi_s, size=None), np.random.choice(self.gauss_phi, size=None)
                 # START OF SECOND DIAGRAM DECAYS
             elif(decPr==25):
-                if not bootstrap: return self.Sigma_8_mass, self.D0_mass #//Sigma_8_lam+D
-                else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.Sigma_8_mass, self.B0_mass #//Sigma_8_lam+D
+                else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==26):
-                if not bootstrap: return self.Xi_8_mass, self.Ds_mass # //Xi_8_lam+Ds
-                else: return np.random.choice(self.gauss_Xi_8, size=None), np.random.choice(self.gauss_Ds, size=None)
+                if not bootstrap: return self.Xi_8_mass, self.Bs_mass # //Xi_8_lam+Ds
+                else: return np.random.choice(self.gauss_Xi_8, size=None), np.random.choice(self.gauss_Bs, size=None)
             elif(decPr==27):
-                if not bootstrap: return self.Sigma_8_mass, self.D_star_mass #  //Sigma_8_lam+D*
-                else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_D_star, size=None)                
+                if not bootstrap: return self.Sigma_8_mass, self.B_star_mass #  //Sigma_8_lam+D*
+                else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_B_star, size=None)                
             elif(decPr==28):
-                if not bootstrap: return self.Sigma_10_mass, self.D0_mass #  //Sigma_10_lam+D
-                else: return np.random.choice(self.gauss_Sigma_10, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.Sigma_10_mass, self.B0_mass #  //Sigma_10_lam+D
+                else: return np.random.choice(self.gauss_Sigma_10, size=None), np.random.choice(self.gauss_B0, size=None)
                 
         elif(baryons=='sigmas'):
             if(decPr==1):
@@ -331,29 +329,29 @@ class DecayWidths:
                 else: return np.random.choice(self.gauss_sigma_s, size=None), np.random.choice(self.gauss_small_omega, size=None)
                 # START OF SECOND DIAGRAM DECAYS
             elif(decPr==19):
-                if not bootstrap: return self.proton_mass, self.D0_mass #  //N+D
-                else: return np.random.choice(self.gauss_proton, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.proton_mass, self.B0_mass #  //N+D
+                else: return np.random.choice(self.gauss_proton, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==20):
-                if not bootstrap: return self.Sigma_8_mass, self.Ds_mass # //Sigma_8+Ds
-                else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_Ds, size=None)
+                if not bootstrap: return self.Sigma_8_mass, self.Bs_mass # //Sigma_8+Ds
+                else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_Bs, size=None)
             elif(decPr==21):
-                if not bootstrap: return self.proton_mass, self.D0_mass # //N+D*
-                else: return np.random.choice(self.gauss_proton, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.proton_mass, self.B_star_mass # //N+D*
+                else: return np.random.choice(self.gauss_proton, size=None), np.random.choice(self.gauss_B_star, size=None)
             elif(decPr==22):
-                if not bootstrap: return self.Delta_mass, self.D0_mass #  //Delta+D    
-                else: return np.random.choice(self.gauss_Delta, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.Delta_mass, self.B0_mass #  //Delta+D    
+                else: return np.random.choice(self.gauss_Delta, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==23):
-                if not bootstrap: return self.N_star_1520_mass, self.D0_mass # //N*(1520)+D
-                else: return np.random.choice(self.gauss_N_star_1520, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.N_star_1520_mass, self.B0_mass # //N*(1520)+D
+                else: return np.random.choice(self.gauss_N_star_1520, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==24):
-                if not bootstrap: return self.N_star_1535_mass, self.D0_mass #  //N*(1535)+D    
-                else: return np.random.choice(self.gauss_N_star_1535, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.N_star_1535_mass, self.B0_mass #  //N*(1535)+D    
+                else: return np.random.choice(self.gauss_N_star_1535, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==25):
-                if not bootstrap: return self.N_star_1680_mass, self.D0_mass # //N*(1680)+D
-                else: return np.random.choice(self.gauss_N_star_1680, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.N_star_1680_mass, self.B0_mass # //N*(1680)+D
+                else: return np.random.choice(self.gauss_N_star_1680, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==26):
-                if not bootstrap: return self.N_star_1720_mass, self.D0_mass # //N*(1720)+D
-                else: return np.random.choice(self.gauss_N_star_1720, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.N_star_1720_mass, self.B0_mass # //N*(1720)+D
+                else: return np.random.choice(self.gauss_N_star_1720, size=None), np.random.choice(self.gauss_B0, size=None)
 
         elif(baryons=='lambdas'):
             if(decPr==1):
@@ -397,11 +395,11 @@ class DecayWidths:
                 else: return np.random.choice(self.gauss_xi_s, size=None), np.random.choice(self.gauss_kaon_s, size=None)
                 # START OF SECOND DIAGRAM DECAYS
             elif(decPr==14):
-                if not bootstrap: return self.proton_mass, self.D0_mass #  //N+D
-                else: return np.random.choice(self.gauss_proton, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.proton_mass, self.B0_mass #  //N+D
+                else: return np.random.choice(self.gauss_proton, size=None), np.random.choice(self.gauss_B0, size=None)
             # elif(decPr==15):
-            #     if not bootstrap: return self.proton_mass, self.D_star_mass # //N+D*
-            #     else: return np.random.choice(self.gauss_proton, size=None), np.random.choice(self.gauss_D_star, size=None)
+            #     if not bootstrap: return self.proton_mass, self.B_star_mass # //N+D*
+            #     else: return np.random.choice(self.gauss_proton, size=None), np.random.choice(self.gauss_B_star, size=None)
 
         elif(baryons=='cascades_anti3'):
             if(decPr==1):
@@ -478,17 +476,17 @@ class DecayWidths:
                 else: return np.random.choice(self.gauss_xi_s, size=None), np.random.choice(self.gauss_phi, size=None)
                 # START OF SECOND DIAGRAM DECAYS
             elif(decPr==25):
-                if not bootstrap: return self.Lambda_8_mass, self.D0_mass # //Lambda_8_rho D
-                else: return np.random.choice(self.gauss_Lambda_8, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.Lambda_8_mass, self.B0_mass # //Lambda_8_rho D
+                else: return np.random.choice(self.gauss_Lambda_8, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==26):
-                if not bootstrap: return self.Lambda_8_mass, self.D_star_mass # //Lambda_8_rho D* 
-                else: return np.random.choice(self.gauss_Lambda_8, size=None), np.random.choice(self.gauss_D_star, size=None)
+                if not bootstrap: return self.Lambda_8_mass, self.B_star_mass # //Lambda_8_rho D* 
+                else: return np.random.choice(self.gauss_Lambda_8, size=None), np.random.choice(self.gauss_B_star, size=None)
             elif(decPr==27):
-                if not bootstrap: return self.Sigma_8_mass, self.D0_mass #  //Sigma_8_rho D
-                else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.Sigma_8_mass, self.B0_mass #  //Sigma_8_rho D
+                else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==28):
-                if not bootstrap: return self.Lambda_star_mass, self.D0_mass # //Lambda*_8_rho D
-                else: return np.random.choice(self.gauss_Lambda_star, size=None), np.random.choice(self.gauss_D0, size=None)
+                if not bootstrap: return self.Lambda_star_mass, self.B0_mass # //Lambda*_8_rho D
+                else: return np.random.choice(self.gauss_Lambda_star, size=None), np.random.choice(self.gauss_B0, size=None)
 
 
     def fetch_decay_masses(self, bootstrap):
@@ -499,10 +497,7 @@ class DecayWidths:
         self.meson_rho_mass   = 0.77518
         self.kaon_s_mass      = 0.89555
         self.small_omega_mass = 0.78266
-        self.phi_mass         = 1.01946
-        self.D0_mass          = 1.86672
-        self.Ds_mass          = 1.96835
-        self.D_star_mass      = 2.00855
+        self.phi_mass         = 1.01946        
         self.proton_mass      = 0.93891
         self.N_star_1520_mass = 1.51500
         self.N_star_1535_mass = 1.53000
@@ -515,16 +510,19 @@ class DecayWidths:
         self.Xi_10_mass       = 1.53370
         self.Sigma_8_mass     = 1.11932
         self.Sigma_10_mass    = 1.38460
-        # Bottom baryons
-        self.lambda_mass      = 2.28646
-        self.xi_mass          = 2.46908
-        self.xi_p_mass        = 2.57850
-        self.xi_s_mass        = 2.64563
-        self.sigma_mass       = 2.45350
-        self.sigma_s_mass     = 2.51813
-        self.omega_mass       = 2.69520
-        self.omega_s_mass     = 2.76590
-        
+        # Bottom hadrons
+        self.lambda_mass      = 5.61960 # +- 0.0001
+        self.xi_p_mass        = 5.93502 # +- 0.00005        
+        self.xi_mass          = 5.79700 # +- 0.00060.... Difference with Xb0=5.9 +- 0.6 MeV
+        self.xi_s_mass        = 6.07800 # +- 0.00006 (predicted mass)$6078^{+10}_{-10}$  CHECK!!
+        self.sigma_mass       = 5.81056 # +- 0.00025.... Difference of + and - == 5.06+-0.18 MeV
+        self.sigma_s_mass     = 5.83032 # +- 0.00030.... Difference of + and - == 4.37+-0.33 OK
+        self.omega_mass       = 6.04520 # +- 0.00120
+        self.omega_s_mass     = 6.09300 # +- 0.00060 (predicted mass) # $6093^{+10}_{-10}$ CHECK!!
+        self.B0_mass          = 5.27966 # +- 0.00012
+        self.Bs_mass          = 5.36692 # +- 0.00010
+        self.B_star_mass      = 5.32471 # +- 0.00021
+
         if(bootstrap):
             self.gauss_pion        = np.random.normal(0.13725, 0.00295, 10000)
             self.gauss_kaon        = np.random.normal(0.49564, 0.00279, 10000)
@@ -534,9 +532,6 @@ class DecayWidths:
             self.gauss_kaon_s      = np.random.normal(0.89555, 0.00100, 10000)
             self.gauss_small_omega = np.random.normal(0.78266, 0.00002, 10000)
             self.gauss_phi         = np.random.normal(1.01946, 0.00002, 10000)
-            self.gauss_D0          = np.random.normal(1.86672, 0.00193, 10000)
-            self.gauss_Ds          = np.random.normal(1.96835, 0.00007, 10000)
-            self.gauss_D_star      = np.random.normal(2.00855, 0.00180, 10000)
             self.gauss_proton      = np.random.normal(0.93891, 0.00091, 10000)
             self.gauss_N_star_1520 = np.random.normal(1.51500, 0.00500, 10000)
             self.gauss_N_star_1535 = np.random.normal(1.53000, 0.01500, 10000)
@@ -549,18 +544,22 @@ class DecayWidths:
             self.gauss_Xi_10       = np.random.normal(1.53370, 0.00250, 10000)
             self.gauss_Sigma_8     = np.random.normal(1.11932, 0.00340, 10000)
             self.gauss_Sigma_10    = np.random.normal(1.38460, 0.00460, 10000)
-            # Bottom baryons
-            self.gauss_lambda      = np.random.normal(2.28646, 0.00014, 10000)
-            self.gauss_xi          = np.random.normal(2.46908, 0.00158, 10000)
-            self.gauss_xi_p        = np.random.normal(2.57850, 0.00100, 10000)
-            self.gauss_xi_s        = np.random.normal(2.64563, 0.00100, 10000)
-            self.gauss_sigma       = np.random.normal(2.45350, 0.00090, 10000)
-            self.gauss_sigma_s     = np.random.normal(2.51813, 0.00280, 10000)
-            self.gauss_omega       = np.random.normal(2.69520, 0.00170, 10000)
-            self.gauss_omega_s     = np.random.normal(2.76590, 0.00200, 10000)
+            # Bottom hadrons
+            self.gauss_lambda      = np.random.normal(5.61960, 0.00017, 10000)
+            self.gauss_xi_p        = np.random.normal(5.93502, 0.00005, 10000)
+            self.gauss_xi          = np.random.normal(5.79700, 0.00060, 10000)
+            self.gauss_xi_s        = np.random.normal(6.07800, 0.00100, 10000) # predicted massA
+            self.gauss_sigma       = np.random.normal(5.81056, 0.00025, 10000)
+            self.gauss_sigma_s     = np.random.normal(5.83032, 0.00030, 10000)
+            self.gauss_omega       = np.random.normal(6.04520, 0.00120, 10000)
+            self.gauss_omega_s     = np.random.normal(6.09300, 0.00060, 10000) # predicted massA    
+            self.gauss_B0          = np.random.normal(5.27966, 0.00012, 10000)
+            self.gauss_Bs          = np.random.normal(5.36692, 0.00010, 10000)
+            self.gauss_B_star      = np.random.normal(5.32471, 0.00021, 10000)
+
             
     def set_gamma_val(self, bootstrap):
         
-        self.gamma_fit = 19.600666667 # 12.886726481799654 * 1.5 #  old 12.786320816 # even older 11.97 0.46265562598890014 * 1.5 * 5
+        self.gamma_fit = 20.8
         if(bootstrap):
-            self.gauss_gamma = np.random.normal(19.600666667, np.power( 2.47**2 + 4.44**2, 0.5) , 10000)
+            self.gauss_gamma = np.random.normal(20.8, np.power( 1.47**2 + 4.44**2, 0.5) , 10000)

@@ -24,11 +24,12 @@ class BottomThreeQuark:
         self.sampled = sampled
         self.corr_mat = corr_mat
         self.asymmetric = asymmetric
+        self.m_decay_width = decay_width
         self.m_batch_number = batch_number
         self.m_baryons = baryons
         self.m_workpath = workpath
         if decay_width:
-            self.baryon_decay = DecayWidths(bootstrap_width, baryons, workpath=m_workpath)
+            self.baryon_decay = DecayWidths(bootstrap_width, baryons, workpath=workpath)
     
     def model_mass(self, i, j, sampled=False):
         """
@@ -84,7 +85,7 @@ class BottomThreeQuark:
         omega = v_input * (den_lam + den_rho) * kp_input
         return omega
                 
-    def paper_results_predictions(self, bootstrap=False, bootstrap_width=False, prev_params=False, decay_width=False):
+    def paper_results_predictions(self, bootstrap=False, bootstrap_width=False, prev_params=False):
         """
         Method to call the calculations and save them (paper latex tables, here we include all the states)
         The parameters are redifined. Will clean the input param
@@ -94,7 +95,7 @@ class BottomThreeQuark:
             self.previous_parameters()
             self.previous_parameters_uncertainty(N_boots=len(self.sampled_k)) # set params. with previous-paper gauss shape (arbitrary error)
         # compute masses/decays and save them in csv files
-        self.compute_save_predictions(self.m_baryons, bootstrap=bootstrap, decay_width=decay_width, bootstrap_width=bootstrap_width)           
+        self.compute_save_predictions(self.m_baryons, bootstrap=bootstrap, decay_width=self.m_decay_width, bootstrap_width=bootstrap_width)           
 
     def compute_save_predictions(self, baryons='', bootstrap=False, decay_width=False, bootstrap_width=False):
         """

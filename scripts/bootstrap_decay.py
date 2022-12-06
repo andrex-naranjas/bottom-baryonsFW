@@ -11,19 +11,13 @@ import sys
 from iminuit import Minuit
 import numpy as np
 import datetime
-
 # framework modules
-import data_visualization as dv
-import data_preparation as dp
+from decays.decay_wrapper import decay
+import decays.decay_utils as du
+from decays.decay_width import DecayWidths
 
-
-from bottom_wrapper import decay
-import decay_utils as du
-
-from decay_width import DecayWidths
 
 width = decay()
-
 
 def model(v, gamma):
     return v*gamma
@@ -56,8 +50,8 @@ def decay_coef():
     decay_test = DecayWidths()
     coef_decay=([])
     gamma = 1
-    m1_in,m2_in,m3_in = 1612,453,281
-    k_prim = 5393
+    m1_in,m2_in,m3_in = 4926,466,300
+    k_prim = 4848
     
     # baryons = 'omegas'
     # ModEx_val= 'lam'
@@ -133,7 +127,7 @@ def decay_coef():
     # sigmas
     baryons = 'sigmas'
     ModEx_val= 'grd'
-    MassA = 2.456*1000  # gauss_2455
+    MassA = 5.805 * 1000 # 5.8131*1000  # gauss_5813 = 5813.1
     JA_qm = 1/2
     SA_qm = 1/2
     LA_qm = 0
@@ -142,8 +136,8 @@ def decay_coef():
     decay_coef = decay_test.total_decay_width(baryons, k_prim, MassA, SA_qm, LA_qm, JA_qm, SL_qm, ModEx_val, gamma_val=1, m1=m1_in, m2=m2_in, m3=m3_in)
     coef_decay = np.append(coef_decay, decay_coef)
 
-    ModEx_val= 'grd'
-    MassA = 2.526*1000 # gauss_2520
+    ModEx_val= 'grd' 
+    MassA = 5.835 * 1000 # 5.837*1000 # gauss_5837 = 5837.0
     JA_qm = 3/2
     SA_qm = 3/2
     LA_qm = 0
@@ -222,8 +216,8 @@ gauss_2645 = sample_gauss(2.25, 0.41) # OK paper table
 gauss_2965 = sample_gauss(14.1, 1.6) # OK paper table
 
 # sigma states
-gauss_2455 = sample_gauss(2.3, 0.424) # OK paper table
-gauss_2520 = sample_gauss(17.2, 3.86) # OK paper table
+gauss_5813 = sample_gauss(5.0, 0.5)
+gauss_5837 = sample_gauss(10.4, 2.0)
 
 # lambda
 gauss_2592 = sample_gauss(2.6, 0.6)  # OK paper table
@@ -239,18 +233,18 @@ gauss_2818 = sample_gauss(2.48, 0.5) # OK paper table
 for _ in range(10000):
     # measured and quark-sum sampled masses
     exp_m = np.array([
-        # omegas
-        random(gauss_3000),
-        random(gauss_3050),
-        random(gauss_3065),
-        random(gauss_3090),
-        random(gauss_3120),
+        # # omegas
+        # random(gauss_3000),
+        # random(gauss_3050),
+        # random(gauss_3065),
+        # random(gauss_3090),
+        # random(gauss_3120),
         # # cascades prime
         # random(gauss_2645),
         # random(gauss_2965),
-        # # sigmas
-        # random(gauss_2455),
-        # random(gauss_2520), # not in the fit
+        # sigmas
+        random(gauss_5813),
+        random(gauss_5837), # not in the fit
         # # lambdas
         # random(gauss_2592),
         # random(gauss_2880),
