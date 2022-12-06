@@ -94,7 +94,7 @@ class SpinAmplitudes():
         """
         if m_proj in [3/2,1/2,-1/2,-3/2]:
             i = 3/2-m_proj
-            st = spint_states(u, u, u)
+            st = self.spint_states(u, u, u)
             while i > 0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st = v1 / sqrt((transpose(v1)*v1)[0])
@@ -108,7 +108,7 @@ class SpinAmplitudes():
         """
         if m_proj in [1/2,-1/2]:
             i=1/2-m_proj
-            st=(spint_states(u,d,u)-spint_states(d,u,u))/sqrt(2)
+            st=(self.pint_states(u,d,u)-self.spint_states(d,u,u))/sqrt(2)
             while i>0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st=v1/sqrt((transpose(v1)*v1)[0])
@@ -122,7 +122,7 @@ class SpinAmplitudes():
         """
         if a in [1/2,-1/2]:
             i=1/2-a
-            st=(2*spint_states(u,u,d)-spint_states(u,d,u)-spint_states(d,u,u))/sqrt(6)
+            st=(2*self.spint_states(u,u,d)-self.spint_states(u,d,u)-self.spint_states(d,u,u))/sqrt(6)
             while i>0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st=v1/sqrt((transpose(v1)*v1)[0])
