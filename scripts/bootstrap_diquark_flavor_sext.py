@@ -5,7 +5,7 @@
  Script to obtain uncertainties of heavy baryon mass spectrum via bootstrap
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch) and
           H. Garcia-Tecocoatzi
- ------------------------------------------------------------------------
+--------------------------------------------------------------------------
 """
 import sys
 import os
@@ -59,20 +59,23 @@ def least_squares(md1, md2, md3, mb, k, a, b, e, g):
     # return np.sum((pred_m - exp_m)**2 / (yvar_2**2)) #**2
 
 def fit(least_squares):
-    m = Minuit(least_squares, md1=900, md2=300, md3=300, mb=1400, k=0, a=0, b=0, e=0, g=0)
-    m.limits['mb'] = (4900, 6000)
-    # m.limits['md1'] = (850,950)
-    # m.limits['md2'] = (650,850)
-    # m.limits['md3'] = (500,700)
-    m.limits['md1'] =  (850, 950) #(500, 1000)   #  #omega (500, 1500)
-    m.limits['md2'] =  (650, 850) #(500, 1000)   #  #cascade prime
-    m.limits['md3'] =  (500, 700) #(500, 1000)   #  #sigma
+    m = Minuit(least_squares, md1=300, md2=300, md3=300, mb=4000, k=0, a=0, b=0, e=0, g=0)
+    # m.limits['mb'] = (4900, 6000)
+    m.limits['md1'] =  (900, 1200)  # (850, 950) #omega (500, 1500)
+    m.limits['md2'] =  (600, 950)   # (650, 850) #cascade prime
+    m.limits['md3'] =  (500, 850)   # (500, 700) #sigma
+    # m.limits['md1'] = (800,1500)
+    # m.limits['md2'] = (650,950)
+    # m.limits['md3'] = (500,600)
+    # m.limits['md1'] =  (500, 1000) #(850, 950)    #  #omega (500, 1500)
+    # m.limits['md2'] =  (500, 1000) #(650, 850)    #  #cascade prime
+    # m.limits['md3'] =  (500, 1000) #(500, 700)    #  #sigma
     # m.limits['md4'] =  (500, 1500)   # (500, 700) #lambda
     # m.limits['md5'] =  (500, 1500)   # (650, 850) #cascade
-    # m.limits['a'] = (0, 100)
-    # m.limits['b'] = (0, 100)
-    # m.limits['e'] = (30, 100)
-    # m.limits['g'] = (50, 100)
+    # m.limits['a'] = (1, 100)
+    # m.limits['b'] = (1, 100)
+    m.limits['e'] = (20, 50)
+    m.limits['g'] = (50, 80)
     m.errordef=Minuit.LEAST_SQUARES
     m.migrad()
     return m
@@ -98,34 +101,34 @@ rho_ba,rho_ea,rho_ga,rho_eb,rho_gb,rho_ge                  = ([]),([]),([]),([])
 
 # start bootstrap
 start = datetime.datetime.now()
-sigma_model = 10**2 # to be obtained with optimization (Li.Jin)
+sigma_model = 0**2 # to be obtained with optimization (Li.Jin)
 # gaussian pdf with the measured value and with experimental and model(sigma_model) uncertainties
 # Omega states
-gauss_6061 = sample_gauss(6045.2, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
-gauss_6316 = sample_gauss(6315.6, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2767), PDG
-gauss_6330 = sample_gauss(6330.3, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3015), PDG
-gauss_6340 = sample_gauss(6339.7, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3044), PDG
-gauss_6350 = sample_gauss(6349.8, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3051), PDG
+gauss_6061 = sample_gauss(6045.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
+gauss_6316 = sample_gauss(6315.6, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2767), PDG
+gauss_6330 = sample_gauss(6330.3, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3015), PDG
+gauss_6340 = sample_gauss(6339.7, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3044), PDG
+gauss_6350 = sample_gauss(6349.8, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3051), PDG
 # Cascade b sextet
-gauss_5935 = sample_gauss(5935.0, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2461), PDG Average
-gauss_5953 = sample_gauss(5953.8, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2796), PDG Average
-gauss_6328 = sample_gauss(6227.9, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2832), PDG Average
+gauss_5935 = sample_gauss(5935.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2461), PDG Average
+gauss_5953 = sample_gauss(5953.8, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2796), PDG Average
+gauss_6328 = sample_gauss(6227.9, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2832), PDG Average
 # Sigma b
-gauss_5813 = sample_gauss(5813.1, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2453), PDG Average
-gauss_5837 = sample_gauss(5837.0, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2517), PDG Average
-gauss_6097 = sample_gauss(6096.9, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2819), PDG Average
+gauss_5813 = sample_gauss(5813.1, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2453), PDG Average
+gauss_5837 = sample_gauss(5837.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2517), PDG Average
+gauss_6097 = sample_gauss(6096.9, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2819), PDG Average
 # Lambda b
-gauss_5617 = sample_gauss(5619.6, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
-gauss_5912 = sample_gauss(5912.2, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
-gauss_5920 = sample_gauss(5920.1, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
-gauss_6146 = sample_gauss(6146.2, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
-gauss_6152 = sample_gauss(6152.5, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
-gauss_6070 = sample_gauss(6072.3, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
+gauss_5617 = sample_gauss(5619.6, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
+gauss_5912 = sample_gauss(5912.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
+gauss_5920 = sample_gauss(5920.1, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
+gauss_6146 = sample_gauss(6146.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
+gauss_6152 = sample_gauss(6152.5, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
+gauss_6070 = sample_gauss(6072.3, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
 # Cascades anti-3-plet
-gauss_5794 = sample_gauss(5794.5, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2570), PDG Average
-gauss_6100 = sample_gauss(6100.0, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2635), PDG Average
-gauss_6327 = sample_gauss(6327.0, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2934), LHCb PhysRevLett
-gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2941), LHCb PhysRevLett
+gauss_5794 = sample_gauss(5794.5, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2570), PDG Average
+gauss_6100 = sample_gauss(6100.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2635), PDG Average
+gauss_6327 = sample_gauss(6327.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2934), LHCb PhysRevLett
+gauss_6333 = sample_gauss(6333.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2941), LHCb PhysRevLett
 
 # plug here the sigma_0 optimization lines from data_utils.py
 
@@ -265,7 +268,7 @@ print(round(sampled_md3.mean()), "md3 sigma")
 # print(round(sampled_md5.mean()), "md5 cascade")
 print(round(sampled_mb.mean()), "mb")
 
-print("K", sampled_k.mean())
+print("K", pow(sampled_k.mean(), 2)/(1000**3))
 print("A", sampled_a.mean())
 print("B", sampled_b.mean())
 print("E", sampled_e.mean())

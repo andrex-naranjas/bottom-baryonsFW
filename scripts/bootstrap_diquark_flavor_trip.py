@@ -33,46 +33,46 @@ if len(sys.argv) == 4:
 else:
     workpath = os.getcwd()
 
-fit_type = "sext" # sext or trip
+fit_type = "trip" # sext or trip
 
 # input parameters
 
 param_v,param_w,param_x,param_y,param_z,\
     param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade = dp.fetch_data_diquark(fit_type=fit_type)
 
-def model(is_omega, is_cascade_p, is_sigma, is_lambda, is_cascade, v, w, x, y, z, md1, md2, md3, md4, md5, mb, k, a, b, e, g):
-    return is_omega*md1 + is_cascade_p*md2 + is_sigma*md3 + is_lambda*md4 + is_cascade*md5 + mb +\
-        v*k*np.sqrt(1./( ( is_omega*md1 + is_cascade_p*md2 + is_sigma*md3 + is_lambda*md4 + is_cascade*md5)*mb / ( is_omega*md1 + is_cascade_p*md2 + is_sigma*md3 + is_lambda*md4 + is_cascade*md5 + mb ) ) ) +\
+def model(is_lambda, is_cascade, v, w, x, y, z, md1, md2, mb, k, a, b, e, g):
+    return is_lambda*md1 + is_cascade*md2 + mb +\
+        v*k*np.sqrt(1./( ( is_lambda*md1 + is_cascade*md2)*mb / ( is_lambda*md1 + is_cascade*md2 + mb ) ) ) +\
         w*a + x*b + y*e + z*g
 
-def least_squares(md1, md2, md3, md4, md5, mb, k, a, b, e, g):
+def least_squares(md1, md2, mb, k, a, b, e, g):
     # y_var_0 = sigma_0 # best sigma_0= 13.63
     # yvar_0 = y_var_0*np.ones(17)
     # yvar = y_errors_exp
     # yvar_2 = np.power(yvar_0, 2) + np.power(yvar, 2)
     yvar_2 = 0.001
-    pred_m = model(param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade,
+    pred_m = model(param_is_lambda, param_is_cascade,
                    param_v, param_w, param_x, param_y, param_z,
-                   md1, md2, md3, md4 , md5, mb, k, a, b, e, g)
+                   md1, md2, mb, k, a, b, e, g)
     yval_2 = np.power( (pred_m - exp_m), 2)
-    return np.sum( np.divide(yval_2, yvar_2) )
+    return np.sum(np.divide(yval_2, yvar_2) )
     # return np.sum((pred_m - exp_m)**2 / (yvar_2**2)) #**2
 
 def fit(least_squares):
-    m = Minuit(least_squares, md1=900, md2=300, md3=300, md4=300, md5=300, mb=1400, k=0, a=0, b=0, e=0, g=0)
-    m.limits['mb'] = (4900, 6000)
+    m = Minuit(least_squares, md1=300, md2=300, mb=4000, k=0, a=0, b=0, e=0, g=0)
+    m.limits['mb'] = (4900, 4950)
     # m.limits['md1'] = (850,950)
     # m.limits['md2'] = (650,850)
     # m.limits['md3'] = (500,700)
-    # m.limits['md1'] =  (500, 1500)   # (850, 950) #omega (500, 1500)
-    # m.limits['md2'] =  (500, 1500)   # (650, 850) #cascade prime
+    m.limits['md1'] =  (500, 1500)   # (850, 950) #omega (500, 1500)
+    m.limits['md2'] =  (500, 1500)   # (650, 850) #cascade prime
     # m.limits['md3'] =  (500, 1500)   # (500, 700) #sigma
     # m.limits['md4'] =  (500, 1500)   # (500, 700) #lambda
     # m.limits['md5'] =  (500, 1500)   # (650, 850) #cascade
-    # m.limits['a'] = (0, 100)
-    # m.limits['b'] = (0, 100)
-    # m.limits['e'] = (30, 100)
-    # m.limits['g'] = (50, 100)
+    m.limits['a'] = (0, 100)
+    m.limits['b'] = (0, 100)
+    m.limits['e'] = (0, 100)
+    m.limits['g'] = (0, 100)
     m.errordef=Minuit.LEAST_SQUARES
     m.migrad()
     return m
@@ -98,7 +98,7 @@ rho_ba,rho_ea,rho_ga,rho_eb,rho_gb,rho_ge                  = ([]),([]),([]),([])
 
 # start bootstrap
 start = datetime.datetime.now()
-sigma_model = 10**2 # to be obtained with optimization (Li.Jin)
+sigma_model = 0**2 # to be obtained with optimization (Li.Jin)
 # gaussian pdf with the measured value and with experimental and model(sigma_model) uncertainties
 # Omega states
 gauss_6061 = sample_gauss(6045.2, np.power((1.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
@@ -199,9 +199,9 @@ for _ in range(10): # max 10000 with decays included, computationally expensive
 
     sampled_md1 = np.append(sampled_md1, m.values['md1'])
     sampled_md2 = np.append(sampled_md2, m.values['md2'])
-    sampled_md3 = np.append(sampled_md3, m.values['md3'])
-    sampled_md4 = np.append(sampled_md4, m.values['md4'])
-    sampled_md5 = np.append(sampled_md5, m.values['md5'])
+    # sampled_md3 = np.append(sampled_md3, m.values['md3'])
+    # sampled_md4 = np.append(sampled_md4, m.values['md4'])
+    # sampled_md5 = np.append(sampled_md5, m.values['md5'])
     sampled_mb  = np.append(sampled_mb,  m.values['mb'])
 
     sampled_k = np.append(sampled_k, m.values['k'])
@@ -258,11 +258,11 @@ for _ in range(10): # max 10000 with decays included, computationally expensive
     # rho_ge     = np.append(rho_ge, corr['g','e'])
 
     
-print(round(sampled_md1.mean()), "md1 omega")
-print(round(sampled_md2.mean()), "md2 cascade prime")
-print(round(sampled_md3.mean()), "md3 sigma")
-print(round(sampled_md4.mean()), "md4 lambda")
-print(round(sampled_md5.mean()), "md5 cascade")
+print(round(sampled_md1.mean()), "md1 lambdas")
+print(round(sampled_md2.mean()), "md2 cascade")
+# print(round(sampled_md3.mean()), "md3 sigma")
+# print(round(sampled_md4.mean()), "md4 lambda")
+# print(round(sampled_md5.mean()), "md5 cascade")
 print(round(sampled_mb.mean()), "mb")
 
 print("K", sampled_k.mean())
