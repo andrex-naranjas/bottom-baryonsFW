@@ -150,21 +150,21 @@ class SpinAmplitudes():
         Method to calcualte all the matrix elements
         """
         for n in [1,2,3]:
-            for x in [s,r,l]:
-                for y in  [s,r,l]:
-                    if x==s:
+            for x in [self.symmetric_states,self.rho_states,self.lambda_states]:
+                for y in  [self.symmetric_states,self.rho_states,self.lambda_states]:
+                    if x==self.symmetric_states:
                         for i in [3/2,1/2,-1/2,-3/2]:
-                            if y==s:
+                            if y==self.symmetric_states:
                                 for j in [3/2,1/2,-1/2,-3/2]:
-                                    print([m(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
+                                    print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
                             else:
                                 for j in [1/2,-1/2]:
-                                    print([m(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
+                                    print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
                     else:
                         for i in [1/2,-1/2]:
-                            if y==s:
+                            if y==self.symmetric_states:
                                 for j in [3/2,1/2,-1/2,-3/2]:
-                                    print([m(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
+                                    print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
                             else:
                                 for j in [1/2,-1/2]:
-                                    print([m(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
+                                    print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
