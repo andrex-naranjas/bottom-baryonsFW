@@ -40,6 +40,7 @@ fit_type = "trip" # sext or trip
 param_v,param_w,param_x,param_y,param_z,\
     param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade = dp.fetch_data_diquark(fit_type=fit_type)
 
+
 def model(is_lambda, is_cascade, v, w, x, y, z, md1, md2, mb, k, a, b, e, g):
     return is_lambda*md1 + is_cascade*md2 + mb +\
         v*k*np.sqrt(1./( ( is_lambda*md1 + is_cascade*md2)*mb / ( is_lambda*md1 + is_cascade*md2 + mb ) ) ) +\
@@ -59,21 +60,22 @@ def least_squares(md1, md2, mb, k, a, b, e, g):
     # return np.sum((pred_m - exp_m)**2 / (yvar_2**2)) #**2
 
 def fit(least_squares):
-    m = Minuit(least_squares, md1=300, md2=300, mb=4000, k=0, a=0, b=0, e=0, g=0)
-    m.limits['mb'] = (4900, 4950)
+    m = Minuit(least_squares, md1=800, md2=800, mb=5000, k=0, a=0, b=0, e=0, g=0)
+    m.limits['mb'] = (4900, 6000)
     # m.limits['md1'] = (850,950)
     # m.limits['md2'] = (650,850)
     # m.limits['md3'] = (500,700)
-    m.limits['md1'] =  (500, 1500)   # (850, 950) #omega (500, 1500)
-    m.limits['md2'] =  (500, 1500)   # (650, 850) #cascade prime
+    # m.limits['md1'] =  (500, 800)     # (850, 950) #omega (500, 1500)
+    # m.limits['md2'] =  (500, 1500)     # (650, 850) #cascade prime
     # m.limits['md3'] =  (500, 1500)   # (500, 700) #sigma
     # m.limits['md4'] =  (500, 1500)   # (500, 700) #lambda
     # m.limits['md5'] =  (500, 1500)   # (650, 850) #cascade
-    m.limits['a'] = (0, 100)
-    m.limits['b'] = (0, 100)
-    m.limits['e'] = (0, 100)
-    m.limits['g'] = (0, 100)
+    m.limits['a'] = (9,   10)
+    m.limits['b'] = (4,    6)
+    m.limits['e'] = (34,  36)
+    m.limits['g'] = (55,  65)    
     m.errordef=Minuit.LEAST_SQUARES
+    # m.errordef=Minuit.LIKELIHOOD
     m.migrad()
     return m
 

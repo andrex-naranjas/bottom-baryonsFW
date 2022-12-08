@@ -77,17 +77,12 @@ def fetch_data_diquark(fit_type="All"):
             param_is_sigma   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
             return param_v,param_w,param_x,param_y,param_z,param_is_omega,param_is_cascade,param_is_sigma
             
-
         param_is_omega     = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
         param_is_cascade_p = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
         param_is_sigma     = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
         param_is_lambda    = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
         param_is_cascade   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  1.00, 1.00]) # coef kp
         
-        # flavor
-        param_is_sext    = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   1.00, 1.00, 1.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_trip    = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,  1.00, 1.00]) # coef kp
-
     elif fit_type=="sext":
         # hamiltonian coeficients
         param_v          = np.array([0.00, w_om, w_om, w_om, w_om,   0.00, 0.00, wcas,   0.00, 0.00, w_ls]) # coef infront kprim_c
@@ -96,16 +91,12 @@ def fetch_data_diquark(fit_type="All"):
         param_y          = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.75, 0.75, 0.75,   2.00, 2.00, 2.00]) # coef infront E
         param_z          = np.array([10/3, 10/3, 10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   10/3, 10/3, 10/3]) # coef infront G        
 
-        # flavor
-        param_flav_sext  = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   1.00, 1.00, 1.00,   1.00, 1.00, 1.00]) # coef kp
-        param_flav_trip  = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
-        
         # kind of baryon
         param_is_omega     = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
-        param_is_cascade   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
+        param_is_cascade   = np.array([0.00])# 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
         param_is_cascade_p = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00]) # coef kp
         param_is_sigma     = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00]) # coef kp
-        param_is_lambda    = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
+        param_is_lambda    = np.array([0.00])#, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
     elif fit_type=="trip":
         # hamiltonian coeficients
         param_v          = np.array([0.00, w_ls, w_ls,   0.00, wcas]) # coef infront kprim_c
@@ -115,10 +106,10 @@ def fetch_data_diquark(fit_type="All"):
         param_z          = np.array([4/3 , 4/3 , 4/3 ,   4/3 , 4/3 ]) # coef infront G    
         
         # kind of baryon
-        param_is_omega     = np.array([0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
+        param_is_omega     = np.array([0.00])#, 0.00, 0.00,  0.00, 0.00]) # coef kp
         param_is_cascade   = np.array([0.00, 0.00, 0.00,  1.00, 1.00]) # coef kp
-        param_is_cascade_p = np.array([0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_sigma     = np.array([0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
+        param_is_cascade_p = np.array([0.00])#, 0.00, 0.00,  0.00, 0.00]) # coef kp
+        param_is_sigma     = np.array([0.00])#, 0.00, 0.00,  0.00, 0.00]) # coef kp
         param_is_lambda    = np.array([1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
         
     #return param_v,param_w,param_x,param_y,param_z,param_is_omega,param_is_cascade,param_is_sigma

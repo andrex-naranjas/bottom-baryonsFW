@@ -59,11 +59,20 @@ def least_squares(md1, md2, md3, mb, k, a, b, e, g):
     # return np.sum((pred_m - exp_m)**2 / (yvar_2**2)) #**2
 
 def fit(least_squares):
-    m = Minuit(least_squares, md1=300, md2=300, md3=300, mb=4000, k=0, a=0, b=0, e=0, g=0)
-    # m.limits['mb'] = (4900, 6000)
-    m.limits['md1'] =  (900, 1200)  # (850, 950) #omega (500, 1500)
-    m.limits['md2'] =  (600, 950)   # (650, 850) #cascade prime
-    m.limits['md3'] =  (500, 850)   # (500, 700) #sigma
+    m = Minuit(least_squares, md1=1000, md2=500, md3=650, mb=4900, k=0, a=1, b=1, e=1, g=1)
+    m.limits['mb']  = (4900, 5000)
+    # m.limits['md1'] =  (900, 1200)  # (850, 950) #omega (500, 1500)
+    # m.limits['md2'] =  (600, 950)   # (650, 850) #cascade prime
+    # m.limits['md3'] =  (500, 850)   # (500, 700) #sigma
+
+    # m.limits['md1'] = (850, 990)   # (850, 950) #omega (500, 1500)
+    # m.limits['md2'] = (750, 820)   # (650, 850) #cascade prime
+    # m.limits['md3'] = (600, 750)   # (500, 700) #sigma
+
+    # m.limits['md1'] = (800, 960)   # (850, 950) #omega (500, 1500)
+    # m.limits['md2'] = (650, 800)   # (650, 850) #cascade prime
+    # m.limits['md3'] = (600, 620)   # (500, 700) #sigma
+
     # m.limits['md1'] = (800,1500)
     # m.limits['md2'] = (650,950)
     # m.limits['md3'] = (500,600)
@@ -72,10 +81,16 @@ def fit(least_squares):
     # m.limits['md3'] =  (500, 1000) #(500, 700)    #  #sigma
     # m.limits['md4'] =  (500, 1500)   # (500, 700) #lambda
     # m.limits['md5'] =  (500, 1500)   # (650, 850) #cascade
-    # m.limits['a'] = (1, 100)
-    # m.limits['b'] = (1, 100)
-    m.limits['e'] = (20, 50)
-    m.limits['g'] = (50, 80)
+
+    m.limits['a'] = (9,  10)
+    m.limits['b'] = (4,   6)
+    m.limits['e'] = (34, 36)
+    m.limits['g'] = (55, 65)
+
+    # m.limits['a'] = (5, 20)
+    # m.limits['b'] = (2, 10)
+    # m.limits['e'] = (20, 50)
+    # m.limits['g'] = (40, 90)
     m.errordef=Minuit.LEAST_SQUARES
     m.migrad()
     return m

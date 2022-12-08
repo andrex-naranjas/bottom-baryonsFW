@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
---------------------------------------------------------------------------
+---------------------------------------------------------------------------
  Script to obtain uncertainties of heavy baryon mass spectrum via bootstrap
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch) and
           H. Garcia-Tecocoatzi
- ------------------------------------------------------------------------
+---------------------------------------------------------------------------
 """
 import sys
 import os
