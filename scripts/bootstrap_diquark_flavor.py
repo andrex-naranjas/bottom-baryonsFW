@@ -15,7 +15,7 @@ import datetime
 import pandas as pd
 # framework modules
 import bottomfw.baryons.data_preparation as dp
-from bottomfw.baryons.bottom_diquark import BottomDiquark
+from bottomfw.baryons.bottom_diquark_flavor import BottomDiquark
 
 
 if len(sys.argv) <= 1:
@@ -149,8 +149,8 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
             random(gauss_5617),
             random(gauss_5912),
             random(gauss_5920),
-            # random(gauss_6146),
-            # random(gauss_6152),
+            random(gauss_6146),
+            random(gauss_6152),
             # Cascades
             random(gauss_5794),
             random(gauss_6100),
@@ -283,10 +283,11 @@ else:
     df.to_csv(workpath+"/batch_results_diquark/"+run_baryons+"/parameters/"+str(batch_number)+".csv", index=False)
 
 # create dictionaries
-param   = {'is_omega':param_is_omega,
-           'is_cascade':param_is_cascade, 'is_sigma':param_is_sigma,'V':param_v, 'W':param_w, 'X':param_x, 'Y':param_y, 'Z':param_z}
+param   = {'is_omega':param_is_omega,'is_cascade_p':param_is_cascade_p,'is_sigma':param_is_sigma,
+           'is_lambda':param_is_lambda, 'is_cascade':param_is_cascade,'V':param_v, 'W':param_w, 'X':param_x, 'Y':param_y, 'Z':param_z}
 
-sampled = {'sampled_md1':sampled_md1,'sampled_md2':sampled_md2,'sampled_md3':sampled_md3,'sampled_mb':sampled_mb,
+sampled = {'sampled_md1':sampled_md1,'sampled_md2':sampled_md2,'sampled_md3':sampled_md3,'sampled_md4':sampled_md4,'sampled_md5':sampled_md5,
+           'sampled_mb':sampled_mb,
            'sampled_k':sampled_k,'sampled_a':sampled_a, 'sampled_b':sampled_b, 'sampled_e':sampled_e, 'sampled_g':sampled_g}
 corr_mat_diquark ={
     'rho_md2md1':rho_md2md1,'rho_md3md1':rho_md3md1,'rho_mbmd1':rho_mbmd1, 'rho_kmd1':rho_kmd1, 'rho_amd1':rho_amd1, 'rho_bmd1':rho_bmd1,

@@ -64,11 +64,11 @@ def fetch_data_diquark(fit_type="All"):
 
     if fit_type=="All" or fit_type=="trad":
         # hamiltonian coeficients
-        param_v          = np.array([0.00, w_om, w_om, w_om, w_om,   0.00, 0.00, wcas,   0.00, 0.00, w_ls,   0.00, w_ls, w_ls,   0.00, wcas]) # coef infront kprim_c
-        param_w          = np.array([0.75, 0.75, 0.75, 3.75, 3.75,   0.75, 3.75, 3.75,   0.75, 3.75, 0.75,   0.75, 0.75, 0.75,   0.75, 0.75]) # coef infront A
-        param_x          = np.array([0.00, -1.0, 0.50, -2.5, -1.0,   0.00, 0.00, 1.50,   0.00, 0.00, -1.0,   0.00, -1.0, 0.50,   0.00, 0.50]) # coef infront B
-        param_y          = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.75, 0.75, 0.75,   2.00, 2.00, 2.00,   0.00, 0.00, 0.00,   0.75, 0.75]) # coef infront E
-        param_z          = np.array([10/3, 10/3, 10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   4/3 , 4/3 , 4/3 ,   4/3 , 4/3 ]) # coef infront G    
+        param_v          = np.array([0.00, w_om, w_om, w_om, w_om,   0.00, 0.00, wcas,   0.00, 0.00, w_ls,   0.00, w_ls, w_ls, w_ls, w_ls,   0.00, wcas]) # coef infront kprim_c
+        param_w          = np.array([0.75, 0.75, 0.75, 3.75, 3.75,   0.75, 3.75, 3.75,   0.75, 3.75, 0.75,   0.75, 0.75, 0.75, 0.75, 0.75,   0.75, 0.75]) # coef infront A
+        param_x          = np.array([0.00, -1.0, 0.50, -2.5, -1.0,   0.00, 0.00, 1.50,   0.00, 0.00, -1.0,   0.00, -1.0, 0.50, -1.5, 1.00,   0.00, 0.50]) # coef infront B
+        param_y          = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.75, 0.75, 0.75,   2.00, 2.00, 2.00,   0.00, 0.00, 0.00, 0.00, 0.00,   0.75, 0.75]) # coef infront E
+        param_z          = np.array([10/3, 10/3, 10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   4/3 , 4/3 , 4/3 , 4/3 , 4/3 ,   4/3 , 4/3 ]) # coef infront G        
         
         # # kind of baryon
         if fit_type=="trad":
@@ -77,11 +77,11 @@ def fetch_data_diquark(fit_type="All"):
             param_is_sigma   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
             return param_v,param_w,param_x,param_y,param_z,param_is_omega,param_is_cascade,param_is_sigma
             
-        param_is_omega     = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_cascade_p = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_sigma     = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_lambda    = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
-        param_is_cascade   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  1.00, 1.00]) # coef kp
+        param_is_omega     = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
+        param_is_cascade_p = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
+        param_is_sigma     = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
+        param_is_lambda    = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
+        param_is_cascade   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00, 0.00, 0.00,  1.00, 1.00]) # coef kp
         
     elif fit_type=="sext":
         # hamiltonian coeficients

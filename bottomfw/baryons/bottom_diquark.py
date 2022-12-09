@@ -108,7 +108,7 @@ class BottomDiquark:
                 # TODO: save to a csv file
                 channels_indi = np.array(self.baryon_decay.channel_widths_vector)
                 self.baryon_decay.channel_widths_vector = [] # clean,get ready for next mass[i]
-                # last tine of states loop
+                # last line of states loop
                     
         df_masses = None
         df_decays = None        
