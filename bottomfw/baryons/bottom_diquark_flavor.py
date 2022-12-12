@@ -233,10 +233,10 @@ class BottomDiquark:
         state,sum_mass,J_tot,S_tot,L_tot,I_tot,SU_tot,HO_n,SL,ModEx = bs.states_mass_diquark(baryons)
         # get the hamiltonian factors based on the quatum numbers
         param_v, param_q1, param_q2, param_q3, param_is_rho, param_is_lam,\
-            param_is_omega, param_is_cascade, param_is_sigma,\
+            param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade,\
             param_w,param_x,param_y,param_z  = \
-                dp.hamiltonian_quantum_factors_extended(state,J_tot,
-                                                        S_tot,L_tot,I_tot,SU_tot,HO_n,ModEx)
+                dp.hamiltonian_quantum_factors_flavor(state,J_tot,
+                                                      S_tot,L_tot,I_tot,SU_tot,HO_n,ModEx)
         # parameters re-assigment
         self.v_param = param_v
         self.w_param = param_w
@@ -250,8 +250,10 @@ class BottomDiquark:
         self.is_rho_param    = param_is_rho
         self.is_lam_param    = param_is_lam
         self.is_omega_param  = param_is_omega
+        self.is_cascade_p_param= param_is_cascade_p
+        self.is_sigma_param  = param_is_sigma
+        self.is_lambda_param  = param_is_lambda
         self.is_cascade_param= param_is_cascade
-        self.is_sigma_param  = param_is_sigma        
         # quantum number assigment
         self.state  = state
         self.J_tot  = J_tot

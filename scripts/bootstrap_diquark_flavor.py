@@ -33,7 +33,7 @@ if len(sys.argv) == 4:
 else:
     workpath = os.getcwd()
 
-fit_type = "All" # sext or trip
+fit_type = "flav" # sext or trip
 
 # input parameters
 
@@ -60,7 +60,7 @@ def least_squares(md1, md2, md3, md4, md5, mb, k, a, b, e, g):
 
 def fit(least_squares):
     m = Minuit(least_squares, md1=900, md2=300, md3=300, md4=300, md5=300, mb=4000, k=0, a=5, b=5, e=10, g=10)
-    # m.limits['mb'] = (4900, 6000)    
+    # m.limits['mb'] = (4900, 6000)
     m.limits['md1'] =  (900, 1200)  # (850, 950) #omega (500, 1500)
     m.limits['md2'] =  (700, 950)   # (650, 850) #cascade prime
     m.limits['md3'] =  (500, 700)   # (500, 700) #sigma
@@ -129,65 +129,33 @@ gauss_6333 = sample_gauss(6333.0, np.power((0.00**2 + sigma_model), 0.5 ))  # al
 # construct the simulated sampling distribution (bootstrap technique)
 for _ in range(100): # max 10000 with decays included, computationally expensive
 
-    if fit_type=="All":
-        exp_m = np.array([ # measured baryon masses        
-            # omegas
-            random(gauss_6061),
-            random(gauss_6316),
-            random(gauss_6330),
-            random(gauss_6340),
-            random(gauss_6350),
-            # Cascade 
-            random(gauss_5935),
-            random(gauss_5953),
-            random(gauss_6328),
-            # Sigma b         
-            random(gauss_5813),
-            random(gauss_5837),
-            random(gauss_6097),
-            # Lambda b
-            random(gauss_5617),
-            random(gauss_5912),
-            random(gauss_5920),
-            random(gauss_6146),
-            random(gauss_6152),
-            # Cascades
-            random(gauss_5794),
-            random(gauss_6100),
-            # random(gauss_6327),
-            # random(gauss_6333)        
-        ])
-    elif fit_type=="sext":
-        exp_m = np.array([ # measured baryon masses        
-            # omegas
-            random(gauss_6061),
-            random(gauss_6316),
-            random(gauss_6330),
-            random(gauss_6340),
-            random(gauss_6350),
-            # Cascade 
-            random(gauss_5935),
-            random(gauss_5953),
-            random(gauss_6328),
-            # Sigma b         
-            random(gauss_5813),
-            random(gauss_5837),
-            random(gauss_6097),
-        ])
-    elif fit_type=="trip":
-        exp_m = np.array([ # measured baryon masses        
-            # Lambda b
-            random(gauss_5617),
-            random(gauss_5912),
-            random(gauss_5920),
-            # random(gauss_6146),
-            # random(gauss_6152),
-            # Cascades antitriplet
-            random(gauss_5794),
-            random(gauss_6100),
-            # random(gauss_6327),
-            # random(gauss_6333)        
-        ])
+    exp_m = np.array([ # measured baryon masses        
+        # omegas
+        random(gauss_6061),
+        random(gauss_6316),
+        random(gauss_6330),
+        random(gauss_6340),
+        random(gauss_6350),
+        # Cascade 
+        random(gauss_5935),
+        random(gauss_5953),
+        random(gauss_6328),
+        # Sigma b         
+        random(gauss_5813),
+        random(gauss_5837),
+        random(gauss_6097),
+        # Lambda b
+        random(gauss_5617),
+        random(gauss_5912),
+        random(gauss_5920),
+        # random(gauss_6146),
+        # random(gauss_6152),
+        # Cascades
+        random(gauss_5794),
+        random(gauss_6100),
+        # random(gauss_6327),
+        # random(gauss_6333)        
+    ])
         
     # print(len(exp_m))
     # input()
@@ -210,51 +178,51 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
     # correlation matrix
     corr = m.covariance.correlation()
 
-    # rho_md2md1 = np.append(rho_md2md1, corr['md2','md1'])
-    # rho_md3md1 = np.append(rho_md3md1, corr['md3','md1'])
-    # rho_mbmd1  = np.append(rho_mbmd1, corr['mb','md1'])
-    # rho_kmd1   = np.append(rho_kmd1,  corr['k','md1'])
-    # rho_amd1   = np.append(rho_amd1,  corr['a','md1'])
-    # rho_bmd1   = np.append(rho_bmd1,  corr['b','md1'])
-    # rho_emd1   = np.append(rho_emd1,  corr['e','md1'])
-    # rho_gmd1   = np.append(rho_gmd1,  corr['g','md1'])
+    rho_md2md1 = np.append(rho_md2md1, corr['md2','md1'])
+    rho_md3md1 = np.append(rho_md3md1, corr['md3','md1'])
+    rho_mbmd1  = np.append(rho_mbmd1, corr['mb','md1'])
+    rho_kmd1   = np.append(rho_kmd1,  corr['k','md1'])
+    rho_amd1   = np.append(rho_amd1,  corr['a','md1'])
+    rho_bmd1   = np.append(rho_bmd1,  corr['b','md1'])
+    rho_emd1   = np.append(rho_emd1,  corr['e','md1'])
+    rho_gmd1   = np.append(rho_gmd1,  corr['g','md1'])
 
-    # rho_md3md2 = np.append(rho_md3md2, corr['md3','md2'])
-    # rho_mbmd2  = np.append(rho_mbmd2,  corr['mb','md2'])
-    # rho_kmd2   = np.append(rho_kmd2 , corr['k','md2'])
-    # rho_amd2   = np.append(rho_amd2 , corr['a','md2'])
-    # rho_bmd2   = np.append(rho_bmd2 , corr['b','md2'])
-    # rho_emd2   = np.append(rho_emd2 , corr['e','md2'])
-    # rho_gmd2   = np.append(rho_gmd2 , corr['g','md2'])
+    rho_md3md2 = np.append(rho_md3md2, corr['md3','md2'])
+    rho_mbmd2  = np.append(rho_mbmd2,  corr['mb','md2'])
+    rho_kmd2   = np.append(rho_kmd2 , corr['k','md2'])
+    rho_amd2   = np.append(rho_amd2 , corr['a','md2'])
+    rho_bmd2   = np.append(rho_bmd2 , corr['b','md2'])
+    rho_emd2   = np.append(rho_emd2 , corr['e','md2'])
+    rho_gmd2   = np.append(rho_gmd2 , corr['g','md2'])
 
-    # rho_mbmd3  = np.append(rho_kmd3, corr['mb','md3'])
-    # rho_kmd3   = np.append(rho_kmd3, corr['k','md3'])
-    # rho_amd3   = np.append(rho_amd3, corr['a','md3'])
-    # rho_bmd3   = np.append(rho_bmd3, corr['b','md3'])
-    # rho_emd3   = np.append(rho_emd3, corr['e','md3'])
-    # rho_gmd3   = np.append(rho_gmd3, corr['g','md3'])
+    rho_mbmd3  = np.append(rho_kmd3, corr['mb','md3'])
+    rho_kmd3   = np.append(rho_kmd3, corr['k','md3'])
+    rho_amd3   = np.append(rho_amd3, corr['a','md3'])
+    rho_bmd3   = np.append(rho_bmd3, corr['b','md3'])
+    rho_emd3   = np.append(rho_emd3, corr['e','md3'])
+    rho_gmd3   = np.append(rho_gmd3, corr['g','md3'])
 
-    # rho_kmb    = np.append(rho_kmb, corr['k','mb'])
-    # rho_amb    = np.append(rho_amb, corr['a','mb'])
-    # rho_bmb    = np.append(rho_bmb, corr['b','mb'])
-    # rho_emb    = np.append(rho_emb, corr['e','mb'])
-    # rho_gmb    = np.append(rho_gmb, corr['g','mb'])
+    rho_kmb    = np.append(rho_kmb, corr['k','mb'])
+    rho_amb    = np.append(rho_amb, corr['a','mb'])
+    rho_bmb    = np.append(rho_bmb, corr['b','mb'])
+    rho_emb    = np.append(rho_emb, corr['e','mb'])
+    rho_gmb    = np.append(rho_gmb, corr['g','mb'])
     
-    # rho_ak     = np.append(rho_ak, corr['a','k'])
-    # rho_bk     = np.append(rho_bk, corr['b','k'])
-    # rho_ek     = np.append(rho_ek, corr['e','k'])
-    # rho_gk     = np.append(rho_gk, corr['g','k'])
+    rho_ak     = np.append(rho_ak, corr['a','k'])
+    rho_bk     = np.append(rho_bk, corr['b','k'])
+    rho_ek     = np.append(rho_ek, corr['e','k'])
+    rho_gk     = np.append(rho_gk, corr['g','k'])
 
-    # rho_ba     = np.append(rho_ba, corr['b','a'])
-    # rho_ea     = np.append(rho_ea, corr['e','a'])
-    # rho_ga     = np.append(rho_ga, corr['g','a'])
+    rho_ba     = np.append(rho_ba, corr['b','a'])
+    rho_ea     = np.append(rho_ea, corr['e','a'])
+    rho_ga     = np.append(rho_ga, corr['g','a'])
 
-    # rho_eb     = np.append(rho_eb, corr['e','b'])
-    # rho_gb     = np.append(rho_gb, corr['g','b'])
+    rho_eb     = np.append(rho_eb, corr['e','b'])
+    rho_gb     = np.append(rho_gb, corr['g','b'])
     
-    # rho_ge     = np.append(rho_ge, corr['g','e'])
+    rho_ge     = np.append(rho_ge, corr['g','e'])
 
-    
+
 print(round(sampled_md1.mean()), "md1 omega")
 print(round(sampled_md2.mean()), "md2 cascade prime")
 print(round(sampled_md3.mean()), "md3 sigma")

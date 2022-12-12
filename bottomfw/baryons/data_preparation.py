@@ -55,63 +55,33 @@ def fetch_data_extended():
 
 
 
-def fetch_data_diquark(fit_type="All"):
+def fetch_data_diquark(fit_type="trad"):
 
     w_om=1.732050808 # omega_lam
     w_ls=1.732050808 # lambda&sigma_lam
     wcas=1.732050808 # casc_lam
     wcar=1.732050808 # wcas_rho
 
-    if fit_type=="All" or fit_type=="trad":
-        # hamiltonian coeficients
-        param_v          = np.array([0.00, w_om, w_om, w_om, w_om,   0.00, 0.00, wcas,   0.00, 0.00, w_ls,   0.00, w_ls, w_ls, w_ls, w_ls,   0.00, wcas]) # coef infront kprim_c
-        param_w          = np.array([0.75, 0.75, 0.75, 3.75, 3.75,   0.75, 3.75, 3.75,   0.75, 3.75, 0.75,   0.75, 0.75, 0.75, 0.75, 0.75,   0.75, 0.75]) # coef infront A
-        param_x          = np.array([0.00, -1.0, 0.50, -2.5, -1.0,   0.00, 0.00, 1.50,   0.00, 0.00, -1.0,   0.00, -1.0, 0.50, -1.5, 1.00,   0.00, 0.50]) # coef infront B
-        param_y          = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.75, 0.75, 0.75,   2.00, 2.00, 2.00,   0.00, 0.00, 0.00, 0.00, 0.00,   0.75, 0.75]) # coef infront E
-        param_z          = np.array([10/3, 10/3, 10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   4/3 , 4/3 , 4/3 , 4/3 , 4/3 ,   4/3 , 4/3 ]) # coef infront G        
+    # hamiltonian coeficients
+    param_v          = np.array([0.00, w_om, w_om, w_om, w_om,   0.00, 0.00, wcas,   0.00, 0.00, w_ls,   0.00, w_ls, w_ls,    0.00, wcas]) # coef infront kprim_c  w_ls, w_ls,
+    param_w          = np.array([0.75, 0.75, 0.75, 3.75, 3.75,   0.75, 3.75, 3.75,   0.75, 3.75, 0.75,   0.75, 0.75, 0.75,    0.75, 0.75]) # coef infront A        0.75, 0.75,
+    param_x          = np.array([0.00, -1.0, 0.50, -2.5, -1.0,   0.00, 0.00, 1.50,   0.00, 0.00, -1.0,   0.00, -1.0, 0.50,    0.00, 0.50]) # coef infront B        -1.5, 1.00,
+    param_y          = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.75, 0.75, 0.75,   2.00, 2.00, 2.00,   0.00, 0.00, 0.00,    0.75, 0.75]) # coef infront E        0.00, 0.00,
+    param_z          = np.array([10/3, 10/3, 10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   4/3 , 4/3 , 4/3 ,    4/3 , 4/3 ]) # coef infront G        4/3 , 4/3 ,
         
-        # # kind of baryon
-        if fit_type=="trad":
-            param_is_omega   = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-            param_is_cascade = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  1.00, 1.00]) # coef kp
-            param_is_sigma   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
-            return param_v,param_w,param_x,param_y,param_z,param_is_omega,param_is_cascade,param_is_sigma
+    # kind of baryon
+    if fit_type=="trad":
+        param_is_omega   = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
+        param_is_cascade = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,  1.00, 1.00]) # coef kp
+        param_is_sigma   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
+        return param_v,param_w,param_x,param_y,param_z,param_is_omega,param_is_cascade,param_is_sigma
             
-        param_is_omega     = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_cascade_p = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_sigma     = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_lambda    = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
-        param_is_cascade   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00, 0.00, 0.00,  1.00, 1.00]) # coef kp
-        
-    elif fit_type=="sext":
-        # hamiltonian coeficients
-        param_v          = np.array([0.00, w_om, w_om, w_om, w_om,   0.00, 0.00, wcas,   0.00, 0.00, w_ls]) # coef infront kprim_c
-        param_w          = np.array([0.75, 0.75, 0.75, 3.75, 3.75,   0.75, 3.75, 3.75,   0.75, 3.75, 0.75]) # coef infront A
-        param_x          = np.array([0.00, -1.0, 0.50, -2.5, -1.0,   0.00, 0.00, 1.50,   0.00, 0.00, -1.0]) # coef infront B
-        param_y          = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.75, 0.75, 0.75,   2.00, 2.00, 2.00]) # coef infront E
-        param_z          = np.array([10/3, 10/3, 10/3, 10/3, 10/3,   10/3, 10/3, 10/3,   10/3, 10/3, 10/3]) # coef infront G        
-
-        # kind of baryon
-        param_is_omega     = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
-        param_is_cascade   = np.array([0.00])# 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
-        param_is_cascade_p = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00]) # coef kp
-        param_is_sigma     = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00]) # coef kp
-        param_is_lambda    = np.array([0.00])#, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00]) # coef kp
-    elif fit_type=="trip":
-        # hamiltonian coeficients
-        param_v          = np.array([0.00, w_ls, w_ls,   0.00, wcas]) # coef infront kprim_c
-        param_w          = np.array([0.75, 0.75, 0.75,   0.75, 0.75]) # coef infront A
-        param_x          = np.array([0.00, -1.0, 0.50,   0.00, 0.50]) # coef infront B
-        param_y          = np.array([0.00, 0.00, 0.00,   0.75, 0.75]) # coef infront E
-        param_z          = np.array([4/3 , 4/3 , 4/3 ,   4/3 , 4/3 ]) # coef infront G    
-        
-        # kind of baryon
-        param_is_omega     = np.array([0.00])#, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_cascade   = np.array([0.00, 0.00, 0.00,  1.00, 1.00]) # coef kp
-        param_is_cascade_p = np.array([0.00])#, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_sigma     = np.array([0.00])#, 0.00, 0.00,  0.00, 0.00]) # coef kp
-        param_is_lambda    = np.array([1.00, 1.00, 1.00,  0.00, 0.00]) # coef kp
-        
+    param_is_omega     = np.array([1.00, 1.00, 1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00]) # coef kp            0.00, 0.00,
+    param_is_cascade_p = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00]) # coef kp            0.00, 0.00,
+    param_is_sigma     = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00, 0.00,   0.00, 0.00]) # coef kp            0.00, 0.00,
+    param_is_lambda    = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00, 1.00,   0.00, 0.00]) # coef kp            1.00, 1.00,
+    param_is_cascade   = np.array([0.00, 0.00, 0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   0.00, 0.00, 0.00,   1.00, 1.00]) # coef kp            0.00, 0.00,
+                
     #return param_v,param_w,param_x,param_y,param_z,param_is_omega,param_is_cascade,param_is_sigma
     return param_v, param_w, param_x, param_y, param_z, param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade
 
@@ -213,7 +183,8 @@ def reduced_mass(state, ModEx, HO_n):
 
 
 def hamiltonian_quantum_factors_extended(state, J_tot, S_tot, L_tot, I_tot, SU_tot, HO_n, ModEx):
-    """ compute the (quantum) coeficients that multiplied the fitted/bootstrap parameters
+    """
+    This method computes the (quantum) coeficients that multiplied the fitted/bootstrap parameters
     This function needs to be fed directly with quantum numbers stored in a numpy.array
     """
     param_v,param_w,param_x,param_y,param_z = [],[],[],[],[]
@@ -230,8 +201,8 @@ def hamiltonian_quantum_factors_extended(state, J_tot, S_tot, L_tot, I_tot, SU_t
                 
         param_v.append(param_v_i)    # coef infront kprim
         param_q1.append(param_q1_i)
-        param_q2.append(param_q2_i)         
-        param_q3.append(param_q3_i)         
+        param_q2.append(param_q2_i) 
+        param_q3.append(param_q3_i)
         param_is_rho.append(param_is_rho_i)
         param_is_lam.append(param_is_lam_i)     
         param_is_omega.append(param_is_omega_i)
@@ -262,4 +233,106 @@ def hamiltonian_quantum_factors_extended(state, J_tot, S_tot, L_tot, I_tot, SU_t
     
     return param_v, param_q1, param_q2, param_q3, param_is_rho, param_is_lam,\
         param_is_omega, param_is_cascade, param_is_sigma,\
+        param_w,param_x,param_y,param_z
+
+
+def reduced_flavor(state, ModEx, HO_n):
+    # calculate parameters for all the states
+    param_v = 0
+    param_q1 = 1
+    param_q2,param_q3 = 0,0
+    param_is_rho,param_is_lam = 0,0
+    param_is_omega,param_is_cascade_p,param_is_sigma,param_is_lambda,param_is_cascade=0,0,0,0,0
+    const = np.sqrt(3.)
+    
+    # set HO excitation mode
+    if(ModEx=='lam' or ModEx=='rpl'):
+        param_is_lam = 1
+        param_v      = HO_n * const
+    elif(ModEx=='rho' or ModEx=='rpr'):
+        param_is_rho = 1
+        param_v      = HO_n * const
+    elif(ModEx=='mix'):
+        param_is_lam = 1
+        param_is_rho = 1
+        param_v      = const
+
+    # set baryon type
+    if(state=='omg'):
+        param_q2 = 2
+        param_q3 = 0
+        param_is_omega = 1
+    elif(state=='cas'):
+        param_q2 = 1
+        param_q3 = 1
+        param_is_cascade_p = 1
+    elif(state=='sig'):
+        param_q2 = 0
+        param_q3 = 2
+        param_is_sigma = 1
+    elif(state=='Lam'):
+        param_q2 = 0
+        param_q3 = 2
+        param_is_lambda = 1
+    elif(state=='tri'):
+        param_q2 = 1
+        param_q3 = 1
+        param_is_cascade = 1
+    
+    return param_v,param_q1,param_q2,param_q3, param_is_rho,param_is_lam,\
+        param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade
+
+def hamiltonian_quantum_factors_flavor(state, J_tot, S_tot, L_tot, I_tot, SU_tot, HO_n, ModEx):
+    """
+    This method computes the (quantum) coeficients that multiplied the fitted/bootstrap parameters
+    This function needs to be fed directly with quantum numbers stored in a numpy.array
+    """
+    param_v,param_w,param_x,param_y,param_z = [],[],[],[],[]
+    param_q1,param_q2,param_q3 = [],[],[]
+    param_is_rho,param_is_lam = [],[]
+    param_is_omega,param_is_cascade_p,param_is_sigma,param_is_lambda,param_is_cascade = [],[],[],[],[]
+    
+    for i in range(len(J_tot)):
+
+        param_v_i,\
+            param_q1_i,param_q2_i, param_q3_i,\
+            param_is_rho_i, param_is_lam_i, param_is_omega_i,\
+            param_is_cascade_p_i, param_is_sigma_i, param_is_lambda_i, param_is_cascade_i = reduced_flavor(state[i], ModEx[i], HO_n[i])
+                
+        param_v.append(param_v_i)    # coef infront kprim
+        param_q1.append(param_q1_i)
+        param_q2.append(param_q2_i)         
+        param_q3.append(param_q3_i)         
+        param_is_rho.append(param_is_rho_i)
+        param_is_lam.append(param_is_lam_i)     
+        param_is_omega.append(param_is_omega_i)
+        param_is_cascade_p.append(param_is_cascade_p_i)
+        param_is_sigma.append(param_is_sigma_i)
+        param_is_lambda.append(param_is_lambda_i)
+        param_is_cascade.append(param_is_cascade_i)
+
+        param_w.append((S_tot[i] + 1)*S_tot[i]) # coef infront A
+        param_x.append(0.5 * ( (J_tot[i] + 1)*J_tot[i] - (L_tot[i] + 1)*L_tot[i] - (S_tot[i] + 1)*S_tot[i] ) ) # coef infront B
+        param_y.append((I_tot[i] + 1)*I_tot[i]) # coef infront E
+        param_z.append(SU_tot[i])               # coef infront G
+
+
+    param_v = np.array(param_v)
+
+    param_q1         = np.array(param_q1)
+    param_q2         = np.array(param_q2)         
+    param_q3         = np.array(param_q3)         
+    param_is_rho     = np.array(param_is_rho)
+    param_is_lam     = np.array(param_is_lam)     
+    param_is_omega   = np.array(param_is_omega)
+    param_is_cascade = np.array(param_is_cascade)
+    param_is_sigma   = np.array(param_is_sigma)
+    
+    param_w = np.array(param_w)
+    param_x = np.array(param_x)
+    param_y = np.array(param_y)
+    param_z = np.array(param_z)
+    
+    return param_v, param_q1, param_q2, param_q3, param_is_rho, param_is_lam,\
+        param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade,\
         param_w,param_x,param_y,param_z
