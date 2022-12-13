@@ -14,13 +14,6 @@ from sympy import *
 from sympy.physics.quantum import TensorProduct
 from sympy.physics.matrices import msigma
 
-"""
-    Definitions of the spin states as uparrow (u) and downarrow (d) 
-    """ 
-
-u = Matrix([[1],[0]])
-d = Matrix([[0],[1]])
-
 class SpinAmplitudes():
     """
     Class to get electromagnetic spin amplitudes
@@ -36,7 +29,7 @@ class SpinAmplitudes():
         dummy = self.m_baryons
 
 
-    def su2_generator(self, index):
+    def su2_generator(self, index): #j(i)
         """
         Method to calculate SU(2) generator
         index == generator index (1,2,3)
@@ -78,23 +71,38 @@ class SpinAmplitudes():
             return self.tensor_product(dim1) + I*self.tensor_product(dim2)
         else:
             return self.tensor_product(dim1) - I*self.tensor_product(dim2)
-        
 
-    def spint_states(self, state_a=u, state_b=d, state_c=d): # k
+    """
+    Definitions of the spin states as uparrow (u) and downarrow (d) 
+    """ 
+    def u(self):
+        """
+        Method to obtain the uparrow (u) spin state
+        """
+        return Matrix([[1],[0]])
+
+    def d(self):
+        """
+        Method to obtain the downarrow (d) spin state
+        """
+        return Matrix([[0],[1]])
+
+
+    def spint_states(self, state_a, state_b, state_c): # k
         """
         Method to calculate the spin states
         state_a,b,c should be sympy matrices of the form: Matrix([[0],...,[1]])
         """
         return TensorProduct(TensorProduct(state_a ,state_b), state_c)
 
-    
+
     def symmetric_states(self, m_proj):
         """
         Method to calculate symmetric states
         """
         if m_proj in [3/2,1/2,-1/2,-3/2]:
             i = 3/2-m_proj
-            st = self.spint_states(u, u, u)
+            st = self.spint_states(self.u,self.u,self.u)
             while i > 0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st = v1 / sqrt((transpose(v1)*v1)[0])
@@ -108,7 +116,7 @@ class SpinAmplitudes():
         """
         if m_proj in [1/2,-1/2]:
             i=1/2-m_proj
-            st=(self.pint_states(u,d,u)-self.spint_states(d,u,u))/sqrt(2)
+            st=(self.spint_states(self.u,self.d,self.u)-self.spint_states(self.d,self.u,self.u))/sqrt(2)
             while i>0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st=v1/sqrt((transpose(v1)*v1)[0])
@@ -122,7 +130,7 @@ class SpinAmplitudes():
         """
         if a in [1/2,-1/2]:
             i=1/2-a
-            st=(2*self.spint_states(u,u,d)-self.spint_states(u,d,u)-self.spint_states(d,u,u))/sqrt(6)
+            st=(2*self.spint_states(self.u,self.u,self.d)-self.spint_states(self.u,self.d,self.u)-self.spint_states(self.d,self.u,self.u))/sqrt(6)
             while i>0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st=v1/sqrt((transpose(v1)*v1)[0])
@@ -136,12 +144,12 @@ class SpinAmplitudes():
         Method to calculate the matrix element for the spin part
         """
         if n==1:
-            sm = TensorProduct(TensorProduct(self.su2_generator(index), self.identity_matrix(dim)), self.identity_matrix(dim))  
+            sm = TensorProduct(TensorProduct(self.ladder_operator(self, sign=-1, dim1=1, dim2=2), self.identity_matrix(dim=2)), self.identity_matrix(dim=2))  
         else: 
             if n==2:
-                sm = TensorProduct(TensorProduct(self.identity_matrix(dim), self.su2_generator(index)), self.identity_matrix(dim))
+                sm = TensorProduct(TensorProduct(self.identity_matrix(dim=2), self.ladder_operator(self, sign=-1, dim1=1, dim2=2)), self.identity_matrix(dim=2))
             else:
-                sm = TensorProduct(TensorProduct(self.identity_matrix(dim), self.identity_matrix(dim)), self.su2_generator(index))
+                sm = TensorProduct(TensorProduct(self.identity_matrix(dim=2), self.identity_matrix(dim=2)), self.ladder_operator(self, sign=-1, dim1=1, dim2=2))
         return conjugate(transpose(x(i)))*sm*y(j)
 
 
@@ -168,3 +176,7 @@ class SpinAmplitudes():
                             else:
                                 for j in [1/2,-1/2]:
                                     print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
+
+obj = SpinAmplitudes(baryons="omegas") #initializing the class
+test_spint_state_uuu = obj.spint_states(state_a=SpinAmplitudes.u(obj), state_b=SpinAmplitudes.u(obj), state_c=SpinAmplitudes.u(obj)) #calling the method and saving it in the variable
+print(test_spint_state_uuu)

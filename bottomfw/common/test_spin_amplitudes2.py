@@ -24,5 +24,25 @@ test_tensor_product2 = test_amplitudes.tensor_product(index=2, dim=2)
 print(test_tensor_product2)
 
 test_ladder_operator_tensorp = test_amplitudes.ladder_operator_tensor(sign=1, dim1=1, dim2=2)
-print(test_ladder_operator_tensorp) 
+print(test_ladder_operator_tensorp)
+
+test_spint_stateM = test_amplitudes.spint_states(state_a=test_u, state_b=test_u, state_c=test_u)
+print(test_spint_stateM)
+
+test_symmetric_state_3_2 = test_amplitudes.symmetric_states(m_proj=3/2
+print(test_symmetric_state_3_2)
+
+test_symmetric_state_1_2 = test_amplitudes.symmetric_states(m_proj=1/2)
+print(test_symmetric_state_1_2)
+
+test_symmetric_state_1_2m = test_amplitudes.symmetric_states(m_proj=-1/2)
+print(test_symmetric_state_1_2m)
+
+test_symmetric_state_3_2m = test_amplitudes.symmetric_states(m_proj=-3/2)
+print(test_symmetric_state_3_2m)
+
+                                                            
+
+
+                                                            
 
