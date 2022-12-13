@@ -22,6 +22,8 @@ class SpinAmplitudes():
     def __init__(self, baryons):
 
         self.m_baryons = baryons
+        self.spin_u = Matrix([1,0]) #spin state uparrow
+        self.spin_d = Matrix([0,1]) #spin state downarrow
         # baryons podria ser omegas, sigmas, lambdas, etc
 
     
@@ -72,22 +74,7 @@ class SpinAmplitudes():
         else:
             return self.tensor_product(dim1) - I*self.tensor_product(dim2)
 
-    """
-    Definitions of the spin states as uparrow (u) and downarrow (d) 
-    """ 
-    def u(self):
-        """
-        Method to obtain the uparrow (u) spin state
-        """
-        return Matrix([[1],[0]])
-
-    def d(self):
-        """
-        Method to obtain the downarrow (d) spin state
-        """
-        return Matrix([[0],[1]])
-
-
+   
     def spint_states(self, state_a, state_b, state_c): # k
         """
         Method to calculate the spin states
@@ -102,7 +89,7 @@ class SpinAmplitudes():
         """
         if m_proj in [3/2,1/2,-1/2,-3/2]:
             i = 3/2-m_proj
-            st = self.spint_states(self.u,self.u,self.u)
+            st = self.spint_states(self.spin_u,self.spin_u,self.spin_u)
             while i > 0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st = v1 / sqrt((transpose(v1)*v1)[0])
@@ -116,7 +103,7 @@ class SpinAmplitudes():
         """
         if m_proj in [1/2,-1/2]:
             i=1/2-m_proj
-            st=(self.spint_states(self.u,self.d,self.u)-self.spint_states(self.d,self.u,self.u))/sqrt(2)
+            st=(self.spint_states(self.spin_u,self.spin_d,self.spin_u)-self.spint_states(self.spin_d,self.spin_u,self.spin_u))/sqrt(2)
             while i>0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st=v1/sqrt((transpose(v1)*v1)[0])
@@ -130,7 +117,7 @@ class SpinAmplitudes():
         """
         if a in [1/2,-1/2]:
             i=1/2-a
-            st=(2*self.spint_states(self.u,self.u,self.d)-self.spint_states(self.u,self.d,self.u)-self.spint_states(self.d,self.u,self.u))/sqrt(6)
+            st=(2*self.spint_states(self.spin_u,self.spin_u,self.spin_d)-self.spint_states(self.spin_u,self.spin_d,self.spin_u)-self.spint_states(self.spin_d,self.spin_u,self.spin_u))/sqrt(6)
             while i>0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
                 st=v1/sqrt((transpose(v1)*v1)[0])
@@ -176,7 +163,3 @@ class SpinAmplitudes():
                             else:
                                 for j in [1/2,-1/2]:
                                     print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
-
-obj = SpinAmplitudes(baryons="omegas") #initializing the class
-test_spint_state_uuu = obj.spint_states(state_a=SpinAmplitudes.u(obj), state_b=SpinAmplitudes.u(obj), state_c=SpinAmplitudes.u(obj)) #calling the method and saving it in the variable
-print(test_spint_state_uuu)
