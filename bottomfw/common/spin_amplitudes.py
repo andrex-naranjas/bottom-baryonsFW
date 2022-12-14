@@ -21,10 +21,10 @@ class SpinAmplitudes():
     
     def __init__(self, baryons):
 
-        self.m_baryons = baryons
-        self.spin_u = Matrix([1,0]) #spin state uparrow
-        self.spin_d = Matrix([0,1]) #spin state downarrow
-        # baryons podria ser omegas, sigmas, lambdas, etc
+        self.m_baryons = baryons # baryons podria ser omegas, sigmas, lambdas, etc
+        self.spin_u = Matrix([[1],[0]]) #spin state uparrow
+        self.spin_d = Matrix([[0],[1]]) #spin state downarrow
+        
 
     
     def test(self):
