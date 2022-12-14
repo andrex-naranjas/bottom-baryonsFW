@@ -111,12 +111,12 @@ class SpinAmplitudes():
         return st
 
 
-    def lambda_states(self, a):
+    def lambda_states(self, m_proj):
         """
         Method to calculate the lambda states
         """
-        if a in [1/2,-1/2]:
-            i=1/2-a
+        if m_proj in [1/2,-1/2]:
+            i=1/2-m_proj
             st=(2*self.spint_states(self.spin_u,self.spin_u,self.spin_d)-self.spint_states(self.spin_u,self.spin_d,self.spin_u)-self.spint_states(self.spin_d,self.spin_u,self.spin_u))/sqrt(6)
             while i>0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
@@ -124,42 +124,15 @@ class SpinAmplitudes():
                 i=i-1
         return st
 
-    
-
-    def matrix_elements(self, n, x, i, y, j):
+    def matrix_elements(self, n, x_i, y_j):
         """
         Method to calculate the matrix element for the spin part
         """
         if n==1:
-            sm = TensorProduct(TensorProduct(self.ladder_operator(self, sign=-1, dim1=1, dim2=2), self.identity_matrix(dim=2)), self.identity_matrix(dim=2))  
+            sm = TensorProduct(TensorProduct(self.ladder_operator(sign=-1, dim1=1, dim2=2), self.identity_matrix(dim=2)), self.identity_matrix(dim=2))  
         else: 
             if n==2:
-                sm = TensorProduct(TensorProduct(self.identity_matrix(dim=2), self.ladder_operator(self, sign=-1, dim1=1, dim2=2)), self.identity_matrix(dim=2))
+                sm = TensorProduct(TensorProduct(self.identity_matrix(dim=2), self.ladder_operator(sign=-1, dim1=1, dim2=2)), self.identity_matrix(dim=2))
             else:
-                sm = TensorProduct(TensorProduct(self.identity_matrix(dim=2), self.identity_matrix(dim=2)), self.ladder_operator(self, sign=-1, dim1=1, dim2=2))
-        return conjugate(transpose(x(i)))*sm*y(j)
-
-
-    def all_matrix_elements(self):
-        """
-        Method to calcualte all the matrix elements
-        """
-        for n in [1,2,3]:
-            for x in [self.symmetric_states,self.rho_states,self.lambda_states]:
-                for y in  [self.symmetric_states,self.rho_states,self.lambda_states]:
-                    if x==self.symmetric_states:
-                        for i in [3/2,1/2,-1/2,-3/2]:
-                            if y==self.symmetric_states:
-                                for j in [3/2,1/2,-1/2,-3/2]:
-                                    print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
-                            else:
-                                for j in [1/2,-1/2]:
-                                    print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
-                    else:
-                        for i in [1/2,-1/2]:
-                            if y==self.symmetric_states:
-                                for j in [3/2,1/2,-1/2,-3/2]:
-                                    print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
-                            else:
-                                for j in [1/2,-1/2]:
-                                    print([self.matrix_elements(n, x, i, y, j)[0],n,x.__name__,Rational(i),y.__name__,Rational(j)])
+                sm = TensorProduct(TensorProduct(self.identity_matrix(dim=2), self.identity_matrix(dim=2)), self.ladder_operator(sign=-1, dim1=1, dim2=2))
+        return conjugate(transpose(x_i))*sm*y_j
