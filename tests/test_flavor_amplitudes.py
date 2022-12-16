@@ -30,7 +30,7 @@ test_Xi_0 = test_flavor_amplitudes.Xi_0
 print(test_Xi_0())
 
 test_Xi_prime_m = test_flavor_amplitudes.Xi_prime_m
-print(test_Xi_m())
+print(test_Xi_prime_m())
 
 test_Xi_m = test_flavor_amplitudes.Xi_m
 print(test_Xi_m())
