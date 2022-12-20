@@ -121,6 +121,7 @@ class FlavorAmplitudes():
         """
         return (self.flavor_state(self.d,self.s,self.b)-self.flavor_state(self.s,self.d,self.b))/sqrt(2)
 
+    #Transition,  ⟨Ξ0𝑏|𝜇1|Ξ′0𝑏⟩ 
     
     def transition_lambda0_sigma0_1(self):
         """
@@ -140,3 +141,21 @@ class FlavorAmplitudes():
         """
         return conjugate(transpose(self.Lambda_0()))*self.tensor_product_operator_3()*self.Sigma_0()    
 
+    #Transition,  ⟨Ξ0𝑏|𝜇1|Ξ′0𝑏⟩ 
+    def transition_Xi_0_Xi_prime_0(self):
+        """
+        Method to calculate the matrix element for the flavor part
+        """
+        return conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_1()*self.Xi_prime_0()
+
+    def transition_lambda0_Xi_prime_0(self):
+        """
+        Method to calculate the matrix element for the flavor part
+        """
+        return conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_2()*self.Xi_prime_0()    
+
+    def transition_Xi_0_Xi_prime_0(self):
+        """
+        Method to calculate the matrix element for the flavor part
+        """
+        return conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_3()*self.Xi_prime_0()    
