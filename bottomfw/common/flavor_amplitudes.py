@@ -14,7 +14,10 @@ from sympy import *
 from sympy.physics.quantum import TensorProduct
 
 #mu_u, mu_d, mu_s, mu_b=symbols('mu_u, mu_d, mu_s, mu_b',positive=True) # Definitions of the magnetic moments of each quark
-mu_u, mu_d, mu_s, mu_b = 1,2,3,4
+mu_u = 1
+mu_d = 2
+mu_s = 3
+mu_b = 4
 
 class FlavorAmplitudes():
     """
@@ -119,8 +122,21 @@ class FlavorAmplitudes():
         return (self.flavor_state(self.d,self.s,self.b)-self.flavor_state(self.s,self.d,self.b))/sqrt(2)
 
     
-    def transition_lambda0_sigma0(self):
+    def transition_lambda0_sigma0_1(self):
         """
         Method to calculate the matrix element for the flavor part
         """
-        return conjugate(transpose(self.Lambda_0))*self.tensor_product_operator_1()*self.Sigma_0
+        return conjugate(transpose(self.Lambda_0()))*self.tensor_product_operator_1()*self.Sigma_0()
+
+    def transition_lambda0_sigma0_2(self):
+        """
+        Method to calculate the matrix element for the flavor part
+        """
+        return conjugate(transpose(self.Lambda_0()))*self.tensor_product_operator_2()*self.Sigma_0()    
+
+    def transition_lambda0_sigma0_3(self):
+        """
+        Method to calculate the matrix element for the flavor part
+        """
+        return conjugate(transpose(self.Lambda_0()))*self.tensor_product_operator_3()*self.Sigma_0()    
+
