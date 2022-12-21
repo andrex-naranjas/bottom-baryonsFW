@@ -12,6 +12,7 @@ import sympy.physics.mechanics as mech
 from sympy import *
 from sympy.physics.quantum import TensorProduct
 from sympy.physics.matrices import msigma
+import numpy as np
 
 class SpinAmplitudes():
     """
@@ -123,4 +124,4 @@ class SpinAmplitudes():
                 sm = TensorProduct(TensorProduct(self.identity_matrix(dim=2), self.ladder_operator(sign=-1, dim1=1, dim2=2)), self.identity_matrix(dim=2))
             else:
                 sm = TensorProduct(TensorProduct(self.identity_matrix(dim=2), self.identity_matrix(dim=2)), self.ladder_operator(sign=-1, dim1=1, dim2=2))
-        return conjugate(transpose(x_i))*sm*y_j
+        return np.array(conjugate(transpose(x_i)) * sm * y_j).astype(np.float64).flatten()[0]

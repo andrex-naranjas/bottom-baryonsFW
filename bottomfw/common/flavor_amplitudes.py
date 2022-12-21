@@ -10,13 +10,14 @@
 import sympy.physics.mechanics as mech
 from sympy import *
 from sympy.physics.quantum import TensorProduct
+import numpy as np
 
-# Definitions of the magnetic moments of each quark
-mu_u, mu_d, mu_s, mu_b=symbols('mu_u, mu_d, mu_s, mu_b',positive=True)
-#mu_u = 1
-#mu_d = 2
-#mu_s = 3
-#mu_b = 4
+# Values of the magnetic moments of each quark according to Dothan 1982
+mu_u = 2.08
+mu_d = -1.31
+mu_s = -0.77
+#Computed by myself using equation related to mass (this is not the correct value)
+mu_b = -2.38
 
 class FlavorAmplitudes():
     """
@@ -112,71 +113,71 @@ class FlavorAmplitudes():
         """
         Method to calculate the matrix element for the flavor part (Transition,  ⟨Λ0𝑏|𝜇1|Σ0𝑏⟩ )
         """
-        return conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_1() * self.Sigma_0()
+        return np.array(conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_1() * self.Sigma_0()).astype(np.float64).flatten()[0]
 
     def transition_lambda_0_sigma_0_2(self):
         """
         Method to calculate the matrix element for the flavor part (Transition,  ⟨Λ0𝑏|𝜇2|Σ0𝑏⟩ )
         """
-        return conjugate(transpose(self.Lambda_0()))*self.tensor_product_operator_2()*self.Sigma_0()
+        return np.array(conjugate(transpose(self.Lambda_0()))*self.tensor_product_operator_2()*self.Sigma_0()).astype(np.float64).flatten()[0]
 
     def transition_lambda_0_sigma_0_3(self):
         """
         Method to calculate the matrix element for the flavor part (Transition,  ⟨Λ0𝑏|𝜇3|Σ0𝑏⟩ )
         """
-        return conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_3() * self.Sigma_0()
+        return np.array(conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_3() * self.Sigma_0()).astype(np.float64).flatten()[0]
 
     def transition_Xi_0_Xi_prime_0_1(self):
         """
         Method to calculate the matrix element for the flavor part (Transition, ⟨Ξ0𝑏|𝜇1|Ξ′0𝑏⟩) 
         """
-        return conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_1() * self.Xi_prime_0()
+        return np.array(conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_1() * self.Xi_prime_0()).astype(np.float64).flatten()[0]
  
     def transition_Xi_0_Xi_prime_0_2(self):
         """
         Method to calculate the matrix element for the flavor part (Transition, ⟨Ξ0𝑏|𝜇2|Ξ′0𝑏⟩)
         """
-        return conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_2()*self.Xi_prime_0()
+        return np.array(conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_2()*self.Xi_prime_0()).astype(np.float64).flatten()[0]
 
     def transition_Xi_0_Xi_prime_0_3(self):
         """
         Method to calculate the matrix element for the flavor part (Transition, ⟨Ξ0𝑏|𝜇3|Ξ′0𝑏⟩)
         """
-        return conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_3()*self.Xi_prime_0()    
+        return np.array(conjugate(transpose(self.Xi_0()))*self.tensor_product_operator_3()*self.Xi_prime_0()).astype(np.float64).flatten()[0]  
 
 
     def transition_Xi_m_Xi_prime_m_1(self):
         """
         Method to calculate the matrix element for the flavor part (Transition,  ⟨Ξ−𝑏|𝜇1|Ξ′−𝑏⟩ ) 
         """
-        return conjugate(transpose(self.Xi_m())) * self.tensor_product_operator_1() * self.Xi_prime_m()
+        return np.array(conjugate(transpose(self.Xi_m())) * self.tensor_product_operator_1() * self.Xi_prime_m()).astype(np.float64).flatten()[0]
 
     def transition_Xi_m_Xi_prime_m_2(self):
         """
         Method to calculate the matrix element for the flavor part (Transition,  ⟨Ξ−𝑏|𝜇2|Ξ′−𝑏⟩ )
         """
-        return conjugate(transpose(self.Xi_m())) * self.tensor_product_operator_2() * self.Xi_prime_m()    
+        return np.array(conjugate(transpose(self.Xi_m())) * self.tensor_product_operator_2() * self.Xi_prime_m()).astype(np.float64).flatten()[0]   
 
     def transition_Xi_m_Xi_prime_m_3(self):
         """
         Method to calculate the matrix element for the flavor part (Transition,  ⟨Ξ−𝑏|𝜇3|Ξ′−𝑏⟩ )
         """
-        return conjugate(transpose(self.Xi_m())) * self.tensor_product_operator_3() * self.Xi_prime_m()    
+        return np.array(conjugate(transpose(self.Xi_m())) * self.tensor_product_operator_3() * self.Xi_prime_m()).astype(np.float64).flatten()[0]    
 
     def transition_Lambda_0_Lambda_0_1(self):
         """
         Method to calculate the matrix element for the flavor part (TTransition,  ⟨Λ0𝑏|𝜇1|Λ0𝑏⟩ ) 
         """
-        return conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_1() * self.Lambda_0()
+        return np.array(conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_1() * self.Lambda_0()).astype(np.float64).flatten()[0]
 
     def transition_Lambda_0_Lambda_0_2(self):
         """
         Method to calculate the matrix element for the flavor part (Transition,  Transition,  ⟨Λ0𝑏|𝜇1|Λ0𝑏⟩ )
         """
-        return conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_2() * self.Lambda_0()    
+        return np.array(conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_2() * self.Lambda_0()).astype(np.float64).flatten()[0]   
 
     def transition_Lambda_0_Lambda_0_3(self):
         """
         Method to calculate the matrix element for the flavor part (Transition,  ⟨Λ0𝑏|𝜇1|Λ0𝑏⟩ )
         """
-        return conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_3() * self.Lambda_0()
+        return np.array(conjugate(transpose(self.Lambda_0())) * self.tensor_product_operator_3() * self.Lambda_0()).astype(np.float64).flatten()[0]
