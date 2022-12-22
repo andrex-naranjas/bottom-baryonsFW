@@ -8,7 +8,6 @@
 ---------------------------------------------------------------
 """
 import sympy.physics.mechanics as mech
-#mech.init_vprinting()
 from sympy import *
 from sympy.physics.quantum import TensorProduct
 from sympy.physics.matrices import msigma
