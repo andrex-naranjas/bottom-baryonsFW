@@ -254,3 +254,13 @@ results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_pa
 end = datetime.datetime.now()
 elapsed_time = end - start
 print("Elapsed total time = " + str(elapsed_time))
+print(round(sampled_m1.mean()), "md1 omega")
+print(round(sampled_m2.mean()), "md2 cascade")
+print(round(sampled_m3.mean()), "md3 sigma, lambda")
+#print(round(sampled_mb.mean()), "mb")
+
+print("K", pow(sampled_k.mean(), 2)/(1000**3))
+print("A", sampled_a.mean())
+print("B", sampled_b.mean())
+print("E", sampled_e.mean())
+print("G", sampled_g.mean())
