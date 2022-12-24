@@ -12,13 +12,17 @@ from sympy import *
 from sympy.physics.quantum import TensorProduct
 import numpy as np
 
-#mu_u, mu_d, mu_s, mu_b=symbols('mu_u, mu_d, mu_s, mu_b',positive=True)
-# Values of the magnetic moments of each quark according to Dothan 1982
-mu_u = 1
-mu_d = 2
-mu_s = 3
-#Computed by myself using equation related to mass (this is not the correct value)
-mu_b = 4
+#Values of the masses computed in our work
+m_q = 299
+m_s = 465
+m_b = 4928
+
+#Values of the magnetic moments of each quark according to Dothan 1982
+mu_u = (2/3) * 1/(2 * m_q)
+mu_d = (-1/3) * 1/(2 * m_q)
+mu_s = (-1/3) * 1/(2 * m_s)
+mu_b = (-1/3) * 1/(2 * m_b)
+
 
 class FlavorAmplitudes():
     """
@@ -75,42 +79,63 @@ class FlavorAmplitudes():
         return TensorProduct(TensorProduct(state_a ,state_b), state_c)
     
     
-    def Lambda_0(self):
+    #Flavor States of the anti-triplet
+    def Lambda_b_0(self):
         """
-        Method to define the Lambda_0 flavor state
+        Method to define the Lambda_b_0 flavor state
         """
         return (self.flavor_state(self.u, self.d, self.b) - self.flavor_state(self.d, self.u, self.b)) / sqrt(2)
 
-    def Xi_prime_0(self):
+    def Xi_b_0(self):
         """
-        Method to define the Xi_prime_0 flavor state
-        """
-        return (self.flavor_state(self.u, self.s, self.b) + self.flavor_state(self.s, self.u, self.b)) / sqrt(2)
-
-    def Xi_0(self):
-        """
-        Method to define the Xi_0 flavor state
+        Method to define the Xi_b_0 flavor state
         """
         return (self.flavor_state(self.u, self.s, self.b) - self.flavor_state(self.s, self.u, self.b)) / sqrt(2)
 
-    def Xi_prime_m(self):
+    def Xi_b_m(self):
         """
-        Method to define the Xi_prime_m flavor state
-        """
-        return (self.flavor_state(self.d,self.s,self.b) + self.flavor_state(self.s, self.d, self.b)) / sqrt(2)
-
-    def Xi_m(self):
-        """
-        Method to define the Xi_m flavor state
+        Method to define the Xi_b_m flavor state
         """
         return (self.flavor_state(self.d, self.s, self.b) - self.flavor_state(self.s, self.d, self.b)) / sqrt(2)
 
-    def Sigma_0(self):
+
+    #Flavor States of the sextet
+    def Sigma_b_p(self):
         """
-        Method to define the Sigma_0 flavor state
+        Method to define the Sigma_b_p flavor state
+        """
+        return (self.flavor_state(self.u, self.u, self.b))
+
+    def Sigma_b_0(self):
+        """
+        Method to define the Sigma_b_0 flavor state
         """
         return (self.flavor_state(self.u, self.d, self.b) + self.flavor_state(self.d, self.u, self.b)) / sqrt(2)
   
+    def Sigma_b_m(self):
+        """
+        Method to define the Sigma_b_p flavor state
+        """
+        return (self.flavor_state(self.d, self.d, self.b))
+
+    def Xi_b_pr_0(self):
+        """
+        Method to define the Xi_b_pr_0 flavor state
+        """
+        return (self.flavor_state(self.u, self.s, self.b) + self.flavor_state(self.s, self.u, self.b)) / sqrt(2)
+
+    
+    def Xi_b_pr_m(self):
+        """
+        Method to define the Xi_b_pr_m flavor state
+        """
+        return (self.flavor_state(self.d,self.s,self.b) + self.flavor_state(self.s, self.d, self.b)) / sqrt(2)
+
+    def Omega_b_m(self):
+        """
+        Method to define the Omega_b_m flavor state
+        """
+        return (self.flavor_state(self.s, self.s, self.b))
     
     def flavor_matrix_elements(self, n, x_i, y_j):
         """
