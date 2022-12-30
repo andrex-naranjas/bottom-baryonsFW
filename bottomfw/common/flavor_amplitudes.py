@@ -12,25 +12,19 @@ from sympy import *
 from sympy.physics.quantum import TensorProduct
 import numpy as np
 
-#Values of the masses computed in our work
-m_q = 299
-m_s = 465
-m_b = 4928
-
-#Values of the magnetic moments of each quark according to Dothan 1982
-mu_u = (2/3) * 1/(2 * m_q)
-mu_d = (-1/3) * 1/(2 * m_q)
-mu_s = (-1/3) * 1/(2 * m_s)
-mu_b = (-1/3) * 1/(2 * m_b)
-
 
 class FlavorAmplitudes():
     """
     Class to get electromagnetic flavor amplitudes
     """        
-    def __init__(self, baryons):        
+    def __init__(self, baryons, m_q=299, m_s=465, m_b=4928):
         # baryons available: omegas, sigmas, lambdas, cascades_prime, cascades
-        self.m_baryons = baryons  
+        self.m_baryons = baryons
+        #Values of the magnetic moments of each quark according to Dothan 1982
+        self.mu_u = (2/3) * 1/(2 * m_q)
+        self.mu_d = (-1/3) * 1/(2 * m_q)
+        self.mu_s = (-1/3) * 1/(2 * m_s)
+        self.mu_b = (-1/3) * 1/(2 * m_b)
         # up quark state
         self.u = Matrix([[1],[0],[0],[0]]) 
         # down quark state
@@ -45,7 +39,7 @@ class FlavorAmplitudes():
         Method to calculate the Magnetic Operators (mu(i))
         index == operator index (1,2,3)
         """
-        return Matrix([[mu_u, 0, 0, 0], [0, mu_d, 0, 0], [0, 0, mu_s, 0], [0, 0, 0, mu_b]])
+        return Matrix([[self.mu_u, 0, 0, 0], [0, self.mu_d, 0, 0], [0, 0, self.mu_s, 0], [0, 0, 0, self.mu_b]])
 
     def identity_matrix(self, dim):
         """
@@ -77,7 +71,6 @@ class FlavorAmplitudes():
         state_a,b,c should be sympy matrices of the form: Matrix([[0],...,[1]])
         """
         return TensorProduct(TensorProduct(state_a ,state_b), state_c)
-    
     
     #Flavor States of the anti-triplet
     def Lambda_b_0(self):
@@ -123,7 +116,6 @@ class FlavorAmplitudes():
         Method to define the Xi_b_pr_0 flavor state
         """
         return (self.flavor_state(self.u, self.s, self.b) + self.flavor_state(self.s, self.u, self.b)) / sqrt(2)
-
     
     def Xi_b_pr_m(self):
         """
