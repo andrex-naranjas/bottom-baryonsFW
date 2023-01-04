@@ -5,7 +5,7 @@
  Script to obtain uncertainties of heavy baryon mass spectrum via bootstrap
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch) and
           H. Garcia-Tecocoatzi
- ------------------------------------------------------------------------
+--------------------------------------------------------------------------
 """
 import sys
 import os
@@ -59,18 +59,32 @@ def least_squares(md1, md2, md3, md4, md5, mb, k, a, b, e, g):
     # return np.sum((pred_m - exp_m)**2 / (yvar_2**2)) #**2
 
 def fit(least_squares):
-    m = Minuit(least_squares, md1=900, md2=300, md3=300, md4=300, md5=300, mb=4000, k=0, a=5, b=5, e=10, g=10)
-    # m.limits['mb'] = (4900, 6000)
-    m.limits['md1'] =  (900, 1200)  # (850, 950) #omega (500, 1500)
-    m.limits['md2'] =  (700, 950)   # (650, 850) #cascade prime
-    m.limits['md3'] =  (500, 700)   # (500, 700) #sigma
-    m.limits['md4'] =  (500, 700)   # (500, 700) #lambda
-    m.limits['md5'] =  (700, 900)   # (650, 850) #cascade
-    # m.limits['a'] = (0, 100)
-    # m.limits['b'] = (0, 100)
-    # m.limits['e'] = (20, 100)
-    # m.limits['g'] = (60, 100)
+    m = Minuit(least_squares, md1=900, md2=300, md3=600, md4=600, md5=300, mb=4000, k=0, a=5, b=5, e=10, g=10)
+    m.limits['mb'] = (4600, 6000)
+
+
+    m.limits['md1'] =  (900, 1900) # omega
+    m.limits['md2'] =  (800, 1300) # cascade primer sextuplet
+    m.limits['md3'] =  (200, 1100) # sigma
+    m.limits['md4'] =  (800, 1000)  # lambda
+    m.limits['md5'] =  (800, 1300)  # cascade
+
+
+    # sigma in the limit :( but the rest OK
+    # m.limits['md1'] =  (900, 1900) # omega
+    # m.limits['md2'] =  (800, 1300) # cascade primer sextuplet
+    # m.limits['md3'] =  (700, 1100) # sigma
+    # m.limits['md4'] =  (700, 1000)  # lambda
+    # m.limits['md5'] =  (700, 1300)  # cascade
+    
+    # trad
+    # m.limits['md1'] =  (900, 1200)  # (850, 950) #omega (500, 1500)
+    # m.limits['md2'] =  (700, 950)   # (650, 850) #cascade prime
+    # m.limits['md3'] =  (500, 700)   # (500, 700) #sigma
+    # m.limits['md4'] =  (500, 700)   # (500, 700) #lambda
+    # m.limits['md5'] =  (700, 900)   # (650, 850) #cascade
     m.errordef=Minuit.LEAST_SQUARES
+    #m.errordef=Minuit.LIKELIHOOD
     m.migrad()
     return m
 
