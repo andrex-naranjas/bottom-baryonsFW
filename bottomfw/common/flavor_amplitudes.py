@@ -19,8 +19,8 @@ class FlavorAmplitudes():
     """        
     def __init__(self, baryons, m_q=299, m_s=465, m_b=4928):
         # baryons available: omegas, sigmas, lambdas, cascades_prime, cascades
-        self.m_baryons = baryons
-        #Values of the magnetic moments of each quark according to Dothan 1982
+        self.m_baryons = baryons 
+        # Values of the magnetic moments of each quark according to Dothan 1982
         self.mu_u = (2/3) * 1/(2 * m_q)
         self.mu_d = (-1/3) * 1/(2 * m_q)
         self.mu_s = (-1/3) * 1/(2 * m_s)
