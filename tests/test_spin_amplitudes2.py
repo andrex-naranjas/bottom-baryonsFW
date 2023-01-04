@@ -1,3 +1,5 @@
+# new tests
+
 from bottomfw.common.spin_amplitudes import SpinAmplitudes
 
 test_amplitudes = SpinAmplitudes(baryons="omegas")
