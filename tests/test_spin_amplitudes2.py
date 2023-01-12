@@ -2,8 +2,10 @@ import unittest
 import pytest
 
 
-class TestBoostedSVM(unittest.TestCase):
-    """Tests classes in common_methods"""
+class TestSpinAmplitudes(unittest.TestCase):
+    """
+    Tests methods in spin_amplitudes
+    """
     @pytest.fixture(autouse=True)
     def initdir(self, tmpdir):
         print(tmpdir)
