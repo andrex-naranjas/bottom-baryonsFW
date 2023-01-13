@@ -35,7 +35,6 @@ class TestSpinAmplitudes(unittest.TestCase):
         self.assertAlmostEqual(test_amp_slo1_s3_2m_s1_2m, np.sqrt(3) / 3)
         self.assertAlmostEqual(test_amp_slo1_s1_2m_r1_2, np.sqrt(6) / 6)
         self.assertAlmostEqual(test_amp_slo1_s3_2m_r1_2m, np.sqrt(2) / 2)
-
         self.assertAlmostEqual(test_amp_slo1_s1_2m_l1_2, np.sqrt(2) / 6)
         self.assertAlmostEqual(test_amp_slo1_s3_2m_l1_2m, np.sqrt(6) / 6)
         self.assertAlmostEqual(test_amp_slo1_r1_2_s3_2, -np.sqrt(2) / 2)
