@@ -202,7 +202,6 @@ while count < 10000: # max 10000 with decays included, computationally expensive
     else:
         continue
 
-
     sampled_md1 = np.append(sampled_md1, m.values['md1'])
     sampled_md2 = np.append(sampled_md2, m.values['md2'])
     sampled_md3 = np.append(sampled_md3, m.values['md3'])
