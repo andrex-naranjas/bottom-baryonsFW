@@ -10,7 +10,6 @@
 import numpy as np
 from scipy.stats import norm, normaltest, shapiro, chisquare, kstest
 from statsmodels.stats.diagnostic import lilliefors
-from oct2py import octave
 
 
 def find_best_sigma_0():
@@ -51,6 +50,7 @@ def find_best_sigma_0():
 
 def linear_algebra_check(name, workpath='.'):
     #name='All'
+    from oct2py import octave
     A = octave.load(workpath+'/octave/matrix_'+ name + '.mat')
     b = octave.load(workpath+'/octave/vector_'+ name + '.mat')
     return octave.linsolve(A,b)

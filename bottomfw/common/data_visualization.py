@@ -46,23 +46,22 @@ def paper_tables_results(baryons, di_three_quark='diquark', decay_width=False,
     # make statitical summary csv files for later use in latex and plots
     
     masses_df,decays_df=None,None
-    n_decay_samples=0
+    n_decay_samples = 0
     di_label=''
-    if di_three_quark=='diquark':
-        di_label='diquark_'
+    if di_three_quark == 'diquark':
+        di_label = 'diquark_'
         if batch_number is not None:
-            di_label='_diquark'  
+            di_label = '_diquark'  
         # get the original quantum numbers and experimental data
         state,sum_mass,J_tot,S_tot,L_tot,I_tot,SU_tot,HO_n,SL,ModEx = bs.states_mass_diquark(baryons)
     else:
         state,sum_mass,J_tot,S_tot,L_tot,I_tot,SU_tot,HO_n,SL,ModEx = bs.states_mass(baryons)
         
     if batch_number is None:
-        masses_df = pd.read_csv(workpath+"/tables/masses_states_"+di_label+baryons+".csv")
+        masses_df = pd.read_csv(workpath + "/tables/masses_states_" + di_label + baryons + ".csv")
         if decay_width and di_three_quark!='diquark':
-            decays_df = pd.read_csv(workpath+"/tables/decays_states_"+di_label+baryons+".csv")
+            decays_df = pd.read_csv(workpath + "/tables/decays_states_" + di_label+baryons + ".csv")
             n_decay_samples = len(decays_df.index)
-
     else: # merge results from batch jobs
         all_files = glob.glob(os.path.join(workpath+"/batch_results"+di_label+"/"+baryons+"/mass_states/", "*.csv"))
         df_from_each_file = (pd.read_csv(f) for f in all_files)
@@ -76,6 +75,7 @@ def paper_tables_results(baryons, di_three_quark='diquark', decay_width=False,
     n_states  = len(masses_df.columns)
     n_samples = len(masses_df.index)
 
+    print(n_samples, di_label)
     baryons_name = baryons
     if prev_params: baryons_name+='_previous'
     if di_three_quark=='diquark': di_label='diquark_'
@@ -101,7 +101,7 @@ def paper_tables_results(baryons, di_three_quark='diquark', decay_width=False,
             decay = np.mean(sorted_decays)
         
         # asymmetric error calculation via 68%(95%) quantile method
-        error_up,error_dn = 0,0
+        error_up, error_dn = 0, 0
         if n_samples>1:
             error_up = sorted_masses[quantile_up-1] - mass
             error_dn = sorted_masses[quantile_dn-1] - mass

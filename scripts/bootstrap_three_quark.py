@@ -209,11 +209,11 @@ df = pd.DataFrame({"M1" : sampled_m1,"M2" : sampled_m2,"M3" : sampled_m3,
 
 if batch_number is None:
     if not os.path.exists(workpath+"/tables/"):
-        os.mkdir(workpath+"/tables/")        
+        os.makedirs(workpath+"/tables/")        
     df.to_csv(workpath+"/tables/bootstrap_param_"+run_baryons+".csv", index=False)
 else:
     if not os.path.exists(workpath+"/batch_results/"+run_baryons+"/parameters/"):
-        os.mkdir(workpath+"/batch_results/"+run_baryons+"/parameters/")
+        os.makedirs(workpath+"/batch_results/"+run_baryons+"/parameters/")
     df.to_csv(workpath+"/batch_results/"+run_baryons+"/parameters/"+str(batch_number)+".csv", index=False)
 
 # create dictionaries
@@ -230,22 +230,22 @@ corr_mat_ext ={'rho_m2m1':rho_m2m1, 'rho_m3m1':rho_m3m1, 'rho_km1':rho_km1, 'rho
 df = pd.DataFrame(corr_mat_ext)
 if batch_number is None:
     if not os.path.exists(workpath+"/tables/"):
-        os.mkdir(workpath+"/tables/")
+        os.makedirs(workpath+"/tables/")
     df.to_csv(workpath+"/tables/bootstrap_correlation_"+run_baryons+".csv", index=False)
 else:
-    if not os.path.exists(workpath+"/batch_results/"+run_baryons+"/parameters/"):
-        os.mkdir(workpath+"/batch_results/"+run_baryons+"/parameters/")
+    if not os.path.exists(workpath+"/batch_results/"+run_baryons+"/correlation/"):
+        os.makedirs(workpath+"/batch_results/"+run_baryons+"/correlation/")
     df.to_csv(workpath+"/batch_results/"+run_baryons+"/correlation/"+str(batch_number)+".csv", index=False)
 
 # calculate the masses and decays using the bootstrap simulation above
 results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=True,
-                           decay_width=True, bootstrap_width=False, batch_number=batch_number, workpath=workpath)
+                           decay_width=True, bootstrap_width=True, batch_number=batch_number, workpath=workpath)
 results.fetch_values()
 
 print('Getting paper results for:', run_baryons)
 #input()
 # omegas,cascades,sigmas,lambdas,cascades_anti3
-results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_params=False) # all running for paper
+results.paper_results_predictions(bootstrap=True, bootstrap_width=True, prev_params=False) # all running for paper
 #results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=True, prev_params=False, decay_width=True) # all running for paper
 # avoid time consuming decay widths calculations
 # results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)

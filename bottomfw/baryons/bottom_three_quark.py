@@ -164,13 +164,13 @@ class BottomThreeQuark:
                     if self.m_batch_number is None:
                         if df_decays_indi is not None:
                             if not os.path.exists(self.m_workpath+"/tables/decays_indi/"):
-                                os.mkdir(self.m_workpath+"/tables/decays_indi/")                            
+                                os.makedirs(self.m_workpath+"/tables/decays_indi/")                            
                             df_decays_indi.to_csv(self.m_workpath+"/tables/decays_indi/decays_state_"+str(i)+"_"+self.m_baryons+".csv", index=False)
                     else:
                         if df_decays_indi is not None:  # save results for batch a given batch job
                             dec_dir = self.m_workpath+"/batch_results/"+self.m_baryons+"/decays_indi/state_"+str(i)
                             if not os.path.exists(dec_dir):
-                                os.mkdir(dec_dir)
+                                os.makedirs(dec_dir)
                             df_decays_indi.to_csv(dec_dir+"/"+str(self.m_batch_number)+".csv", index=False)                                                   
                 # last line of states loop
         df_masses = None
@@ -191,24 +191,24 @@ class BottomThreeQuark:
         if self.m_batch_number is None:
             if df_masses is not None:
                 if not os.path.exists(self.m_workpath+"/tables/"):
-                    os.mkdir(self.m_workpath+"/tables/")
+                    os.makedirs(self.m_workpath+"/tables/")
                 df_masses.to_csv(self.m_workpath+"/tables/masses_states_"+self.m_baryons+".csv", index=False)
             if df_omegas is not None:
                 if not os.path.exists(self.m_workpath+"/tables/"):
-                    os.mkdir(self.m_workpath+"/tables/")
+                    os.makedirs(self.m_workpath+"/tables/")
                 df_omegas.to_csv(self.m_workpath+"/tables/harmonic_states_"+self.m_baryons+".csv", index=False)
             if df_decays is not None:
                 if not os.path.exists(self.m_workpath+"/tables/"):
-                    os.mkdir(self.m_workpath+"/tables/")
+                    os.makedirs(self.m_workpath+"/tables/")
                 df_decays.to_csv(self.m_workpath+"/tables/decays_states_"+self.m_baryons+".csv", index=False)                
         else:
             if df_masses is not None:  # save results for batch a given batch job
                 if not os.path.exists(self.m_workpath+"/batch_results/"+self.m_baryons+"/mass_states/"):
-                    os.mkdir(self.m_workpath+"/batch_results/"+self.m_baryons+"/mass_states/")
+                    os.makedirs(self.m_workpath+"/batch_results/"+self.m_baryons+"/mass_states/")
                 df_masses.to_csv(self.m_workpath+"/batch_results/"+self.m_baryons+"/mass_states/"+str(self.m_batch_number)+".csv", index=False)
             if df_decays is not None:
                 if not os.path.exists(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/"):
-                    os.mkdir(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/")
+                    os.makedirs(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/")
                 df_decays.to_csv(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/"+str(self.m_batch_number)+".csv", index=False)
     
     def fetch_values(self):

@@ -4,7 +4,7 @@
 ---------------------------------------------------------------
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
           H. Garcia-Tecocoatzi
- ---------------------------------------------------------------
+---------------------------------------------------------------
 """
 import sys
 import glob
@@ -386,7 +386,8 @@ class BottomTables:
         self.m_rho_gb   = round(np.mean(data_frame['rho_gb']), 2)
         self.m_rho_ge   = round(np.mean(data_frame['rho_ge']), 2)
 
-        if self.m_batch:
+        # diquark 
+        if self.m_batch and False:
             all_files = glob.glob(os.path.join(self.m_workpath+"/batch_results_diquark/"+baryons+"/correlation/", "*.csv"))
             df_from_each_file = (pd.read_csv(f) for f in all_files)
             data_frame = pd.concat(df_from_each_file, ignore_index=True)            

@@ -8,12 +8,12 @@
 '''
 
 # htcondor job submitter
-# python3 submit_batch.py baryons three_quark/diquark n_jobs
+# python3 scripts/submit_batch.py baryons three_quark/diquark n_jobs
 
 import sys
 from os import system,getenv,getuid,getcwd,popen
 
-workpath=getcwd()
+workpath = getcwd()
 
 if len(sys.argv)!=4:
   sys.exit('Not enough arguments to set the batch job')
@@ -24,7 +24,7 @@ n_jobs = sys.argv[3]
 py3_path = popen('which python3').read().strip()
 
 if three_di=='three_quark':
-  run_bottom = 'bottom_bootstrap_extended.py'
+  run_bottom = 'scripts/bootstrap_three_quark.py'
 elif three_di=='diquark':
   run_bottom = 'bottom_bootstrap_diquark.py'
 else:

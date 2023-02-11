@@ -24,21 +24,21 @@ workpath = getcwd()
 
 # create summary of the results and store in a csv file
 dv.paper_tables_results(run_baryons, di_three_quark='three_quark', decay_width=True,
-                        asymmetric=True, prev_params=False, workpath=workpath, batch_number=None)
-print('three-quark')
+                        asymmetric=True, prev_params=False, workpath=workpath, batch_number=True)
+print('three-quark results created')
 
 # create summary of the results and store in a csv file
-dv.paper_tables_results(run_baryons, di_three_quark='diquark', decay_width=True,
-                       asymmetric=True, prev_params=False, workpath=workpath, batch_number=None)
-print('diquark')
+dv.paper_tables_results(run_baryons, di_three_quark='diquark', decay_width=False,
+                        asymmetric=True, prev_params=False, workpath=workpath, batch_number=None)
+print('diquark results created')
 
 # create summary tables for 
 dv.decay_indi_tables_results(run_baryons, asymmetric=True,
-                             prev_params=False, workpath=workpath, batch_number=None) # change to batch_number to True
-print('individual decays')
+                             prev_params=False, workpath=workpath, batch_number=True) # change to batch_number to True
+print('individual decays created')
 
 # tables
-bottom_tables = BottomTables(run_baryons, workpath=workpath, batch_results=False) # assume diquark never come from batch jobs (FIX this)
+bottom_tables = BottomTables(run_baryons, workpath=workpath, batch_results=True) # assume diquark never come from batch jobs (FIX this)
 bottom_tables.single_model_table()
 bottom_tables.combined_model_table()
 bottom_tables.parameter_combined()
