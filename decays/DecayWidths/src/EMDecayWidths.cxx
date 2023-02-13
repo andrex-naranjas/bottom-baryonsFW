@@ -97,10 +97,18 @@ double EMDecayWidths::ANGULAR_SUM(double alpha_rho, double alpha_lam,
 
 
 // SPIN-FLIP INTEGRALS
-double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam,  double MB, double ML){
+double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML){
   double value1 = (-1.0)*std::pow(k_value, 2) / 8.;
-  double value2 = 3.*std::pow(MB, 2) / (std::pow(alpha_lam * (MB + 2.*ML), 2));
-  double value3 = 1./std::pow(alpha_lam, 2);
+  double value2 = 3.*std::pow(MB, 2) / (std::pow(alpha_lam * (MB + 2 * ML), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = std::exp(value1 * (value2 + value3));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_GS_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML){
+  double value1 = (-1.0)*std::pow(k_value, 2) / 8.;
+  double value2 = 3.*std::pow(MB, 2) / (std::pow(alpha_lam * (MB + 2 * ML), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
   double value = std::exp(value1 * (value2 + value3));
   return value;
 }
