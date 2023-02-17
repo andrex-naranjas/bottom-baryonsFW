@@ -118,3 +118,92 @@ double EMDecayWidths::SPINFLIP_U3_GS_GS(double k_value, double alpha_lam, double
   double value = std::exp(value1);
   return value;
 }
+
+double EMDecayWidths::SPINFLIP_U1_1l_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2).;
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = std::sqrt(6) * i * MB * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1l_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2).;
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = std::sqrt(3) * i * MB * k_value * std::exp(value1 + value2) * cos(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1l_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = (-1.0) * std::sqrt(6) * i * MB * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1l_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2).;
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = std::sqrt(6) * i * MB * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1l_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2).;
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (-1.0) * std::sqrt(3) * i * MB * k_value * std::exp(value1 + value2) * cos(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1l_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = (-1.0) * std::sqrt(6) * i * MB * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1l_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = i * phik;
+  double value2 = (-3.0) * std::pow(ML, 2) * std::pow(k_value, 2) / 2 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (-1.0) * std::sqrt(6) * i * ML * k_value * std::exp(value1 + value2) * sin(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1l_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-3.0) * std::pow(ML, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = std::sqrt(3) * i * ML * k_value * std::exp(value1) * cos(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1l_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = i * phik;
+  double value2 = (-3.0) * std::pow(ML, 2) * std::pow(k_value, 2) / 2 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = std::sqrt(6) * i * ML * k_value * std::exp(value1 + value2) * sin(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1r_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2).;
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = std::sqrt(2) * i * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1r_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2).;
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value =  (-1.0) * k_value * std::exp(value1 + value2) * cos(thetak)/ (2 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1r_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2).;
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = (-1.0) * std::sqrt(2) * i * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_rho);
+  return value;
+}
