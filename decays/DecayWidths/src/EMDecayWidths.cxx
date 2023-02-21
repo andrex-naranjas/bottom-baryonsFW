@@ -277,3 +277,10 @@ double EMDecayWidths::ORBITALSPLIT_U1_1l_m0_1l_m1(double k_value, double alpha_l
   double value = 3. * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/ 16 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
   return value;
 }
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m0_1l_m0(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (((-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 4 * (std::pow(alpha_lam * (MB + 2. * ML), 2))) * std::pow(cos(thetak), 2) + 1) * k_value * std::exp(value1 + value2)/ (4 * alpha_rho);
+  return value;
+}
