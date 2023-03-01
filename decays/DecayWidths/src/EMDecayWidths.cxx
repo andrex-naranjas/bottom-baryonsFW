@@ -97,10 +97,292 @@ double EMDecayWidths::ANGULAR_SUM(double alpha_rho, double alpha_lam,
 
 
 // SPIN-FLIP INTEGRALS
-double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam,  double MB, double ML){
+double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML){
   double value1 = (-1.0)*std::pow(k_value, 2) / 8.;
-  double value2 = 3.*std::pow(MB, 2) / (std::pow(alpha_lam * (MB + 2.*ML), 2));
-  double value3 = 1./std::pow(alpha_lam, 2);
+  double value2 = 3.*std::pow(MB, 2) / (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
   double value = std::exp(value1 * (value2 + value3));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_GS_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML){
+  double value1 = (-1.0)*std::pow(k_value, 2) / 8.;
+  double value2 = 3.*std::pow(MB, 2) / (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = std::exp(value1 * (value2 + value3));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_GS_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML){
+  double value1 = (-3.0)*std::pow(k_value, 2) * std::pow(ML, 2) / 2.*(std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = std::exp(value1);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1l_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = std::sqrt(6) * i * MB * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1l_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = std::sqrt(3) * i * MB * k_value * std::exp(value1 + value2) * cos(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1l_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = (-1.0) * std::sqrt(6) * i * MB * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1l_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = std::sqrt(6) * i * MB * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1l_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (-1.0) * std::sqrt(3) * i * MB * k_value * std::exp(value1 + value2) * cos(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1l_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = (-1.0) * std::sqrt(6) * i * MB * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1l_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = i * phik;
+  double value2 = (-3.0) * std::pow(ML, 2) * std::pow(k_value, 2) / 2 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (-1.0) * std::sqrt(6) * i * ML * k_value * std::exp(value1 + value2) * sin(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1l_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-3.0) * std::pow(ML, 2) * std::pow(k_value, 2) / 2 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = std::sqrt(3) * i * ML * k_value * std::exp(value1) * cos(thetak)/ (alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1l_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * i * phik;
+  double value2 = (-3.0) * std::pow(ML, 2) * std::pow(k_value, 2) / 2 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = std::sqrt(6) * i * ML * k_value * std::exp(value1 + value2) * sin(thetak)/ (2 * alpha_lam *(MB + 2 * ML) );
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1r_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = std::sqrt(2) * i * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1r_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value =  (-1.0) * i * k_value * std::exp(value1 + value2) * cos(thetak)/ (2 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_1r_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = (-1.0) * std::sqrt(2) * i * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1r_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = (-1.0) * std::sqrt(2) * i * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1r_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value =  i * k_value * std::exp(value1 + value2) * cos(thetak)/ (2 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_1r_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = std::sqrt(2) * i * k_value * std::exp(value1 + value2 + value3) * sin(thetak)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1r_m1_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value = 0;
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1r_m0_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value = 0;
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_1r_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value = 0;
+  return value;
+}
+
+// ORBIT-SPLIT INTEGRALS
+// U1_1lambda-1lambda
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m1_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (value2 * std::pow(sin(thetak), 2) + 1) * k_value * std::exp(value1 + value2)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m1_1l_m0(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = 3. * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/ 16 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m1_1l_m1m(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = 2 * i * phik;
+  double value = 0.375 * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * std::pow(sin(thetak), 2)/ (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m0_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = 3. * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/ 16 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m0_1l_m0(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (((-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 4 * (std::pow(alpha_lam * (MB + 2. * ML), 2))) * std::pow(cos(thetak), 2) + 1) * k_value * std::exp(value1 + value2)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m0_1l_m1m(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = (-1.0) * 0.1875 * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/(std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+} 
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m1m_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = 2 * i * phik;
+  double value = 3 * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * std::pow(sin(thetak), 2)/ 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m1m_1l_m0(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = (-3.0) * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/16 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m1m_1l_m1m(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (value2 * std::pow(sin(thetak), 2) + 1) * k_value * std::exp(value1 + value2)/ (4 * alpha_rho);
+  return value;
+}
+
+// U2_1lambda-1lambda
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m1_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (value2 * std::pow(sin(thetak), 2) + 1) * k_value * std::exp(value1 + value2)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m1_1l_m0(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = 3. * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/ 16 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m1_1l_m1m(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = 2 * i * phik;
+  double value = 0.375 * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * std::pow(sin(thetak), 2)/ (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m0_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = 3. * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/ 16 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m0_1l_m0(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (((-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 4 * (std::pow(alpha_lam * (MB + 2. * ML), 2))) * std::pow(cos(thetak), 2) + 1) * k_value * std::exp(value1 + value2)/ (4 * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m0_1l_m1m(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = i * phik;
+  double value = (-1.0) * 0.1875 * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/(std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+} 
+
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m1m_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = 2 * i * phik;
+  double value = 3 * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * std::pow(sin(thetak), 2)/ 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m1m_1l_m0(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value3 = (-1.0) * i * phik;
+  double value = (-3.0) * std::sqrt(2) * std::pow(MB, 2) * std::pow(k_value, 2) * std::exp(value1 + value2 + value3) * sin(2 * thetak)/16 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  return value;
+}
+
+double EMDecayWidths::ORBITALSPLIT_U2_1l_m1m_1l_m1m(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
+  double value2 = (-3.0) * std::pow(MB, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (MB + 2. * ML), 2));
+  double value = (value2 * std::pow(sin(thetak), 2) + 1) * k_value * std::exp(value1 + value2)/ (4 * alpha_rho);
   return value;
 }
