@@ -360,59 +360,59 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
 
     if baryons=='omegas':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$6045.2\\pm 1.0$' , '$xx$'
+            return '$6045.2\\pm 1.2$' , '$\\approx 0$'
         elif J_tot==1/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6315.6\\pm$', '$xx$'
+            return '$6315.6\\pm 0.6$', '$<4.2$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6330.3\\pm 1.0$' , '$xx$'
+            return '$6339.7\\pm 0.6$' , '$<1.8$'
         elif J_tot==1/2 and S_tot==3/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6339.7\\pm 1.0$' , '$xx$'
+            return '$6330.3\\pm 0.6$' , '$<4.7$'
         elif J_tot==3/2 and S_tot==3/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6349.8\\pm 1.0$' , '$xx$'
+            return '$6349.8\\pm 0.6$' , '$<3.2$'
         else:
             return '$\\dagger$', '$\\dagger$'
     elif baryons=='cascades':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$5935.02\\pm 1.0$' , '$xx$'
+            return '$5935.02\\pm 0.05$' , '$<0.08$'
         elif J_tot==3/2 and S_tot==3/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$5953.82\\pm 1.0$' , '$xx$'
+            return '$5952.3\\pm 0.6$' , '$0.90\pm 0.18$'
         elif J_tot==5/2 and S_tot==3/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6227.85\\pm 1.0$' , '$xx$'
+            return '$6227.9\\pm 0.9$' , '$19.9\pm 2.6$'
         else:
             return '$\\dagger$', '$\\dagger$'
     if baryons=='sigmas':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$5813.1\\pm 1.0$' , '$5.0\\pm 0.5$'
+            return '$5813.1\\pm 0.3$' , '$5.0\\pm 0.5$'
         elif J_tot==3/2 and S_tot==3/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$5837.03\\pm 1.0$' , '$10.4\\pm 2.0$'
+            return '$5832.5\\pm 0.5$' , '$9.9\\pm 0.9$'
         elif J_tot==1/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6096.9\\pm 1.0$' , '$31\\pm 6$'
+            return '$6096.9\\pm 1.8$' , '$30\\pm 7$'
         else:
             return '$\\dagger$', '$\\dagger$'
     elif baryons=='lambdas':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(4/3):
-            return '$5619.6\\pm 1.0$' , '$xx$'
+            return '$5619.60\\pm 0.17$' , '$\approx 0$'
         elif J_tot==1/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$5912.2\\pm 1.0$' , '$xx$'
+            return '$5912.19\\pm 0.17$' , '$<0.25$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$5920.1\\pm 1.0$' , '$xx$'
+            return '$5920.09\\pm 0.17$' , '$<0.19$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6146.2\\pm 1.0$' , '$xx$'
+            return '$6146.2\\pm 0.4$' , '$2.9\\pm 1.3$'
         elif J_tot==5/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6152.5\\pm 1.0$' , '$xx$'
-        elif J_tot==5/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6072.3\\pm 1.0$' , '$xx$'
+            return '$6152.5\\pm 0.4$' , '$2.1\\pm 0.9$'
+        #elif J_tot==5/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
+        #    return '$6072.3\\pm 1.0$' , '$xx$'
         else:
             return '$\\dagger$', '$\\dagger$'
     elif baryons=='cascades_anti3':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(4/3):
-            return '$5794.45\\pm 1.0$' , '$xx$'
+            return '$5797.5\\pm 0.6$' , '$\\approx 0$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6100.00\\pm 1.0$' , '$xx$'
+            return '$6100.3\\pm 0.6$' , '$<1.9$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6327.00\\pm 1.0$' , '$xx$'
+            return '$6327.4\\pm 1.6$' , '$1\\pm5$'
         elif J_tot==5/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6333.00\\pm 1.0$' , '$xx$'
+            return '$6332.7\\pm 0.3$' , '$<1.60$'
         else:
             return '$\\dagger$', '$\\dagger$'
         
