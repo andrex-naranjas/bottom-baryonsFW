@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 ---------------------------------------------------------------
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
@@ -38,12 +38,12 @@ def find_best_sigma_0():
         y_errors_exp =np.array([1.7, 2.0, 0.22, 0.5, 1.0, 0.9, 0.7, 0.3, 0.4, 2.8, 0.9, 2.8, 20, 0.14, 0.28, 0.19, 1.77, 1.4, 2.07])
         # for diquark
         # y_errors_exp =np.array([1.7, 2.00, 0.22, 0.50, 1.00, 0.90, 0.71, 0.33,0.90, 2.80, 20.1, 0.14, 0.28, 0.19, 1.77, 1.40, 2.07])
-        sigma_0 = i*0.01
+        sigma_0 = i * 0.01
         m = fit(least_squares)
         if(0.9 < m.fval/(19-m.nfit) < 1.1):
             print(m.fval/((19-m.nfit)), round(m.values['m1']), round(m.values['m2']), round(m.values['m3']), sigma_0)
             print(round(m.values['k']), round(m.values['a']),  round(m.values['b']),   round(m.values['e']), round(m.values['g']) )
-            print('********************************************************')
+            print(' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * ')
     input()
     print("End scan!")
 
@@ -164,7 +164,7 @@ def names_values(name):
 
 
 def wave_label(S_tot, J_tot, L_tot):
-    spin_label='^{'+str(int(2*S_tot+1))+'}'    
+    spin_label='^{'+str(int(2 * S_tot+1))+'}'    
     jtot_string = ''
     if J_tot   == 0.5: jtot_string = '1/2'
     elif J_tot == 1.5: jtot_string = '3/2'

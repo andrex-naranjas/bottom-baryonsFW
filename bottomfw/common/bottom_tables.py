@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 ---------------------------------------------------------------
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
@@ -181,10 +181,10 @@ class BottomTables:
         Method to calculate the mean value, the asymmetric error and return a latex string
         """
         N = len(value)
-        qntl_up = int(N*0.975) # 95% C.L.
-        qntl_dn = int(N*0.025)
-        qntl_up = int(N*0.1587) # 68% C.L.
-        qntl_dn = int(N*0.8413)
+        qntl_up = int(N * 0.975) # 95% C.L.
+        qntl_dn = int(N * 0.025)
+        qntl_up = int(N * 0.1587) # 68% C.L.
+        qntl_dn = int(N * 0.8413)
         
         return '$'+str(round(np.mean(value),2)) +'^{+'+ str(abs(round(np.sort(value)[qntl_dn-1] - np.mean(value),2))) +'}_{-'+\
             str(abs(round(np.sort(value)[qntl_up-1] - np.mean(value), 2)))+'}$ '+units
@@ -324,7 +324,7 @@ class BottomTables:
         self.m_SU_tot_di =     data_frame_di['SU_tot']
 
         if self.m_batch:
-            all_files = glob.glob(os.path.join(self.m_workpath+"/batch_results/"+baryons+"/parameters/", "*.csv"))
+            all_files = glob.glob(os.path.join(self.m_workpath+"/batch_results/"+baryons+"/parameters/", " * .csv"))
             df_from_each_file = (pd.read_csv(f) for f in all_files)
             data_frame = pd.concat(df_from_each_file, ignore_index=True)            
         else:
@@ -351,7 +351,7 @@ class BottomTables:
         self.m_sampled_g_di = data_frame_di["G"]
 
         if self.m_batch:
-            all_files = glob.glob(os.path.join(self.m_workpath+"/batch_results/"+baryons+"/correlation/", "*.csv"))
+            all_files = glob.glob(os.path.join(self.m_workpath+"/batch_results/"+baryons+"/correlation/", " * .csv"))
             df_from_each_file = (pd.read_csv(f) for f in all_files)
             data_frame = pd.concat(df_from_each_file, ignore_index=True)            
         else:
@@ -388,7 +388,7 @@ class BottomTables:
 
         # diquark 
         if self.m_batch and False:
-            all_files = glob.glob(os.path.join(self.m_workpath+"/batch_results_diquark/"+baryons+"/correlation/", "*.csv"))
+            all_files = glob.glob(os.path.join(self.m_workpath+"/batch_results_diquark/"+baryons+"/correlation/", " * .csv"))
             df_from_each_file = (pd.read_csv(f) for f in all_files)
             data_frame = pd.concat(df_from_each_file, ignore_index=True)            
         else:

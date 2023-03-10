@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 ----------------------------------------------------------------
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
@@ -33,17 +33,17 @@ class BottomDiquark:
         Method that computes baryon masses according to model
         """
         if not sampled: # here the mass is calculated using the average value of parameters
-            return  self.md1*self.is_omega_param[i] + self.md2*self.is_cascade_param[i] + self.md3*self.is_sigma_param[i] + self.mb + \
+            return  self.md1 * self.is_omega_param[i] + self.md2 * self.is_cascade_param[i] + self.md3 * self.is_sigma_param[i] + self.mb + \
                 self.omega_harmonic(self.Kp, self.md1, self.md2, self.md3, self.mb,
                                     self.is_omega_param[i], self.is_cascade_param[i], self.is_sigma_param[i], self.v_param[i] ) + \
-                self.A*self.w_param[i] + self.B*self.x_param[i] + self.E*self.y_param[i] + self.G*self.z_param[i]
+                self.A * self.w_param[i] + self.B * self.x_param[i] + self.E * self.y_param[i] + self.G * self.z_param[i]
         else: # here the mass is calculated using every single bootstrap simulated parameter
-            return  self.sampled_md1[j]*self.is_omega_param[i] + self.sampled_md2[j]*self.is_cascade_param[i] + self.sampled_md3[j]*self.is_sigma_param[i] + \
+            return  self.sampled_md1[j] * self.is_omega_param[i] + self.sampled_md2[j] * self.is_cascade_param[i] + self.sampled_md3[j] * self.is_sigma_param[i] + \
                 self.sampled_mb[j] + \
                 self.omega_harmonic(self.sampled_k[j], self.sampled_md1[j], self.sampled_md2[j], self.sampled_md3[j], self.sampled_mb[j],
                                     self.is_omega_param[i], self.is_cascade_param[i], self.is_sigma_param[i], self.v_param[i] ) + \
-                self.sampled_a[j]*self.w_param[i] + self.sampled_b[j]*self.x_param[i] + \
-                self.sampled_e[j]*self.y_param[i] + self.sampled_g[j]*self.z_param[i]
+                self.sampled_a[j] * self.w_param[i] + self.sampled_b[j] * self.x_param[i] + \
+                self.sampled_e[j] * self.y_param[i] + self.sampled_g[j] * self.z_param[i]
 
     
     def omega_harmonic(self, kp_input, md1_input, md2_input, md3_input, mb_input, is_omega_input, is_cascade_input, is_sigma_input, v_input):
@@ -51,8 +51,8 @@ class BottomDiquark:
         Method that calculates the h.o. frequencies(omegas)
         """
         if(v_input==0.): return 0 # no contribution from harmonic oscillator, i.e. base states
-        m_d = is_omega_input*md1_input + is_cascade_input*md2_input + is_sigma_input*md3_input
-        m_u = m_d*mb_input/(m_d + mb_input)
+        m_d = is_omega_input * md1_input + is_cascade_input * md2_input + is_sigma_input * md3_input
+        m_u = m_d * mb_input/(m_d + mb_input)
         den_m_u = np.sqrt(1./m_u)
         omega = v_input * den_m_u  * kp_input
         return omega

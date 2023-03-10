@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 -------------------------------------------------------------
  authors: C. A. Vaquera Araujo (vaquera@fisica.ugto.mx)
@@ -8,7 +8,7 @@
 ------------------------------------------------------------
 """
 import sympy.physics.mechanics as mech
-from sympy import *
+from sympy import  * 
 from sympy.physics.quantum import TensorProduct
 import numpy as np
 

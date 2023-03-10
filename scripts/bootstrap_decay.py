@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 -----------------------------------------------------------------------
  code to obtain uncertainties of quarkonium mass spectrum via bootstrap
@@ -20,11 +20,11 @@ from decays.decay_width import DecayWidths
 width = decay()
 
 def model(v, gamma):
-    return v*gamma
+    return v * gamma
 
 def least_squares(gamma):
     # y_var_0 = sigma_0 # best sigma_0 (omega=9.87) (cascade'=2.54) (cascades_anti3=5.35)
-    # yvar_0 = y_var_0*np.ones(2)
+    # yvar_0 = y_var_0 * np.ones(2)
     # yvar = y_errors_exp
     # yvar_2 = np.power(yvar_0, 2) + np.power(yvar, 2)
     yvar_2 = 1.0
@@ -55,9 +55,9 @@ def decay_coef():
     
     # baryons = 'omegas'
     # ModEx_val= 'lam'
-    # #MassA = 3.0656*1000 # santopinto uses experimental values to calculate the width, which I think is wrong
+    # #MassA = 3.0656 * 1000 # santopinto uses experimental values to calculate the width, which I think is wrong
 
-    # MassA = 3.0074*1000 # gauss_3000
+    # MassA = 3.0074 * 1000 # gauss_3000
     # SA_qm = 1/2
     # LA_qm = 1
     # JA_qm = 1/2
@@ -66,7 +66,7 @@ def decay_coef():
     # decay_coef = decay_test.total_decay_width(baryons, k_prim, MassA, SA_qm, LA_qm, JA_qm, SL_qm, ModEx_val, gamma_val=1, m1=m1_in, m2=m2_in, m3=m3_in)
     # coef_decay = np.append(coef_decay, decay_coef)
 
-    # MassA = 3.049*1000 # gauss_3050
+    # MassA = 3.049 * 1000 # gauss_3050
     # JA_qm = 1/2
     # SA_qm = 3/2
     # LA_qm = 1
@@ -75,7 +75,7 @@ def decay_coef():
     # decay_coef = decay_test.total_decay_width(baryons, k_prim, MassA, SA_qm, LA_qm, JA_qm, SL_qm, ModEx_val, gamma_val=1,  m1=m1_in, m2=m2_in, m3=m3_in)
     # coef_decay = np.append(coef_decay, decay_coef)
 
-    # MassA = 3.034*1000 # gauss_3065
+    # MassA = 3.034 * 1000 # gauss_3065
     # JA_qm = 3/2
     # SA_qm = 1/2
     # LA_qm = 1
@@ -84,7 +84,7 @@ def decay_coef():
     # decay_coef = decay_test.total_decay_width(baryons, k_prim, MassA, SA_qm, LA_qm, JA_qm, SL_qm, ModEx_val, gamma_val=1, m1=m1_in, m2=m2_in, m3=m3_in)
     # coef_decay = np.append(coef_decay, decay_coef)
     
-    # MassA = 3.0764*1000 # gauss_3090
+    # MassA = 3.0764 * 1000 # gauss_3090
     # JA_qm = 3/2
     # SA_qm = 3/2
     # LA_qm = 1
@@ -93,7 +93,7 @@ def decay_coef():
     # decay_coef = decay_test.total_decay_width(baryons, k_prim, MassA, SA_qm, LA_qm, JA_qm, SL_qm, ModEx_val, gamma_val=1, m1=m1_in, m2=m2_in, m3=m3_in)
     # coef_decay = np.append(coef_decay, decay_coef)
 
-    # MassA = 3.122*1000 # gauss_3120  was not in the global fit
+    # MassA = 3.122 * 1000 # gauss_3120  was not in the global fit
     # JA_qm = 5/2
     # SA_qm = 3/2
     # LA_qm = 1
@@ -105,7 +105,7 @@ def decay_coef():
     # cascades prime
     # baryons = 'cascades'
     # ModEx_val= 'grd'
-    # MassA = 2.6405*1000 # gauss_2645
+    # MassA = 2.6405 * 1000 # gauss_2645
     # JA_qm = 3/2
     # SA_qm = 3/2
     # LA_qm = 0
@@ -115,7 +115,7 @@ def decay_coef():
     # coef_decay = np.append(coef_decay, decay_coef)
 
     # ModEx_val= 'lam'
-    # MassA = 2.9616*1000 # gauss_2965
+    # MassA = 2.9616 * 1000 # gauss_2965
     # JA_qm = 3/2
     # SA_qm = 3/2
     # LA_qm = 1
@@ -127,7 +127,7 @@ def decay_coef():
     # sigmas
     baryons = 'sigmas'
     ModEx_val= 'grd'
-    MassA = 5.805 * 1000 # 5.8131*1000  # gauss_5813 = 5813.1
+    MassA = 5.805 * 1000 # 5.8131 * 1000  # gauss_5813 = 5813.1
     JA_qm = 1/2
     SA_qm = 1/2
     LA_qm = 0
@@ -137,7 +137,7 @@ def decay_coef():
     coef_decay = np.append(coef_decay, decay_coef)
 
     ModEx_val= 'grd' 
-    MassA = 5.835 * 1000 # 5.837*1000 # gauss_5837 = 5837.0
+    MassA = 5.835 * 1000 # 5.837 * 1000 # gauss_5837 = 5837.0
     JA_qm = 3/2
     SA_qm = 3/2
     LA_qm = 0
@@ -150,7 +150,7 @@ def decay_coef():
     # lambdas
     # baryons = 'lambdas'
     # ModEx_val= 'lam'
-    # MassA = 2.6162*1000  # gauss_2592
+    # MassA = 2.6162 * 1000  # gauss_2592
     # JA_qm = 1/2
     # SA_qm = 1/2
     # LA_qm = 1
@@ -160,7 +160,7 @@ def decay_coef():
     # coef_decay = np.append(coef_decay, decay_coef)
     
     # ModEx_val= 'lam'
-    # MassA = 3.025*1000  # gauss_2880
+    # MassA = 3.025 * 1000  # gauss_2880
     # JA_qm = 5/2
     # SA_qm = 1/2
     # LA_qm = 2
@@ -172,7 +172,7 @@ def decay_coef():
     # # cascades_anti3
     # baryons = 'cascades_anti3'
     # ModEx_val= 'lam'
-    # MassA = 2.7878*1000 # gauss_2792
+    # MassA = 2.7878 * 1000 # gauss_2792
     # JA_qm = 1/2
     # SA_qm = 1/2
     # LA_qm = 1
@@ -182,7 +182,7 @@ def decay_coef():
     # coef_decay = np.append(coef_decay, decay_coef)
 
     # ModEx_val= 'lam'
-    # MassA = 2.8149*1000 # gauss_2818
+    # MassA = 2.8149 * 1000 # gauss_2818
     # JA_qm = 3/2
     # SA_qm = 1/2
     # LA_qm = 1
@@ -285,18 +285,18 @@ print(round(np.sqrt(sampled), 2), 'sampled root squared')
 
 # #sampled = 424
 # sampled=4
-# print(round(sampled*sampled*param_v[0],  2), sampled, param_v[0] ,  'random(gauss_3000)') #random(gauss_3000)
-# print(round(sampled*sampled*param_v[1],  2), sampled, param_v[1] ,  'random(gauss_3050)') #random(gauss_3050)
-# print(round(sampled*sampled*param_v[2],  2), sampled, param_v[2] ,  'random(gauss_3065)') #random(gauss_3065)
-# print(round(sampled*sampled*param_v[3],  2), sampled, param_v[3] ,  'random(gauss_3090)') #random(gauss_3090)
-# print(round(sampled*sampled*param_v[4],  2), sampled, param_v[4] ,  'random(gauss_2645)') #random(gauss_2645)
-# print(round(sampled*sampled*param_v[5],  2), sampled, param_v[5] ,  'random(gauss_2965)') #random(gauss_2965)
-# print(round(sampled*sampled*param_v[6],  2), sampled, param_v[6] ,  'random(gauss_2455)') #random(gauss_2455)
-# print(round(sampled*sampled*param_v[7],  2), sampled, param_v[7] ,  'random(gauss_2520)') #random(gauss_2520)
-# print(round(sampled*sampled*param_v[8],  2), sampled, param_v[8] ,  'random(gauss_2592)') #random(gauss_2592)
-# print(round(sampled*param_v[9],  2), sampled, param_v[9] ,  'random(gauss_2880)') #random(gauss_2880)
-# print(round(sampled*param_v[10], 2), sampled, param_v[10],  'random(gauss_2792)') #random(gauss_2792)                                                             
-# print(round(sampled*param_v[10], 2), sampled, param_v[11],  'random(gauss_2818)') #random(gauss_2818)
+# print(round(sampled * sampled * param_v[0],  2), sampled, param_v[0] ,  'random(gauss_3000)') #random(gauss_3000)
+# print(round(sampled * sampled * param_v[1],  2), sampled, param_v[1] ,  'random(gauss_3050)') #random(gauss_3050)
+# print(round(sampled * sampled * param_v[2],  2), sampled, param_v[2] ,  'random(gauss_3065)') #random(gauss_3065)
+# print(round(sampled * sampled * param_v[3],  2), sampled, param_v[3] ,  'random(gauss_3090)') #random(gauss_3090)
+# print(round(sampled * sampled * param_v[4],  2), sampled, param_v[4] ,  'random(gauss_2645)') #random(gauss_2645)
+# print(round(sampled * sampled * param_v[5],  2), sampled, param_v[5] ,  'random(gauss_2965)') #random(gauss_2965)
+# print(round(sampled * sampled * param_v[6],  2), sampled, param_v[6] ,  'random(gauss_2455)') #random(gauss_2455)
+# print(round(sampled * sampled * param_v[7],  2), sampled, param_v[7] ,  'random(gauss_2520)') #random(gauss_2520)
+# print(round(sampled * sampled * param_v[8],  2), sampled, param_v[8] ,  'random(gauss_2592)') #random(gauss_2592)
+# print(round(sampled * param_v[9],  2), sampled, param_v[9] ,  'random(gauss_2880)') #random(gauss_2880)
+# print(round(sampled * param_v[10], 2), sampled, param_v[10],  'random(gauss_2792)') #random(gauss_2792)                                                             
+# print(round(sampled * param_v[10], 2), sampled, param_v[11],  'random(gauss_2818)') #random(gauss_2818)
         
         
         

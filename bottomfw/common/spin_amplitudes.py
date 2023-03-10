@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 ---------------------------------------------------------------
  authors: C. A. Vaquera Araujo (vaquera@fisica.ugto.mx)
@@ -8,7 +8,7 @@
 ---------------------------------------------------------------
 """
 import sympy.physics.mechanics as mech
-from sympy import *
+from sympy import  * 
 from sympy.physics.quantum import TensorProduct
 from sympy.physics.matrices import msigma
 import numpy as np
@@ -28,7 +28,7 @@ class SpinAmplitudes():
         index == generator index (1,2,3)
         equivalent j(i)
         """
-        return Rational(1,2)*msigma(index)
+        return Rational(1,2) * msigma(index)
 
     def identity_matrix(self, dim):
         """
@@ -51,18 +51,18 @@ class SpinAmplitudes():
         Method to calculate ladder operators
         """
         if sign > 0:
-            return self.su2_generator(dim1) + I*self.su2_generator(dim2)
+            return self.su2_generator(dim1) + I * self.su2_generator(dim2)
         else:
-            return self.su2_generator(dim1) - I*self.su2_generator(dim2)
+            return self.su2_generator(dim1) - I * self.su2_generator(dim2)
 
     def ladder_operator_tensor(self, sign=1, dim1=1, dim2=2):
         """
         Method to calculate ladder operators tensor
         """
         if sign > 0:
-            return self.tensor_product(dim1) + I*self.tensor_product(dim2)
+            return self.tensor_product(dim1) + I * self.tensor_product(dim2)
         else:
-            return self.tensor_product(dim1) - I*self.tensor_product(dim2)
+            return self.tensor_product(dim1) - I * self.tensor_product(dim2)
    
     def spint_states(self, state_a, state_b, state_c):
         """
@@ -81,7 +81,7 @@ class SpinAmplitudes():
             st = self.spint_states(self.spin_u, self.spin_u, self.spin_u)
             while i > 0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
-                st = v1 / sqrt((transpose(v1)*v1)[0])
+                st = v1 / sqrt((transpose(v1) * v1)[0])
                 i = i - 1
         return st
 
@@ -94,7 +94,7 @@ class SpinAmplitudes():
             st = (self.spint_states(self.spin_u, self.spin_d, self.spin_u) - self.spint_states(self.spin_d, self.spin_u, self.spin_u))/sqrt(2)
             while i > 0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
-                st = v1/sqrt((transpose(v1)*v1)[0])
+                st = v1/sqrt((transpose(v1) * v1)[0])
                 i = i-1
         return st
 
@@ -104,11 +104,11 @@ class SpinAmplitudes():
         """
         if m_proj in [1/2, -1/2]:
             i = 1/2 - m_proj
-            st = (2*self.spint_states(self.spin_u, self.spin_u, self.spin_d) - self.spint_states(self.spin_u, self.spin_d, self.spin_u) -\
+            st = (2 * self.spint_states(self.spin_u, self.spin_u, self.spin_d) - self.spint_states(self.spin_u, self.spin_d, self.spin_u) -\
                 self.spint_states(self.spin_d, self.spin_u, self.spin_u))/sqrt(6)
             while i>0:
                 v1 = self.ladder_operator_tensor(sign=-1) * st
-                st = v1/sqrt((transpose(v1)*v1)[0])
+                st = v1/sqrt((transpose(v1) * v1)[0])
                 i = i - 1
         return st
 

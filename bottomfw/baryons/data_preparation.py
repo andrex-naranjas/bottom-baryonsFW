@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
           H. Garcia-Tecocoatzi
@@ -127,9 +127,9 @@ def hamiltonian_quantum_factors(state, sum_mass, J_tot, S_tot, L_tot, I_tot, SU_
                 omega_mx=0.100843897
                 
         param_v.append(n_ho * omega_ho + n_ho * omega_mx)    # coef infront kprim 
-        param_w.append((S_tot[i] + 1)*S_tot[i]) # coef infront A
-        param_x.append(0.5 * ( (J_tot[i] + 1)*J_tot[i] - (L_tot[i] + 1)*L_tot[i] - (S_tot[i] + 1)*S_tot[i] ) ) # coef infront B
-        param_y.append((I_tot[i] + 1)*I_tot[i]) # coef infront E
+        param_w.append((S_tot[i] + 1) * S_tot[i]) # coef infront A
+        param_x.append(0.5 * ( (J_tot[i] + 1) * J_tot[i] - (L_tot[i] + 1) * L_tot[i] - (S_tot[i] + 1) * S_tot[i] ) ) # coef infront B
+        param_y.append((I_tot[i] + 1) * I_tot[i]) # coef infront E
         param_z.append(SU_tot[i])               # coef infront G
         mass_sum.append(sum_mass[i])            # sum of masses
 
@@ -209,9 +209,9 @@ def hamiltonian_quantum_factors_extended(state, J_tot, S_tot, L_tot, I_tot, SU_t
         param_is_cascade.append(param_is_cascade_i)
         param_is_sigma.append(param_is_sigma_i)
 
-        param_w.append((S_tot[i] + 1)*S_tot[i]) # coef infront A
-        param_x.append(0.5 * ( (J_tot[i] + 1)*J_tot[i] - (L_tot[i] + 1)*L_tot[i] - (S_tot[i] + 1)*S_tot[i] ) ) # coef infront B
-        param_y.append((I_tot[i] + 1)*I_tot[i]) # coef infront E
+        param_w.append((S_tot[i] + 1) * S_tot[i]) # coef infront A
+        param_x.append(0.5 * ( (J_tot[i] + 1) * J_tot[i] - (L_tot[i] + 1) * L_tot[i] - (S_tot[i] + 1) * S_tot[i] ) ) # coef infront B
+        param_y.append((I_tot[i] + 1) * I_tot[i]) # coef infront E
         param_z.append(SU_tot[i])               # coef infront G
 
 
@@ -311,9 +311,9 @@ def hamiltonian_quantum_factors_flavor(state, J_tot, S_tot, L_tot, I_tot, SU_tot
         param_is_lambda.append(param_is_lambda_i)
         param_is_cascade.append(param_is_cascade_i)
 
-        param_w.append((S_tot[i] + 1)*S_tot[i]) # coef infront A
-        param_x.append(0.5 * ( (J_tot[i] + 1)*J_tot[i] - (L_tot[i] + 1)*L_tot[i] - (S_tot[i] + 1)*S_tot[i] ) ) # coef infront B
-        param_y.append((I_tot[i] + 1)*I_tot[i]) # coef infront E
+        param_w.append((S_tot[i] + 1) * S_tot[i]) # coef infront A
+        param_x.append(0.5 * ( (J_tot[i] + 1) * J_tot[i] - (L_tot[i] + 1) * L_tot[i] - (S_tot[i] + 1) * S_tot[i] ) ) # coef infront B
+        param_y.append((I_tot[i] + 1) * I_tot[i]) # coef infront E
         param_z.append(SU_tot[i])               # coef infront G
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 '''
 ---------------------------------------------------------------
  code to obtain uncertainties of quarkonium mass spectrum
@@ -47,8 +47,8 @@ class BottomPlots:
         
     def mass_spectrum_plot(self):
         # timesfont = {'fontname':'Times New Roman'} # check this later
-        # plt.xlabel('xlabel', **timesfont)
-        # plt.ylabel('ylabel', **timesfont)
+        # plt.xlabel('xlabel', * * timesfont)
+        # plt.ylabel('ylabel', * * timesfont)
         baryon_name = du.baryon_name_plots(self.m_baryons)
 
         fig, ax = plt.subplots()
@@ -106,10 +106,10 @@ class BottomPlots:
                 J_EXP_up = (J_EXP['exp_mass']+J_EXP['exp_mass_err']).to_numpy()
                 J_EXP_dn = (J_EXP['exp_mass']-J_EXP['exp_mass_err']).to_numpy()
 
-                x = [x1[pos-1] + off_set*pos, x2[pos-1] + off_set*pos2]
-                vx = np.full(len(J_PRED_dn), (x[1]+x[0])*0.5)
-                vx_exp = np.full(len(J_EXP_dn), (x[1]+x[0])*0.5)
-                if pos!=8: tick_positions = np.append(tick_positions, (x[1]+x[0])*0.5)
+                x = [x1[pos-1] + off_set * pos, x2[pos-1] + off_set * pos2]
+                vx = np.full(len(J_PRED_dn), (x[1]+x[0]) * 0.5)
+                vx_exp = np.full(len(J_EXP_dn), (x[1]+x[0]) * 0.5)
+                if pos!=8: tick_positions = np.append(tick_positions, (x[1]+x[0]) * 0.5)
             
                 # plot predictions
                 plt.plot(vx, J_PRED['mass'], linestyle='None', marker='_',  markersize=28.5, mew=0.95, color='b')                

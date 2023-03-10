@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 ----------------------------------------------------------------
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
@@ -36,18 +36,18 @@ class BottomThreeQuark:
         Method that computes baryon masses according to model
         """
         if not sampled: # here the mass is calculated using the average value of parameters
-            return  self.m1*self.q1_param[i] + self.m2*self.q2_param[i] + self.m3*self.q3_param[i] + \
+            return  self.m1 * self.q1_param[i] + self.m2 * self.q2_param[i] + self.m3 * self.q3_param[i] + \
                 self.omega_harmonic(self.Kp, self.m1, self.m2, self.m3,
                                     self.is_rho_param[i], self.is_lam_param[i],
                                     self.is_omega_param[i], self.is_cascade_param[i], self.is_sigma_param[i], self.v_param[i] ) + \
-                self.A*self.w_param[i]  + self.B*self.x_param[i] + self.E*self.y_param[i] + self.G*self.z_param[i]
+                self.A * self.w_param[i]  + self.B * self.x_param[i] + self.E * self.y_param[i] + self.G * self.z_param[i]
         else: # here the mass is calculated using every single bootstrap simulated parameter
-            return  self.sampled_m1[j]*self.q1_param[i] + self.sampled_m2[j]*self.q2_param[i] + self.sampled_m3[j]*self.q3_param[i] + \
+            return  self.sampled_m1[j] * self.q1_param[i] + self.sampled_m2[j] * self.q2_param[i] + self.sampled_m3[j] * self.q3_param[i] + \
                 self.omega_harmonic(self.sampled_k[j], self.sampled_m1[j], self.sampled_m2[j], self.sampled_m3[j],
                                     self.is_rho_param[i], self.is_lam_param[i],
                                     self.is_omega_param[i], self.is_cascade_param[i], self.is_sigma_param[i], self.v_param[i] ) + \
-                self.sampled_a[j]*self.w_param[i] + self.sampled_b[j]*self.x_param[i] + \
-                self.sampled_e[j]*self.y_param[i] + self.sampled_g[j]*self.z_param[i]
+                self.sampled_a[j] * self.w_param[i] + self.sampled_b[j] * self.x_param[i] + \
+                self.sampled_e[j] * self.y_param[i] + self.sampled_g[j] * self.z_param[i]
         
     def get_omega_harmonic(self, i, j, sampled=False):
         """
@@ -69,9 +69,9 @@ class BottomThreeQuark:
         """
         if(v_input==0.): return 0 # no contribution from harmonic oscillator, i.e. base states
 
-        m_rho = is_rho_input*(is_omega_input*m2_input + is_cascade_input*((m2_input+m3_input)/2) + is_sigma_input*m3_input )
-        m_lam = is_lam_input*(is_omega_input*((3*m2_input*m1_input)/(2*m2_input+m1_input)) + \
-                           is_cascade_input*((1.5*(m2_input+m3_input)*m1_input)/(m1_input+m2_input+m3_input)) + is_sigma_input*((3*m3_input*m1_input)/(2*m3_input+m1_input)))
+        m_rho = is_rho_input * (is_omega_input * m2_input + is_cascade_input * ((m2_input+m3_input)/2) + is_sigma_input * m3_input )
+        m_lam = is_lam_input * (is_omega_input * ((3 * m2_input * m1_input)/(2 * m2_input+m1_input)) + \
+                           is_cascade_input * ((1.5 * (m2_input+m3_input) * m1_input)/(m1_input+m2_input+m3_input)) + is_sigma_input * ((3 * m3_input * m1_input)/(2 * m3_input+m1_input)))
         if(m_lam == 0):
             den_lam = 0            
         else:

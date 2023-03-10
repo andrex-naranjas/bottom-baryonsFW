@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 ---------------------------------------------------------------
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
@@ -63,11 +63,11 @@ def paper_tables_results(baryons, di_three_quark='diquark', decay_width=False,
             decays_df = pd.read_csv(workpath + "/tables/decays_states_" + di_label+baryons + ".csv")
             n_decay_samples = len(decays_df.index)
     else: # merge results from batch jobs
-        all_files = glob.glob(os.path.join(workpath+"/batch_results"+di_label+"/"+baryons+"/mass_states/", "*.csv"))
+        all_files = glob.glob(os.path.join(workpath+"/batch_results"+di_label+"/"+baryons+"/mass_states/", " * .csv"))
         df_from_each_file = (pd.read_csv(f) for f in all_files)
         masses_df = pd.concat(df_from_each_file, ignore_index=True)
         if decay_width and di_three_quark!='diquark':
-            all_files = glob.glob(os.path.join(workpath+"/batch_results"+di_label+"/"+baryons+"/decay_states/", "*.csv"))
+            all_files = glob.glob(os.path.join(workpath+"/batch_results"+di_label+"/"+baryons+"/decay_states/", " * .csv"))
             df_from_each_file = (pd.read_csv(f) for f in all_files)
             decays_df = pd.concat(df_from_each_file, ignore_index=True)
             n_decay_samples = len(decays_df.index)
@@ -86,10 +86,10 @@ def paper_tables_results(baryons, di_three_quark='diquark', decay_width=False,
     #     if n_samples != n_decay_samples and decay_width:
     #         sys.exit('Not the same number of masses of decays!!! something fishy is going on. bye')
     
-    quantile_dn = int(n_samples*0.025)#1587)   #int(np.floor(N*0.1587))
-    quantile_up = int(n_samples*0.975)#8413)+1 #int(np.floor(N*0.8413))    
-    quantile_dn = int(n_samples*0.1587)
-    quantile_up = int(n_samples*0.8413)
+    quantile_dn = int(n_samples * 0.025)#1587)   #int(np.floor(N * 0.1587))
+    quantile_up = int(n_samples * 0.975)#8413)+1 #int(np.floor(N * 0.8413))    
+    quantile_dn = int(n_samples * 0.1587)
+    quantile_up = int(n_samples * 0.8413)
     
     for i in range(n_states):
         sorted_masses = np.sort(np.array(masses_df[str(i)+'_state']))
@@ -142,15 +142,15 @@ def decay_indi_tables_results(baryons, asymmetric=False, prev_params=False, work
         if batch_number is None:
             decay_indi_df = pd.read_csv(workpath+"/tables/decays_indi/decays_state_"+str(i)+"_"+baryons+".csv")
         else: # merge results from batch jobs
-            all_files = glob.glob(os.path.join(workpath+"/batch_results/"+baryons+"/decays_indi/state_"+str(i)+"/", "*.csv"))
+            all_files = glob.glob(os.path.join(workpath+"/batch_results/"+baryons+"/decays_indi/state_"+str(i)+"/", " * .csv"))
             df_from_each_file = (pd.read_csv(f) for f in all_files)
             decay_indi_df = pd.concat(df_from_each_file, ignore_index=True)
             
         n_channels  = len(decay_indi_df.columns)
         n_samples   = len(decay_indi_df.index)
 
-        quantile_dn = int(n_samples*0.025)#1587)   #int(np.floor(N*0.1587))
-        quantile_up = int(n_samples*0.975)#8413)+1 #int(np.floor(N*0.8413))
+        quantile_dn = int(n_samples * 0.025)#1587)   #int(np.floor(N * 0.1587))
+        quantile_up = int(n_samples * 0.975)#8413)+1 #int(np.floor(N * 0.8413))
             
         if(i==0): # print the header only once
             decays_header = ''

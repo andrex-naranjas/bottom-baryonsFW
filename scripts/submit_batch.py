@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 '''
 ---------------------------------------------------------------
  authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
@@ -48,6 +48,6 @@ logpath = '.'
 with open(logpath+'/condor.jdl','w') as jdlfile:
   jdlfile.write(classad)
 
-print("************************ Batch jobs for: ", baryons, " masses and decays  ************************")
+print(" * * * * * * * * * * * * * * * * * * * * * * * * Batch jobs for: ", baryons, " masses and decays  * * * * * * * * * * * * * * * * * * * * * * * * ")
 #print('condor_submit %s/condor.jdl'%logpath)
 system('condor_submit %s/condor.jdl'%logpath)

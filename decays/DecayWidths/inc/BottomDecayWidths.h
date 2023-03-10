@@ -265,7 +265,7 @@ extern "C"{
 			double la_val, double ja_val, double sl_val, double al_val, double ar_val,
 			int baryon, int excMode, int prodDecay){
 
-    BottomDecayWidths* m_decays = new BottomDecayWidths();
+    BottomDecayWidths *  m_decays = new BottomDecayWidths();
     return m_decays->execute(ma_val, mb_val, mc_val, ga_val, sa_val,
 			     la_val, ja_val, sl_val, al_val, ar_val,
 			     baryon, excMode, prodDecay);

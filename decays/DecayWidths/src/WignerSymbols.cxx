@@ -60,13 +60,13 @@ std::vector<double> WignerSymbols::wigner3j(double l2, double l3,
 		// From now on, we check the variation of |alpha(l1)|.
 		double alphaNew, l1(l1min);
 		if (l1min==0.0)
-			alphaNew = -(m3-m2+2.0*wigner3j_auxB(l1,l2,l3,m1,m2,m3))/wigner3j_auxA(1.0,l2,l3,m1,m2,m3);
+			alphaNew = -(m3-m2+2.0 * wigner3j_auxB(l1,l2,l3,m1,m2,m3))/wigner3j_auxA(1.0,l2,l3,m1,m2,m3);
 		else
 			alphaNew = -wigner3j_auxB(l1min,l2,l3,m1,m2,m3)
-							/(l1min*wigner3j_auxA(l1min+1.0,l2,l3,m1,m2,m3));
+							/(l1min * wigner3j_auxA(l1min+1.0,l2,l3,m1,m2,m3));
 
 		// We compute the two-term recursion.
-		thrcof[1] = alphaNew*thrcof[0];
+		thrcof[1] = alphaNew * thrcof[0];
 
 		// If size > 2, we start the forward recursion.
 		if (size>2)
@@ -77,13 +77,13 @@ std::vector<double> WignerSymbols::wigner3j(double l2, double l3,
 			// From now on, we check the variation of |alpha(l1)|.
 			double alphaOld, alphaNew, beta, l1(l1min);
 			if (l1min==0.0)
-				alphaNew = -(m3-m2+2.0*wigner3j_auxB(l1,l2,l3,m1,m2,m3))/wigner3j_auxA(1.0,l2,l3,m1,m2,m3);
+				alphaNew = -(m3-m2+2.0 * wigner3j_auxB(l1,l2,l3,m1,m2,m3))/wigner3j_auxA(1.0,l2,l3,m1,m2,m3);
 			else
 				alphaNew = -wigner3j_auxB(l1min,l2,l3,m1,m2,m3)
-							/(l1min*wigner3j_auxA(l1min+1.0,l2,l3,m1,m2,m3));
+							/(l1min * wigner3j_auxA(l1min+1.0,l2,l3,m1,m2,m3));
 
 			// We compute the two-term recursion.
-			thrcof[1] = alphaNew*thrcof[0];
+			thrcof[1] = alphaNew * thrcof[0];
 
 			// We compute the rest of the recursion.
 			int i = 1;
@@ -97,13 +97,13 @@ std::vector<double> WignerSymbols::wigner3j(double l2, double l3,
 
 				// New coefficients in recursion.
 				alphaNew = -wigner3j_auxB(l1,l2,l3,m1,m2,m3)
-							/(l1*wigner3j_auxA(l1+1.0,l2,l3,m1,m2,m3));
+							/(l1 * wigner3j_auxA(l1+1.0,l2,l3,m1,m2,m3));
 
-				beta = -(l1+1.0)*wigner3j_auxA(l1,l2,l3,m1,m2,m3)
-						/(l1*wigner3j_auxA(l1+1.0,l2,l3,m1,m2,m3));
+				beta = -(l1+1.0) * wigner3j_auxA(l1,l2,l3,m1,m2,m3)
+						/(l1 * wigner3j_auxA(l1+1.0,l2,l3,m1,m2,m3));
 
 				// Application of the recursion.
-				thrcof[i] = alphaNew*thrcof[i-1]+beta*thrcof[i-2];
+				thrcof[i] = alphaNew * thrcof[i-1]+beta * thrcof[i-2];
 
 				// We check if we are overflowing.
 				if (std::fabs(thrcof[i])>srhuge)
@@ -111,9 +111,9 @@ std::vector<double> WignerSymbols::wigner3j(double l2, double l3,
 					std::cout << "We renormalized the forward recursion." << std::endl;
 					for (std::vector<double>::iterator it = thrcof.begin(); it != thrcof.begin()+i; ++it)
 					{
-						//if (std::fabs(*it) < srtiny) *it = 0;
+						//if (std::fabs( * it) < srtiny)  * it = 0;
 						//else
-						*it /= srhuge;
+						 * it /= srhuge;
 					}
 				}
 
@@ -143,8 +143,8 @@ std::vector<double> WignerSymbols::wigner3j(double l2, double l3,
 				// We compute the two-term recursion.
 				l1 = l1max;
 				alphaNew = -wigner3j_auxB(l1,l2,l3,m1,m2,m3)
-								/((l1+1.0)*wigner3j_auxA(l1,l2,l3,m1,m2,m3));
-				thrcof[size-2] = alphaNew*thrcof[size-1];
+								/((l1+1.0) * wigner3j_auxA(l1,l2,l3,m1,m2,m3));
+				thrcof[size-2] = alphaNew * thrcof[size-1];
 
 				// We compute the rest of the backward recursion.
 				int j = size-2;
@@ -156,12 +156,12 @@ std::vector<double> WignerSymbols::wigner3j(double l2, double l3,
 
 					// New coefficients in recursion.
 					alphaNew = -wigner3j_auxB(l1,l2,l3,m1,m2,m3)
-								/((l1+1.0)*wigner3j_auxA(l1,l2,l3,m1,m2,m3));
-					beta = -l1*wigner3j_auxA(l1+1.0,l2,l3,m1,m2,m3)
-									/((l1+1.0)*wigner3j_auxA(l1,l2,l3,m1,m2,m3));
+								/((l1+1.0) * wigner3j_auxA(l1,l2,l3,m1,m2,m3));
+					beta = -l1 * wigner3j_auxA(l1+1.0,l2,l3,m1,m2,m3)
+									/((l1+1.0) * wigner3j_auxA(l1,l2,l3,m1,m2,m3));
 
 					// Application of the recursion.
-					thrcof[j] = alphaNew*thrcof[j+1]+beta*thrcof[j+2];
+					thrcof[j] = alphaNew * thrcof[j+1]+beta * thrcof[j+2];
 
 					// We check if we are overflowing.
 					if (std::fabs(thrcof[j]>srhuge))
@@ -169,22 +169,22 @@ std::vector<double> WignerSymbols::wigner3j(double l2, double l3,
 						std::cout << "We renormalized the backward recursion." << std::endl;
 						for (std::vector<double>::iterator it = thrcof.begin()+j; it != thrcof.end(); ++it)
 						{
-							//if (std::fabs(*it) < srtiny) *it = 0;
+							//if (std::fabs( * it) < srtiny)  * it = 0;
 							//else
-							*it /= srhuge;
+							 * it /= srhuge;
 						}
 					}
 
 				} while (j>(i-2)); // Loop stops when we are at l1=l1mid-1.
 
 				// We now compute the scaling factor for the forward recursion.
-				double lambda = (l1midp1*thrcof[j+2]+l1mid*thrcof[j+1]+l1midm1*thrcof[j])
-										/(l1midp1*l1midp1+l1mid*l1mid+l1midm1*l1midm1);
+				double lambda = (l1midp1 * thrcof[j+2]+l1mid * thrcof[j+1]+l1midm1 * thrcof[j])
+										/(l1midp1 * l1midp1+l1mid * l1mid+l1midm1 * l1midm1);
 
 				// We scale the forward recursion.
 				for (std::vector<double>::iterator it = thrcof.begin(); it != thrcof.begin()+j; ++it)
 				{
-					*it *= lambda;
+					 * it  * = lambda;
 				}
 			}
 		}
@@ -194,18 +194,18 @@ std::vector<double> WignerSymbols::wigner3j(double l2, double l3,
 	double sum = 0.0;
 	for (int k=0;k<size;k++)
 	{
-		sum += (2.0*(l1min+k)+1.0)*thrcof[k]*thrcof[k];
+		sum += (2.0 * (l1min+k)+1.0) * thrcof[k] * thrcof[k];
 	}
 	//std::cout << sum << std::endl;
 
 	//std::cout << "(-1)^(l2-l3-m1): " << pow(-1.0,l2-l3-m1) << " sgn:" << sgn(thrcof[size-1]) << std::endl;
-	double c1 = pow(-1.0,l2-l3-m1)*sgn(thrcof[size-1]);
+	double c1 = pow(-1.0,l2-l3-m1) * sgn(thrcof[size-1]);
 	//std::cout << "c1: " << c1 << std::endl;
 	for (std::vector<double>::iterator it = thrcof.begin(); it != thrcof.end(); ++it)
 	{
-		//std::cout << *it << ", " << c1 << ", ";
-		*it *= c1/sqrt(sum);
-		//std::cout << *it << std::endl;
+		//std::cout <<  * it << ", " << c1 << ", ";
+		 * it  * = c1/sqrt(sum);
+		//std::cout <<  * it << std::endl;
 	}
 	return thrcof;
 }
@@ -274,8 +274,8 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 	// If l1min=l1max, we have an analytical formula.
 	if (size==1)
 	{
-		sixcof[0] = 1.0/sqrt((l1min+l1min+1.0)*(l4+l4+1.0));
-		sixcof[0] *= ((int)std::floor(l2+l3+l5+l6+eps) & 1 ? -1.0 : 1.0);
+		sixcof[0] = 1.0/sqrt((l1min+l1min+1.0) * (l4+l4+1.0));
+		sixcof[0]  * = ((int)std::floor(l2+l3+l5+l6+eps) & 1 ? -1.0 : 1.0);
 	}
 
 	// Otherwise, we start the forward recursion.
@@ -288,14 +288,14 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 		double alphaNew, l1(l1min);
 
 		if (l1min==0)
-			alphaNew = -(l2*(l2+1.0)+l3*(l3+1.0)+l5*(l5+1.0)+l6*(l6+1.0)-2.0*l4*(l4+1.0))/wigner6j_auxA(1.0,l2,l3,l4,l5,l6);
+			alphaNew = -(l2 * (l2+1.0)+l3 * (l3+1.0)+l5 * (l5+1.0)+l6 * (l6+1.0)-2.0 * l4 * (l4+1.0))/wigner6j_auxA(1.0,l2,l3,l4,l5,l6);
 
 		else
 			alphaNew = -wigner6j_auxB(l1,l2,l3,l4,l5,l6)
-							/(l1min*wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6));
+							/(l1min * wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6));
 
 		// We compute the two-term recursion.
-		sixcof[1] = alphaNew*sixcof[0];
+		sixcof[1] = alphaNew * sixcof[0];
 
 		if (size>2)
 		{
@@ -305,14 +305,14 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 			// From now on, we check the variation of |alpha(l1)|.
 			double alphaOld, alphaNew, beta, l1(l1min);
 			if (l1min==0)
-				alphaNew = -(l2*(l2+1.0)+l3*(l3+1.0)+l5*(l5+1.0)+l6*(l6+1.0)-2.0*l4*(l4+1.0))/wigner6j_auxA(1.0,l2,l3,l4,l5,l6);
+				alphaNew = -(l2 * (l2+1.0)+l3 * (l3+1.0)+l5 * (l5+1.0)+l6 * (l6+1.0)-2.0 * l4 * (l4+1.0))/wigner6j_auxA(1.0,l2,l3,l4,l5,l6);
 
 			else
 				alphaNew = -wigner6j_auxB(l1,l2,l3,l4,l5,l6)
-							/(l1min*wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6));
+							/(l1min * wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6));
 
 			// We compute the two-term recursion.
-			sixcof[1] = alphaNew*sixcof[0];
+			sixcof[1] = alphaNew * sixcof[0];
 
 			// We compute the rest of the recursion.
 			unsigned int i = 1;
@@ -326,13 +326,13 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 
 				// New coefficients in recursion.
 				alphaNew = -wigner6j_auxB(l1,l2,l3,l4,l5,l6)
-							/(l1*wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6));
+							/(l1 * wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6));
 
-				beta = -(l1+1.0)*wigner6j_auxA(l1,l2,l3,l4,l5,l6)
-						/(l1*wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6));
+				beta = -(l1+1.0) * wigner6j_auxA(l1,l2,l3,l4,l5,l6)
+						/(l1 * wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6));
 
 				// Application of the recursion.
-				sixcof[i] = alphaNew*sixcof[i-1]+beta*sixcof[i-2];
+				sixcof[i] = alphaNew * sixcof[i-1]+beta * sixcof[i-2];
 
 				// We check if we are overflowing.
 				if (std::fabs(sixcof[i]>srhuge))
@@ -340,7 +340,7 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 					std::cout << "We renormalized the forward recursion." << std::endl;
 					for (std::vector<double>::iterator it = sixcof.begin(); it != sixcof.begin()+i; ++it)
 					{
-						*it /= srhuge;
+						 * it /= srhuge;
 					}
 				}
 
@@ -370,8 +370,8 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 				// We compute the two-term recursion.
 				l1 = l1max;
 				alphaNew = -wigner6j_auxB(l1,l2,l3,l4,l5,l6)
-								/((l1+1.0)*wigner6j_auxA(l1,l2,l3,l4,l5,l6));
-				sixcof[size-2] = alphaNew*sixcof[size-1];
+								/((l1+1.0) * wigner6j_auxA(l1,l2,l3,l4,l5,l6));
+				sixcof[size-2] = alphaNew * sixcof[size-1];
 
 				// We compute the rest of the backward recursion.
 				unsigned int j = size-2;
@@ -383,12 +383,12 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 
 					// New coefficients in recursion.
 					alphaNew = -wigner6j_auxB(l1,l2,l3,l4,l5,l6)
-								/((l1+1.0)*wigner6j_auxA(l1,l2,l3,l4,l5,l6));
-					beta = -l1*wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6)
-								/((l1+1.0)*wigner6j_auxA(l1,l2,l3,l4,l5,l6));
+								/((l1+1.0) * wigner6j_auxA(l1,l2,l3,l4,l5,l6));
+					beta = -l1 * wigner6j_auxA(l1+1.0,l2,l3,l4,l5,l6)
+								/((l1+1.0) * wigner6j_auxA(l1,l2,l3,l4,l5,l6));
 
 					// Application of the recursion.
-					sixcof[j] = alphaNew*sixcof[j+1]+beta*sixcof[j+2];
+					sixcof[j] = alphaNew * sixcof[j+1]+beta * sixcof[j+2];
 
 					// We check if we are overflowing.
 					if (std::fabs(sixcof[j]>srhuge))
@@ -396,20 +396,20 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 						std::cout << "We renormalized the backward recursion." << std::endl;
 						for (std::vector<double>::iterator it = sixcof.begin()+j; it != sixcof.end(); ++it)
 						{
-							*it /= srhuge;
+							 * it /= srhuge;
 						}
 					}
 
 				} while (j>(i-2)); // Loop stops when we are at l1=l1mid-1.
 
 				// We now compute the scaling factor for the forward recursion.
-				double lambda = (l1midp1*sixcof[j+2]+l1mid*sixcof[j+1]+l1midm1*sixcof[j])
-									/(l1midp1*l1midp1+l1mid*l1mid+l1midm1*l1midm1);
+				double lambda = (l1midp1 * sixcof[j+2]+l1mid * sixcof[j+1]+l1midm1 * sixcof[j])
+									/(l1midp1 * l1midp1+l1mid * l1mid+l1midm1 * l1midm1);
 
 				// We scale the forward recursion.
 				for (std::vector<double>::iterator it = sixcof.begin(); it != sixcof.begin()+j; ++it)
 				{
-					*it *= lambda;
+					 * it  * = lambda;
 				}
 			}
 		}
@@ -419,13 +419,13 @@ std::vector<double> WignerSymbols::wigner6j(double l2, double l3,
 	double sum = 0.0;
 	for (unsigned int k=0;k<size;k++)
 	{
-		sum += (2.0*(l1min+k)+1.0)*(2.0*l4+1.0)*sixcof[k]*sixcof[k];
+		sum += (2.0 * (l1min+k)+1.0) * (2.0 * l4+1.0) * sixcof[k] * sixcof[k];
 	}
-	double c1 = pow(-1.0,std::floor(l2+l3+l5+l6+eps))*sgn(sixcof[size-1])/sqrt(sum);
+	double c1 = pow(-1.0,std::floor(l2+l3+l5+l6+eps)) * sgn(sixcof[size-1])/sqrt(sum);
 
 	for (std::vector<double>::iterator it = sixcof.begin(); it != sixcof.end(); ++it)
 	{
-		*it *= c1;
+		 * it  * = c1;
 	}
 	return sixcof;
 }
@@ -462,54 +462,54 @@ double WignerSymbols::wigner6j(double l1, double l2, double l3,
 }
 
 double WignerSymbols::wigner3j_auxA(double l1, double l2, double l3,
-                                               double m1, double /*m2*/, double /*m3*/)
+                                               double m1, double / * m2 * /, double / * m3 * /)
 {
-	double T1 = l1*l1-pow(l2-l3,2.0);
-	double T2 = pow(l2+l3+1.0,2.0)-l1*l1;
-	double T3 = l1*l1-m1*m1;
+	double T1 = l1 * l1-pow(l2-l3,2.0);
+	double T2 = pow(l2+l3+1.0,2.0)-l1 * l1;
+	double T3 = l1 * l1-m1 * m1;
 
-	return sqrt(T1*T2*T3);
+	return sqrt(T1 * T2 * T3);
 }
 
 double WignerSymbols::wigner3j_auxB(double l1, double l2, double l3,
 						double m1, double m2, double m3)
 {
-	double T1 = -(2.0*l1+1.0);
-	double T2 = l2*(l2+1.0)*m1;
-	double T3 = l3*(l3+1.0)*m1;
-	double T4 = l1*(l1+1.0)*(m3-m2);
+	double T1 = -(2.0 * l1+1.0);
+	double T2 = l2 * (l2+1.0) * m1;
+	double T3 = l3 * (l3+1.0) * m1;
+	double T4 = l1 * (l1+1.0) * (m3-m2);
 
-	return T1*(T2-T3-T4);
+	return T1 * (T2-T3-T4);
 }
 
 double WignerSymbols::wigner6j_auxA(double l1, double l2, double l3,
-						double /*l4*/, double l5, double l6)
+						double / * l4 * /, double l5, double l6)
 {
-	double T1 = l1*l1-pow(l2-l3,2.0);
-	double T2 = pow(l2+l3+1.0,2.0)-l1*l1;
-	double T3 = l1*l1-pow(l5-l6,2.0);
-	double T4 = pow(l5+l6+1.0,2.0)-l1*l1;
+	double T1 = l1 * l1-pow(l2-l3,2.0);
+	double T2 = pow(l2+l3+1.0,2.0)-l1 * l1;
+	double T3 = l1 * l1-pow(l5-l6,2.0);
+	double T4 = pow(l5+l6+1.0,2.0)-l1 * l1;
 
-	return sqrt(T1*T2*T3*T4);
+	return sqrt(T1 * T2 * T3 * T4);
 }
 
 double WignerSymbols::wigner6j_auxB(double l1, double l2, double l3,
 						double l4, double l5, double l6)
 {
-	double T0 = 2.0*l1+1.0;
+	double T0 = 2.0 * l1+1.0;
 
-	double T1 = l1*(l1+1.0);
-	double T2 = -l1*(l1+1.0)+l2*(l2+1.0)+l3*(l3+1.0);
+	double T1 = l1 * (l1+1.0);
+	double T2 = -l1 * (l1+1.0)+l2 * (l2+1.0)+l3 * (l3+1.0);
 
-	double T3 = l5*(l5+1.0);
-	double T4 = l1*(l1+1.0)+l2*(l2+1.0)-l3*(l3+1.0);
+	double T3 = l5 * (l5+1.0);
+	double T4 = l1 * (l1+1.0)+l2 * (l2+1.0)-l3 * (l3+1.0);
 
-	double T5 = l6*(l6+1.0);
-	double T6 = l1*(l1+1.0)-l2*(l2+1.0)+l3*(l3+1.0);
+	double T5 = l6 * (l6+1.0);
+	double T6 = l1 * (l1+1.0)-l2 * (l2+1.0)+l3 * (l3+1.0);
 
-	double T7 = 2.0*l1*(l1+1.0)*l4*(l4+1.0);
+	double T7 = 2.0 * l1 * (l1+1.0) * l4 * (l4+1.0);
 
-	return (T0*(T1*T2+T3*T4+T5*T6-T7));
+	return (T0 * (T1 * T2+T3 * T4+T5 * T6-T7));
 }
 
 #endif

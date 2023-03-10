@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# - * - coding: utf-8 - * -
 """
 ---------------------------------------------------------------------------
  Script to obtain uncertainties of heavy baryon mass spectrum via bootstrap
@@ -41,13 +41,13 @@ param_v,param_w,param_x,param_y,param_z,\
 
 
 def model(is_omega, is_cascade, is_sigma, v, w, x, y, z, md1, md2, md3, mb, k, a, b, e, g):
-    return is_omega*md1 + is_cascade*md2 + is_sigma*md3 + mb + \
-        v*k*np.sqrt(1./( (is_omega*md1 + is_cascade*md2 + is_sigma*md3)*mb / ( is_omega*md1 + is_cascade*md2 + is_sigma*md3 + mb ) ) ) +\
-        w*a + x*b + y*e + z*g
+    return is_omega * md1 + is_cascade * md2 + is_sigma * md3 + mb + \
+        v * k * np.sqrt(1./( (is_omega * md1 + is_cascade * md2 + is_sigma * md3) * mb / ( is_omega * md1 + is_cascade * md2 + is_sigma * md3 + mb ) ) ) +\
+        w * a + x * b + y * e + z * g
 
 def least_squares(md1, md2, md3, mb, k, a, b, e, g):
     # y_var_0 = sigma_0 # best sigma_0= 13.63
-    # yvar_0 = y_var_0*np.ones(17)
+    # yvar_0 = y_var_0 * np.ones(17)
     # yvar = y_errors_exp
     # yvar_2 = np.power(yvar_0, 2) + np.power(yvar, 2)
     yvar_2 = 0.001
@@ -56,7 +56,7 @@ def least_squares(md1, md2, md3, mb, k, a, b, e, g):
                    md1, md2, md3, mb, k, a, b, e, g)
     yval_2 = np.power( (pred_m - exp_m), 2)
     return np.sum( np.divide(yval_2, yvar_2) )
-    # return np.sum((pred_m - exp_m)**2 / (yvar_2**2)) #**2
+    # return np.sum((pred_m - exp_m) *  * 2 / (yvar_2 *  * 2)) # *  * 2
 
 def fit(least_squares):
     m = Minuit(least_squares, md1=900, md2=300, md3=250, mb=1400, k=0, a=0, b=0, e=0, g=0)
@@ -95,34 +95,34 @@ rho_ba,rho_ea,rho_ga,rho_eb,rho_gb,rho_ge                  = ([]),([]),([]),([])
 
 # start bootstrap
 start = datetime.datetime.now()
-sigma_model = 10**2 # to be obtained with optimization (Li.Jin)
+sigma_model = 10 *  * 2 # to be obtained with optimization (Li.Jin)
 # gaussian pdf with the measured value and with experimental and model(sigma_model) uncertainties
 # Omega states
-gauss_6061 = sample_gauss(6045.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
-gauss_6316 = sample_gauss(6315.6, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2767), PDG
-gauss_6330 = sample_gauss(6330.3, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3015), PDG
-gauss_6340 = sample_gauss(6339.7, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3044), PDG
-gauss_6350 = sample_gauss(6349.8, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3051), PDG
+gauss_6061 = sample_gauss(6045.2, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
+gauss_6316 = sample_gauss(6315.6, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2767), PDG
+gauss_6330 = sample_gauss(6330.3, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3015), PDG
+gauss_6340 = sample_gauss(6339.7, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3044), PDG
+gauss_6350 = sample_gauss(6349.8, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3051), PDG
 # Cascade b sextet
-gauss_5935 = sample_gauss(5935.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2461), PDG Average
-gauss_5953 = sample_gauss(5953.8, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2796), PDG Average
-gauss_6328 = sample_gauss(6227.9, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2832), PDG Average
+gauss_5935 = sample_gauss(5935.0, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2461), PDG Average
+gauss_5953 = sample_gauss(5953.8, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2796), PDG Average
+gauss_6328 = sample_gauss(6227.9, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2832), PDG Average
 # Sigma b
-gauss_5813 = sample_gauss(5813.1, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2453), PDG Average
-gauss_5837 = sample_gauss(5837.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2517), PDG Average
-gauss_6097 = sample_gauss(6096.9, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2819), PDG Average
+gauss_5813 = sample_gauss(5813.1, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2453), PDG Average
+gauss_5837 = sample_gauss(5837.0, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2517), PDG Average
+gauss_6097 = sample_gauss(6096.9, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2819), PDG Average
 # Lambda b
-gauss_5617 = sample_gauss(5619.6, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
-gauss_5912 = sample_gauss(5912.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
-gauss_5920 = sample_gauss(5920.1, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
-gauss_6146 = sample_gauss(6146.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
-gauss_6152 = sample_gauss(6152.5, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
-gauss_6070 = sample_gauss(6072.3, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
+gauss_5617 = sample_gauss(5619.6, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
+gauss_5912 = sample_gauss(5912.2, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
+gauss_5920 = sample_gauss(5920.1, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
+gauss_6146 = sample_gauss(6146.2, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
+gauss_6152 = sample_gauss(6152.5, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
+gauss_6070 = sample_gauss(6072.3, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
 # Cascades anti-3-plet
-gauss_5794 = sample_gauss(5794.5, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2570), PDG Average
-gauss_6100 = sample_gauss(6100.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2635), PDG Average
-gauss_6327 = sample_gauss(6327.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2934), LHCb PhysRevLett
-gauss_6333 = sample_gauss(6333.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2941), LHCb PhysRevLett
+gauss_5794 = sample_gauss(5794.5, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2570), PDG Average
+gauss_6100 = sample_gauss(6100.0, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2635), PDG Average
+gauss_6327 = sample_gauss(6327.0, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2934), LHCb PhysRevLett
+gauss_6333 = sample_gauss(6333.0, np.power((0.00 *  * 2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2941), LHCb PhysRevLett
 
 # plug here the sigma_0 optimization lines from data_utils.py
 
@@ -314,7 +314,7 @@ print(round(sampled_md2.mean()), "md2 cascade")
 print(round(sampled_md3.mean()), "md3 sigma, lambda")
 print(round(sampled_mb.mean()), "mb")
 
-print("K", pow(sampled_k.mean(), 2)/(1000**3))
+print("K", pow(sampled_k.mean(), 2)/(1000 *  * 3))
 print("A", sampled_a.mean())
 print("B", sampled_b.mean())
 print("E", sampled_e.mean())
