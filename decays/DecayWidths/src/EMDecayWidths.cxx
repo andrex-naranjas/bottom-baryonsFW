@@ -672,5 +672,33 @@ double EMDecayWidths::T3l(double k_value, double alpha_lam, double alpha_rho,
   return (-1.0) * p_imag * std::sqrt(2/3) * alpha_lam * value;
 }
 
+//T1r
+double EMDecayWidths::T1r(double k_value, double alpha_lam, double alpha_rho,
+			  double MB, double ML, double thetak, double phik, double mLrA){
+  double value1 = ORBITALSPLIT_U1_1r_m1_1r_m1(k_value, alpha_lam, alpha_rho, MB, ML, phik, thetak);
+  double value2 = ORBITALSPLIT_U1_2r_m0_GS(k_value, alpha_lam, alpha_rho, MB, ML, phik, thetak);
+  double value3 = SPINFLIP_U1_GS_GS(k_value, alpha_lam, alpha_rho,  MB, ML);
+  double value4 = ORBITALSPLIT_U1_1nr_m0_GS(k_value, alpha_lam, alpha_rho, MB, ML, thetak);
+  double value = value1 + std::sqrt(1/3) * value2 +  value3 +  std::sqrt(2/3) * value4;
+  return p_imag * std::sqrt(1/2) * alpha_rho * value;
+}
+
+//T2r
+double EMDecayWidths::T2r(double k_value, double alpha_lam, double alpha_rho,
+			  double MB, double ML, double thetak, double phik, double mLrA){
+  double value1 = ORBITALSPLIT_U2_1r_m1_1r_m1(k_value, alpha_lam, alpha_rho, MB, ML, phik, thetak);
+  double value2 = ORBITALSPLIT_U2_2r_m0_GS(k_value, alpha_lam, alpha_rho, MB, ML, phik, thetak);
+  double value3 = SPINFLIP_U2_GS_GS(k_value, alpha_lam, alpha_rho,  MB, ML);
+  double value4 = ORBITALSPLIT_U2_1nr_m0_GS(k_value, alpha_lam, alpha_rho, MB, ML, thetak);
+  double value = value1 + std::sqrt(1/3) * value2 +  value3 +  std::sqrt(2/3) * value4;
+  return (-1.0) * p_imag * std::sqrt(1/2) * alpha_rho * value;
+}
+
+//T3r
+double EMDecayWidths::T3r(double k_value, double alpha_lam, double alpha_rho,
+			  double MB, double ML, double thetak, double phik, double mLrA){
+   double value = 0;
+  return value;
+}
 
 #endif
