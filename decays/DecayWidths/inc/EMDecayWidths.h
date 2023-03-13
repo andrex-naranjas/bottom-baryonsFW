@@ -106,6 +106,17 @@ private:
   virtual double ORBITALSPLIT_U2_1r_m0_ll_m0(double k_value, double alpha_lam, double alpha_rho,
 						    double MB, double ML, double thetak, double phik);
 
+  //(13.03.2023)
+  virtual double ORBITALSPLIT_U1_2l_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U2_2l_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U3_2l_m0_GS(double k_value, double alpha_lam, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U1_2r_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U2_2r_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U1_2nl_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U2_1nl_m0_GS_2r_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U3_1nl_m0_GS(double k_value, double alpha_lam, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U1_1nr_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML, double thetak);
+  virtual double ORBITALSPLIT_U2_1nr_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML, double thetak);
 };
 
 
