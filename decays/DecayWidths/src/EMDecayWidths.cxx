@@ -536,3 +536,14 @@ double EMDecayWidths::ORBITALSPLIT_U2_1r_m0_ll_m0(double k_value, double alpha_l
   double value = value1/value2;
   return -Sqrt(1.5) * value;
 }
+
+//Tensor operators
+//T1l
+double EMDecayWidths::T1l(double k_value, double alpha_lam, double alpha_rho,
+						  double MB, double ML, double thetak, double phik, double mLlA){
+
+  double value1 = ORBITALSPLIT_U1_1l_m1_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak);
+  double value2 = ORBITALSPLIT_U1_1l_m1_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double MB, double ML, double phik, double thetak);
+  double value = value1/value2;
+  return -Sqrt(1.5) * value;
+}
