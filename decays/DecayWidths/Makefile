@@ -9,11 +9,11 @@ LDFLAGS= -shared
 
 TARGET = libbottomdecay.so
 
-SRC = $(wildcard src/ * .cxx)
+SRC = $(wildcard src/*.cxx)
 
 OBJECTS = $(subst src,obj,$(patsubst %.cxx,%.o,$(SRC)))
 
-HEADERS = $(wildcard $(INCDIR)/ * .h)
+HEADERS = $(wildcard $(INCDIR)/*.h)
 
 .PHONY: all clean
 

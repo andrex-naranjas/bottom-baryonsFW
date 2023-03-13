@@ -39,6 +39,10 @@ private:
 
   int baryonFlag=0;
   int decayProd=0;
+  double E = 2.718281828;
+
+  // check later if still needed
+  int p_imag = 1;
 
   virtual double ALPHA_MES(int diagram);
 
