@@ -133,12 +133,23 @@ class EMDecayWidths{
   virtual double ORBITALSPLIT_U1_1nr_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML);
   virtual double ORBITALSPLIT_U2_1nr_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML);
 
+  virtual double ORBITALSPLIT_U1_1nl_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML);
+
+  virtual double ORBITALSPLIT_U2_1nl_m0_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML);
+
   // Tensors
   //T1l
   virtual double T1l(double k_value, double alpha_lam, double alpha_rho,
 		     double MB, double ML, double thetak, double phik, double mLlA);
-
-
+  virtual double T2l(double k_value, double alpha_lam, double alpha_rho,
+			    double MB, double ML, double thetak, double phik, double mLlA);
+  virtual double T3l(double k_value, double alpha_lam, double alpha_rho,
+			    double MB, double ML, double thetak, double phik, double mLlA);
+  virtual double T1r(double k_value, double alpha_lam, double alpha_rho,
+			    double MB, double ML, double thetak, double phik, double mLrA);
+  virtual double T2r(double k_value, double alpha_lam, double alpha_rho,
+			    double MB, double ML, double thetak, double phik, double mLrA);
+  virtual double T3r();
 };
 
 
