@@ -87,6 +87,24 @@ double EMDecayWidths::DecayWidth(double flav_coup, double gamma, double fi2_valu
   return decayWidth * GeV;
 }
 
+std::vector<double> EMDecayWidths::getMomentumProjections(double j_angular){
+  //gets the m projections "m_projection" for a given angular momentum "j_angular"
+  std::vector<double> angularProjections; angularProjections.clear();
+  if(j_angular==0.){ angularProjections.push_back(0); return angularProjections;}
+  
+  double m_projection = (-1.0)*j_angular;
+  do{
+    angularProjections.push_back(m_projection);
+    m_projection++;
+  }while(m_projection<=j_angular);
+  
+  return angularProjections;
+}
+
+int EMDecayWidths::KroneckerDelta(double i, double j){
+  if(i==j) return 1;
+  else return 0;
+}
 
 double EMDecayWidths::ANGULAR_SUM(double alpha_rho, double alpha_lam,
 				  double alpha_mes, double k_value){
@@ -675,7 +693,7 @@ double EMDecayWidths::T3l(double k_value, double alpha_lam, double alpha_rho,
 //T1r
 double EMDecayWidths::T1r(double k_value, double alpha_lam, double alpha_rho,
 			  double MB, double ML, double thetak, double phik, double mLrA){
-  double value1 = ORBITALSPLIT_U1_1r_m1_1r_m1(k_value, alpha_lam, alpha_rho, MB, ML, phik, thetak);
+  double value1 = 1;//ORBITALSPLIT_U1_1r_m1_1r_m1(k_value, alpha_lam, alpha_rho, MB, ML, phik, thetak);
   double value2 = ORBITALSPLIT_U1_2r_m0_GS(k_value, alpha_lam, alpha_rho, MB, ML, thetak);
   double value3 = SPINFLIP_U1_GS_GS(k_value, alpha_lam, alpha_rho, MB, ML);
   double value4 = ORBITALSPLIT_U1_1nr_m0_GS(k_value, alpha_lam, alpha_rho, MB, ML);
