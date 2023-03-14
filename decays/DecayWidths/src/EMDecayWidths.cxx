@@ -532,7 +532,7 @@ double EMDecayWidths::ORBITALSPLIT_U3_1r_m1m_1r_m1m(double k_value, double alpha
 
 
 //U1 1rho->1lam
-double EMDecayWidths::ORBITALSPLIT_U1_1r_m0_ll_m0(double k_value, double alpha_lam, double alpha_rho,
+double EMDecayWidths::ORBITALSPLIT_U1_1r_m0_1l_m0(double k_value, double alpha_lam, double alpha_rho,
 						  double MB, double ML, double thetak, double phik){
   // double value1 = std::exp(-std::pow(k_value,2)/(8. * std::pow(alpha_rho,2)) -
   // 			   (3 * std::pow(k_value,2) * std::pow(MB,2))/(8. * std::pow(alpha_lam,2) * std::pow(MB + 2 * ML,2)) + Complex(0,1) * phik);
@@ -547,7 +547,7 @@ double EMDecayWidths::ORBITALSPLIT_U1_1r_m0_ll_m0(double k_value, double alpha_l
 
 
 //U2 1rho->1lam
-double EMDecayWidths::ORBITALSPLIT_U2_1r_m0_ll_m0(double k_value, double alpha_lam, double alpha_rho,
+double EMDecayWidths::ORBITALSPLIT_U2_1r_m0_1l_m0(double k_value, double alpha_lam, double alpha_rho,
 						  double MB, double ML, double thetak, double phik){
 
   // double value1 = std::exp(-(std::pow(k_value,2) * (std::pow(alpha_rho,-2) +

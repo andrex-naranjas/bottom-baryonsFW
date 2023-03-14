@@ -104,9 +104,9 @@ class EMDecayWidths{
   virtual double ORBITALSPLIT_U3_1r_m1_1r_m1(double k_value, double alpha_lam, double MB, double ML);
   virtual double ORBITALSPLIT_U3_1r_m0_1r_m0(double k_value, double alpha_lam, double MB, double ML);
   virtual double ORBITALSPLIT_U3_1r_m1m_1r_m1m(double k_value, double alpha_lam, double MB, double ML);
-  virtual double ORBITALSPLIT_U1_1r_m0_ll_m0(double k_value, double alpha_lam, double alpha_rho,
+  virtual double ORBITALSPLIT_U1_1r_m0_1l_m0(double k_value, double alpha_lam, double alpha_rho,
 					     double MB, double ML, double thetak, double phik);
-  virtual double ORBITALSPLIT_U2_1r_m0_ll_m0(double k_value, double alpha_lam, double alpha_rho,
+  virtual double ORBITALSPLIT_U2_1r_m0_1l_m0(double k_value, double alpha_lam, double alpha_rho,
 					     double MB, double ML, double thetak, double phik);
 
 
