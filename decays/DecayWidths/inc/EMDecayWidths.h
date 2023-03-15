@@ -2,6 +2,8 @@
 #ifndef EMECAYWIDTHS_H
 #define EMDECAYWIDTHS_H
 
+#include "WignerSymbols.h"
+
 #include <string>
 #include <vector>
 
@@ -47,6 +49,9 @@ class EMDecayWidths{
 
   virtual int KroneckerDelta(double i, double j);
   virtual std::vector<double> getMomentumProjections(double j_angular);
+  virtual double ClebshGordan(WignerSymbols *m_wigner,
+			      double l1, double l2, double l3,
+			      double m1, double m2, double m3);
   virtual double ANGULAR_SUM(double alpha_rho, double alpha_lam,
 			     double alpha_mes, double k_value);
   virtual double DecayWidth(double decay, double gamma, double fi2_value, double angular_sum_value);
