@@ -82,11 +82,12 @@ double EMDecayWidths::execute(double ma_val, double mb_val, double sa_val,
   k_value = 0.249748;
   alpha_lam = 0.524626;
   alpha_rho = 0.413255;
-  mbottom = 6.190/1000;
-  mlight = 5.935/1000;
+  mbottom = 4.928;
+  mlight = 0.382;
 
 
   double tensor1 = T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  double tensor2 = T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
 
   std::cout<<tensor1<<std::endl;
 
@@ -300,9 +301,9 @@ double EMDecayWidths::SPINFLIP_U3_1r_m1m_GS(double k_value, double alpha_lam, do
 // ORBIT-SPLIT INTEGRALS
 // U1_1lambda-1lambda
 double EMDecayWidths::ORBITALSPLIT_U1_1l_m1_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double mbottom, double mlight, double phik, double thetak){
-  double value1 = (-1.0) * std::pow(k_value, 2) / 8 * std::pow(alpha_rho, 2);
-  double value2 = (-3.0) * std::pow(mbottom, 2) * std::pow(k_value, 2) / 8 * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
-  double value = (value2 * std::pow(std::sin(thetak), 2) + 1) * k_value * std::exp(value1 + value2)/ (4 * alpha_rho);
+  double value1 = (-1.0) * std::pow(k_value, 2) / (8 * std::pow(alpha_rho, 2));
+  double value2 = (-3.0) * std::pow(mbottom, 2) * std::pow(k_value, 2) / (8 * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = std::exp(value1 + value2) * (1 - value2 * std::pow(std::sin(thetak), 2)) ;
   return value;
 }
 
@@ -693,9 +694,10 @@ double EMDecayWidths::T2l(double k_value, double alpha_lam, double alpha_rho,
 			  double mbottom, double mlight, double thetak, double phik, double mLlA){
   double value1 = ORBITALSPLIT_U2_1l_m1_1l_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak);
   double value2 = ORBITALSPLIT_U2_2l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak);
-  double value3 = SPINFLIP_U2_GS_GS(k_value, alpha_lam, alpha_rho,  mbottom, mlight);
+  double value3 = SPINFLIP_U2_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
   double value4 = ORBITALSPLIT_U2_1nl_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
   double value = value1 + std::sqrt(1/3) * value2 +  value3 +  std::sqrt(2/3) * value4;
+  std::cout<<value1<<"   "<<value2<<"   "<<value3<<"   "<<value4<<"   "<<"   "<<value<<std::endl;
   return p_imag * std::sqrt(1/6) * alpha_lam * value;
 }
 
