@@ -12,32 +12,35 @@ class EMDecayWidths{
  public:
   EMDecayWidths();
   virtual ~EMDecayWidths();
-  virtual double execute(double ma_val, double mb_val, double sa_val,
-			 double la_val, double ja_val, double sl_val, double al_val, double ar_val,
+  virtual double execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
+			 double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
+			 double al_val, double ar_val,
 			 double mbottom_val, double mlight_val, int baryon, int excMode, int prodDecay);
+
  private:
   double MA; double MB; double MC; double mbottom; double mlight;
   int modeExcitation=0;
   double pi_val = 3.1415926536;
-  double JA = 0.5;   std::vector<double> mJA;
-  double LA = 1.;    std::vector<double> mLA;
-  double L1 = 0.;    std::vector<double> mL1;
-  double L2 = 0.;    std::vector<double> mL2;  
-  double SA = 0.5;   std::vector<double> mSA;
-  double SB = 0.5;   std::vector<double> mSB;
-  double SC = 0;     std::vector<double> mSC;
-  double slight = 0; std::vector<double> m12;
-  std::vector<double> m23;
-  double slightf = 1;std::vector<double> m24;
-  double s = 1.0;    std::vector<double> m;
-  double s1 = 0.5;   std::vector<double> m1;
-  double s2 = 0.5;   std::vector<double> m2;
-  double s3 = 0.5;   std::vector<double> m3;
-  double s4 = 0.5;   std::vector<double> m4;
-  double s5 = 0.5;   std::vector<double> m5;
 
-  double LB = 0.0;  std::vector<double> mLB;
-  double JB = 0.0;  std::vector<double> mJB;
+  double L   = 0.0;  std::vector<double> mL;
+
+  double SA  = 0.0;  std::vector<double> mSA;
+  double JA  = 0.0;  std::vector<double> mJA;
+  double SlA = 0.0;  std::vector<double> mSlA;
+  double LA  = 0.0;  std::vector<double> mLA;
+  double LlA = 0.0;  std::vector<double> mLlA;
+  double LrA = 0.0;  std::vector<double> mLrA;
+
+  double SB  = 0.0;  std::vector<double> mSB;
+  double JB  = 0.0;  std::vector<double> mJB;
+  double SlB = 0.0;  std::vector<double> mSlB;
+  double LB  = 0.0;  std::vector<double> mLB;
+  double LlB = 0.0;  std::vector<double> mLlB;
+  double LrB = 0.0;  std::vector<double> mLrB;
+
+  double S1  = 0.5;  std::vector<double> mS1;
+  double S2  = 0.5;  std::vector<double> mS2;
+  double S3  = 0.5;  std::vector<double> mS3;
 
   int baryonFlag=0;
   int decayProd=0;
@@ -47,9 +50,9 @@ class EMDecayWidths{
 
   virtual int KroneckerDelta(double i, double j);
   virtual std::vector<double> getMomentumProjections(double j_angular);
-  virtual double ClebshGordan(WignerSymbols *m_wigner,
-			      double l1, double l2, double l3,
-			      double m1, double m2, double m3);
+  virtual double ClebschGordan(WignerSymbols *m_wigner,
+			       double l1, double l2, double l3,
+			       double m1, double m2, double m3);
   virtual double ANGULAR_SUM(double alpha_rho, double alpha_lam, double k_value);
   virtual double DecayWidth(double decay, double fi2_value, double angular_sum_value);
   virtual double EB(double MB, double K);
@@ -153,13 +156,14 @@ class EMDecayWidths{
 
 //to talk to python
 extern "C"{
-  double electro_execute(double ma_val, double mb_val, double sa_val,
-			 double la_val, double ja_val, double sl_val, double al_val, double ar_val,
+  double electro_execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
+			 double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
+			 double al_val, double ar_val,
 			 double mbottom_val, double mlight_val, int baryon, int excMode, int prodDecay){
-
     EMDecayWidths *m_decays = new EMDecayWidths();
-    return m_decays->execute(ma_val, mb_val, sa_val,
-			     la_val, ja_val, sl_val, al_val, ar_val,
+    return m_decays->execute(ma_val, sa_val, ja_val, la_val, sla_val, lla_val, lra_val,
+			     mb_val, sb_val, jb_val, lb_val, slb_val, llb_val, lrb_val,
+			     al_val, ar_val,
 			     mbottom_val, mlight_val, baryon, excMode, prodDecay);
   }
 }

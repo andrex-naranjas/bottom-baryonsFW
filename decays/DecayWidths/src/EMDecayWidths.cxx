@@ -19,8 +19,9 @@ EMDecayWidths::EMDecayWidths()
 
 EMDecayWidths::~EMDecayWidths(){}
 
-double EMDecayWidths::execute(double ma_val, double mb_val, double sa_val,
-			      double la_val, double ja_val, double sl_val, double al_val, double ar_val,
+double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
+			      double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
+			      double al_val, double ar_val,
 			      double mbottom_val, double mlight_val, int baryon, int excMode, int prodDecay){  
   // decay product masses
   MA = ma_val;
@@ -36,34 +37,30 @@ double EMDecayWidths::execute(double ma_val, double mb_val, double sa_val,
   modeExcitation = excMode;
   decayProd  = prodDecay;
   double alpha_rho = 0.,alpha_lam = 0.,flav_coup= 0.;
-  double slf_val=0., sb_val=0., lb_val=0., jb_val=0.;
-  double l1_val=0., l2_val=0.;
 
   alpha_rho = ar_val;
   alpha_lam = al_val;
 
   //fetch quantum numbers and projections
-  SA = sa_val;      mSA = getMomentumProjections(SA);
-  LA = la_val;      mLA = getMomentumProjections(LA);
-  JA = ja_val;      mJA = getMomentumProjections(JA);
-  SB = sb_val;      mSB = getMomentumProjections(SB);
-  LB = lb_val;      mLB = getMomentumProjections(LB);
-  JB = jb_val;      mJB = getMomentumProjections(JB);
-  
-  slight = sl_val;  m12 = getMomentumProjections(slight);
-  slight = sl_val;  m23 = getMomentumProjections(slight);
-  slightf= slf_val; m24 = getMomentumProjections(slightf);
-  L1 = l1_val;      mL1 = getMomentumProjections(L1);
-  L2 = l2_val;      mL2 = getMomentumProjections(L2);
+  L   = 0;  mL = getMomentumProjections(L); //check if this is always the case
 
-  mSC = getMomentumProjections(SC);  
-  //values are the same for all states (at least for now!)
-  s  = 1.0;   m  = getMomentumProjections(s);
-  s1 = 0.5;   m1 = getMomentumProjections(s1);
-  s2 = 0.5;   m2 = getMomentumProjections(s2);
-  s3 = 0.5;   m3 = getMomentumProjections(s3);
-  s4 = 0.5;   m4 = getMomentumProjections(s4);
-  s5 = 0.5;   m5 = getMomentumProjections(s5);
+  SA  = sa_val;    mSA  = getMomentumProjections(SA);
+  JA  = ja_val;    mJA  = getMomentumProjections(JA);
+  SlA = sla_val;   mSlA = getMomentumProjections(SlA);
+  LA  = la_val;    mLA  = getMomentumProjections(LA);
+  LlA = lla_val;   mLlA = getMomentumProjections(LlA);
+  LrA = lra_val;   mLrA = getMomentumProjections(LrA);
+
+  SB  = sb_val;    mSB  = getMomentumProjections(SB);
+  JB  = jb_val;    mJB  = getMomentumProjections(JB);
+  SlB = slb_val;   mSlB = getMomentumProjections(SlB);
+  LB  = lb_val;    mLB  = getMomentumProjections(LB);
+  LlB = llb_val;   mLlB = getMomentumProjections(LlB);
+  LrB = lrb_val;   mLrB = getMomentumProjections(LrB);
+
+  S1  = 0.5;       mS1  = getMomentumProjections(S1);
+  S2  = 0.5;       mS2  = getMomentumProjections(S2);
+  S3  = 0.5;       mS3  = getMomentumProjections(S3);
 
   double k_value; k_value = K(MA, MB);
   double EB_value = EB(MB, k_value);
@@ -127,16 +124,45 @@ double EMDecayWidths::FI2(double EB, double MA, double k_value){
   return value;
 }
 
-double EMDecayWidths::ClebshGordan(WignerSymbols *m_wigner,
-				   double l1, double l2, double l3,
-				   double m1, double m2, double m3){
+double EMDecayWidths::ClebschGordan(WignerSymbols *m_wigner,
+				    double l1, double l2, double l3,
+				    double m1, double m2, double m3){
   double coef = std::pow(-1.0, m2-m1-m3) * std::pow(2*l3 + 1, 0.5);
   double three_j = m_wigner->wigner3j(l1, l2, l3, m1, m2, (-1.0)*m3);
   return coef * three_j;
 }
 
-double EMDecayWidths::ANGULAR_SUM(double alpha_rho, double alpha_lam, double k_value){  
+double EMDecayWidths::ANGULAR_SUM(double alpha_rho, double alpha_lam, double k_value){
+
   WignerSymbols  *m_wigner = new WignerSymbols();
+  double dummy = 0;
+
+  double innerSum = 0;
+
+  for(int iML = 0; iML<(int)mL.size(); iML++)
+    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+	for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+	  for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
+	    for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+	      for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
+		for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
+		  for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+		    for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
+		      dummy = std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1)) * ClebschGordan(m_wigner, L,SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
+			ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), mJA.at(iMJA))*
+			ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
+			ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1) - 1, mS2.at(iMS2), mSlB.at(iMSlB))*
+			ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
+			ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+		      innerSum+=dummy;
+		    }
+  
+
+
+
+
+
   return 1.0;
 }
 
