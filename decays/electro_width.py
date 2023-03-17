@@ -24,7 +24,7 @@ class ElectroWidths:
         """
         Method that calls the wrapper and sums the individual decay widths
         """
-        MassA = massA #/1000.0
+        MassA = massA/1000.0
         SA_qm = SA_val
         LA_qm = LA_val
         JA_qm = JA_val
@@ -37,17 +37,18 @@ class ElectroWidths:
         
         alpha_lam = self.alphas(k_prim, m_lam)
         alpha_rho = self.alphas(k_prim, m_rho)
+        print(alpha_lam, alpha_rho)
 
-        alpha_lam = 1
-        alpha_rho = 1
+        mbottom = m1/1000
+        mlight = 0.5*(m2 + m3)/1000
 
+        # these depend on each decay
         MassB = 5.935
         excMode = 1
         prodDecay = 1
-
         decay_value = self.m_width.electro_width(MassA, MassB,
                                                  SA_qm, LA_qm, JA_qm, SL_qm, alpha_lam, alpha_rho,
-                                                 m1, m2, baryon, excMode, prodDecay)
+                                                 mbottom, mlight, baryon, excMode, prodDecay)
 
 
         return decay_value
@@ -75,21 +76,20 @@ class ElectroWidths:
         """
         value1 = (np.sqrt(3./m_lam_rho)) * k_prim
         value2 = value1*m_lam_rho
-        return np.sqrt(value2)/1000. # transform from GeV -> MeV
+        return np.sqrt(value2)/1000. # transform from MeV -> GeV
 
 
 test_electro = ElectroWidths()
-m1 = 4.928
-m2 = 0.299
-m3 = 0.465
-massA = 6.190
-k_prim = 1
+m1 = 4.928 * 1000
+m2 = 0.299 * 1000
+m3 = 0.465 * 1000
+massA = 6.190 * 1000
+k_prim = 5044.8
 SA_val = 0.5
 LA_val = 1
 JA_val = 0.5
 SL_val = 1
 ModEx_val = 1
 baryons = "cascades"
-
 
 value = test_electro.total_decay_width(baryons, k_prim, massA, SA_val, LA_val, JA_val, SL_val, ModEx_val, bootstrap=False, m1=m1, m2=m2, m3=m3)
