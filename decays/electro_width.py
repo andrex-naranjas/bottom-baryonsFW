@@ -20,15 +20,20 @@ class ElectroWidths:
         # self.fetch_decay_masses(bootstrap)
         self.channel_widths_vector = []
 
-    def total_decay_width(self, baryons, k_prim, massA, SA_val, LA_val, JA_val, SL_val, ModEx_val, bootstrap=False, m1=0, m2=0, m3=0):
+
+    def total_decay_width(self, baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
+                          ModEx_val, bootstrap=False, m1=0, m2=0, m3=0):
         """
         Method that calls the wrapper and sums the individual decay widths
         """
         MassA = massA/1000.0
         SA_qm = SA_val
-        LA_qm = LA_val
         JA_qm = JA_val
-        SL_qm = SL_val
+        LA_qm = LA_val
+        SlA_qm = SlA_val
+        LlA_qm = LlA_val
+        LrA_qm = LrA_val
+
         baryon= 0 # self.baryon_flag(baryons)
         ModEx = 0 # self.ModEx_flag(ModEx_val)
         nChannels = 0 # self.n_channels(baryons)
@@ -37,21 +42,34 @@ class ElectroWidths:
         
         alpha_lam = self.alphas(k_prim, m_lam)
         alpha_rho = self.alphas(k_prim, m_rho)
-        print(alpha_lam, alpha_rho)
+        # print(alpha_lam, alpha_rho)
 
         mbottom = m1/1000
         mlight = 0.5*(m2 + m3)/1000
 
         # these depend on each decay
         MassB = 5.935
+        SB_qm = 0
+        JB_qm = 0
+        LB_qm = 0
+        SlB_qm = 0
+        LlB_qm = 0
+        LrB_qm = 0
+        
+
+        SB_qm = 0.5
+        JB_qm = 0.5
+        SlB_qm = 0.0
+
+
         excMode = 1
         prodDecay = 1
-        decay_value = self.m_width.electro_width(MassA, MassB,
-                                                 SA_qm, LA_qm, JA_qm, SL_qm, alpha_lam, alpha_rho,
+        decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                                                 MassB, SB_qm, JB_qm, LB_qm, SlB_qm, LlB_qm, LrB_qm,
+                                                 alpha_lam, alpha_rho,
                                                  mbottom, mlight, baryon, excMode, prodDecay)
-
-
         return decay_value
+
 
     def reduced_masses(self, baryons, m1_input, m2_input, m3_input):
         """
@@ -85,11 +103,15 @@ m2 = 0.299 * 1000
 m3 = 0.465 * 1000
 massA = 6.190 * 1000
 k_prim = 5044.8
-SA_val = 0.5
+SA_val = 1.5
+JA_val = 1.5
 LA_val = 1
-JA_val = 0.5
-SL_val = 1
+SlA_val = 1.
+LlA_val = 0
+LrA_val = 0
 ModEx_val = 1
 baryons = "cascades"
 
-value = test_electro.total_decay_width(baryons, k_prim, massA, SA_val, LA_val, JA_val, SL_val, ModEx_val, bootstrap=False, m1=m1, m2=m2, m3=m3)
+
+value = test_electro.total_decay_width(baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
+                                       ModEx_val, bootstrap=False, m1=m1, m2=m2, m3=m3)

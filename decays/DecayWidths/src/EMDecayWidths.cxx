@@ -44,6 +44,14 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   //fetch quantum numbers and projections
   L   = 0;  mL = getMomentumProjections(L); //check if this is always the case
 
+  // sa_val = 3./2.;
+  // ja_val = 3./2.;
+  // sla_val = 1.;
+
+  // sb_val = 1./2.;
+  // jb_val = 1./2.;
+  // slb_val = 0.;
+
   SA  = sa_val;    mSA  = getMomentumProjections(SA);
   JA  = ja_val;    mJA  = getMomentumProjections(JA);
   SlA = sla_val;   mSlA = getMomentumProjections(SlA);
@@ -74,14 +82,9 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
 
   double test_integral = 1; //SPINFLIP_U1_GS_GS();
 
-  // test function
-  double thetak = 0; double phik = 0; double mLlA=1;
-  double tensor1 = T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  double tensor2 = T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  double tensor3 = T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  double tensor4 = T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  double tensor5 = T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  std::cout<<tensor1<<"    "<<tensor2<<"   "<<tensor3<<"   "<<tensor4<<"   "<<tensor5<<std::endl;
+  double test_sum = ANGULAR_SUM(alpha_rho, alpha_lam, k_value);
+  std::cout<<test_sum<<"    test sum"<<std::endl;
+
 
   return decayWidth * test_integral;
 }
@@ -127,7 +130,7 @@ double EMDecayWidths::FI2(double EB, double MA, double k_value){
 double EMDecayWidths::ClebschGordan(WignerSymbols *m_wigner,
 				    double l1, double l2, double l3,
 				    double m1, double m2, double m3){
-  double coef = std::pow(-1.0, m2-m1-m3) * std::pow(2*l3 + 1, 0.5);
+  double coef = std::pow(-1.0, l2-l1-m3) * std::pow(2.0*l3 + 1.0, 0.5);
   double three_j = m_wigner->wigner3j(l1, l2, l3, m1, m2, (-1.0)*m3);
   return coef * three_j;
 }
@@ -137,33 +140,73 @@ double EMDecayWidths::ANGULAR_SUM(double alpha_rho, double alpha_lam, double k_v
   WignerSymbols  *m_wigner = new WignerSymbols();
   double dummy = 0;
 
-  double innerSum = 0;
+  double innerSum = 0.;
 
+  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
   for(int iML = 0; iML<(int)mL.size(); iML++)
     for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
       for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
-	for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-	  for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
-	    for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
-	      for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
-		for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
-		  for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
-		    for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
-		      dummy = std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1)) * ClebschGordan(m_wigner, L,SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
-			ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), mJA.at(iMJA))*
-			ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
-			ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1) - 1, mS2.at(iMS2), mSlB.at(iMSlB))*
-			ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
-			ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
-		      innerSum+=dummy;
-		    }
-  
+	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
+	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
+	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
+		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
+		    dummy = std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1)) *
+		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
+		      ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
+		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
+		      ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1) - 1, mS2.at(iMS2), mSlB.at(iMSlB))*
+		      ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
+		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+		    innerSum+=dummy;
+		  }
 
+  innerSum = 0.;
 
+  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+  for(int iML = 0; iML<(int)mL.size(); iML++)
+    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)	
+	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
+	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
+	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
+		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
+		    dummy = std::sqrt((S2 + mS2.at(iMS2)) *(S2 - mS2.at(iMS2) + 1)) *
+		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
+		      ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
+		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
+		      ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1), mS2.at(iMS2) - 1, mSlB.at(iMSlB))*
+		      ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))* 
+		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+		    innerSum+=dummy;
+		  }
 
+ innerSum = 0.;
 
+  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+  for(int iML = 0; iML<(int)mL.size(); iML++)
+    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)	
+	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
+	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
+	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
+		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
+		    dummy =  std::sqrt((S3 + mS3.at(iMS3)) * (S3 - mS3.at(iMS3) + 1)) *
+		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
+		      ClebschGordan(m_wigner, L, SA, JA,  mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
+		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3) - 1, mSB.at(iMSB))*
+		      ClebschGordan(m_wigner, S1, S2, SlB,  mS1.at(iMS1), mS2.at(iMS2), mSlB.at(iMSlB))*
+		      ClebschGordan(m_wigner, SlA, S3, SA,  mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
+		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+		    innerSum+=dummy;
+		  }
 
-  return 1.0;
+  return innerSum;
 }
 
 // SPIN-FLIP INTEGRALS
@@ -760,3 +803,13 @@ double EMDecayWidths::T3r(){
 }
 
 #endif
+
+
+  // // test function
+  // double thetak = 0; double phik = 0; double mLlA=1;
+  // double tensor1 = T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  // double tensor2 = T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  // double tensor3 = T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  // double tensor4 = T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  // double tensor5 = T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  // std::cout<<tensor1<<"    "<<tensor2<<"   "<<tensor3<<"   "<<tensor4<<"   "<<tensor5<<std::endl;
