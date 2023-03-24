@@ -94,8 +94,9 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   decayWidth = 1;
 
   double test_integral = 1; //SPINFLIP_U1_GS_GS();
+  std::vector<double> flavor_vector = FlavorVector(1.);
 
-  double test_sum = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value);
+  double test_sum = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value, flavor_vector, modeExcitation);
   std::cout<<test_sum<<"    test sum"<<std::endl;
 
 
@@ -148,16 +149,32 @@ double EMDecayWidths::ClebschGordan(WignerSymbols *m_wigner,
   return coef * three_j;
 }
 
-double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value){
+std::vector<double> EMDecayWidths::FlavorVector(double charge){
+  double mu_qu = (+1.) * ((2./3.) * std::sqrt(1./137.)/(2. * mlight));
+  double mu_qd = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mlight));
+  double mu_qs = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mlight));
+  double mu_qb = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mbottom));
+  std::vector<double> flavor_vector; flavor_vector.clear();
+  flavor_vector.push_back(mu_qb);
+  if(charge==0){
+    flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+    flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+  }else if(charge==1){
+    flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+    flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+  }
+  return flavor_vector;    
+}
 
-  WignerSymbols  *m_wigner = new WignerSymbols();
+double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value, std::vector<double> flavor_vector, int excMode){
+
+  WignerSymbols *m_wigner = new WignerSymbols();
   double dummy = 0;
-
-  double innerSum = 0.;
-  double AMP1 = 0.; double AMP2 = 0.; double AMP3 = 0.;
+  double AMP1_1 = 0.; double AMP1_2 = 0.; double AMP1 = 0.;
+  double AMP2_1 = 0.; double AMP2_2 = 0.; double AMP2 = 0.; 
+  double AMP3_1 = 0.; double AMP3_2 = 0.; double AMP3 = 0.;
 
   //AmpSquaredOrbitallambda AMP1
-  innerSum = 0.;
   // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
   for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
     for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
@@ -173,7 +190,8 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
 			  for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
 			    for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-			      dummy = std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1))*
+			      dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+				std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1))*
 				ClebschGordan(m_wigner, LB,  SB,  JB,  mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
 				ClebschGordan(m_wigner, LA,  SA,  JA,  mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/)*
 				ClebschGordan(m_wigner, LlA, LrA, LA,  mLlA.at(iMLlA), mLrA.at(iMLrA), mLA.at(iMLA))*
@@ -182,9 +200,9 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 				ClebschGordan(m_wigner, S1,  S2,  SlB, mS1.at(iMS1)-1, mS2.at(iMS2),   mSlB.at(iMSlB))*
 				ClebschGordan(m_wigner, SlA, S3,  SA,  mSlA.at(iMSlA), mS3.at(iMS3),   mSA.at(iMSA))*
 				ClebschGordan(m_wigner, S1,  S2,  SlA, mS1.at(iMS1),   mS2.at(iMS2),   mSlA.at(iMSlA));
-			      innerSum+=dummy;
+			      AMP1_1+=dummy;
 			   }
-  innerSum = 0.;
+  AMP1_1 *= flavor_vector.at(2);
   // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
   for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
     for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
@@ -195,18 +213,19 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
   	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
   		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
   		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-  		    dummy = KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) *
+  		    dummy = T1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
   		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA)) *
   		      KroneckerDelta(mLlA.at(iMLlA), 1) *
   		      ClebschGordan(m_wigner, LB,  SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),    mJB.at(iMJB))*
   		      ClebschGordan(m_wigner, LlB, LrB, LB, mLlB.at(iMLlB), mLrB.at(iMLrB),  mLB.at(iMLB))*
   		      ClebschGordan(m_wigner, LlA, LrA, LA, mLlA.at(iMLlA), mLrA.at(iMLrA),  mLA.at(iMLA))*
   		      ClebschGordan(m_wigner, LA,  SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
-  		    innerSum+=dummy;
+  		    AMP1_2+=dummy;
   		  }
+  AMP1_2 *= KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB);
+  AMP1 = AMP1_1 - AMP1_2;
 
   //AmpSquaredOrbitallambda AMP2
-  innerSum = 0.;
   // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
   for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
     for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
@@ -222,7 +241,8 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 		       for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
 			 for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
 			   for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-			     dummy = std::sqrt((S2 + mS2.at(iMS2)) * (S2 - mS2.at(iMS2) + 1))*
+			     dummy = U2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+			       std::sqrt((S2 + mS2.at(iMS2)) * (S2 - mS2.at(iMS2) + 1))*
 			       ClebschGordan(m_wigner, LB,  SB,  JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
 			       ClebschGordan(m_wigner, LA,  SA,  JA,   mLA.at(iMLA),    mSA.at(iMSA),     0.5/*mJA.at(iMJA)*/)*
 			       ClebschGordan(m_wigner, LlA, LrA, LA,   mLlA.at(iMLlA),  mLrA.at(iMLrA),   mLA.at(iMLA))*
@@ -231,9 +251,10 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			       ClebschGordan(m_wigner, S1,  S2,  SlB,  mS1.at(iMS1),    mS2.at(iMS2) - 1, mSlB.at(iMSlB))*
 			       ClebschGordan(m_wigner, SlA, S3,  SA,   mSlA.at(iMSlA),  mS3.at(iMS3),     mSA.at(iMSA))*
 			       ClebschGordan(m_wigner, S1,  S2,  SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));			     
-			     innerSum+=dummy;
+			     AMP2_1+=dummy;
 			   }
-  innerSum = 0.;
+  AMP2_1 *= flavor_vector.at(1);
+
   // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
   for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
     for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
@@ -244,20 +265,19 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
   	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
   		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
   		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-		    dummy = KroneckerDelta(SA, SB)*KroneckerDelta(SlA, SlB)*
+		    dummy = T2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
 		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
 		      KroneckerDelta(mLrA.at(iMLrA), 1)*
 		      ClebschGordan(m_wigner, LB,   SB,  JB,  mLB.at(iMLB),    mSB.at(iMSB),    mJB.at(iMJB))*
 		      ClebschGordan(m_wigner, LlB,  LrB, LB,  mLlB.at(iMLlB),  mLrB.at(iMLrB),  mLB.at(iMLB))*
 		      ClebschGordan(m_wigner, LlA,  LrA, LA,  mLlA.at(iMLlA),  mLrA.at(iMLrA),  mLA.at(iMLA))*
 		      ClebschGordan(m_wigner, LA,   SA,  JA,  mLA.at(iMLA),    mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
-		    innerSum+=dummy;
-		  }
-		
-    
+		    AMP2_2+=dummy;
+		  }		
+  AMP2_2 *= KroneckerDelta(SA, SB) * KroneckerDelta(SlA, SlB);
+  AMP2 = AMP2_1 - AMP2_2;
 
   // AmpSquaredOrbitallambda AMP3
-  innerSum = 0.;
   // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
   for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
     for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
@@ -273,7 +293,8 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 		       for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
 			 for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
 			   for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-			     dummy = std::sqrt((S3 + mS3.at(iMS3))*(S3 - mS3.at(iMS3) + 1))*
+			     dummy = U3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+			       std::sqrt((S3 + mS3.at(iMS3))*(S3 - mS3.at(iMS3) + 1))*
 			       ClebschGordan(m_wigner, LB,   SB,   JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
 			       ClebschGordan(m_wigner, LA,   SA,   JA,   mLA.at(iMLA),    mSA.at(iMSA),     0.5/*mJA.at(iMJA)*/)*
 			       ClebschGordan(m_wigner, LlA,  LrA,  LA,   mLlA.at(iMLlA),  mLrA.at(iMLrA),   mLA.at(iMLA))*
@@ -282,11 +303,9 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			       ClebschGordan(m_wigner, S1,   S2,   SlB,  mS1.at(iMS1),    mS2.at(iMS2),     mSlB.at(iMSlB))*
 			       ClebschGordan(m_wigner, SlA,  S3,   SA,   mSlA.at(iMSlA),  mS3.at(iMS3),     mSA.at(iMSA))*
 			       ClebschGordan(m_wigner, S1,   S2,   SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));
-			     innerSum+=dummy;
+			     AMP3_1+=dummy;
 			   }
-
-
-  innerSum = 0.;
+  AMP3_1 *= flavor_vector.at(0);
   // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
   for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
     for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
@@ -297,19 +316,28 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
   	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
   		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
   		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-		    KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB)*
+		    dummy = T3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
 		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
 		      KroneckerDelta(mLrA.at(iMLrA), 1)*
 		      ClebschGordan(m_wigner, LB,   SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
 		      ClebschGordan(m_wigner, LlB,  LrB, LB, mLlB.at(iMLlB), mLrB.at(iMLrB), mLB.at(iMLB))*
 		      ClebschGordan(m_wigner, LlA,  LrA, LA, mLlA.at(iMLlA), mLrA.at(iMLrA), mLA.at(iMLA))*
 		      ClebschGordan(m_wigner, LA,   SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/);
-		    innerSum+=dummy;
+		    AMP3_2+=dummy;
 		  }
 
+  AMP3_2 *= KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB);
+  AMP3 = AMP3_1 - AMP3_2;
 
-  return innerSum;
+  return AMP1;
 }
+
+double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
+double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
+double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
+double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
+double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
+double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
 
 // SPIN-FLIP INTEGRALS
 double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){

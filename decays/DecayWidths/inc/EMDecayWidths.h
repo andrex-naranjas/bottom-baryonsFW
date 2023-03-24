@@ -53,12 +53,21 @@ class EMDecayWidths{
   virtual double ClebschGordan(WignerSymbols *m_wigner,
 			       double l1, double l2, double l3,
 			       double m1, double m2, double m3);
-  virtual double ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value);
+  virtual std::vector<double> FlavorVector(double charge=0);
+  virtual double ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value, std::vector<double>, int excMode);
   virtual double ANGULAR_SUM_SQUARED_GROUND(double alpha_rho, double alpha_lam, double k_value);
   virtual double DecayWidth(double decay, double fi2_value, double angular_sum_value);
   virtual double EB(double MB, double K);
   virtual double K(double MA, double MB);
   virtual double FI2(double EB, double MA, double k_value);
+
+  // SUMMARY INTEGRALS
+  virtual double U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
+  virtual double T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
+  virtual double U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
+  virtual double T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
+  virtual double U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
+  virtual double T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
 
   // SPIN-FLIP Integrals
   virtual double SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML);
