@@ -49,6 +49,7 @@ class EMDecayWidths{
   int p_imag = 1;
 
   virtual int KroneckerDelta(double i, double j);
+  virtual int KroneckerDelta_extended(double i, double j, int excMode);
   virtual std::vector<double> getMomentumProjections(double j_angular);
   virtual double ClebschGordan(WignerSymbols *m_wigner,
 			       double l1, double l2, double l3,

@@ -173,171 +173,207 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
   double AMP1_1 = 0.; double AMP1_2 = 0.; double AMP1 = 0.;
   double AMP2_1 = 0.; double AMP2_2 = 0.; double AMP2 = 0.; 
   double AMP3_1 = 0.; double AMP3_2 = 0.; double AMP3 = 0.;
+  double TOT_AMP = 0.; double SUM_SQUARED_AMP = 0.; 
 
-  //AmpSquaredOrbitallambda AMP1
-  // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
-  for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
-    for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+  for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++){//SUM SQUARED
+    TOT_AMP = 0.;
+    AMP2_1 = 0.; AMP2_2 = 0.; AMP2 = 0.;
+    AMP1_1 = 0.; AMP1_2 = 0.; AMP1 = 0.;
+    AMP3_1 = 0.; AMP3_2 = 0.; AMP3 = 0.;    
+    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)// AMP1
+      for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+	for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+	  for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+	    for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
+	      for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
+		for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
+		  for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
+		    for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+		      for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
+			for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
+			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
+			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
+			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
+				dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+				  std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1))*
+				  ClebschGordan(m_wigner, LB,  SB,  JB,  mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
+				  ClebschGordan(m_wigner, LA,  SA,  JA,  mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/)*
+				  ClebschGordan(m_wigner, LlA, LrA, LA,  mLlA.at(iMLlA), mLrA.at(iMLrA), mLA.at(iMLA))*
+				  ClebschGordan(m_wigner, LlB, LrB, LB,  mLlB.at(iMLlB), mLrB.at(iMLrB), mLB.at(iMLB))*
+				  ClebschGordan(m_wigner, SlB, S3,  SB,  mSlB.at(iMSlB), mS3.at(iMS3),   mSB.at(iMSB))*
+				  ClebschGordan(m_wigner, S1,  S2,  SlB, mS1.at(iMS1)-1, mS2.at(iMS2),   mSlB.at(iMSlB))*
+				  ClebschGordan(m_wigner, SlA, S3,  SA,  mSlA.at(iMSlA), mS3.at(iMS3),   mSA.at(iMSA))*
+				  ClebschGordan(m_wigner, S1,  S2,  SlA, mS1.at(iMS1),   mS2.at(iMS2),   mSlA.at(iMSlA));
+				AMP1_1+=dummy;
+			      }
+    AMP1_1 *= flavor_vector.at(2) * (2.*std::sqrt(pi_val * k_value));
+
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+      for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                         
+	    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+	      for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
+		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
+		      dummy = T1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA)) *
+			ClebschGordan(m_wigner, LB,  SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),    mJB.at(iMJB))*
+			ClebschGordan(m_wigner, LlB, LrB, LB, mLlB.at(iMLlB), mLrB.at(iMLrB),  mLB.at(iMLB))*
+			ClebschGordan(m_wigner, LlA, LrA, LA, mLlA.at(iMLlA), mLrA.at(iMLrA),  mLA.at(iMLA))*
+			ClebschGordan(m_wigner, LA,  SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
+		      AMP1_2+=dummy;
+		    }
+    AMP1_2 *= KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
+    AMP1 = AMP1_1 - AMP1_2;
+
+    //AmpSquared AMP2
+    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
+      for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+	for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+	  for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+	    for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
+	      for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
+		for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
+		  for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
+		    for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+		      for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
+			for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
+			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
+			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
+			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
+				dummy = U2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+				  std::sqrt((S2 + mS2.at(iMS2)) * (S2 - mS2.at(iMS2) + 1))*
+				  ClebschGordan(m_wigner, LB,  SB,  JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
+				  ClebschGordan(m_wigner, LA,  SA,  JA,   mLA.at(iMLA),    mSA.at(iMSA),     0.5/*mJA.at(iMJA)*/)*
+				  ClebschGordan(m_wigner, LlA, LrA, LA,   mLlA.at(iMLlA),  mLrA.at(iMLrA),   mLA.at(iMLA))*
+				  ClebschGordan(m_wigner, LlB, LrB, LB,   mLlB.at(iMLlB),  mLrB.at(iMLrB),   mLB.at(iMLB))*
+				  ClebschGordan(m_wigner, SlB, S3,  SB,   mSlB.at(iMSlB),  mS3.at(iMS3),     mSB.at(iMSB))*
+				  ClebschGordan(m_wigner, S1,  S2,  SlB,  mS1.at(iMS1),    mS2.at(iMS2) - 1, mSlB.at(iMSlB))*
+				  ClebschGordan(m_wigner, SlA, S3,  SA,   mSlA.at(iMSlA),  mS3.at(iMS3),     mSA.at(iMSA))*
+				  ClebschGordan(m_wigner, S1,  S2,  SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));			     
+				AMP2_1+=dummy;
+			      }
+    AMP2_1 *= flavor_vector.at(1) * (2.*std::sqrt(pi_val * k_value));
+
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+      for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                    
+	    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+	      for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
+		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
+		      dummy = T2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
+			ClebschGordan(m_wigner, LB,   SB,  JB,  mLB.at(iMLB),    mSB.at(iMSB),    mJB.at(iMJB))*
+			ClebschGordan(m_wigner, LlB,  LrB, LB,  mLlB.at(iMLlB),  mLrB.at(iMLrB),  mLB.at(iMLB))*
+			ClebschGordan(m_wigner, LlA,  LrA, LA,  mLlA.at(iMLlA),  mLrA.at(iMLrA),  mLA.at(iMLA))*
+			ClebschGordan(m_wigner, LA,   SA,  JA,  mLA.at(iMLA),    mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
+		      AMP2_2+=dummy;
+		    }		
+    AMP2_2 *= KroneckerDelta(SA, SB) * KroneckerDelta(SlA, SlB) * (1.*std::sqrt(pi_val / k_value));
+    AMP2 = AMP2_1 - AMP2_2;
+    
+    // AmpSquared AMP3
+    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
+      for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+	for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+	  for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+	    for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
+	      for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
+		for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
+		  for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
+		    for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+		      for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
+			for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
+			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
+			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
+			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
+				dummy = U3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+				  std::sqrt((S3 + mS3.at(iMS3))*(S3 - mS3.at(iMS3) + 1))*
+				  ClebschGordan(m_wigner, LB,   SB,   JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
+				  ClebschGordan(m_wigner, LA,   SA,   JA,   mLA.at(iMLA),    mSA.at(iMSA),     0.5/*mJA.at(iMJA)*/)*
+				  ClebschGordan(m_wigner, LlA,  LrA,  LA,   mLlA.at(iMLlA),  mLrA.at(iMLrA),   mLA.at(iMLA))*
+				  ClebschGordan(m_wigner, LlB,  LrB,  LB,   mLlB.at(iMLlB),  mLrB.at(iMLrB),   mLB.at(iMLB))*
+				  ClebschGordan(m_wigner, SlB,  S3,   SB,   mSlB.at(iMSlB),  mS3.at(iMS3) - 1, mSB.at(iMSB))*
+				  ClebschGordan(m_wigner, S1,   S2,   SlB,  mS1.at(iMS1),    mS2.at(iMS2),     mSlB.at(iMSlB))*
+				  ClebschGordan(m_wigner, SlA,  S3,   SA,   mSlA.at(iMSlA),  mS3.at(iMS3),     mSA.at(iMSA))*
+				  ClebschGordan(m_wigner, S1,   S2,   SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));
+				AMP3_1+=dummy;
+			      }
+    AMP3_1 *= flavor_vector.at(0) * (2.*std::sqrt(pi_val * k_value));
+
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
 	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
-	    for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
-	      for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
-		for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
+	    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+	      for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
 		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
-		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
-		      for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
-			for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
-			  for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
-			    for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-			      dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
-				std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1))*
-				ClebschGordan(m_wigner, LB,  SB,  JB,  mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
-				ClebschGordan(m_wigner, LA,  SA,  JA,  mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/)*
-				ClebschGordan(m_wigner, LlA, LrA, LA,  mLlA.at(iMLlA), mLrA.at(iMLrA), mLA.at(iMLA))*
-				ClebschGordan(m_wigner, LlB, LrB, LB,  mLlB.at(iMLlB), mLrB.at(iMLrB), mLB.at(iMLB))*
-				ClebschGordan(m_wigner, SlB, S3,  SB,  mSlB.at(iMSlB), mS3.at(iMS3),   mSB.at(iMSB))*
-				ClebschGordan(m_wigner, S1,  S2,  SlB, mS1.at(iMS1)-1, mS2.at(iMS2),   mSlB.at(iMSlB))*
-				ClebschGordan(m_wigner, SlA, S3,  SA,  mSlA.at(iMSlA), mS3.at(iMS3),   mSA.at(iMSA))*
-				ClebschGordan(m_wigner, S1,  S2,  SlA, mS1.at(iMS1),   mS2.at(iMS2),   mSlA.at(iMSlA));
-			      AMP1_1+=dummy;
-			   }
-  AMP1_1 *= flavor_vector.at(2);
-  // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
-    for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
-      for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
-  	for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                         
-  	  for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-  	    for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
-  	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
-  		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
-  		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-  		    dummy = T1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
-  		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA)) *
-  		      KroneckerDelta(mLlA.at(iMLlA), 1) *
-  		      ClebschGordan(m_wigner, LB,  SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),    mJB.at(iMJB))*
-  		      ClebschGordan(m_wigner, LlB, LrB, LB, mLlB.at(iMLlB), mLrB.at(iMLrB),  mLB.at(iMLB))*
-  		      ClebschGordan(m_wigner, LlA, LrA, LA, mLlA.at(iMLlA), mLrA.at(iMLrA),  mLA.at(iMLA))*
-  		      ClebschGordan(m_wigner, LA,  SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
-  		    AMP1_2+=dummy;
-  		  }
-  AMP1_2 *= KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB);
-  AMP1 = AMP1_1 - AMP1_2;
-
-  //AmpSquaredOrbitallambda AMP2
-  // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
-  for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
-    for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
-      for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
-	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
-	 for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
-	   for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
-	     for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
-	       for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
-		 for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
-		   for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
-		     for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
-		       for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
-			 for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
-			   for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-			     dummy = U2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
-			       std::sqrt((S2 + mS2.at(iMS2)) * (S2 - mS2.at(iMS2) + 1))*
-			       ClebschGordan(m_wigner, LB,  SB,  JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
-			       ClebschGordan(m_wigner, LA,  SA,  JA,   mLA.at(iMLA),    mSA.at(iMSA),     0.5/*mJA.at(iMJA)*/)*
-			       ClebschGordan(m_wigner, LlA, LrA, LA,   mLlA.at(iMLlA),  mLrA.at(iMLrA),   mLA.at(iMLA))*
-			       ClebschGordan(m_wigner, LlB, LrB, LB,   mLlB.at(iMLlB),  mLrB.at(iMLrB),   mLB.at(iMLB))*
-			       ClebschGordan(m_wigner, SlB, S3,  SB,   mSlB.at(iMSlB),  mS3.at(iMS3),     mSB.at(iMSB))*
-			       ClebschGordan(m_wigner, S1,  S2,  SlB,  mS1.at(iMS1),    mS2.at(iMS2) - 1, mSlB.at(iMSlB))*
-			       ClebschGordan(m_wigner, SlA, S3,  SA,   mSlA.at(iMSlA),  mS3.at(iMS3),     mSA.at(iMSA))*
-			       ClebschGordan(m_wigner, S1,  S2,  SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));			     
-			     AMP2_1+=dummy;
-			   }
-  AMP2_1 *= flavor_vector.at(1);
-
-  // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
-    for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
-      for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
-  	for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                         
-  	  for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-  	    for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
-  	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
-  		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
-  		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-		    dummy = T2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
-		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
-		      KroneckerDelta(mLrA.at(iMLrA), 1)*
-		      ClebschGordan(m_wigner, LB,   SB,  JB,  mLB.at(iMLB),    mSB.at(iMSB),    mJB.at(iMJB))*
-		      ClebschGordan(m_wigner, LlB,  LrB, LB,  mLlB.at(iMLlB),  mLrB.at(iMLrB),  mLB.at(iMLB))*
-		      ClebschGordan(m_wigner, LlA,  LrA, LA,  mLlA.at(iMLlA),  mLrA.at(iMLrA),  mLA.at(iMLA))*
-		      ClebschGordan(m_wigner, LA,   SA,  JA,  mLA.at(iMLA),    mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
-		    AMP2_2+=dummy;
-		  }		
-  AMP2_2 *= KroneckerDelta(SA, SB) * KroneckerDelta(SlA, SlB);
-  AMP2 = AMP2_1 - AMP2_2;
-
-  // AmpSquaredOrbitallambda AMP3
-  // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
-  for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
-    for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
-      for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
-	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
-	 for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
-	   for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
-	     for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
-	       for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
-		 for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
-		   for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
-		     for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
-		       for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
-			 for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
-			   for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-			     dummy = U3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
-			       std::sqrt((S3 + mS3.at(iMS3))*(S3 - mS3.at(iMS3) + 1))*
-			       ClebschGordan(m_wigner, LB,   SB,   JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
-			       ClebschGordan(m_wigner, LA,   SA,   JA,   mLA.at(iMLA),    mSA.at(iMSA),     0.5/*mJA.at(iMJA)*/)*
-			       ClebschGordan(m_wigner, LlA,  LrA,  LA,   mLlA.at(iMLlA),  mLrA.at(iMLrA),   mLA.at(iMLA))*
-			       ClebschGordan(m_wigner, LlB,  LrB,  LB,   mLlB.at(iMLlB),  mLrB.at(iMLrB),   mLB.at(iMLB))*
-			       ClebschGordan(m_wigner, SlB,  S3,   SB,   mSlB.at(iMSlB),  mS3.at(iMS3) - 1, mSB.at(iMSB))*
-			       ClebschGordan(m_wigner, S1,   S2,   SlB,  mS1.at(iMS1),    mS2.at(iMS2),     mSlB.at(iMSlB))*
-			       ClebschGordan(m_wigner, SlA,  S3,   SA,   mSlA.at(iMSlA),  mS3.at(iMS3),     mSA.at(iMSA))*
-			       ClebschGordan(m_wigner, S1,   S2,   SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));
-			     AMP3_1+=dummy;
-			   }
-  AMP3_1 *= flavor_vector.at(0);
-  // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
-    for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
-      for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
-  	for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
-  	  for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-  	    for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
-  	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
-  		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
-  		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-		    dummy = T3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
-		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
-		      KroneckerDelta(mLrA.at(iMLrA), 1)*
-		      ClebschGordan(m_wigner, LB,   SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
-		      ClebschGordan(m_wigner, LlB,  LrB, LB, mLlB.at(iMLlB), mLrB.at(iMLrB), mLB.at(iMLB))*
-		      ClebschGordan(m_wigner, LlA,  LrA, LA, mLlA.at(iMLlA), mLrA.at(iMLrA), mLA.at(iMLA))*
-		      ClebschGordan(m_wigner, LA,   SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/);
-		    AMP3_2+=dummy;
-		  }
-
-  AMP3_2 *= KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB);
-  AMP3 = AMP3_1 - AMP3_2;
-
-  return AMP1;
+		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
+		      dummy = T3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
+			ClebschGordan(m_wigner, LB,   SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
+			ClebschGordan(m_wigner, LlB,  LrB, LB, mLlB.at(iMLlB), mLrB.at(iMLrB), mLB.at(iMLB))*
+			ClebschGordan(m_wigner, LlA,  LrA, LA, mLlA.at(iMLlA), mLrA.at(iMLrA), mLA.at(iMLA))*
+			ClebschGordan(m_wigner, LA,   SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/);
+		      AMP3_2+=dummy;
+		    }
+    AMP3_2 *= KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
+    AMP3 = AMP3_1 - AMP3_2;
+    // sum quark amplitudes, squared them and get squared the total
+    TOT_AMP = AMP1 + AMP2 + AMP3;
+    SUM_SQUARED_AMP += TOT_AMP * TOT_AMP;
+  }
+  return SUM_SQUARED_AMP;
 }
 
-double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
-double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
-double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
-double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
-double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
-double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){ return 1.;}
+double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+  double thetak=0., phik=0.;
+  if(excMode==0)
+    return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  else if(excMode==1)
+    return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  return 0.;
+}
+
+double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+  double thetak=0., phik=0.;
+  if(excMode==0)
+    return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  else if(excMode==1)
+    return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  return 0.;
+}
+
+double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+  double thetak=0., phik=0.;
+  if(excMode==0)
+    return T3r();
+  else if(excMode==1)
+    return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  return 0.;
+}
+
+double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){return 1.;}
+double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){return 1.;}
+double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){return 1.;}
+
+
+int EMDecayWidths::KroneckerDelta_extended(double mLrA, double mLlA, int excMode){
+  if(excMode==0)
+    return KroneckerDelta(mLrA, 1);
+  else if(excMode==1)
+    return KroneckerDelta(mLlA, 1);
+  return 0;
+}
 
 // SPIN-FLIP INTEGRALS
 double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
