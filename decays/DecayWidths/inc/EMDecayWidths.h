@@ -53,7 +53,8 @@ class EMDecayWidths{
   virtual double ClebschGordan(WignerSymbols *m_wigner,
 			       double l1, double l2, double l3,
 			       double m1, double m2, double m3);
-  virtual double ANGULAR_SUM(double alpha_rho, double alpha_lam, double k_value);
+  virtual double ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value);
+  virtual double ANGULAR_SUM_SQUARED_GROUND(double alpha_rho, double alpha_lam, double k_value);
   virtual double DecayWidth(double decay, double fi2_value, double angular_sum_value);
   virtual double EB(double MB, double K);
   virtual double K(double MA, double MB);

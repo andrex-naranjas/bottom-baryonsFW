@@ -52,6 +52,22 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   // jb_val = 1./2.;
   // slb_val = 0.;
 
+  // sa_val    = 0.5;
+  // sla_val   = 1.;  
+  // la_val    = 1.;  
+  // lla_val   = 1.;  
+  // lra_val   = 0.;  
+  // ja_val    = 0.5;
+  
+
+  // sb_val     = 0.5;
+  // slb_val    = 1.;  
+  // lb_val     = 0.;  
+  // llb_val    = 0.;  
+  // lrb_val    = 0.;  
+  // jb_val     = 0.5;
+  
+
   SA  = sa_val;    mSA  = getMomentumProjections(SA);
   JA  = ja_val;    mJA  = getMomentumProjections(JA);
   SlA = sla_val;   mSlA = getMomentumProjections(SlA);
@@ -73,16 +89,13 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   double k_value; k_value = K(MA, MB);
   double EB_value = EB(MB, k_value);
   
-  double sum_value  = 0.; //test
-  sum_value = ANGULAR_SUM(alpha_rho, alpha_lam, k_value);
-
   double fi2_value  = FI2(EB_value, MA, k_value);
-  double decayWidth = DecayWidth(flav_coup, fi2_value, sum_value);
+  double decayWidth = 0;//DecayWidth(flav_coup, fi2_value, sum_value);
   decayWidth = 1;
 
   double test_integral = 1; //SPINFLIP_U1_GS_GS();
 
-  double test_sum = ANGULAR_SUM(alpha_rho, alpha_lam, k_value);
+  double test_sum = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value);
   std::cout<<test_sum<<"    test sum"<<std::endl;
 
 
@@ -135,76 +148,165 @@ double EMDecayWidths::ClebschGordan(WignerSymbols *m_wigner,
   return coef * three_j;
 }
 
-double EMDecayWidths::ANGULAR_SUM(double alpha_rho, double alpha_lam, double k_value){
+double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value){
 
   WignerSymbols  *m_wigner = new WignerSymbols();
   double dummy = 0;
 
   double innerSum = 0.;
+  double AMP1 = 0.; double AMP2 = 0.; double AMP3 = 0.;
 
-  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iML = 0; iML<(int)mL.size(); iML++)
-    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
-	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
-	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
-	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
-	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
-		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
-		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
-		    dummy = std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1)) *
-		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
-		      ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
-		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
-		      ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1) - 1, mS2.at(iMS2), mSlB.at(iMSlB))*
-		      ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
-		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+  //AmpSquaredOrbitallambda AMP1
+  innerSum = 0.;
+  // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
+  for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
+    for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+      for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
+	    for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
+	      for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
+		for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
+		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
+		      for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
+			for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
+			  for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
+			    for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
+			      dummy = std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1))*
+				ClebschGordan(m_wigner, LB,  SB,  JB,  mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
+				ClebschGordan(m_wigner, LA,  SA,  JA,  mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/)*
+				ClebschGordan(m_wigner, LlA, LrA, LA,  mLlA.at(iMLlA), mLrA.at(iMLrA), mLA.at(iMLA))*
+				ClebschGordan(m_wigner, LlB, LrB, LB,  mLlB.at(iMLlB), mLrB.at(iMLrB), mLB.at(iMLB))*
+				ClebschGordan(m_wigner, SlB, S3,  SB,  mSlB.at(iMSlB), mS3.at(iMS3),   mSB.at(iMSB))*
+				ClebschGordan(m_wigner, S1,  S2,  SlB, mS1.at(iMS1)-1, mS2.at(iMS2),   mSlB.at(iMSlB))*
+				ClebschGordan(m_wigner, SlA, S3,  SA,  mSlA.at(iMSlA), mS3.at(iMS3),   mSA.at(iMSA))*
+				ClebschGordan(m_wigner, S1,  S2,  SlA, mS1.at(iMS1),   mS2.at(iMS2),   mSlA.at(iMSlA));
+			      innerSum+=dummy;
+			   }
+  innerSum = 0.;
+  // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+  for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+    for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+      for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+  	for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                         
+  	  for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+  	    for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+  	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
+  		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+  		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
+  		    dummy = KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) *
+  		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA)) *
+  		      KroneckerDelta(mLlA.at(iMLlA), 1) *
+  		      ClebschGordan(m_wigner, LB,  SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),    mJB.at(iMJB))*
+  		      ClebschGordan(m_wigner, LlB, LrB, LB, mLlB.at(iMLlB), mLrB.at(iMLrB),  mLB.at(iMLB))*
+  		      ClebschGordan(m_wigner, LlA, LrA, LA, mLlA.at(iMLlA), mLrA.at(iMLrA),  mLA.at(iMLA))*
+  		      ClebschGordan(m_wigner, LA,  SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
+  		    innerSum+=dummy;
+  		  }
+
+  //AmpSquaredOrbitallambda AMP2
+  innerSum = 0.;
+  // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
+  for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
+    for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+      for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+	 for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
+	   for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
+	     for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
+	       for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
+		 for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+		   for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
+		     for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
+		       for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
+			 for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
+			   for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
+			     dummy = std::sqrt((S2 + mS2.at(iMS2)) * (S2 - mS2.at(iMS2) + 1))*
+			       ClebschGordan(m_wigner, LB,  SB,  JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
+			       ClebschGordan(m_wigner, LA,  SA,  JA,   mLA.at(iMLA),    mSA.at(iMSA),     0.5/*mJA.at(iMJA)*/)*
+			       ClebschGordan(m_wigner, LlA, LrA, LA,   mLlA.at(iMLlA),  mLrA.at(iMLrA),   mLA.at(iMLA))*
+			       ClebschGordan(m_wigner, LlB, LrB, LB,   mLlB.at(iMLlB),  mLrB.at(iMLrB),   mLB.at(iMLB))*
+			       ClebschGordan(m_wigner, SlB, S3,  SB,   mSlB.at(iMSlB),  mS3.at(iMS3),     mSB.at(iMSB))*
+			       ClebschGordan(m_wigner, S1,  S2,  SlB,  mS1.at(iMS1),    mS2.at(iMS2) - 1, mSlB.at(iMSlB))*
+			       ClebschGordan(m_wigner, SlA, S3,  SA,   mSlA.at(iMSlA),  mS3.at(iMS3),     mSA.at(iMSA))*
+			       ClebschGordan(m_wigner, S1,  S2,  SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));			     
+			     innerSum+=dummy;
+			   }
+  innerSum = 0.;
+  // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+  for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+    for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+      for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+  	for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                         
+  	  for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+  	    for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+  	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
+  		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+  		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
+		    dummy = KroneckerDelta(SA, SB)*KroneckerDelta(SlA, SlB)*
+		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
+		      KroneckerDelta(mLrA.at(iMLrA), 1)*
+		      ClebschGordan(m_wigner, LB,   SB,  JB,  mLB.at(iMLB),    mSB.at(iMSB),    mJB.at(iMJB))*
+		      ClebschGordan(m_wigner, LlB,  LrB, LB,  mLlB.at(iMLlB),  mLrB.at(iMLrB),  mLB.at(iMLB))*
+		      ClebschGordan(m_wigner, LlA,  LrA, LA,  mLlA.at(iMLlA),  mLrA.at(iMLrA),  mLA.at(iMLA))*
+		      ClebschGordan(m_wigner, LA,   SA,  JA,  mLA.at(iMLA),    mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
 		    innerSum+=dummy;
 		  }
+		
+    
+
+  // AmpSquaredOrbitallambda AMP3
+  innerSum = 0.;
+  // for(int iMJA = 0;  iMJA<(int)mJA.size(); iMJA++)
+  for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
+    for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+      for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+	 for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
+	   for(int iMSB = 0;  iMSB<(int)mSB.size(); iMSB++)
+	     for(int iMSlB = 0;  iMSlB<(int)mSlB.size(); iMSlB++)
+	       for(int iMLB = 0;  iMLB<(int)mLB.size(); iMLB++)
+		 for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+		   for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++)
+		     for(int iMJB = 0;  iMJB<(int)mJB.size(); iMJB++)
+		       for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
+			 for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
+			   for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
+			     dummy = std::sqrt((S3 + mS3.at(iMS3))*(S3 - mS3.at(iMS3) + 1))*
+			       ClebschGordan(m_wigner, LB,   SB,   JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
+			       ClebschGordan(m_wigner, LA,   SA,   JA,   mLA.at(iMLA),    mSA.at(iMSA),     0.5/*mJA.at(iMJA)*/)*
+			       ClebschGordan(m_wigner, LlA,  LrA,  LA,   mLlA.at(iMLlA),  mLrA.at(iMLrA),   mLA.at(iMLA))*
+			       ClebschGordan(m_wigner, LlB,  LrB,  LB,   mLlB.at(iMLlB),  mLrB.at(iMLrB),   mLB.at(iMLB))*
+			       ClebschGordan(m_wigner, SlB,  S3,   SB,   mSlB.at(iMSlB),  mS3.at(iMS3) - 1, mSB.at(iMSB))*
+			       ClebschGordan(m_wigner, S1,   S2,   SlB,  mS1.at(iMS1),    mS2.at(iMS2),     mSlB.at(iMSlB))*
+			       ClebschGordan(m_wigner, SlA,  S3,   SA,   mSlA.at(iMSlA),  mS3.at(iMS3),     mSA.at(iMSA))*
+			       ClebschGordan(m_wigner, S1,   S2,   SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));
+			     innerSum+=dummy;
+			   }
+
 
   innerSum = 0.;
-
-  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iML = 0; iML<(int)mL.size(); iML++)
-    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)	
-	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
-	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
-	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
-	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
-		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
-		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
-		    dummy = std::sqrt((S2 + mS2.at(iMS2)) *(S2 - mS2.at(iMS2) + 1)) *
-		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
-		      ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
-		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
-		      ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1), mS2.at(iMS2) - 1, mSlB.at(iMSlB))*
-		      ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))* 
-		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+  // for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+  for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+    for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
+      for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
+  	for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
+  	  for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+  	    for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+  	      for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
+  		for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
+  		  for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
+		    KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB)*
+		      KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
+		      KroneckerDelta(mLrA.at(iMLrA), 1)*
+		      ClebschGordan(m_wigner, LB,   SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
+		      ClebschGordan(m_wigner, LlB,  LrB, LB, mLlB.at(iMLlB), mLrB.at(iMLrB), mLB.at(iMLB))*
+		      ClebschGordan(m_wigner, LlA,  LrA, LA, mLlA.at(iMLlA), mLrA.at(iMLrA), mLA.at(iMLA))*
+		      ClebschGordan(m_wigner, LA,   SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/);
 		    innerSum+=dummy;
 		  }
 
- innerSum = 0.;
-
-  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iML = 0; iML<(int)mL.size(); iML++)
-    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)	
-	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
-	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
-	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
-	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
-		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
-		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
-		    dummy =  std::sqrt((S3 + mS3.at(iMS3)) * (S3 - mS3.at(iMS3) + 1)) *
-		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
-		      ClebschGordan(m_wigner, L, SA, JA,  mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
-		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3) - 1, mSB.at(iMSB))*
-		      ClebschGordan(m_wigner, S1, S2, SlB,  mS1.at(iMS1), mS2.at(iMS2), mSlB.at(iMSlB))*
-		      ClebschGordan(m_wigner, SlA, S3, SA,  mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
-		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
-		    innerSum+=dummy;
-		  }
 
   return innerSum;
 }
@@ -800,6 +902,82 @@ double EMDecayWidths::T2r(double k_value, double alpha_lam, double alpha_rho,
 double EMDecayWidths::T3r(){
   double value = 0;
   return value;
+}
+
+
+double EMDecayWidths::ANGULAR_SUM_SQUARED_GROUND(double alpha_rho, double alpha_lam, double k_value){
+
+  WignerSymbols  *m_wigner = new WignerSymbols();
+  double dummy = 0;
+
+  double innerSum = 0.;
+
+  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+  for(int iML = 0; iML<(int)mL.size(); iML++)
+    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+ 	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
+ 	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+ 	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
+ 	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
+ 		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+ 		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
+ 		    dummy = std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1)) *
+ 		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
+ 		      ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
+ 		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
+ 		      ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1) - 1, mS2.at(iMS2), mSlB.at(iMSlB))*
+ 		      ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
+ 		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+ 		    innerSum+=dummy;
+ 		  }
+
+  innerSum = 0.;
+
+  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+  for(int iML = 0; iML<(int)mL.size(); iML++)
+    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)	
+ 	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
+ 	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+ 	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
+ 	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
+ 		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+ 		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
+ 		    dummy = std::sqrt((S2 + mS2.at(iMS2)) *(S2 - mS2.at(iMS2) + 1)) *
+ 		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
+ 		      ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
+ 		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
+ 		      ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1), mS2.at(iMS2) - 1, mSlB.at(iMSlB))*
+ 		      ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))* 
+ 		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+ 		    innerSum+=dummy;
+ 		  }
+
+ innerSum = 0.;
+
+  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
+  for(int iML = 0; iML<(int)mL.size(); iML++)
+    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
+      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)	
+  	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
+  	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
+  	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
+  	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
+  		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
+  		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
+  		    dummy =  std::sqrt((S3 + mS3.at(iMS3)) * (S3 - mS3.at(iMS3) + 1)) *
+  		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
+  		      ClebschGordan(m_wigner, L, SA, JA,  mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
+  		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3) - 1, mSB.at(iMSB))*
+  		      ClebschGordan(m_wigner, S1, S2, SlB,  mS1.at(iMS1), mS2.at(iMS2), mSlB.at(iMSlB))*
+  		      ClebschGordan(m_wigner, SlA, S3, SA,  mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
+  		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
+  		    innerSum+=dummy;
+  		  }
+
+
+  return innerSum;
 }
 
 #endif
