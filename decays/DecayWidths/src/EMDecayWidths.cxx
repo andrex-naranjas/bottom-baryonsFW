@@ -360,12 +360,35 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
   return 0.;
 }
 
-double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){return 1.;}
-double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){return 1.;}
-double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){return 1.;}
+double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+  double thetak=0., phik=0.;
+  if(excMode==0)
+    return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==1)
+    return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  return 0.;
+}
 
+double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+  double thetak=0., phik=0.;
+  if(excMode==0)
+    return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==1)
+    return SPINFLIP_U2_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+return 0.;
+}
+
+double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+  double thetak=0., phik=0.;
+  if(excMode==0)
+    return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==1)
+    return SPINFLIP_U3_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+return 0.;
+}
 
 int EMDecayWidths::KroneckerDelta_extended(double mLrA, double mLlA, int excMode){
+  double thetak=0., phik=0.;
   if(excMode==0)
     return KroneckerDelta(mLrA, 1);
   else if(excMode==1)
