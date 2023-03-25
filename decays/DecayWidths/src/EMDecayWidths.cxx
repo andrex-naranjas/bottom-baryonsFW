@@ -180,7 +180,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     AMP2_1 = 0.; AMP2_2 = 0.; AMP2 = 0.;
     AMP1_1 = 0.; AMP1_2 = 0.; AMP1 = 0.;
     AMP3_1 = 0.; AMP3_2 = 0.; AMP3 = 0.;    
-    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)// AMP1
+    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)// AMP1, SPIN FLIP
       for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
 	for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	  for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
@@ -208,7 +208,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			      }
     AMP1_1 *= flavor_vector.at(2) * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP1, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
 	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                         
@@ -226,11 +226,10 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			ClebschGordan(m_wigner, LA,  SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
 		      AMP1_2+=dummy;
 		    }
-    AMP1_2 *= KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
+    AMP1_2 *= flavor_vector.at(2) * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
     AMP1 = AMP1_1 - AMP1_2;
 
-    //AmpSquared AMP2
-    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
+    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++) // AMP2, SPIN FLIP
       for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
 	for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	  for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
@@ -258,7 +257,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			      }
     AMP2_1 *= flavor_vector.at(1) * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP2, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
 	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                    
@@ -276,11 +275,10 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			ClebschGordan(m_wigner, LA,   SA,  JA,  mLA.at(iMLA),    mSA.at(iMSA),    0.5/*mJA.at(iMJA)*/);
 		      AMP2_2+=dummy;
 		    }		
-    AMP2_2 *= KroneckerDelta(SA, SB) * KroneckerDelta(SlA, SlB) * (1.*std::sqrt(pi_val / k_value));
+    AMP2_2 *= flavor_vector.at(1) * KroneckerDelta(SA, SB) * KroneckerDelta(SlA, SlB) * (1.*std::sqrt(pi_val / k_value));
     AMP2 = AMP2_1 - AMP2_2;
     
-    // AmpSquared AMP3
-    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++)
+    for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++) // AMP3, SPIN FLIP
       for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
 	for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	  for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
@@ -308,7 +306,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			      }
     AMP3_1 *= flavor_vector.at(0) * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP3, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
 	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
@@ -326,7 +324,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			ClebschGordan(m_wigner, LA,   SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),   0.5/*mJA.at(iMJA)*/);
 		      AMP3_2+=dummy;
 		    }
-    AMP3_2 *= KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
+    AMP3_2 *= flavor_vector.at(0) * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
     AMP3 = AMP3_1 - AMP3_2;
     // sum quark amplitudes, squared them and get squared the total
     TOT_AMP = AMP1 + AMP2 + AMP3;
