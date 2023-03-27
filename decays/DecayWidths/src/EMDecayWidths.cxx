@@ -156,6 +156,7 @@ std::vector<double> EMDecayWidths::FlavorVector(double charge){
   double mu_qs = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mstrange));
   double mu_qb = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mbottom));
   std::vector<double> flavor_vector; flavor_vector.clear();
+  //Function that Andres included (Xi_b to Xi_b and Xi_0 to Xi_0)
   flavor_vector.push_back(mu_qb);
   if(charge==0){
     flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
@@ -163,6 +164,56 @@ std::vector<double> EMDecayWidths::FlavorVector(double charge){
   }else if(charge==1){
     flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
     flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+  }
+  return flavor_vector;    
+
+  //3bar to 3bar
+  //For Lambda_0 to Lambda_0
+  flavor_vector.push_back(mu_qb);
+  flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+  flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+  return flavor_vector;  
+
+  //6 with 3/2 to 6 with 1/2
+  //For Sigma_+ to Sigma_+
+  flavor_vector.push_back(mu_qb);
+  flavor_vector.push_back(mu_qu);
+  flavor_vector.push_back(mu_qu);
+  return flavor_vector; 
+
+  //For Sigma_0 to Sigma_0
+  flavor_vector.push_back(mu_qb);
+  flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+  flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+  return flavor_vector;  
+
+  //For Sigma_- to Sigma_-
+  flavor_vector.push_back(mu_qb);
+  flavor_vector.push_back(mu_qd);
+  flavor_vector.push_back(mu_qd);
+  return flavor_vector;  
+
+  //For Omega_- to Omega_-
+  flavor_vector.push_back(mu_qb);
+  flavor_vector.push_back(mu_qs);
+  flavor_vector.push_back(mu_qs);
+  return flavor_vector; 
+
+  //6 to 3bar
+  //For Sigma_0 to Lambda_0
+  flavor_vector.push_back(0);
+  flavor_vector.push_back( 0.5*(mu_qu - mu_qd) );
+  flavor_vector.push_back( -0.5*(mu_qu - mu_qd) );
+  return flavor_vector; 
+
+   //Xi_b_prime to Xi_b and Xi_0_prime to Xi_0
+  flavor_vector.push_back(0);
+  if(charge==0){
+    flavor_vector.push_back( 0.5*(mu_qu - mu_qs) );
+    flavor_vector.push_back( -0.5*(mu_qu - mu_qs) );
+  }else if(charge==1){
+    flavor_vector.push_back( 0.5*(mu_qd - mu_qs) );
+    flavor_vector.push_back( -0.5*(mu_qd - mu_qs) );
   }
   return flavor_vector;    
 }
