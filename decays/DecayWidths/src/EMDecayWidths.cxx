@@ -21,7 +21,7 @@ EMDecayWidths::~EMDecayWidths(){}
 
 double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
 			      double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
-			      double al_val, double ar_val,
+			      double al_val, double ar_val, double mstrange_val,
 			      double mbottom_val, double mlight_val, int baryon, int excMode, int prodDecay){  
   // decay product masses
   MA = ma_val;
@@ -29,6 +29,7 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   if(MA<MB) return 0.; //energy conservation
 
   // quark masses
+  mstrange = mstrange_val;
   mbottom = mbottom_val;
   mlight = mlight_val;
 
@@ -152,7 +153,7 @@ double EMDecayWidths::ClebschGordan(WignerSymbols *m_wigner,
 std::vector<double> EMDecayWidths::FlavorVector(double charge){
   double mu_qu = (+1.) * ((2./3.) * std::sqrt(1./137.)/(2. * mlight));
   double mu_qd = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mlight));
-  double mu_qs = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mlight));
+  double mu_qs = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mstrange));
   double mu_qb = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mbottom));
   std::vector<double> flavor_vector; flavor_vector.clear();
   flavor_vector.push_back(mu_qb);

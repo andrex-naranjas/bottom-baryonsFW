@@ -14,11 +14,11 @@ class EMDecayWidths{
   virtual ~EMDecayWidths();
   virtual double execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
 			 double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
-			 double al_val, double ar_val,
+			 double al_val, double ar_val, double mstrange_val,
 			 double mbottom_val, double mlight_val, int baryon, int excMode, int prodDecay);
 
  private:
-  double MA; double MB; double MC; double mbottom; double mlight;
+  double MA; double MB; double MC; double mstrange; double mbottom; double mlight;
   int modeExcitation=0;
   double pi_val = 3.1415926536;
 
