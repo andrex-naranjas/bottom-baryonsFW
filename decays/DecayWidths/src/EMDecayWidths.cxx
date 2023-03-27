@@ -158,8 +158,8 @@ std::vector<double> EMDecayWidths::FlavorVector(double charge){
   std::vector<double> flavor_vector; flavor_vector.clear();
   flavor_vector.push_back(mu_qb);
   if(charge==0){
-    flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
-    flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+    flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
+    flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
   }else if(charge==1){
     flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
     flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
