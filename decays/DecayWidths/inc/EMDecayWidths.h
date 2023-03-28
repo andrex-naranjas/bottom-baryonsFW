@@ -57,7 +57,7 @@ class EMDecayWidths{
   virtual std::vector<double> FlavorVector(double charge=0);
   virtual double ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value, std::vector<double>, int excMode);
   virtual double ANGULAR_SUM_SQUARED_GROUND(double alpha_rho, double alpha_lam, double k_value);
-  virtual double DecayWidth(double decay, double fi2_value, double angular_sum_value);
+  virtual double DecayWidth(double fi2_value, double angular_sum_value);
   virtual double EB(double MB, double K);
   virtual double K(double MA, double MB);
   virtual double FI2(double EB, double MA, double k_value);
