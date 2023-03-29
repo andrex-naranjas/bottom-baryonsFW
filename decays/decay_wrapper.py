@@ -42,3 +42,44 @@ class decay(object):
                                            SA_val, LA_val, JA_val, SL_val, AL_val, AR_val,
                                            baryon, excMode, prodDecay)
         return decay_value
+
+
+    def electro_width(self, MA_val, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
+                      MB_val, SB_val, JB_val, LB_val, SlB_val, LlB_val, LrB_val,
+                      AL_val, AR_val,
+                      mbottom_val, mupdown_val, mstrange_val,
+                      baryon, excMode, prodDecay):
+        """
+        Method to convert the python variables to c++ objects
+        """
+        MA_val  = ctypes.c_double(MA_val)
+        SA_val  = ctypes.c_double(SA_val)
+        JA_val  = ctypes.c_double(JA_val)
+        LA_val  = ctypes.c_double(LA_val)
+        SlA_val = ctypes.c_double(SlA_val)
+        LlA_val = ctypes.c_double(LlA_val)
+        LrA_val = ctypes.c_double(LrA_val)
+        MB_val  = ctypes.c_double(MB_val)
+        SB_val  = ctypes.c_double(SB_val)
+        JB_val  = ctypes.c_double(JB_val)
+        LB_val  = ctypes.c_double(LB_val)
+        SlB_val = ctypes.c_double(SlB_val)
+        LlB_val = ctypes.c_double(LlB_val)
+        LrB_val = ctypes.c_double(LrB_val)
+        AL_val = ctypes.c_double(AL_val)
+        AR_val = ctypes.c_double(AR_val)
+        mbottom_val = ctypes.c_double(mbottom_val)
+        mupdown_val = ctypes.c_double(mupdown_val)
+        mstrange_val = ctypes.c_double(mstrange_val)
+        baryon = ctypes.c_int(baryon)
+        excMode = ctypes.c_int(excMode)
+        prodDecay = ctypes.c_int(prodDecay)
+        m_lib = ctypes.CDLL(os.path.join(self.workpath+"/DecayWidths", 'libbottomdecay.so'))
+        m_lib.electro_execute.restype = ctypes.c_double
+        m_lib.electro_execute.argtypes = [ctypes.c_double]
+        decay_value = m_lib.electro_execute(MA_val, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
+                                            MB_val, SB_val, JB_val, LB_val, SlB_val, LlB_val, LrB_val,
+                                            AL_val, AR_val,
+                                            mbottom_val, mupdown_val, mstrange_val,
+                                            baryon, excMode, prodDecay)
+        return decay_value
