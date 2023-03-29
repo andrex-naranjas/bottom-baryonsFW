@@ -32,44 +32,18 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   mbottom = mbottom_val;
   mlight = mlight_val;
 
-
   // which baryon, mode, decay product
   baryonFlag = baryon;
   modeExcitation = excMode;
   decayProd  = prodDecay;
   double alpha_rho = 0.,alpha_lam = 0.,flav_coup= 0.;
-
   alpha_rho = ar_val;
   alpha_lam = al_val;
 
   //fetch quantum numbers and projections
   L   = 0;  mL = getMomentumProjections(L); //check if this is always the case
-
-  // sa_val = 3./2.;
-  // ja_val = 3./2.;
-  // sla_val = 1.;
-
-  // sb_val = 1./2.;
-  // jb_val = 1./2.;
-  // slb_val = 0.;
-
-  // sa_val    = 0.5;
-  // sla_val   = 1.;  
-  // la_val    = 1.;  
-  // lla_val   = 1.;  
-  // lra_val   = 0.;  
-  // ja_val    = 0.5;
-  
-  // sb_val     = 0.5;
-  // jb_val     = 0.5;
-  // lb_val     = 0.;
-  // llb_val    = 0.;  
-  // lrb_val    = 0.;  
-  // slb_val    = 1.;  
-  
+  JA  = ja_val;    mJA  = getMomentumProjections(JA, true);
   SA  = sa_val;    mSA  = getMomentumProjections(SA);
-  JA  = ja_val;    mJA  = getMomentumProjections(JA);
-  JA  = ja_val;    mJA.clear(); mJA.push_back(0.5); mJA.push_back(1.5);
   SlA = sla_val;   mSlA = getMomentumProjections(SlA);
   LA  = la_val;    mLA  = getMomentumProjections(LA);
   LlA = lla_val;   mLlA = getMomentumProjections(LlA);
@@ -87,34 +61,11 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   S3  = 0.5;       mS3  = getMomentumProjections(S3);
 
   double k_value; k_value = K(MA, MB);
-  double EB_value = EB(MB, k_value);
-
-  // alpha_rho = 0.4132549850060273;
-  // alpha_lam = 0.5246260684382235;
-  // k_value  =  0.2497475767366728;
-  
+  double EB_value = EB(MB, k_value);  
   double fi2_value  = FI2(EB_value, MA, k_value);
-
   std::vector<double> flavor_vector = FlavorVector(1.);
-
-  // std::cout<<U1_rho_lambda(k_value, alpha_rho, alpha_lam, 0, 0, 1)<<std::endl;
-  // std::cout<<U2_rho_lambda(k_value, alpha_rho, alpha_lam, 0, 0, 1)<<std::endl;
-  // std::cout<<U3_rho_lambda(k_value, alpha_rho, alpha_lam, 0, 0, 1)<<std::endl;
-
-  // std::cout<<U1_rho_lambda(k_value, alpha_rho, alpha_lam, 0, 0, 0)<<std::endl;
-  // std::cout<<U2_rho_lambda(k_value, alpha_rho, alpha_lam, 0, 0, 0)<<std::endl;
-  // std::cout<<U3_rho_lambda(k_value, alpha_rho, alpha_lam, 0, 0, 0)<<std::endl;
-
   double sum_value = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value, flavor_vector, modeExcitation);
-  double decayWidth = DecayWidth(fi2_value, sum_value); //flav_coup,
-
-  std::cout<<decayWidth<<"  TEST, decay width     "<<std::endl;
-
-  // for(int i=0; i<(int)flavor_vector.size(); i++) 
-  //   std::cout<<flavor_vector.at(i)<<"    "<<i<<std::endl;
-
-  // for(int i=0; i<(int)mJA.size(); i++) 
-  //   std::cout<<mJA.at(i)<<"  MJA   "<<i<<std::endl;
+  double decayWidth = DecayWidth(fi2_value, sum_value);
 
   return decayWidth;
 }
@@ -125,11 +76,14 @@ double EMDecayWidths::DecayWidth(double fi2_value, double angular_sum_value){
   return (2.*pi_val) * decayWidth * GeV2;
 }
 
-std::vector<double> EMDecayWidths::getMomentumProjections(double j_angular){
+std::vector<double> EMDecayWidths::getMomentumProjections(double j_angular, bool onlyPositive){
   // Method to obtain the projections "m_projection" for a given angular momentum "j_angular"
+  // set onlyPositive = true, to obtain only m_projection > 0
   std::vector<double> angularProjections; angularProjections.clear();
-  if(j_angular==0.){angularProjections.push_back(0); return angularProjections;}  
-  double m_projection = (-1.0)*j_angular;
+  if(j_angular==0.){angularProjections.push_back(0); return angularProjections;}
+  double m_projection = 0.;
+  if(!onlyPositive) m_projection = (-1.0)*j_angular;
+  else m_projection = (0.5)*(int)(std::ceil(j_angular)!=j_angular);
   do{
     angularProjections.push_back(m_projection);
     m_projection++;

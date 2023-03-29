@@ -168,3 +168,4 @@ JA_val = 1.5
 
 value = test_electro.total_decay_width(baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
                                        ModEx_val, bootstrap=False, m1=m1, m2=m2, m3=m3)
+print("EM decay width:  ", value)
