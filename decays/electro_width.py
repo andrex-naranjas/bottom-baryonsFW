@@ -62,20 +62,29 @@ class ElectroWidths:
         SlB_qm = 0.0
 
         # Orbital lambda amps
-        # SB_qm = 0.5
+        SB_qm = 0.5
+        SlB_qm = 1.0
+        LB_qm = 0.0
+        LlB_qm = 0.0
+        LrB_qm = 0.0
+        JB_qm = 0.5
+
+        # Orbital lambda amps second test
+        # SB_qm = 0.5 
         # SlB_qm = 1.0
         # LB_qm = 0.0
         # LlB_qm = 0.0
         # LrB_qm = 0.0
         # JB_qm = 0.5
 
-        # Orbital lambda amps second test
-        SB_qm = 0.5 
-        SlB_qm = 1.0
-        LB_qm = 0.0
-        LlB_qm = 0.0
-        LrB_qm = 0.0
-        JB_qm = 0.5
+        # hugo test
+        # MassB = 5.792
+        # SB_qm = 0.5 
+        # JB_qm = 0.5
+        # LB_qm = 0.0
+        # LlB_qm = 0.0
+        # LrB_qm = 0.0
+        # SlB_qm = 0.0
 
 
         excMode = 1
@@ -146,6 +155,15 @@ LA_val = 1.0
 LlA_val = 1.0
 LrA_val = 0.0
 JA_val = 1.5
+
+
+# SA_val = 0.5
+# SlA_val = 1.0
+# LA_val = 1
+# LlA_val = 1
+# LrA_val = 0
+# JA_val = 0.5
+
 
 
 value = test_electro.total_decay_width(baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
