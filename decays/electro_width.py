@@ -14,6 +14,10 @@ class ElectroWidths:
     Class that administrates the decay width calculations of the hevay baryon widths done by the C++ class
     The class calls the python wrapper and feeds the functions with the needed quatumn numbers
     and masses
+
+    baryon FLAG: 1 -> omega, 2->cascade_6, 3->sigma,# 4 -> lambda, 5-> cascade_3
+    ModEx  FLAG: 0-> ground(grd), 1 -> lambda(lam), 2->rho, 3->rop_lam(rpl), 4->rop_rho(rpr), 5->mix  Excitation
+    decPr  FLAG: 0->.....  decayProduct Flag
     """
     def __init__(self, bootstrap=False, baryons='', workpath="."):
         self.m_width = decay(workpath)
@@ -44,8 +48,9 @@ class ElectroWidths:
         alpha_rho = self.alphas(k_prim, m_rho)
         # print(alpha_lam, alpha_rho)
 
-        mbottom = m1/1000
-        mlight = 0.5*(m2 + m3)/1000
+        mbottom  = m1/1000
+        mupdown  = m2/1000
+        mstrange = m3/1000
 
         # these depend on each decay
         MassB = 5.935
@@ -92,7 +97,8 @@ class ElectroWidths:
         decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                  MassB, SB_qm, JB_qm, LB_qm, SlB_qm, LlB_qm, LrB_qm,
                                                  alpha_lam, alpha_rho,
-                                                 mbottom, mlight, baryon, excMode, prodDecay)
+                                                 mbottom, mupdown, mstrange,
+                                                 baryon, excMode, prodDecay)
         return decay_value
 
 

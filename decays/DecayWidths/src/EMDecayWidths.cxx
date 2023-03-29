@@ -22,7 +22,8 @@ EMDecayWidths::~EMDecayWidths(){}
 double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
 			      double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
 			      double al_val, double ar_val,
-			      double mbottom_val, double mlight_val, int baryon, int excMode, int prodDecay){  
+			      double mbottom_val, double mupdown_val, double mstrange_val,
+			      int baryon, int excMode, int prodDecay){
   // decay product masses
   MA = ma_val;
   MB = mb_val;  
@@ -30,13 +31,16 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
 
   // quark masses
   mbottom = mbottom_val;
-  mlight = mlight_val;
+  mupdown = mupdown_val;
+  mstrange = mstrange_val;
+  mlight = 0.5*(mupdown_val + mstrange_val);
 
   // which baryon, mode, decay product
   baryonFlag = baryon;
   modeExcitation = excMode;
   decayProd  = prodDecay;
-  double alpha_rho = 0.,alpha_lam = 0.,flav_coup= 0.;
+
+  double alpha_rho = 0.,alpha_lam = 0.;
   alpha_rho = ar_val;
   alpha_lam = al_val;
 
@@ -119,22 +123,87 @@ double EMDecayWidths::ClebschGordan(WignerSymbols *m_wigner,
   return coef * three_j;
 }
 
-std::vector<double> EMDecayWidths::FlavorVector(double charge){
-  double mu_qu = (+1.) * ((2./3.) * std::sqrt(1./137.)/(2. * 0.299));
-  double mu_qd = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * 0.299));
-  double mu_qs = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * 0.465));
-  double mu_qb = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * 4.928));
+std::vector<double> EMDecayWidths::FlavorVector(int baryonFlag, int decayProd, double charge){
+  double mu_qu = (+1.) * ((2./3.) * std::sqrt(1./137.)/(2. * mupdown));
+  double mu_qd = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mupdown));
+  double mu_qs = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mstrange));
+  double mu_qb = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mbottom));
   std::vector<double> flavor_vector; flavor_vector.clear();
-  flavor_vector.push_back(mu_qb);
+
   if(charge==0){
     flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
     flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
-  }else if(charge==1){
+  }else if(charge==1){//test
     // flavor_vector.push_back( 0.5*(mu_qu - mu_qs) );
     // flavor_vector.push_back( 0.5*((-1.0)*mu_qu + mu_qs) );
     flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
     flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
   }
+
+
+
+  if(baryonFlag==1){ // Omegas
+
+    //For Omega_- to Omega_-
+    flavor_vector.push_back(mu_qs);
+    flavor_vector.push_back(mu_qs);
+
+
+  }else if(baryonFlag==2 or baryonFlag==5){//cascades (6-plet, 3-plet)
+
+
+    //Xi_b_prime to Xi_b and Xi_0_prime to Xi_0
+    if(charge==0){
+      flavor_vector.push_back( 0.5*(mu_qu - mu_qs) );
+      flavor_vector.push_back( -0.5*(mu_qu - mu_qs) );
+    }else if(charge==1){
+      flavor_vector.push_back( 0.5*(mu_qd - mu_qs) );
+      flavor_vector.push_back( -0.5*(mu_qd - mu_qs) );
+    }
+
+
+  //Function that Andres included (Xi_b to Xi_b and Xi_0 to Xi_0)
+  if(charge==0){
+    flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
+    flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
+  }else if(charge==1){
+    flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+    flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+  }
+
+
+  }else if(baryonFlag==3){// sigmas
+
+  //6 with 3/2 to 6 with 1/2
+  //For Sigma_+ to Sigma_+
+  flavor_vector.push_back(mu_qu);
+  flavor_vector.push_back(mu_qu);
+
+  //For Sigma_0 to Sigma_0
+  flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+  flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+
+  //For Sigma_- to Sigma_-
+  flavor_vector.push_back(mu_qd);
+  flavor_vector.push_back(mu_qd);
+
+  //6 to 3bar
+  //For Sigma_0 to Lambda_0
+  flavor_vector.push_back( 0.5*(mu_qu - mu_qd) );
+  flavor_vector.push_back( -0.5*(mu_qu - mu_qd) );
+
+
+
+  }else if(baryonFlag==4){// lambdas
+
+    //3bar to 3bar
+    //For Lambda_0 to Lambda_0
+    flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+    flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+  }
+
+
+  flavor_vector.push_back(mu_qb); // third element 
   return flavor_vector;    
 }
 
@@ -178,7 +247,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 				  ClebschGordan(m_wigner, S1,  S2,  SlA, mS1.at(iMS1),   mS2.at(iMS2),   mSlA.at(iMSlA));
 				AMP1_1+=dummy;
 			      }
-    AMP1_1 *= flavor_vector.at(2) * (2.*std::sqrt(pi_val * k_value));
+    AMP1_1 *= flavor_vector.at(0) * (2.*std::sqrt(pi_val * k_value));
 
     for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP1, ORBITAL SPLIT
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
@@ -198,7 +267,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			ClebschGordan(m_wigner, LA,  SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),    mJA.at(iMJA));
 		      AMP1_2+=dummy;
 		    }
-    AMP1_2 *= flavor_vector.at(2) * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
+    AMP1_2 *= flavor_vector.at(0) * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
     AMP1 = AMP1_1 - AMP1_2;
 
     for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++) // AMP2, SPIN FLIP
@@ -276,7 +345,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     				  ClebschGordan(m_wigner, S1,   S2,   SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));
     				AMP3_1+=dummy;
     			      }
-    AMP3_1 *= flavor_vector.at(0) * (2.*std::sqrt(pi_val * k_value));
+    AMP3_1 *= flavor_vector.at(2) * (2.*std::sqrt(pi_val * k_value));
 
     for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP3, ORBITAL SPLIT
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
@@ -296,7 +365,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			ClebschGordan(m_wigner, LA,   SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),   mJA.at(iMJA));
     		      AMP3_2+=dummy;
     		    }
-    AMP3_2 *= flavor_vector.at(0) * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
+    AMP3_2 *= flavor_vector.at(2) * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
     AMP3 = AMP3_1 - AMP3_2;
 
     // sum quark amplitudes, squared them and get squared the total
