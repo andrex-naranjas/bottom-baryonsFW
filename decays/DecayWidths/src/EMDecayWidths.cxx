@@ -142,8 +142,7 @@ std::vector<double> EMDecayWidths::FlavorVector(int baryonFlag, int decayProd){
     }else if(decayProd==2){ // Xi_b_prime to Xi_b
       flavor_vector.push_back( +0.5*(mu_qd - mu_qs) );
       flavor_vector.push_back( -0.5*(mu_qd - mu_qs) );
-    }
-    if(decayProd==3){ // Xi_0_prime to Xi_0_prime
+    }else if(decayProd==3){ // Xi_0_prime to Xi_0_prime
       flavor_vector.push_back( +0.5*(mu_qu + mu_qs) );
       flavor_vector.push_back( +0.5*(mu_qu + mu_qs) );
     }else if(decayProd==4){ // Xi_b_prime to Xi_b_prime

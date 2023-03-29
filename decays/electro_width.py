@@ -38,7 +38,7 @@ class ElectroWidths:
         LlA_qm = LlA_val
         LrA_qm = LrA_val
 
-        baryon= 5 # self.baryon_flag(baryons)
+        baryon= 2 # self.baryon_flag(baryons)
         ModEx = 0 # self.ModEx_flag(ModEx_val)
         nChannels = 0 # self.n_channels(baryons)
         m_lam, m_rho = self.reduced_masses(baryons, m1, m2, m3)
@@ -93,7 +93,7 @@ class ElectroWidths:
 
 
         excMode = 1
-        prodDecay = -1
+        prodDecay = 3
         decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                  MassB, SB_qm, JB_qm, LB_qm, SlB_qm, LlB_qm, LrB_qm,
                                                  alpha_lam, alpha_rho,
