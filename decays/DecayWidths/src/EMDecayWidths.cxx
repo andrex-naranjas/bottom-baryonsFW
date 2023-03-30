@@ -135,59 +135,73 @@ std::vector<double> EMDecayWidths::FlavorVector(int baryonFlag, int decayProd){
     //For Omega_- to Omega_-
     flavor_vector.push_back(mu_qs);
     flavor_vector.push_back(mu_qs);
+    flavor_vector.push_back(mu_qb); // third element 
   }else if(baryonFlag==2){ // Cascades prime
     if(decayProd==1){ // Xi_0_prime to Xi_0
       flavor_vector.push_back( +0.5*(mu_qu - mu_qs) );
       flavor_vector.push_back( -0.5*(mu_qu - mu_qs) );
+      flavor_vector.push_back(0.); // third element
     }else if(decayProd==2){ // Xi_b_prime to Xi_b
       flavor_vector.push_back( +0.5*(mu_qd - mu_qs) );
       flavor_vector.push_back( -0.5*(mu_qd - mu_qs) );
+      flavor_vector.push_back(0.); // third element 
     }else if(decayProd==3){ // Xi_0_prime to Xi_0_prime
       flavor_vector.push_back( +0.5*(mu_qu + mu_qs) );
       flavor_vector.push_back( +0.5*(mu_qu + mu_qs) );
+      flavor_vector.push_back(mu_qb); // third element 
     }else if(decayProd==4){ // Xi_b_prime to Xi_b_prime
       flavor_vector.push_back( +0.5*(mu_qd + mu_qs) );
       flavor_vector.push_back( +0.5*(mu_qd + mu_qs) );
+      flavor_vector.push_back(mu_qb); // third element 
     }
   }else if(baryonFlag==3){ // Sigmas
     if(decayProd==1){ // Sigma_+ to Sigma_+ (6 with 3/2 to 6 with 1/2)
       flavor_vector.push_back(mu_qu);
       flavor_vector.push_back(mu_qu);
+      flavor_vector.push_back(mu_qb); // third element 
     }else if(decayProd==2){ // Sigma_0 to Sigma_0
       flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
       flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+      flavor_vector.push_back(mu_qb); // third element 
     }else if(decayProd==3){ // Sigma_- to Sigma_-
       flavor_vector.push_back(mu_qd);
       flavor_vector.push_back(mu_qd);
+      flavor_vector.push_back(mu_qb); // third element 
     }else if(decayProd==4){ // Sigma_0 to Lambda_0 (6 to 3bar)
       flavor_vector.push_back( +0.5*(mu_qu - mu_qd) );
       flavor_vector.push_back( -0.5*(mu_qu - mu_qd) );
+      flavor_vector.push_back(0.); // third element 
     }
   }else if(baryonFlag==4){ // Lambdas
     if(decayProd==1){ // Lambda_0 to Lambda_0 (3bar to 3bar)
       flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
       flavor_vector.push_back( 0.5*(mu_qu + mu_qd) );
+      flavor_vector.push_back(mu_qb); // third element
     }else if(decayProd==2){ // Lambda_0  to Sigma_0
       flavor_vector.push_back( +0.5*(mu_qu - mu_qd) );
       flavor_vector.push_back( -0.5*(mu_qu - mu_qd) );
+      flavor_vector.push_back(0.); // third element 
     }
   }else if(baryonFlag==5){// Cascades anti3_plet
     if(decayProd==1){ // Xi_0 to Xi_0
       flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
       flavor_vector.push_back( 0.5*(mu_qu + mu_qs) );
+      flavor_vector.push_back(mu_qb); // third element 
     }else if(decayProd==2){ // Xi_0 to Xi_0_prime
       flavor_vector.push_back( +0.5*(mu_qu - mu_qs) );
       flavor_vector.push_back( -0.5*(mu_qu - mu_qs) );
+      flavor_vector.push_back(0.); // third element 
     }else if(decayProd==3){ // Xi_b to Xi_b
       flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
       flavor_vector.push_back( 0.5*(mu_qd + mu_qs) );
+      flavor_vector.push_back(mu_qb); // third element 
     }else if(decayProd==4){ // Xi_b to Xi_b_prime
       flavor_vector.push_back( +0.5*(mu_qd - mu_qs) );
       flavor_vector.push_back( -0.5*(mu_qd - mu_qs) );
+      flavor_vector.push_back(0.); // third element 
     }
   }
-  flavor_vector.push_back(mu_qb); // third element 
-  return flavor_vector;    
+  return flavor_vector;
 }
 
 double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value, std::vector<double> flavor_vector, int excMode){
