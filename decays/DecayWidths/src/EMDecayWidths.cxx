@@ -369,6 +369,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     TOT_AMP = AMP1 + AMP2 + AMP3;
     SUM_SQUARED_AMP += TOT_AMP * TOT_AMP;
   }
+  delete m_wigner;
   return SUM_SQUARED_AMP;
 }
 
