@@ -46,6 +46,10 @@ class EMDecayWidths{
   int baryonFlag=0;
   int decayProd=0;
 
+  double flavor_vec1 = 0.;
+  double flavor_vec2 = 0.;
+  double flavor_vec3 = 0.;
+
   // check later if still needed
   int p_imag = 1;
 
@@ -56,8 +60,7 @@ class EMDecayWidths{
   virtual double ClebschGordan(WignerSymbols *m_wigner,
 			       double l1, double l2, double l3,
 			       double m1, double m2, double m3);
-  virtual std::vector<double> FlavorVector(int baryonFlag, int decayProd);
-  virtual double ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value, std::vector<double>, int excMode);
+  virtual double ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, double k_value, int excMode);
   virtual double ANGULAR_SUM_SQUARED_GROUND(double alpha_rho, double alpha_lam, double k_value);
   virtual double DecayWidth(double fi2_value, double angular_sum_value);
   virtual double EB(double MB, double K);
