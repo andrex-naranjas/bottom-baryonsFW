@@ -45,7 +45,7 @@ class decay(object):
 
 
     def electro_width(self, MA_val, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
-                      MB_val, SB_val, JB_val, LB_val, SlB_val, LlB_val, LrB_val,
+                      MB_val,
                       AL_val, AR_val,
                       mbottom_val, mupdown_val, mstrange_val,
                       baryon, excMode, prodDecay):
@@ -60,12 +60,6 @@ class decay(object):
         LlA_val = ctypes.c_double(LlA_val)
         LrA_val = ctypes.c_double(LrA_val)
         MB_val  = ctypes.c_double(MB_val)
-        SB_val  = ctypes.c_double(SB_val)
-        JB_val  = ctypes.c_double(JB_val)
-        LB_val  = ctypes.c_double(LB_val)
-        SlB_val = ctypes.c_double(SlB_val)
-        LlB_val = ctypes.c_double(LlB_val)
-        LrB_val = ctypes.c_double(LrB_val)
         AL_val = ctypes.c_double(AL_val)
         AR_val = ctypes.c_double(AR_val)
         mbottom_val = ctypes.c_double(mbottom_val)
@@ -78,7 +72,7 @@ class decay(object):
         m_lib.electro_execute.restype = ctypes.c_double
         m_lib.electro_execute.argtypes = [ctypes.c_double]
         decay_value = m_lib.electro_execute(MA_val, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
-                                            MB_val, SB_val, JB_val, LB_val, SlB_val, LlB_val, LrB_val,
+                                            MB_val,
                                             AL_val, AR_val,
                                             mbottom_val, mupdown_val, mstrange_val,
                                             baryon, excMode, prodDecay)

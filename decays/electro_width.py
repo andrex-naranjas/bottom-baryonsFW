@@ -21,7 +21,7 @@ class ElectroWidths:
     """
     def __init__(self, bootstrap=False, baryons='', workpath="."):
         self.m_width = decay(workpath)
-        # self.fetch_decay_masses(bootstrap)
+        self.fetch_decay_masses(bootstrap)
         self.channel_widths_vector = []
 
     def total_decay_width(self, baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
@@ -50,54 +50,32 @@ class ElectroWidths:
         alpha_lam = self.alphas(k_prim, m_lam)
         alpha_rho = self.alphas(k_prim, m_rho)
 
-        # these depend on each decay
-        MassB = 5.935
-        SB_qm = 0
-        JB_qm = 0
-        LB_qm = 0
-        SlB_qm = 0
-        LlB_qm = 0
-        LrB_qm = 0
-        
-        # first AMPS
-        SB_qm = 0.5
-        JB_qm = 0.5
-        SlB_qm = 0.0
+        for i in range(nChannels):
+            decPr = i+1
+            decPr = 3
+            MassB = self.decay_mass(bootstrap, baryons, decPr)
+            single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                                                            MassB,
+                                                            alpha_lam, alpha_rho,
+                                                            mbottom, mupdown, mstrange,
+                                                            baryon, ModEx, decPr)
 
-        # Orbital lambda amps
-        SB_qm = 0.5
-        SlB_qm = 1.0
-        LB_qm = 0.0
-        LlB_qm = 0.0
-        LrB_qm = 0.0
-        JB_qm = 0.5
+            channel_widths = np.append(channel_widths, single_decay_value)
+            baryon_name, ModEx_name, decPr_name =  "test", "test", "test" # du.state_labels(baryon, ModEx, decPr, LA_qm)
+            if not bootstrap:
+                print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.6f '
+                      %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, single_decay_value))
+                    
+        # sum the individual width to obtain total width
+        total_decay_width = np.sum(channel_widths)
+        # print(alpha_lam,alpha_rho)
+        if not bootstrap:
+            print('          ******************   TOTAL WIDTH FOR', baryons, ModEx_name, round(total_decay_width,4), '   ******************')
+            print('-------------------------------------------------------------------------------------------------------------')
+            
+        self.channel_widths_vector.append(channel_widths) # for individual decay tables, this is a list of arrays!
+        return total_decay_width
 
-        # Orbital lambda amps second test
-        # SB_qm = 0.5 
-        # SlB_qm = 1.0
-        # LB_qm = 0.0
-        # LlB_qm = 0.0
-        # LrB_qm = 0.0
-        # JB_qm = 0.5
-
-        # hugo test
-        # MassB = 5.792
-        # SB_qm = 0.5 
-        # JB_qm = 0.5
-        # LB_qm = 0.0
-        # LlB_qm = 0.0
-        # LrB_qm = 0.0
-        # SlB_qm = 0.0
-
-
-
-        prodDecay = 3
-        decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
-                                                 MassB, SB_qm, JB_qm, LB_qm, SlB_qm, LlB_qm, LrB_qm,
-                                                 alpha_lam, alpha_rho,
-                                                 mbottom, mupdown, mstrange,
-                                                 baryon, ModEx, prodDecay)
-        return decay_value
 
     def baryon_flag(self, baryons):
         """
@@ -149,24 +127,27 @@ class ElectroWidths:
         """
         Method to set number of decay channels has each baryon
         """
-        if(baryons=='omegas'):           return 1
-        elif(baryons=='cascades'):       return 4
-        elif(baryons=='sigmas'):         return 4
-        elif(baryons=='lambdas'):        return 2
-        elif(baryons=='cascades_anti3'): return 4
+        if(baryons=='omegas'):           return 2
+        elif(baryons=='cascades'):       return 6
+        elif(baryons=='sigmas'):         return 7
+        elif(baryons=='lambdas'):        return 3
+        elif(baryons=='cascades_anti3'): return 6
 
-    def decay_masses(self, bootstrap, baryons, decPr):
+    def decay_mass(self, bootstrap, baryons, decPr):
         """
         Method to fetch mass of the decay products
         """
         if(baryons=='omegas'):
             if(decPr==1):
-                if not bootstrap:  return self.xi_mass
-                else: return np.random.choice(self.gauss_xi, size=None)         
+                if not bootstrap:  return self.omega_mass
+                else: return np.random.choice(self.gauss_omega, size=None)
+            if(decPr==2):
+                if not bootstrap:  return self.omega_s_mass
+                else: return np.random.choice(self.gauss_omega_s, size=None)         
         elif(baryons=='cascades'):
             if(decPr==1):
-                if not bootstrap: return self.lambda_mass
-                else: return np.random.choice(self.gauss_lambda)
+                if not bootstrap: return self.xi_mass
+                else: return np.random.choice(self.gauss_xi)
             elif(decPr==2):
                 if not bootstrap: return self.xi_mass
                 else: return np.random.choice(self.gauss_xi, size=None)
@@ -174,32 +155,50 @@ class ElectroWidths:
                 if not bootstrap: return self.xi_p_mass
                 else: return np.random.choice(self.gauss_xi_p, size=None)
             elif(decPr==4):
-                if not bootstrap: return self.xi_s_mass
-                else: return np.random.choice(self.gauss_xi_s, size=None)                
+                if not bootstrap: return self.xi_p_mass
+                else: return np.random.choice(self.gauss_xi_p, size=None)
+            elif(decPr==5):
+                if not bootstrap: return self.xi_p_s_mass
+                else: return np.random.choice(self.gauss_xi_p_s, size=None)
+            elif(decPr==6):
+                if not bootstrap: return self.xi_p_s_mass
+                else: return np.random.choice(self.gauss_xi_p_s, size=None)
         elif(baryons=='sigmas'):
             if(decPr==1):
                 if not bootstrap: return self.sigma_mass
                 else: return np.random.choice(self.gauss_sigma, size=None)
             elif(decPr==2):
-                if not bootstrap: return self.sigma_s_mass
-                else: return np.random.choice(self.gauss_sigma_s, size=None)
+                if not bootstrap: return self.sigma_mass
+                else: return np.random.choice(self.gauss_sigma, size=None)
             elif(decPr==3):
+                if not bootstrap: return self.sigma_mass
+                else: return np.random.choice(self.gauss_sigma, size=None)
+            elif(decPr==4):
                 if not bootstrap: return self.lambda_mass
                 else: return np.random.choice(self.gauss_lambda, size=None)
-            elif(decPr==4):
-                if not bootstrap: return self.sigma_mass
-                else: return np.random.choice(self.gauss_sigma, size=None)
+            elif(decPr==5):
+                if not bootstrap: return self.sigma_s_mass
+                else: return np.random.choice(self.gauss_sigma_s, size=None)
+            elif(decPr==6):
+                if not bootstrap: return self.sigma_s_mass
+                else: return np.random.choice(self.gauss_sigma_s, size=None)
+            elif(decPr==7):
+                if not bootstrap: return self.sigma_s_mass
+                else: return np.random.choice(self.gauss_sigma_s, size=None)
         elif(baryons=='lambdas'):
             if(decPr==1):
+                if not bootstrap: return self.lambda_mass
+                else: return np.random.choice(self.gauss_lambda, size=None)
+            elif(decPr==2):
                 if not bootstrap: return self.sigma_mass
                 else: return np.random.choice(self.gauss_sigma, size=None)
-            elif(decPr==2):
+            elif(decPr==3):
                 if not bootstrap: return self.sigma_s_mass
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
         elif(baryons=='cascades_anti3'):
             if(decPr==1):
-                if not bootstrap: return self.lambda_mass
-                else: return np.random.choice(self.gauss_lambda, size=None)
+                if not bootstrap: return self.xi_mass,     self.pion_mass
+                else: return np.random.choice(self.gauss_xi, size=None)
             elif(decPr==2):
                 if not bootstrap: return self.xi_mass,     self.pion_mass
                 else: return np.random.choice(self.gauss_xi, size=None)
@@ -207,8 +206,45 @@ class ElectroWidths:
                 if not bootstrap: return self.xi_p_mass,   self.pion_mass
                 else: return np.random.choice(self.gauss_xi_p, size=None)
             elif(decPr==4):
-                if not bootstrap: return self.xi_s_mass,   self.pion_mass
-                else: return np.random.choice(self.gauss_xi_s, size=None)
+                if not bootstrap: return self.xi_p_mass,   self.pion_mass
+                else: return np.random.choice(self.gauss_xi_p, size=None)
+            elif(decPr==5):
+                if not bootstrap: return self.xi_p_s_mass
+                else: return np.random.choice(self.gauss_xi_p_s, size=None)
+            elif(decPr==6):
+                if not bootstrap: return self.xi_p_s_mass
+                else: return np.random.choice(self.gauss_xi_p_s, size=None)
+
+    def fetch_decay_masses(self, bootstrap):
+        # Bottom hadrons
+        self.lambda_mass      = 5.61960 # +- 0.0001
+        self.xi_p_mass        = 5.9350#2 # +- 0.00005        
+        self.xi_p_s_mass      = 5.9350#2 # +- 0.00005        CHECK!!
+        self.xi_mass          = 5.79700 # +- 0.00060.... Difference with Xb0=5.9 +- 0.6 MeV
+        self.xi_s_mass        = 6.07800 # +- 0.00006 (predicted mass)$6078^{+10}_{-10}$  CHECK!!
+        self.sigma_mass       = 5.81056 # +- 0.00025.... Difference of + and - == 5.06+-0.18 MeV
+        self.sigma_s_mass     = 5.83032 # +- 0.00030.... Difference of + and - == 4.37+-0.33 OK
+        self.omega_mass       = 6.04520 # +- 0.00120
+        self.omega_s_mass     = 6.09300 # +- 0.00060 (predicted mass) # $6093^{+10}_{-10}$ CHECK!!
+        self.B0_mass          = 5.27966 # +- 0.00012
+        self.Bs_mass          = 5.36692 # +- 0.00010
+        self.B_star_mass      = 5.32471 # +- 0.00021
+
+        if(bootstrap):
+            # Bottom hadrons
+            self.gauss_lambda      = np.random.normal(5.61960, 0.00017, 10000)
+            self.gauss_xi_p        = np.random.normal(5.93502, 0.00005, 10000)
+            self.gauss_xi          = np.random.normal(5.79700, 0.00060, 10000)
+            self.gauss_xi_s        = np.random.normal(6.07800, 0.00100, 10000) # predicted massA
+            self.gauss_sigma       = np.random.normal(5.81056, 0.00025, 10000)
+            self.gauss_sigma_s     = np.random.normal(5.83032, 0.00030, 10000)
+            self.gauss_omega       = np.random.normal(6.04520, 0.00120, 10000)
+            self.gauss_omega_s     = np.random.normal(6.09300, 0.00060, 10000) # predicted massA    
+            self.gauss_B0          = np.random.normal(5.27966, 0.00012, 10000)
+            self.gauss_Bs          = np.random.normal(5.36692, 0.00010, 10000)
+            self.gauss_B_star      = np.random.normal(5.32471, 0.00021, 10000)
+
+
 
 
 test_electro = ElectroWidths()
@@ -258,3 +294,24 @@ JA_val = 1.5
 value = test_electro.total_decay_width(baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
                                        ModEx_val, bootstrap=False, m1=m1, m2=m2, m3=m3)
 print("EM decay width:  ", value)
+
+
+        # SB_qm = 0
+        # JB_qm = 0
+        # LB_qm = 0
+        # SlB_qm = 0
+        # LlB_qm = 0
+        # LrB_qm = 0
+        
+        # # first AMPS
+        # SB_qm = 0.5
+        # JB_qm = 0.5
+        # SlB_qm = 0.0
+
+        # # Orbital lambda amps
+        # SB_qm = 0.5
+        # SlB_qm = 1.0
+        # LB_qm = 0.0
+        # LlB_qm = 0.0
+        # LrB_qm = 0.0
+        # JB_qm = 0.5

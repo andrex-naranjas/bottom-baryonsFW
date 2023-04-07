@@ -13,7 +13,7 @@ class EMDecayWidths{
   EMDecayWidths();
   virtual ~EMDecayWidths();
   virtual double execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
-			 double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
+			 double mb_val,
 			 double al_val, double ar_val,
 			 double mbottom_val, double mupdown_val, double mstrange_val,
 			 int baryon, int excMode, int prodDecay);
@@ -46,9 +46,9 @@ class EMDecayWidths{
   int baryonFlag=0;
   int decayProd=0;
 
-  double flavor_vec1 = 0.;
-  double flavor_vec2 = 0.;
-  double flavor_vec3 = 0.;
+  double flav_q1 = 0.;
+  double flav_q2 = 0.;
+  double flav_q3 = 0.;
 
   // check later if still needed
   int p_imag = 1;
@@ -173,13 +173,13 @@ class EMDecayWidths{
 //to talk to python
 extern "C"{
   double electro_execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
-			 double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
+			 double mb_val,
 			 double al_val, double ar_val,
 			 double mbottom_val,  double mupdown_val, double mstrange_val,
 			 int baryon, int excMode, int prodDecay){
     EMDecayWidths *m_decays = new EMDecayWidths();
     return m_decays->execute(ma_val, sa_val, ja_val, la_val, sla_val, lla_val, lra_val,
-			     mb_val, sb_val, jb_val, lb_val, slb_val, llb_val, lrb_val,
+			     mb_val,
 			     al_val, ar_val,
 			     mbottom_val, mupdown_val, mstrange_val,
 			     baryon, excMode, prodDecay);

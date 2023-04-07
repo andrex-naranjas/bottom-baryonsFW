@@ -20,7 +20,7 @@ EMDecayWidths::EMDecayWidths()
 EMDecayWidths::~EMDecayWidths(){}
 
 double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, double la_val, double sla_val, double lla_val, double lra_val,
-			      double mb_val, double sb_val, double jb_val, double lb_val, double slb_val, double llb_val, double lrb_val,
+			      double mb_val, 
 			      double al_val, double ar_val,
 			      double mbottom_val, double mupdown_val, double mstrange_val,
 			      int baryon, int excMode, int prodDecay){
@@ -43,31 +43,46 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   double alpha_rho = 0.,alpha_lam = 0.;
   alpha_rho = ar_val; alpha_lam = al_val;
 
+  double sb_val=0.; double jb_val=0.; double lb_val=0.;
+  double slb_val=0.; double llb_val=0.; double lrb_val=0.;
+
   double mu_qu = (+1.) * ((2./3.) * std::sqrt(1./137.)/(2. * mupdown));
   double mu_qd = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mupdown));
   double mu_qs = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mstrange));
   double mu_qb = (-1.) * ((1./3.) * std::sqrt(1./137.)/(2. * mbottom));
+  double mu_sum_u_s = 0.5*(mu_qu + mu_qs); double mu_dif_u_s = 0.5*(mu_qu - mu_qs);
+  double mu_sum_d_s = 0.5*(mu_qd + mu_qs); double mu_dif_d_s = 0.5*(mu_qd - mu_qs);
+  double mu_sum_u_d = 0.5*(mu_qu + mu_qd); double mu_dif_u_d = 0.5*(mu_qu - mu_qd);
 
   if(baryonFlag==1){// omegas
-    if(decayProd == 1)   {flavor_vec1 = mu_qs;                flavor_vec2 = mu_qs;                flavor_vec3 = mu_qb;} //Omega_- to Omega_-
+    if(decayProd== 1)    {flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Omega_-
+    else if(decayProd==2){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Omega_-*
   }else if(baryonFlag==2){// cascades prime
-    if(decayProd==1)     {flavor_vec1 = +0.5*(mu_qu - mu_qs); flavor_vec2 = -0.5*(mu_qu - mu_qs); flavor_vec3 = 0.;}    //Xi_0_prime to Xi_0
-    else if(decayProd==2){flavor_vec1 = +0.5*(mu_qd - mu_qs); flavor_vec2 = -0.5*(mu_qd - mu_qs); flavor_vec3 = 0.;}    //Xi_b_prime to Xi_b
-    else if(decayProd==3){flavor_vec1 = +0.5*(mu_qu + mu_qs); flavor_vec2 = +0.5*(mu_qu + mu_qs); flavor_vec3 = mu_qb;} //Xi_0_prime to Xi_0_prime
-    else if(decayProd==4){flavor_vec1 = +0.5*(mu_qd + mu_qs); flavor_vec2 = +0.5*(mu_qd + mu_qs); flavor_vec3 = mu_qb;} //Xi_b_prime to Xi_b_prime
+    if(decayProd==1)     {flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0
+    else if(decayProd==2){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b
+    else if(decayProd==3){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0_prime
+    else if(decayProd==4){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b_prime
+    else if(decayProd==5){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0_prime*
+    else if(decayProd==6){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b_prime*
   }else if(baryonFlag==3){// sigmas
-    if(decayProd==1)     {flavor_vec1 = mu_qu;                flavor_vec2 = mu_qu;                flavor_vec3 = mu_qb;} //Sigma_+ to Sigma_+ (6 with 3/2 to 6 with 1/2)
-    else if(decayProd==2){flavor_vec1 = 0.5*(mu_qu + mu_qd);  flavor_vec2 = 0.5*(mu_qu + mu_qd);  flavor_vec3 = mu_qb;} //Sigma_0 to Sigma_0
-    else if(decayProd==3){flavor_vec1 = mu_qd;                flavor_vec2 = mu_qd;                flavor_vec3 = mu_qb;} //Sigma_- to Sigma_-
-    else if(decayProd==4){flavor_vec1 = +0.5*(mu_qu - mu_qd); flavor_vec2 = -0.5*(mu_qu - mu_qd); flavor_vec3 = 0.;}    //Sigma_0 to Lambda_0 (6 to 3bar)    
+    if(decayProd==1)     {flav_q1=mu_qu;       flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_+
+    else if(decayProd==2){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_0
+    else if(decayProd==3){flav_q1=mu_qd;       flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_-
+    else if(decayProd==4){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Lambda_0
+    else if(decayProd==5){flav_q1=mu_qu;       flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_+*
+    else if(decayProd==6){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_0*
+    else if(decayProd==7){flav_q1=mu_qd;       flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_-*    
   }else if(baryonFlag==4){// lambdas
-    if(decayProd==1)     {flavor_vec1 = 0.5*(mu_qu + mu_qd);  flavor_vec2 =  0.5*(mu_qu + mu_qd); flavor_vec3 = mu_qb;} //Lambda_0 to Lambda_0 (3bar to 3bar)
-    else if(decayProd==2){flavor_vec1 = +0.5*(mu_qu - mu_qd); flavor_vec2 = -0.5*(mu_qu - mu_qd); flavor_vec3 = 0.;}    //Lambda_0  to Sigma_0
+    if(decayProd==1)     {flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Lambda_0
+    else if(decayProd==2){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_0
+    else if(decayProd==3){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_0*
   }else if(baryonFlag==5){// cascades anti3_plet
-    if(decayProd==1)     {flavor_vec1 =  0.5*(mu_qu + mu_qs); flavor_vec2 =  0.5*(mu_qu + mu_qs); flavor_vec3 = mu_qb;} //Xi_0 to Xi_0
-    else if(decayProd==2){flavor_vec1 = +0.5*(mu_qu - mu_qs); flavor_vec2 = -0.5*(mu_qu - mu_qs); flavor_vec3 = 0.;}    //Xi_0 to Xi_0_prime
-    else if(decayProd==3){flavor_vec1 =  0.5*(mu_qd + mu_qs); flavor_vec2 =  0.5*(mu_qd + mu_qs); flavor_vec3 = mu_qb;} //Xi_b to Xi_b
-    else if(decayProd==4){flavor_vec1 = +0.5*(mu_qd - mu_qs); flavor_vec2 = -0.5*(mu_qd - mu_qs); flavor_vec3 = 0.;}    //Xi_b to Xi_b_prime    
+    if(decayProd==1)     {flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0
+    else if(decayProd==2){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b
+    else if(decayProd==3){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0_prime   
+    else if(decayProd==4){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b_prime
+    else if(decayProd==5){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0_prime*
+    else if(decayProd==6){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b_prime*  
   }
 
   //fetch quantum numbers and projections
@@ -189,7 +204,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 				  ClebschGordan(m_wigner, S1,  S2,  SlA, mS1.at(iMS1),   mS2.at(iMS2),   mSlA.at(iMSlA));
 				AMP1_1+=dummy;
 			      }
-    AMP1_1 *= flavor_vec1 * (2.*std::sqrt(pi_val * k_value));
+    AMP1_1 *= flav_q1 * (2.*std::sqrt(pi_val * k_value));
 
     for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP1, ORBITAL SPLIT
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
@@ -209,7 +224,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			ClebschGordan(m_wigner, LA,  SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),    mJA.at(iMJA));
 		      AMP1_2+=dummy;
 		    }
-    AMP1_2 *= flavor_vec1 * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
+    AMP1_2 *= flav_q1 * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
     AMP1 = AMP1_1 - AMP1_2;
 
     for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++) // AMP2, SPIN FLIP
@@ -238,7 +253,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     				  ClebschGordan(m_wigner, S1,  S2,  SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));			     
     				AMP2_1+=dummy;
     			      }
-    AMP2_1 *= flavor_vec2 * (2.*std::sqrt(pi_val * k_value));
+    AMP2_1 *= flav_q2 * (2.*std::sqrt(pi_val * k_value));
 
     for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP2, ORBITAL SPLIT
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
@@ -258,7 +273,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			ClebschGordan(m_wigner, LA,   SA,  JA,  mLA.at(iMLA),    mSA.at(iMSA),    mJA.at(iMJA));
     		      AMP2_2+=dummy;
     		    }		
-    AMP2_2 *= flavor_vec2 * KroneckerDelta(SA, SB) * KroneckerDelta(SlA, SlB) * (1.*std::sqrt(pi_val / k_value));
+    AMP2_2 *= flav_q2 * KroneckerDelta(SA, SB) * KroneckerDelta(SlA, SlB) * (1.*std::sqrt(pi_val / k_value));
     AMP2 = AMP2_1 - AMP2_2;
     
     for(int iMSA = 0;  iMSA<(int)mSA.size();  iMSA++) // AMP3, SPIN FLIP
@@ -287,7 +302,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     				  ClebschGordan(m_wigner, S1,   S2,   SlA,  mS1.at(iMS1),    mS2.at(iMS2),     mSlA.at(iMSlA));
     				AMP3_1+=dummy;
     			      }
-    AMP3_1 *= flavor_vec3 * (2.*std::sqrt(pi_val * k_value));
+    AMP3_1 *= flav_q3 * (2.*std::sqrt(pi_val * k_value));
 
     for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP3, ORBITAL SPLIT
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
@@ -307,7 +322,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			ClebschGordan(m_wigner, LA,   SA,  JA, mLA.at(iMLA),   mSA.at(iMSA),   mJA.at(iMJA));
     		      AMP3_2+=dummy;
     		    }
-    AMP3_2 *= flavor_vec3 * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
+    AMP3_2 *= flav_q3 * KroneckerDelta(SlA, SlB) * KroneckerDelta(SA, SB) * (1.*std::sqrt(pi_val / k_value));
     AMP3 = AMP3_1 - AMP3_2;
 
     // sum quark amplitudes, squared them and get squared the total
