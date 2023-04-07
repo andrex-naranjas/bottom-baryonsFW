@@ -320,70 +320,89 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 
 double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
   double thetak=0., phik=0.;
-  if(excMode==0)
-    return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  else if(excMode==1)
+  if(excMode==0) //ground
+    return 0.;
+  else if(excMode==1) //lambda excitation
     return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  else if(excMode==2) //rho excitation
+    return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  
   return 0.;
 }
 
 double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
   double thetak=0., phik=0.;
-  if(excMode==0)
-    return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  else if(excMode==1)
+  if(excMode==0) //ground 
+    return 0.;
+  else if(excMode==1) //lambda excitation
     return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  else if(excMode==2) //rho excitation
+    return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+
   return 0.;
 }
 
 double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
   double thetak=0., phik=0.;
-  if(excMode==0)
-    return T3r();
-  else if(excMode==1)
+  if(excMode==0)//ground 
+    return 0.;
+  else if(excMode==1) //lambda excitation
     return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  else if(excMode==2) //rho excitation
+    return T3r();
   return 0.;
 }
 
 double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
   double thetak=0., phik=0.;
-  if(mLrA!=0 && excMode==0) return 0.;
+  if(mLlA!=0 && excMode==0) return 0.;
   if(mLlA!=0 && excMode==1) return 0.;
-  if(excMode==0)
-    return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-  else if(excMode==1)
+  if(mLrA!=0 && excMode==2) return 0.;
+  if(excMode==0) //ground 
+    return 0.;
+  else if(excMode==1) //lambda excitation
     return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==2) //rho excitation
+    return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
   return 0.;
 }
 
 double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
   double thetak=0., phik=0.;
-  if(mLrA!=0 && excMode==0) return 0.;
+  if(mLlA!=0 && excMode==0) return 0.;
   if(mLlA!=0 && excMode==1) return 0.;
-  if(excMode==0)
-    return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-  else if(excMode==1)
+  if(mLrA!=0 && excMode==2) return 0.;
+  if(excMode==0) //ground
+    return 0.;
+  else if(excMode==1) //lambda excitation
     return SPINFLIP_U2_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==2) //rho excitation
+    return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
   return 0.;
 }
 
 double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
   double thetak=0., phik=0.;
-  if(mLrA!=0 && excMode==0) return 0.;
+  if(mLlA!=0 && excMode==0) return 0.;
   if(mLlA!=0 && excMode==1) return 0.;
-  if(excMode==0)
-    return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-  else if(excMode==1)
+  if(mLrA!=0 && excMode==2) return 0.;
+  if (excMode==0) //ground
+    return 0.;
+  else if(excMode==1) //lambda excitation
     return SPINFLIP_U3_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==2) //rho excitation
+    return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
   return 0.;
 }
 
 int EMDecayWidths::KroneckerDelta_extended(double mLrA, double mLlA, int excMode){
   double thetak=0., phik=0.;
   if(excMode==0)
-    return KroneckerDelta(mLrA, 1);
+    return KroneckerDelta(0, 1);
   else if(excMode==1)
     return KroneckerDelta(mLlA, 1);
+  else if(excMode==2)
+    return KroneckerDelta(mLrA, 1);
   return 0.;
 }
 
