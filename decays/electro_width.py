@@ -52,14 +52,13 @@ class ElectroWidths:
 
         for i in range(nChannels):
             decPr = i+1
-            decPr = 3
+            #decPr = 3
             MassB = self.decay_mass(bootstrap, baryons, decPr)
             single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                             MassB,
                                                             alpha_lam, alpha_rho,
                                                             mbottom, mupdown, mstrange,
                                                             baryon, ModEx, decPr)
-
             channel_widths = np.append(channel_widths, single_decay_value)
             baryon_name, ModEx_name, decPr_name =  "test", "test", "test" # du.state_labels(baryon, ModEx, decPr, LA_qm)
             if not bootstrap:
@@ -197,16 +196,16 @@ class ElectroWidths:
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
         elif(baryons=='cascades_anti3'):
             if(decPr==1):
-                if not bootstrap: return self.xi_mass,     self.pion_mass
+                if not bootstrap: return self.xi_mass
                 else: return np.random.choice(self.gauss_xi, size=None)
             elif(decPr==2):
-                if not bootstrap: return self.xi_mass,     self.pion_mass
+                if not bootstrap: return self.xi_mass
                 else: return np.random.choice(self.gauss_xi, size=None)
             elif(decPr==3):
-                if not bootstrap: return self.xi_p_mass,   self.pion_mass
+                if not bootstrap: return self.xi_p_mass
                 else: return np.random.choice(self.gauss_xi_p, size=None)
             elif(decPr==4):
-                if not bootstrap: return self.xi_p_mass,   self.pion_mass
+                if not bootstrap: return self.xi_p_mass
                 else: return np.random.choice(self.gauss_xi_p, size=None)
             elif(decPr==5):
                 if not bootstrap: return self.xi_p_s_mass
@@ -217,32 +216,26 @@ class ElectroWidths:
 
     def fetch_decay_masses(self, bootstrap):
         # Bottom hadrons
-        self.lambda_mass      = 5.61960 # +- 0.0001
-        self.xi_p_mass        = 5.9350#2 # +- 0.00005        
-        self.xi_p_s_mass      = 5.9350#2 # +- 0.00005        CHECK!!
-        self.xi_mass          = 5.79700 # +- 0.00060.... Difference with Xb0=5.9 +- 0.6 MeV
-        self.xi_s_mass        = 6.07800 # +- 0.00006 (predicted mass)$6078^{+10}_{-10}$  CHECK!!
-        self.sigma_mass       = 5.81056 # +- 0.00025.... Difference of + and - == 5.06+-0.18 MeV
-        self.sigma_s_mass     = 5.83032 # +- 0.00030.... Difference of + and - == 4.37+-0.33 OK
-        self.omega_mass       = 6.04520 # +- 0.00120
-        self.omega_s_mass     = 6.09300 # +- 0.00060 (predicted mass) # $6093^{+10}_{-10}$ CHECK!!
-        self.B0_mass          = 5.27966 # +- 0.00012
-        self.Bs_mass          = 5.36692 # +- 0.00010
-        self.B_star_mass      = 5.32471 # +- 0.00021
+        self.lambda_mass   = 5.61960 # +- 0.0001
+        self.xi_p_mass     = 5.93500 #2 # +- 0.00005        
+        self.xi_p_s_mass   = 5.93500 #2 # +- 0.00005        CHECK!!
+        self.xi_mass       = 5.79700 # +- 0.00060.... Difference with Xb0=5.9 +- 0.6 MeV
+        self.xi_s_mass     = 6.07800 # +- 0.00006 (predicted mass)$6078^{+10}_{-10}$  CHECK!!
+        self.sigma_mass    = 5.81056 # +- 0.00025.... Difference of + and - == 5.06+-0.18 MeV
+        self.sigma_s_mass  = 5.83032 # +- 0.00030.... Difference of + and - == 4.37+-0.33 OK
+        self.omega_mass    = 6.04520 # +- 0.00120
+        self.omega_s_mass  = 6.09300 # +- 0.00060 (predicted mass) # $6093^{+10}_{-10}$ CHECK!!
 
         if(bootstrap):
             # Bottom hadrons
-            self.gauss_lambda      = np.random.normal(5.61960, 0.00017, 10000)
-            self.gauss_xi_p        = np.random.normal(5.93502, 0.00005, 10000)
-            self.gauss_xi          = np.random.normal(5.79700, 0.00060, 10000)
-            self.gauss_xi_s        = np.random.normal(6.07800, 0.00100, 10000) # predicted massA
-            self.gauss_sigma       = np.random.normal(5.81056, 0.00025, 10000)
-            self.gauss_sigma_s     = np.random.normal(5.83032, 0.00030, 10000)
-            self.gauss_omega       = np.random.normal(6.04520, 0.00120, 10000)
-            self.gauss_omega_s     = np.random.normal(6.09300, 0.00060, 10000) # predicted massA    
-            self.gauss_B0          = np.random.normal(5.27966, 0.00012, 10000)
-            self.gauss_Bs          = np.random.normal(5.36692, 0.00010, 10000)
-            self.gauss_B_star      = np.random.normal(5.32471, 0.00021, 10000)
+            self.gauss_lambda   = np.random.normal(5.61960, 0.00017, 10000)
+            self.gauss_xi_p     = np.random.normal(5.93502, 0.00005, 10000)
+            self.gauss_xi       = np.random.normal(5.79700, 0.00060, 10000)
+            self.gauss_xi_s     = np.random.normal(6.07800, 0.00100, 10000) # predicted massA
+            self.gauss_sigma    = np.random.normal(5.81056, 0.00025, 10000)
+            self.gauss_sigma_s  = np.random.normal(5.83032, 0.00030, 10000)
+            self.gauss_omega    = np.random.normal(6.04520, 0.00120, 10000)
+            self.gauss_omega_s  = np.random.normal(6.09300, 0.00060, 10000) # predicted massA    
 
 
 
