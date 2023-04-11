@@ -52,7 +52,6 @@ class ElectroWidths:
 
         for i in range(nChannels):
             decPr = i+1
-            #decPr = 3
             MassB = self.decay_mass(bootstrap, baryons, decPr)
             single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                             MassB,
@@ -235,76 +234,4 @@ class ElectroWidths:
             self.gauss_sigma    = np.random.normal(5.81056, 0.00025, 10000)
             self.gauss_sigma_s  = np.random.normal(5.83032, 0.00030, 10000)
             self.gauss_omega    = np.random.normal(6.04520, 0.00120, 10000)
-            self.gauss_omega_s  = np.random.normal(6.09300, 0.00060, 10000) # predicted massA    
-
-
-
-
-test_electro = ElectroWidths()
-m1 = 4.928 * 1000
-m2 = 0.299 * 1000
-m3 = 0.465 * 1000
-massA = 6.190 * 1000
-k_prim = 5044.8
-ModEx_val = "lam"
-baryons = "cascades"
-
-# first AMPS
-SA_val = 1.5
-JA_val = 1.5
-LA_val = 1
-SlA_val = 1.
-LlA_val = 0
-LrA_val = 0
-
-# OrbitalLAMBDA amps
-SA_val = 0.5
-SlA_val = 1.0
-LA_val = 1.0
-LlA_val = 1.0
-LrA_val = 0.0
-JA_val = 0.5
-
-# OrbitalLAMBDA amps second test
-massA = 6.198 * 1000
-SA_val = 0.5
-SlA_val = 1.0
-LA_val = 1.0
-LlA_val = 1.0
-LrA_val = 0.0
-JA_val = 1.5
-
-
-# SA_val = 0.5
-# SlA_val = 1.0
-# LA_val = 1
-# LlA_val = 1
-# LrA_val = 0
-# JA_val = 0.5
-
-
-
-value = test_electro.total_decay_width(baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
-                                       ModEx_val, bootstrap=False, m1=m1, m2=m2, m3=m3)
-print("EM decay width:  ", value)
-
-
-        # SB_qm = 0
-        # JB_qm = 0
-        # LB_qm = 0
-        # SlB_qm = 0
-        # LlB_qm = 0
-        # LrB_qm = 0
-        
-        # # first AMPS
-        # SB_qm = 0.5
-        # JB_qm = 0.5
-        # SlB_qm = 0.0
-
-        # # Orbital lambda amps
-        # SB_qm = 0.5
-        # SlB_qm = 1.0
-        # LB_qm = 0.0
-        # LlB_qm = 0.0
-        # LrB_qm = 0.0
-        # JB_qm = 0.5
+            self.gauss_omega_s  = np.random.normal(6.09300, 0.00060, 10000) # predicted massA
