@@ -237,15 +237,37 @@ else:
         os.makedirs(workpath+"/batch_results/"+run_baryons+"/correlation/")
     df.to_csv(workpath+"/batch_results/"+run_baryons+"/correlation/"+str(batch_number)+".csv", index=False)
 
+
+
+
+
 # calculate the masses and decays using the bootstrap simulation above
+# results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=True,
+#                            decay_width=True, bootstrap_width=True, batch_number=batch_number, workpath=workpath)
+# results.fetch_values()
+
+# print('Getting paper results for:', run_baryons)
+# #input()
+# # omegas,cascades,sigmas,lambdas,cascades_anti3
+# results.paper_results_predictions(bootstrap=True, bootstrap_width=True, prev_params=False) # all running for paper
+# #results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=True, prev_params=False, decay_width=True) # all running for paper
+# # avoid time consuming decay widths calculations
+# # results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)
+# # nominal results, expected to be the same as the previous paper, very important check
+# # results.paper_results_predictions(baryons=run_baryons,         bootstrap=False, bootstrap_width=False, prev_params=True, decay_width=True)
+# end = datetime.datetime.now()
+# elapsed_time = end - start
+# print("Elapsed total time = " + str(elapsed_time))
+
+
 results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=True,
-                           decay_width=True, bootstrap_width=True, batch_number=batch_number, workpath=workpath)
+                           decay_width=False, bootstrap_width=False, decay_width_em=True, bootstrap_width_em=False, batch_number=batch_number, workpath=workpath)
 results.fetch_values()
 
 print('Getting paper results for:', run_baryons)
 #input()
 # omegas,cascades,sigmas,lambdas,cascades_anti3
-results.paper_results_predictions(bootstrap=True, bootstrap_width=True, prev_params=False) # all running for paper
+results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_params=False) # all running for paper
 #results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=True, prev_params=False, decay_width=True) # all running for paper
 # avoid time consuming decay widths calculations
 # results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)
