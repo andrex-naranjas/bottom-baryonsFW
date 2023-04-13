@@ -32,11 +32,12 @@ class ElectroWidths:
         mb = m1
         ms = m2
         ml = m3
-
+        
         MassA = massA/1000.0
         mbottom  = mb/1000.0
         mupdown  = ml/1000.0
         mstrange = ms/1000.0
+        print(ModEx_val, "PRUEBA")
 
         SA_qm = SA_val
         JA_qm = JA_val
@@ -241,7 +242,7 @@ class ElectroWidths:
         self.xi_s_mass     = 6.07800 # +- 0.00006 (predicted mass)$6078^{+10}_{-10}$  CHECK!!
         self.sigma_mass    = 5.81056 # +- 0.00025.... Difference of + and - == 5.06+-0.18 MeV
         self.sigma_s_mass  = 5.83032 # +- 0.00030.... Difference of + and - == 4.37+-0.33 OK
-        self.omega_mass    = 6.04520 # +- 0.00120
+        self.omega_mass    = 6.06400 # +- 0.00120
         self.omega_s_mass  = 6.09300 # +- 0.00060 (predicted mass) # $6093^{+10}_{-10}$ CHECK!!
 
         if(bootstrap):
