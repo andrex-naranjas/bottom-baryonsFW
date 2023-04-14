@@ -5,7 +5,7 @@
 ---------------------------------------------------------------
 """
 from decays.decay_wrapper import decay
-import decays.decay_utils as du
+import decays.decay_utils_em as du
 import numpy as np
 
 
@@ -37,7 +37,6 @@ class ElectroWidths:
         mbottom  = mb/1000.0
         mupdown  = ml/1000.0
         mstrange = ms/1000.0
-        print(ModEx_val, "PRUEBA")
 
         SA_qm = SA_val
         JA_qm = JA_val
@@ -64,16 +63,16 @@ class ElectroWidths:
                                                             mbottom, mupdown, mstrange,
                                                             baryon, ModEx, decPr)
             channel_widths = np.append(channel_widths, single_decay_value)
-            baryon_name, ModEx_name, decPr_name =  "test", "test", "test" # du.state_labels(baryon, ModEx, decPr, LA_qm)
+            baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
             if not bootstrap:
                 print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.1f | %5.6f '
-                      %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm,single_decay_value))
+                      %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
                     
         # sum the individual width to obtain total width
         total_decay_width = np.sum(channel_widths)
         # print(alpha_lam,alpha_rho)
         if not bootstrap:
-            print('          ******************   TOTAL WIDTH FOR', baryons, ModEx_name, round(total_decay_width,4), '   ******************')
+            print(' ******************   TOTAL ELECTROMAGNETIC WIDTH FOR', baryons, ModEx_name, round(total_decay_width,4), '   ******************')
             print('-------------------------------------------------------------------------------------------------------------')
             
         self.channel_widths_vector.append(channel_widths) # for individual decay tables, this is a list of arrays!
@@ -235,23 +234,23 @@ class ElectroWidths:
 
     def fetch_decay_masses(self, bootstrap):
         # Bottom hadrons
-        self.lambda_mass   = 5.61960 # +- 0.0001
-        self.xi_p_mass     = 5.93500 #2 # +- 0.00005        
-        self.xi_p_s_mass   = 5.94500 #2 # +- 0.00005        CHECK!!
-        self.xi_mass       = 5.79200 # +- 0.00060.... Difference with Xb0=5.9 +- 0.6 MeV
-        self.xi_s_mass     = 6.07800 # +- 0.00006 (predicted mass)$6078^{+10}_{-10}$  CHECK!!
-        self.sigma_mass    = 5.81056 # +- 0.00025.... Difference of + and - == 5.06+-0.18 MeV
-        self.sigma_s_mass  = 5.83032 # +- 0.00030.... Difference of + and - == 4.37+-0.33 OK
-        self.omega_mass    = 6.06400 # +- 0.00120
-        self.omega_s_mass  = 6.09300 # +- 0.00060 (predicted mass) # $6093^{+10}_{-10}$ CHECK!!
+        self.lambda_mass   = 5.61960
+        self.xi_p_mass     = 5.93500
+        self.xi_p_s_mass   = 5.94500
+        self.xi_mass       = 5.79200
+        self.xi_s_mass     = 6.07800
+        self.sigma_mass    = 5.81056
+        self.sigma_s_mass  = 5.83032
+        self.omega_mass    = 6.06400
+        self.omega_s_mass  = 6.09300
 
         if(bootstrap):
             # Bottom hadrons
             self.gauss_lambda   = np.random.normal(5.61960, 0.00017, 10000)
             self.gauss_xi_p     = np.random.normal(5.93502, 0.00005, 10000)
             self.gauss_xi       = np.random.normal(5.79700, 0.00060, 10000)
-            self.gauss_xi_s     = np.random.normal(6.07800, 0.00100, 10000) # predicted massA
+            self.gauss_xi_s     = np.random.normal(6.07800, 0.00100, 10000)
             self.gauss_sigma    = np.random.normal(5.81056, 0.00025, 10000)
             self.gauss_sigma_s  = np.random.normal(5.83032, 0.00030, 10000)
             self.gauss_omega    = np.random.normal(6.04520, 0.00120, 10000)
-            self.gauss_omega_s  = np.random.normal(6.09300, 0.00060, 10000) # predicted massA
+            self.gauss_omega_s  = np.random.normal(6.09300, 0.00060, 10000)

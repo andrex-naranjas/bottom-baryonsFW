@@ -120,7 +120,7 @@ gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # al
 # plug here the sigma_0 optimization lines from data_utils.py
 
 # construct the simulated sampling distribution (bootstrap technique)
-for i in range(500): # max 10000 with decays included, computationally expensive
+for i in range(10): # max 10000 with decays included, computationally expensive
     #if(states=='All'):
     exp_m = np.array([ # measured baryon masses
         # omegas
