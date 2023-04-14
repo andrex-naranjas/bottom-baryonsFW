@@ -161,10 +161,10 @@ class ElectroWidths:
             if(decPr==2):
                 if not bootstrap:  return self.omega_s_mass
                 else: return np.random.choice(self.gauss_omega_s, size=None)         
-        elif(baryons=='cascades'):
+        elif(baryons=='cascades' or baryons=='cascades_anti3'):
             if(decPr==1):
                 if not bootstrap: return self.xi_mass
-                else: return np.random.choice(self.gauss_xi)
+                else: return np.random.choice(self.gauss_xi, size=None)
             elif(decPr==2):
                 if not bootstrap: return self.xi_mass
                 else: return np.random.choice(self.gauss_xi, size=None)
@@ -212,45 +212,30 @@ class ElectroWidths:
             elif(decPr==3):
                 if not bootstrap: return self.sigma_s_mass
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
-        elif(baryons=='cascades_anti3'):
-            if(decPr==1):
-                if not bootstrap: return self.xi_mass
-                else: return np.random.choice(self.gauss_xi, size=None)
-            elif(decPr==2):
-                if not bootstrap: return self.xi_mass
-                else: return np.random.choice(self.gauss_xi, size=None)
-            elif(decPr==3):
-                if not bootstrap: return self.xi_p_mass
-                else: return np.random.choice(self.gauss_xi_p, size=None)
-            elif(decPr==4):
-                if not bootstrap: return self.xi_p_mass
-                else: return np.random.choice(self.gauss_xi_p, size=None)
-            elif(decPr==5):
-                if not bootstrap: return self.xi_p_s_mass
-                else: return np.random.choice(self.gauss_xi_p_s, size=None)
-            elif(decPr==6):
-                if not bootstrap: return self.xi_p_s_mass
-                else: return np.random.choice(self.gauss_xi_p_s, size=None)
-
+        
     def fetch_decay_masses(self, bootstrap):
-        # Bottom hadrons
-        self.lambda_mass   = 5.61960
-        self.xi_p_mass     = 5.93500
-        self.xi_p_s_mass   = 5.94500
-        self.xi_mass       = 5.79200
-        self.xi_s_mass     = 6.07800
-        self.sigma_mass    = 5.81056
-        self.sigma_s_mass  = 5.83032
+        '''
+        Method to fetch the decay products coming from our fit (mA)
+        '''
         self.omega_mass    = 6.06400
         self.omega_s_mass  = 6.09300
-
+        self.sigma_mass    = 5.80500
+        self.sigma_s_mass  = 5.83400
+        self.xi_p_mass     = 5.92500
+        self.xi_p_s_mass   = 5.95500
+        self.xi_mass       = 5.80600
+        self.lambda_mass   = 5.61400
+       
         if(bootstrap):
-            # Bottom hadrons
-            self.gauss_lambda   = np.random.normal(5.61960, 0.00017, 10000)
-            self.gauss_xi_p     = np.random.normal(5.93502, 0.00005, 10000)
-            self.gauss_xi       = np.random.normal(5.79700, 0.00060, 10000)
-            self.gauss_xi_s     = np.random.normal(6.07800, 0.00100, 10000)
-            self.gauss_sigma    = np.random.normal(5.81056, 0.00025, 10000)
-            self.gauss_sigma_s  = np.random.normal(5.83032, 0.00030, 10000)
-            self.gauss_omega    = np.random.normal(6.04520, 0.00120, 10000)
-            self.gauss_omega_s  = np.random.normal(6.09300, 0.00060, 10000)
+            self.gauss_omega    = np.random.normal(6.06400, 0.00600, 10000)
+            self.gauss_omega_s  = np.random.normal(6.09300, 0.00700, 10000)
+            self.gauss_sigma    = np.random.normal(5.80500, 0.00600, 10000)
+            self.gauss_sigma_s  = np.random.normal(5.83400, 0.00700, 10000)
+            self.gauss_xi_p     = np.random.normal(5.92500, 0.00500, 10000)
+            self.gauss_xi_p_s   = np.random.normal(5.95500, 0.00500, 10000)
+            self.gauss_xi       = np.random.normal(5.80600, 0.00700, 10000)
+            self.gauss_lambda   = np.random.normal(5.61400, 0.00700, 10000)
+            
+            
+            
+            
