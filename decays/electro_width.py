@@ -5,7 +5,7 @@
 ---------------------------------------------------------------
 """
 from decays.decay_wrapper import decay
-import decays.decay_utils as du
+import decays.decay_utils_em as du
 import numpy as np
 
 
@@ -16,35 +16,38 @@ class ElectroWidths:
     and masses
 
     baryon FLAG: 1 -> omega, 2->cascade_6, 3->sigma,# 4 -> lambda, 5-> cascade_3
-    ModEx  FLAG: 0 -> ground(grd), 1 -> lambda(lam), 2->rho, 3->rop_lam(rpl), 4->rop_rho(rpr), 5->mix  Excitation
-    decPr  FLAG: 0 ->.....  decayProduct Flag
+    ModEx  FLAG: 0 -> ground(grd), 1 -> lambda(lam), 2->rho
+    decPr  FLAG: 0 -> ...  decayProduct Flag
     """
     def __init__(self, bootstrap=False, baryons='', workpath="."):
         self.m_width = decay(workpath)
         self.fetch_decay_masses(bootstrap)
         self.channel_widths_vector = []
 
-    def total_decay_width(self, baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val, LlA_val, LrA_val,
+    def total_decay_width(self, baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val,
                           ModEx_val, bootstrap=False, m1=0, m2=0, m3=0):
         """
         Method that calls the wrapper and sums the individual decay widths
         """
+        mb = m1
+        ms = m2
+        ml = m3
+        
         MassA = massA/1000.0
-        mbottom  = m1/1000.0
-        mupdown  = m2/1000.0
-        mstrange = m3/1000.0
+        mbottom  = mb/1000.0
+        mupdown  = ml/1000.0
+        mstrange = ms/1000.0
 
         SA_qm = SA_val
         JA_qm = JA_val
         LA_qm = LA_val
         SlA_qm = SlA_val
-        LlA_qm = LlA_val
-        LrA_qm = LrA_val
-
+        LlA_qm, LrA_qm = self.orbital_projections(ModEx_val, LA_val)
+            
         baryon = self.baryon_flag(baryons)
         ModEx = self.ModEx_flag(ModEx_val)
         nChannels = self.n_channels(baryons)
-        m_lam, m_rho = self.reduced_masses(baryons, m1, m2, m3)
+        m_lam, m_rho = self.reduced_masses(baryons, mb, ml, ms)
         channel_widths = ([])
         
         alpha_lam = self.alphas(k_prim, m_lam)
@@ -59,21 +62,39 @@ class ElectroWidths:
                                                             mbottom, mupdown, mstrange,
                                                             baryon, ModEx, decPr)
             channel_widths = np.append(channel_widths, single_decay_value)
-            baryon_name, ModEx_name, decPr_name =  "test", "test", "test" # du.state_labels(baryon, ModEx, decPr, LA_qm)
+            baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
             if not bootstrap:
-                print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.6f '
-                      %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, single_decay_value))
+                print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.1f | %5.6f '
+                      %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
                     
         # sum the individual width to obtain total width
         total_decay_width = np.sum(channel_widths)
         # print(alpha_lam,alpha_rho)
         if not bootstrap:
-            print('          ******************   TOTAL WIDTH FOR', baryons, ModEx_name, round(total_decay_width,4), '   ******************')
+            print(' ******************   TOTAL ELECTROMAGNETIC WIDTH FOR', baryons, ModEx_name, round(total_decay_width,4), '   ******************')
             print('-------------------------------------------------------------------------------------------------------------')
             
         self.channel_widths_vector.append(channel_widths) # for individual decay tables, this is a list of arrays!
         return total_decay_width
 
+
+    def orbital_projections(self, ModEx_val, LA_val):
+        """
+        Method to fecth the orbital projection (up to P-wave)
+        """
+        if(ModEx_val=="grd"):
+            LlA = LA_val
+            LrA = LA_val
+        elif(ModEx_val=="lam"):
+            LlA = LA_val
+            LrA = 0
+        elif(ModEx_val=="rho"):
+            LlA = 0
+            LrA = LA_val
+        else:
+            LlA = -1
+            LrA = -1
+        return LlA, LrA
 
     def baryon_flag(self, baryons):
         """
@@ -112,14 +133,11 @@ class ElectroWidths:
     def ModEx_flag(self, ModEx_val):
         """
         Method to parse the h.o mode to integers
-        grd=0, lam =1 , rho=2, rpl=3, rpr=4, mix=5
+        grd=0, lam =1 , rho=2
         """
         if(ModEx_val=='grd'):   return 0
         elif(ModEx_val=='lam'): return 1
         elif(ModEx_val=='rho'): return 2
-        elif(ModEx_val=='rpl'): return 3
-        elif(ModEx_val=='rpr'): return 4
-        elif(ModEx_val=='mix'): return 5
 
     def n_channels(self, baryons):
         """
@@ -142,10 +160,10 @@ class ElectroWidths:
             if(decPr==2):
                 if not bootstrap:  return self.omega_s_mass
                 else: return np.random.choice(self.gauss_omega_s, size=None)         
-        elif(baryons=='cascades'):
+        elif(baryons=='cascades' or baryons=='cascades_anti3'):
             if(decPr==1):
                 if not bootstrap: return self.xi_mass
-                else: return np.random.choice(self.gauss_xi)
+                else: return np.random.choice(self.gauss_xi, size=None)
             elif(decPr==2):
                 if not bootstrap: return self.xi_mass
                 else: return np.random.choice(self.gauss_xi, size=None)
@@ -193,45 +211,26 @@ class ElectroWidths:
             elif(decPr==3):
                 if not bootstrap: return self.sigma_s_mass
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
-        elif(baryons=='cascades_anti3'):
-            if(decPr==1):
-                if not bootstrap: return self.xi_mass
-                else: return np.random.choice(self.gauss_xi, size=None)
-            elif(decPr==2):
-                if not bootstrap: return self.xi_mass
-                else: return np.random.choice(self.gauss_xi, size=None)
-            elif(decPr==3):
-                if not bootstrap: return self.xi_p_mass
-                else: return np.random.choice(self.gauss_xi_p, size=None)
-            elif(decPr==4):
-                if not bootstrap: return self.xi_p_mass
-                else: return np.random.choice(self.gauss_xi_p, size=None)
-            elif(decPr==5):
-                if not bootstrap: return self.xi_p_s_mass
-                else: return np.random.choice(self.gauss_xi_p_s, size=None)
-            elif(decPr==6):
-                if not bootstrap: return self.xi_p_s_mass
-                else: return np.random.choice(self.gauss_xi_p_s, size=None)
-
+        
     def fetch_decay_masses(self, bootstrap):
-        # Bottom hadrons
-        self.lambda_mass   = 5.61960 # +- 0.0001
-        self.xi_p_mass     = 5.93500 #2 # +- 0.00005        
-        self.xi_p_s_mass   = 5.93500 #2 # +- 0.00005        CHECK!!
-        self.xi_mass       = 5.79700 # +- 0.00060.... Difference with Xb0=5.9 +- 0.6 MeV
-        self.xi_s_mass     = 6.07800 # +- 0.00006 (predicted mass)$6078^{+10}_{-10}$  CHECK!!
-        self.sigma_mass    = 5.81056 # +- 0.00025.... Difference of + and - == 5.06+-0.18 MeV
-        self.sigma_s_mass  = 5.83032 # +- 0.00030.... Difference of + and - == 4.37+-0.33 OK
-        self.omega_mass    = 6.04520 # +- 0.00120
-        self.omega_s_mass  = 6.09300 # +- 0.00060 (predicted mass) # $6093^{+10}_{-10}$ CHECK!!
-
+        '''
+        Method to fetch the decay products coming from our fit (mA)
+        '''
+        self.omega_mass    = 6.06400
+        self.omega_s_mass  = 6.09300
+        self.sigma_mass    = 5.80500
+        self.sigma_s_mass  = 5.83400
+        self.xi_p_mass     = 5.92500
+        self.xi_p_s_mass   = 5.95500
+        self.xi_mass       = 5.80600
+        self.lambda_mass   = 5.61400
+       
         if(bootstrap):
-            # Bottom hadrons
-            self.gauss_lambda   = np.random.normal(5.61960, 0.00017, 10000)
-            self.gauss_xi_p     = np.random.normal(5.93502, 0.00005, 10000)
-            self.gauss_xi       = np.random.normal(5.79700, 0.00060, 10000)
-            self.gauss_xi_s     = np.random.normal(6.07800, 0.00100, 10000) # predicted massA
-            self.gauss_sigma    = np.random.normal(5.81056, 0.00025, 10000)
-            self.gauss_sigma_s  = np.random.normal(5.83032, 0.00030, 10000)
-            self.gauss_omega    = np.random.normal(6.04520, 0.00120, 10000)
-            self.gauss_omega_s  = np.random.normal(6.09300, 0.00060, 10000) # predicted massA
+            self.gauss_omega    = np.random.normal(6.06400, 0.00600, 10000)
+            self.gauss_omega_s  = np.random.normal(6.09300, 0.00700, 10000)
+            self.gauss_sigma    = np.random.normal(5.80500, 0.00600, 10000)
+            self.gauss_sigma_s  = np.random.normal(5.83400, 0.00700, 10000)
+            self.gauss_xi_p     = np.random.normal(5.92500, 0.00500, 10000)
+            self.gauss_xi_p_s   = np.random.normal(5.95500, 0.00500, 10000)
+            self.gauss_xi       = np.random.normal(5.80600, 0.00700, 10000)
+            self.gauss_lambda   = np.random.normal(5.61400, 0.00700, 10000)

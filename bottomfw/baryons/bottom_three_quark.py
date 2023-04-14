@@ -4,7 +4,7 @@
 ----------------------------------------------------------------
  Authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
           H. Garcia-Tecocoatzi
- ---------------------------------------------------------------
+---------------------------------------------------------------
 """
 import os
 import numpy as np
@@ -12,6 +12,7 @@ import pandas as pd
 # framework includes
 from bottomfw.baryons import data_preparation as dp
 from decays.decay_width import DecayWidths
+from decays.electro_width import ElectroWidths
 from bottomfw.baryons import bottom_states as bs
 
 
@@ -19,17 +20,21 @@ class BottomThreeQuark:
     """
     Class that computes the mass and decay widths of three-quark heavy baryons.
     """
-    def __init__(self, baryons, params, sampled, corr_mat, asymmetric, decay_width=False, bootstrap_width=False, batch_number=None, workpath='.'):
+    def __init__(self, baryons, params, sampled, corr_mat, asymmetric, decay_width=False, bootstrap_width=False, decay_width_em=False, bootstrap_width_em=False, batch_number=None, workpath='.'):
         self.params = params
         self.sampled = sampled
         self.corr_mat = corr_mat
         self.asymmetric = asymmetric
         self.m_decay_width = decay_width
+        self.m_decay_width_em = decay_width_em # check
+        self.m_bootstrap_width_em = bootstrap_width_em # check
         self.m_batch_number = batch_number
         self.m_baryons = baryons
         self.m_workpath = workpath
         if decay_width:
             self.baryon_decay = DecayWidths(bootstrap_width, baryons, workpath=workpath)
+        if decay_width_em:
+            self.electro_decay = ElectroWidths(bootstrap_width_em, baryons, workpath=workpath)
     
     def model_mass(self, i, j, sampled=False):
         """
@@ -95,18 +100,20 @@ class BottomThreeQuark:
             self.previous_parameters()
             self.previous_parameters_uncertainty(N_boots=len(self.sampled_k)) # set params. with previous-paper gauss shape (arbitrary error)
         # compute masses/decays and save them in csv files
-        self.compute_save_predictions(self.m_baryons, bootstrap=bootstrap, decay_width=self.m_decay_width, bootstrap_width=bootstrap_width)           
+        self.compute_save_predictions(self.m_baryons, bootstrap=bootstrap, decay_width=self.m_decay_width, bootstrap_width=bootstrap_width, decay_width_em=self.m_decay_width_em, bootstrap_width_em=self.m_bootstrap_width_em)
 
-    def compute_save_predictions(self, baryons='', bootstrap=False, decay_width=False, bootstrap_width=False):
+    def compute_save_predictions(self, baryons='', bootstrap=False, decay_width=False, bootstrap_width=False, decay_width_em=False, bootstrap_width_em=False):
         """
         Methods that calculates the masses and decay widths with the bootstraped fitted parameters
         """
         masses_csv = []
         omegas_csv = []
-        decays_csv = []        
+        decays_csv = []
+        decays_csv_em = []
         for i in range(len(self.v_param)): # states loop
-            dummy,dummy_decay,dummy_omega = ([]),([]),([])
+            dummy,dummy_decay,dummy_omega,dummy_decay_em = ([]),([]),([]),([])
             decays_indi_csv = []
+            decays_electro_indi_csv = []
             if bootstrap:
                 for j in range(len(self.sampled_k)): # sampled data loop (e.g. 10^4)
                     mass = self.model_mass(i, j, sampled=True)
@@ -128,26 +135,40 @@ class BottomThreeQuark:
                                                                 self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
                     dummy_decay = np.append(dummy_decay, decay) # total decay
                     decays_indi_csv.append(self.baryon_decay.channel_widths_vector[0]) # individual channel decays
-                    self.baryon_decay.channel_widths_vector=[] # clean decay object for next iteration           
-                        
+                    self.baryon_decay.channel_widths_vector=[] # clean decay object for next iteration
+
+                if decay_width_em and not bootstrap_width_em and self.L_tot[i]<=1 and (self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # bootstrap mass but not bootstrap widhts
+                    mass_single = self.model_mass(i, 0, sampled=False)
+                    electro_decay = self.electro_decay.total_decay_width(baryons, self.Kp, mass_single,
+                                                                         self.S_tot[i], self.J_tot[i], self.L_tot[i], self.SL[i],
+                                                                         self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
+                    dummy_decay_em = np.append(dummy_decay_em, electro_decay) # total electro decay
+                    decays_electro_indi_csv.append(pd.DataFrame(self.electro_decay.channel_widths_vector)) # individual channel electro decays
+                    self.electro_decay.channel_widths_vector=[] # clean decay object for next iteration
+
             else: # no bootstrap at all, only one prediction using the average of the fitted parameters
                 mass = self.model_mass(i, 0, sampled=False)
                 dummy = np.append(dummy, mass)
-                if decay_width:
-                    decay = self.baryon_decay.total_decay_width(baryons, self.Kp, mass,
-                                                                self.S_tot[i], self.L_tot[i], self.J_tot[i], self.SL[i],
-                                                                self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
-                    dummy_decay = np.append(dummy_decay, decay) # total decay
-                    decays_indi_csv.append(pd.DataFrame(self.baryon_decay.channel_widths_vector)) # individual channel decays
-                    self.baryon_decay.channel_widths_vector=[] # clean decay object for next iteration
-                                                
-            # prepare data frame to save as csv
+                if decay_width: # strong decays
+                    strong_decay  = self.baryon_decay.total_decay_width(baryons, self.Kp, mass,
+                                                                        self.S_tot[i], self.L_tot[i], self.J_tot[i], self.SL[i],
+                                                                        self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
+                    dummy_decay    = np.append(dummy_decay, strong_decay) # total decay
+                    decays_indi_csv.append(pd.DataFrame(self.baryon_decay.channel_widths_vector)) # individual channel strong decays
+                    self.baryon_decay.channel_widths_vector=[]  # clean decay object for next iteration
+                if decay_width_em  and self.L_tot[i]<=1  and (self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # electromagnetic decays only up to P-wave
+                    electro_decay = self.electro_decay.total_decay_width(baryons, self.Kp, mass,
+                                                                         self.S_tot[i], self.J_tot[i], self.L_tot[i], self.SL[i],
+                                                                         self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
+                    dummy_decay_em = np.append(dummy_decay_em, electro_decay) # total electro decay
+                    decays_electro_indi_csv.append(pd.DataFrame(self.electro_decay.channel_widths_vector)) # individual channel electro decays
+                    self.electro_decay.channel_widths_vector=[] # clean decay object for next iteration
+
+            # prepare data to a csv file
             masses_csv.append(pd.Series(dummy))
             omegas_csv.append(pd.Series(dummy_omega))
-            if decay_width:
+            if decay_width: # strong decays
                 decays_csv.append(pd.Series(dummy_decay))
-                # individual decay channels tables (this is really tricky!!!)
-                # TODO: save to csv file
                 df_decays_indi = None
                 if len(decays_indi_csv) != 0:
                     decay_columns = []
@@ -173,9 +194,37 @@ class BottomThreeQuark:
                                 os.makedirs(dec_dir)
                             df_decays_indi.to_csv(dec_dir+"/"+str(self.m_batch_number)+".csv", index=False)                                                   
                 # last line of states loop
+            if decay_width_em and self.L_tot[i]<=1 and (self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # electromagnetic decays
+                decays_csv_em.append(pd.Series(dummy_decay_em))
+                df_decays_indi_em = None
+                if len(decays_electro_indi_csv) != 0:
+                    decay_columns_em = []
+                    for k in range(len(decays_electro_indi_csv[0])):
+                        dummy_column_em = []
+                        for j in range(len(decays_electro_indi_csv)):
+                            dummy_column_em.append(decays_electro_indi_csv[j][k])
+                        decay_columns_em.append(dummy_column_em)
+                    
+                    channel_names_em = [str(k)+"_channel" for k in range(len(decays_electro_indi_csv[0]))]
+                    df_decays_indi_em = pd.DataFrame({channel_names_em[0]: decay_columns_em[0]})
+                    for k in range(len(decays_electro_indi_csv[0])-1):            
+                        df_decays_indi_em[channel_names_em[k+1]]=decay_columns_em[k+1]
+                    if self.m_batch_number is None:
+                        if df_decays_indi_em is not None:
+                            if not os.path.exists(self.m_workpath+"/tables/decays_indi_em/"):
+                                os.makedirs(self.m_workpath+"/tables/decays_indi_em/")                            
+                            df_decays_indi_em.to_csv(self.m_workpath+"/tables/decays_indi_em/decays_state_"+str(i)+"_"+self.m_baryons+".csv", index=False)
+                    else:
+                        if df_decays_indi_em is not None:  # save results for batch a given batch job
+                            dec_dir_em = self.m_workpath+"/batch_results/"+self.m_baryons+"/decays_indi_em/state_"+str(i)
+                            if not os.path.exists(dec_dir_em):
+                                os.makedirs(dec_dir_em)
+                            df_decays_indi_em.to_csv(dec_dir+"/"+str(self.m_batch_number)+".csv", index=False)                                                   
+                # last line of states loop
         df_masses = None
         df_omegas = None
         df_decays = None
+        df_electro= None
         if len(masses_csv) != 0:
             keys_names = [str(i)+"_state" for i in range(len(masses_csv))]
             df_masses = pd.concat(masses_csv, axis=1, keys=keys_names)
@@ -187,6 +236,11 @@ class BottomThreeQuark:
         if len(decays_csv) != 0:
             keys_names = [str(i)+"_state" for i in range(len(decays_csv))]
             df_decays = pd.concat(decays_csv, axis=1, keys=keys_names)
+
+        if len(decays_csv_em) != 0:
+            keys_names = [str(i)+"_state" for i in range(len(decays_csv_em))]
+            df_electro = pd.concat(decays_csv_em, axis=1, keys=keys_names)
+
         # save in csv files
         if self.m_batch_number is None:
             if df_masses is not None:
@@ -200,7 +254,11 @@ class BottomThreeQuark:
             if df_decays is not None:
                 if not os.path.exists(self.m_workpath+"/tables/"):
                     os.makedirs(self.m_workpath+"/tables/")
-                df_decays.to_csv(self.m_workpath+"/tables/decays_states_"+self.m_baryons+".csv", index=False)                
+                df_decays.to_csv(self.m_workpath+"/tables/decays_states_"+self.m_baryons+".csv", index=False)
+            if df_electro is not None:
+                if not os.path.exists(self.m_workpath+"/tables/"):
+                    os.makedirs(self.m_workpath+"/tables/")
+                df_electro.to_csv(self.m_workpath+"/tables/decays_electro_states_"+self.m_baryons+".csv", index=False)
         else:
             if df_masses is not None:  # save results for batch a given batch job
                 if not os.path.exists(self.m_workpath+"/batch_results/"+self.m_baryons+"/mass_states/"):
@@ -210,6 +268,10 @@ class BottomThreeQuark:
                 if not os.path.exists(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/"):
                     os.makedirs(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/")
                 df_decays.to_csv(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states/"+str(self.m_batch_number)+".csv", index=False)
+            if df_electro is not None:
+                if not os.path.exists(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states_electro/"):
+                    os.makedirs(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states_electro/")
+                df_electro.to_csv(self.m_workpath+"/batch_results/"+self.m_baryons+"/decay_states_electro/"+str(self.m_batch_number)+".csv", index=False)
     
     def fetch_values(self):
         """

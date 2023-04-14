@@ -23,7 +23,7 @@ class DecayWidths:
         self.m_width = decay(workpath)
         self.fetch_decay_masses(bootstrap)
         self.set_gamma_val(bootstrap)
-        self.channel_widths_vector = []        
+        self.channel_widths_vector = []
         
     def total_decay_width(self, baryons, k_prim, massA, SA_val, L_val, JA_val, SL_val, ModEx_val, bootstrap=False, gamma_val=None, m1=0, m2=0, m3=0):
         """
