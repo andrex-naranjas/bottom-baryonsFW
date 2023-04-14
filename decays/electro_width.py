@@ -55,7 +55,6 @@ class ElectroWidths:
 
         for i in range(nChannels):
             decPr = i+1
-            # decPr = 3
             MassB = self.decay_mass(bootstrap, baryons, decPr)
             single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                             MassB,
@@ -235,7 +234,3 @@ class ElectroWidths:
             self.gauss_xi_p_s   = np.random.normal(5.95500, 0.00500, 10000)
             self.gauss_xi       = np.random.normal(5.80600, 0.00700, 10000)
             self.gauss_lambda   = np.random.normal(5.61400, 0.00700, 10000)
-            
-            
-            
-            
