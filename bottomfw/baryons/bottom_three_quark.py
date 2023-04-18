@@ -207,7 +207,7 @@ class BottomThreeQuark:
                     
                     channel_names_em = [str(k)+"_channel" for k in range(len(decays_electro_indi_csv[0]))]
                     df_decays_indi_em = pd.DataFrame({channel_names_em[0]: decay_columns_em[0]})
-                    for k in range(len(decays_electro_indi_csv[0])-1):            
+                    for k in range(len(decays_electro_indi_csv[0])-1):
                         df_decays_indi_em[channel_names_em[k+1]]=decay_columns_em[k+1]
                     if self.m_batch_number is None:
                         if df_decays_indi_em is not None:
