@@ -391,7 +391,7 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
             return '$\\dagger$', '$\\dagger$'
     elif baryons=='lambdas':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(4/3):
-            return '$5619.60\\pm 0.17$' , '$\approx 0$'
+            return '$5619.60\\pm 0.17$' , '$\\approx 0$'
         elif J_tot==1/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):
             return '$5912.19\\pm 0.17$' , '$<0.25$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):

@@ -175,6 +175,55 @@ class BottomTables:
         dec.print_bottom_latex(baryons, f_decay_indi)
 
 
+    def decay_indi_table_em(self):
+        
+        df = pd.read_csv(self.m_workpath+'/tables/decays_indi_'+self.m_baryons+'_summary.csv')
+        f_decay_indi = open(self.m_workpath+'/tables/decay_indi_'+self.m_baryons+'_paper.tex', "w")
+        n_decay_channels = int((len(df.columns)-8)/3)
+        baryons = self.m_baryons
+
+        from decays import decay_utils as dec
+        baryon_symbol = dec.baryon_symbol(baryons)
+        baryon_quarks = "$" + baryon_symbol + "_b(" + dec.baryon_quarks(baryons) + ")$"
+        
+        name_decays=[]
+        mass_decs_B=[]
+        mass_decs_C=[]
+        coulmn_sep = ""
+        name_decays.append(baryon_quarks)
+        for k in range(n_decay_channels):
+            name_decays.append(dec.latex_decay_label(baryons, k+1)[0])
+            mass_decs_B.append(dec.latex_decay_label(baryons, k+1)[1])
+            mass_decs_C.append(dec.latex_decay_label(baryons, k+1)[2])
+            coulmn_sep += "&"
+        name_decays.append('Tot $\\Gamma$')
+        dec.print_header_latex(name_decays, f_decay_indi)
+        
+        flavor = "$\\mathcal{F}={\\bf {6}}_{\\rm f}$ " # omegas, sigmas, cascades
+        if (baryons=="cascades_anti3" or baryons=="lambdas"): # cascades_anti3, lambdas
+            flavor = "$\\mathcal{F}={\\bf {\\bar{3}}}_{\\rm f}$"
+        print(flavor +  coulmn_sep  +"\\\\ \hline", file=f_decay_indi)
+
+        for i in range(len(self.m_SU_tot)):
+            channel_widths = []
+            errors_up = []
+            errors_dn = []
+            for k in range(n_decay_channels):
+                channel_widths.append(df['decay_'+str(k)][i])
+                errors_up.append(df['dec_up_'+str(k)][i])
+                errors_dn.append(df['dec_dn_'+str(k)][i])
+
+            if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3
+            else: SU_tot_val = 4/3
+            quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i],
+                                                  self.m_S_tot[i], self.m_L_tot[i],
+                                                  self.m_ModEx[i], SU_tot_val)
+            wave_label= "$"+baryon_symbol+'_b('+str(abs(round(self.m_mass[i])))+')$ ' +du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])+'&'
+            dec.print_row_latex(self.m_mass[i], mass_decs_B, mass_decs_C, wave_label, channel_widths, errors_up, errors_dn, f_decay_indi)
+
+        dec.print_bottom_latex(baryons, f_decay_indi)
+
+
 
     def latex_string_value_error(self, value, decimals=2, units='Mev'):
         """

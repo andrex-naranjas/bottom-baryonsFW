@@ -129,25 +129,39 @@ def paper_tables_results(baryons, di_three_quark='diquark', decay_width=False,
                       +str(J_tot[i])+','+str(S_tot[i])+','+str(L_tot[i])+','+str(ModEx[i])+','+str(HO_n[i]), file=f_summary)
 
                 
-def decay_indi_tables_results(baryons, asymmetric=False, prev_params=False, workpath='.', batch_number=None):
-    # make statitical summary csv files for later use in latex tables for individual decay channels
-
+def decay_indi_tables_results(baryons, decay_type="strong", asymmetric=False, prev_params=False, workpath='.', batch_number=None):
+    '''
+    Method to make statistical summary csv files for later use in latex tables for individual EM decay channels
+    '''
+    if decay_type=="strong":
+        decay_name=""
+        second_name=""
+    elif decay_type=="electro":
+        decay_name="_em"
+        second_name="_"
+    
     baryons_name = baryons
-    f_indi = open(workpath+'/tables/decays_indi_'+baryons_name+'_summary.csv', "w")    
+    f_indi = open(workpath+'/tables/decays_indi_'+decay_name+second_name+baryons_name+'_summary.csv', "w")    
     state,sum_mass,J_tot,S_tot,L_tot,I_tot,SU_tot,HO_n,SL,ModEx = bs.states_mass(baryons)
 
     for i in range(len(state)):
+        add_it = 0
+        if decay_type=="electro":
+            add_it = 1
 
         decay_indi_df = None
         if batch_number is None:
-            decay_indi_df = pd.read_csv(workpath+"/tables/decays_indi/decays_state_"+str(i)+"_"+baryons+".csv")
+            decay_indi_df = pd.read_csv(workpath+"/tables/decays_indi"+decay_name+"/decays_state_"+str(i+add_it)+"_"+baryons+".csv")                
         else: # merge results from batch jobs
-            all_files = glob.glob(os.path.join(workpath+"/batch_results/"+baryons+"/decays_indi/state_"+str(i)+"/", "*.csv"))
+            all_files = glob.glob(os.path.join(workpath+"/batch_results/"+baryons+"/decays_indi"+decay_name+"/state_"+str(i)+"/", "*.csv"))
             df_from_each_file = (pd.read_csv(f) for f in all_files)
             decay_indi_df = pd.concat(df_from_each_file, ignore_index=True)
             
         n_channels  = len(decay_indi_df.columns)
         n_samples   = len(decay_indi_df.index)
+
+        print(n_channels, n_samples)
+        input()
 
         quantile_dn = int(n_samples*0.025)#1587)   #int(np.floor(N*0.1587))
         quantile_up = int(n_samples*0.975)#8413)+1 #int(np.floor(N*0.8413))
