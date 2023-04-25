@@ -32,7 +32,13 @@ class ElectroWidths:
         mb = m1
         ms = m2
         ml = m3
-        
+
+        # ml = 299.0
+        # ms = 465.0
+        # mb = 4928.0
+        # k_prim = 5044.799302252
+        # massA = 5.935 * 1000
+
         MassA = massA/1000.0
         mbottom  = mb/1000.0
         mupdown  = ml/1000.0
@@ -47,9 +53,9 @@ class ElectroWidths:
         baryon = self.baryon_flag(baryons)
         ModEx = self.ModEx_flag(ModEx_val)
         nChannels = self.n_channels(baryons)
-        m_lam, m_rho = self.reduced_masses(baryons, mb, ml, ms)
-        channel_widths = ([])
-        
+        m_lam, m_rho = self.reduced_masses(baryons, mbottom*1000, mupdown*1000, mstrange*1000)
+        channel_widths = ([])        
+
         alpha_lam = self.alphas(k_prim, m_lam)
         alpha_rho = self.alphas(k_prim, m_rho)
 
@@ -76,7 +82,6 @@ class ElectroWidths:
             
         self.channel_widths_vector.append(channel_widths) # for individual decay tables, this is a list of arrays!
         return total_decay_width
-
 
     def orbital_projections(self, ModEx_val, LA_val):
         """
@@ -106,20 +111,20 @@ class ElectroWidths:
         elif(baryons=='lambdas'):        return 4
         elif(baryons=='cascades_anti3'): return 5
 
-    def reduced_masses(self, baryons, m1_input, m2_input, m3_input):
+    def reduced_masses(self, baryons, mb_input, ml_input, ms_input):
         """
         Method to calculate reduced masses of the harmonic oscillator
         """
-        m_lam,m_rho=0,0
+        m_lam, m_rho=0,0
         if(baryons=='omegas'):
-            m_rho = m2_input
-            m_lam = (3*m2_input*m1_input)/(2*m2_input+m1_input)
+            m_rho = ms_input
+            m_lam = (3*ms_input*mb_input)/(2*ms_input+mb_input)
         elif(baryons=='cascades' or baryons =='cascades_anti3'):
-            m_rho = (m2_input+m3_input)/2
-            m_lam = (1.5*(m2_input+m3_input)*m1_input)/(m1_input+m2_input+m3_input)
+            m_rho = (ml_input+ms_input)/2
+            m_lam = (1.5*(ml_input+ms_input)*mb_input)/(mb_input+ml_input+ms_input)
         elif(baryons=='sigmas' or baryons=='lambdas'):
-             m_rho = m3_input
-             m_lam = (3*m3_input*m1_input)/(2*m3_input+m1_input)
+             m_rho = ml_input
+             m_lam = (3*ml_input*mb_input)/(2*ml_input+mb_input)
         return m_lam, m_rho
 
     def alphas(self, k_prim, m_lam_rho):

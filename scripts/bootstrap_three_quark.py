@@ -13,29 +13,39 @@ from iminuit import Minuit
 import numpy as np
 import datetime
 import pandas as pd
+import json
 # framework modules
 from bottomfw.baryons import data_preparation as dp
 from bottomfw.baryons.bottom_three_quark import BottomThreeQuark
 
 
-if len(sys.argv) <= 1:
-    sys.exit('Provide bottom states group name. Try again!')
+workpath = os.getcwd()
+config = None
+with open(workpath+"/config/three_quark_config.json", "r") as jsonfile:
+    config = json.load(jsonfile)
 
-#states = 'omega' # All, omega, cascades, sigmaLamb
-run_baryons = sys.argv[1]
+if config is not None:
+    run_baryons = config["baryons"]
+    n_events = config["n_events"]
+    asymmetric = config["asymmetric_errors"]
+    decay_width = config["decay_width"]
+    decay_width_em = config["decay_width_em"]
+    bootstrap = config["bootstrap_mass"]
+    bootstrap_width = config["bootstrap_st_dec"]
+    bootstrap_width_em = config["bootstrap_em_dec"]
+    prev_params = config["previous_param"]
+else:
+    sys.exit('Please provide a configuration file. Try again!')
 
 # for running batch jobs with htcondor
 batch_number = None
-if len(sys.argv) == 4:
-    batch_number = sys.argv[2]
-    workpath = sys.argv[3]
-else:
-    workpath = os.getcwd()
+if len(sys.argv) == 3:
+    batch_number = sys.argv[1]
+    workpath = sys.argv[2]
 
 # input parameters
 param_v,param_w,param_x,param_y,param_z,param_q1,param_q2,param_q3,\
     param_is_rho,param_is_lam,param_is_omega,param_is_cascade,param_is_sigma = dp.fetch_data_extended()
-
 
 def model(q1, q2, q3, is_rho, is_lam, is_omega, is_cascade, is_sigma, v, w, x, y, z, m1, m2, m3, k, a, b, e, g):
     return q1*m1 + q2*m2 + q3*m3 + \
@@ -120,7 +130,7 @@ gauss_6333 = sample_gauss(6333.0, np.power((1.00**2 + sigma_model), 0.5 ))  # al
 # plug here the sigma_0 optimization lines from data_utils.py
 
 # construct the simulated sampling distribution (bootstrap technique)
-for i in range(10): # max 10000 with decays included, computationally expensive
+for i in range(n_events): # max 10000 with decays included, computationally expensive
     #if(states=='All'):
     exp_m = np.array([ # measured baryon masses
         # omegas
@@ -162,7 +172,6 @@ for i in range(10): # max 10000 with decays included, computationally expensive
     sampled_e = np.append(sampled_e, m.values['e'])
     sampled_g = np.append(sampled_g, m.values['g'])
 
-    # if states != 'omega':
     # correlation matrix
     corr = m.covariance.correlation()
 
@@ -238,41 +247,12 @@ else:
     df.to_csv(workpath+"/batch_results/"+run_baryons+"/correlation/"+str(batch_number)+".csv", index=False)
 
 
-
-
-
-# calculate the masses and decays using the bootstrap simulation above
-# results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=True,
-#                            decay_width=True, bootstrap_width=True, batch_number=batch_number, workpath=workpath)
-# results.fetch_values()
-
-# print('Getting paper results for:', run_baryons)
-# #input()
-# # omegas,cascades,sigmas,lambdas,cascades_anti3
-# results.paper_results_predictions(bootstrap=True, bootstrap_width=True, prev_params=False) # all running for paper
-# #results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=True, prev_params=False, decay_width=True) # all running for paper
-# # avoid time consuming decay widths calculations
-# # results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)
-# # nominal results, expected to be the same as the previous paper, very important check
-# # results.paper_results_predictions(baryons=run_baryons,         bootstrap=False, bootstrap_width=False, prev_params=True, decay_width=True)
-# end = datetime.datetime.now()
-# elapsed_time = end - start
-# print("Elapsed total time = " + str(elapsed_time))
-
-
-results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=True,
-                           decay_width=False, bootstrap_width=False, decay_width_em=True, bootstrap_width_em=False, batch_number=batch_number, workpath=workpath)
+# calculate masses and widths using the bootstraped fitted parameters
+results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=asymmetric,
+                           decay_width=decay_width, bootstrap_width=bootstrap_width, decay_width_em=decay_width_em, bootstrap_width_em=bootstrap_width_em, batch_number=batch_number, workpath=workpath)
 results.fetch_values()
-
 print('Getting paper results for:', run_baryons)
-#input()
-# omegas,cascades,sigmas,lambdas,cascades_anti3
-results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_params=False) # all running for paper
-#results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=True, prev_params=False, decay_width=True) # all running for paper
-# avoid time consuming decay widths calculations
-# results.paper_results_predictions(baryons=run_baryons,        bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)
-# nominal results, expected to be the same as the previous paper, very important check
-# results.paper_results_predictions(baryons=run_baryons,         bootstrap=False, bootstrap_width=False, prev_params=True, decay_width=True)
+results.paper_results_predictions(bootstrap=bootstrap, bootstrap_width=bootstrap_width, prev_params=prev_params)
 end = datetime.datetime.now()
 elapsed_time = end - start
 print("Elapsed total time = " + str(elapsed_time))
