@@ -7,13 +7,11 @@
 ---------------------------------------------------------------
 """
 import sys
-import pandas as pd
 from os import getcwd
 # framework includes
 import bottomfw.common.data_visualization as dv
 from bottomfw.common.bottom_tables import BottomTables
 from bottomfw.common.bottom_plots import BottomPlots
-
 
 # print results for journal
 if len(sys.argv) <= 1:
@@ -33,9 +31,13 @@ dv.paper_tables_results(run_baryons, di_three_quark='diquark', decay_width=False
 print('diquark results created')
 
 # create summary tables for 
-dv.decay_indi_tables_results(run_baryons, asymmetric=True,
+dv.decay_indi_tables_results(run_baryons, decay_type="strong", asymmetric=True,
                              prev_params=False, workpath=workpath, batch_number=True) # change to batch_number to True
-print('individual decays created')
+print('individual decays strong created')
+
+dv.decay_indi_tables_results(run_baryons, decay_type="electro", asymmetric=True,
+                             prev_params=False, workpath=workpath, batch_number=True) # change to batch_number to True
+print('individual decays electro created')
 
 # tables
 bottom_tables = BottomTables(run_baryons, workpath=workpath, batch_results=True) # assume diquark never come from batch jobs (FIX this)

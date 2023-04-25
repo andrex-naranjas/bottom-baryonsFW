@@ -573,7 +573,6 @@ def decay_masses(baryons, decPr):
         elif(decPr==6):   return sigma_s_mass,kaon_mass
         elif(decPr==7):   return xi_mass,     eta_mass
 
-
 def baryon_symbol(baryons="omegas"):
     if baryons=="omegas":
         return "\Omega"
@@ -588,12 +587,12 @@ def baryon_symbol(baryons="omegas"):
 
 def baryon_quarks(baryons="omegas"):
     if baryons=="omegas":
-        return "ssc"
+        return "ssb"
     elif baryons=="sigmas":
-        return "nnc"
+        return "nnb"
     elif baryons=="lambdas":
-        return "nnc"
+        return "nnb"
     elif baryons=="cascades":
-        return "snc'"
+        return "snb'"
     else:
-        return "snc"
+        return "snb"

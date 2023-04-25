@@ -33,12 +33,16 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   mbottom = mbottom_val;
   mupdown = mupdown_val;
   mstrange = mstrange_val;
-  mlight = 0.5*(mupdown_val + mstrange_val);
 
   // which baryon, mode, decay product
   baryonFlag = baryon;
   modeExcitation = excMode;
   decayProd  = prodDecay;
+
+  // define the light effective mass for the h.o.
+  if (baryonFlag==1)                      mlight = mstrange;
+  else if(baryonFlag==2 or baryonFlag==5) mlight = 0.5*(mupdown_val + mstrange);
+  else if(baryonFlag==3 or baryonFlag==4) mlight = mupdown;
 
   double alpha_rho = 0.,alpha_lam = 0.;
   alpha_rho = ar_val; alpha_lam = al_val;
@@ -106,7 +110,7 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   S3  = 0.5;       mS3  = getMomentumProjections(S3);
 
   double k_value; k_value = K(MA, MB);
-  double EB_value = EB(MB, k_value);  
+  double EB_value = EB(MB, k_value);
   double fi2_value  = FI2(EB_value, MA, k_value);
 
   double sum_value = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value, modeExcitation);
@@ -132,7 +136,7 @@ std::vector<double> EMDecayWidths::getMomentumProjections(double j_angular, bool
   do{
     angularProjections.push_back(m_projection);
     m_projection++;
-  }while(m_projection<=j_angular);  
+  }while(m_projection<=j_angular);
   return angularProjections;
 }
 
@@ -374,7 +378,7 @@ double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alp
   if(mLlA!=0 && excMode==1) return 0.;
   if(mLrA!=0 && excMode==2) return 0.;
   if(excMode==0) //ground 
-    return 0.;
+    return SPINFLIP_U1_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
   else if(excMode==1) //lambda excitation
     return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
   else if(excMode==2) //rho excitation
@@ -388,7 +392,7 @@ double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alp
   if(mLlA!=0 && excMode==1) return 0.;
   if(mLrA!=0 && excMode==2) return 0.;
   if(excMode==0) //ground
-    return 0.;
+    return SPINFLIP_U2_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
   else if(excMode==1) //lambda excitation
     return SPINFLIP_U2_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
   else if(excMode==2) //rho excitation
@@ -402,7 +406,7 @@ double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alp
   if(mLlA!=0 && excMode==1) return 0.;
   if(mLrA!=0 && excMode==2) return 0.;
   if (excMode==0) //ground
-    return 0.;
+    return SPINFLIP_U3_GS_GS(k_value, alpha_lam,  mbottom, mlight);
   else if(excMode==1) //lambda excitation
     return SPINFLIP_U3_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
   else if(excMode==2) //rho excitation
@@ -424,7 +428,7 @@ int EMDecayWidths::KroneckerDelta_extended(double mLrA, double mLlA, int excMode
 // SPIN-FLIP INTEGRALS
 double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
-  double value2 = 3. * std::pow(mbottom, 2) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
   double value = std::exp(value1 * (value2 + value3));
   return value;
@@ -432,14 +436,14 @@ double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double
 
 double EMDecayWidths::SPINFLIP_U2_GS_GS(double k_value, double alpha_lam, double alpha_rho,  double mbottom, double mlight){
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
-  double value2 = 3. * std::pow(mbottom, 2) / std::pow(alpha_lam * (mbottom + 2. * mlight), 2);
+  double value2 = (3. * std::pow(mbottom, 2)) / std::pow(alpha_lam * (mbottom + 2. * mlight), 2);
   double value3 = 1./std::pow(alpha_rho, 2);
   double value = std::exp(value1 * (value2 + value3));
   return value;
 }
 
 double EMDecayWidths::SPINFLIP_U3_GS_GS(double k_value, double alpha_lam,  double mbottom, double mlight){
-  double value1 = (-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
   double value = std::exp(value1);
   return value;
 }
@@ -1012,82 +1016,6 @@ double EMDecayWidths::T2r(double k_value, double alpha_lam, double alpha_rho,
 double EMDecayWidths::T3r(){
   double value = 0;
   return value;
-}
-
-
-double EMDecayWidths::ANGULAR_SUM_SQUARED_GROUND(double alpha_rho, double alpha_lam, double k_value){
-
-  WignerSymbols  *m_wigner = new WignerSymbols();
-  double dummy = 0;
-
-  double innerSum = 0.;
-
-  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iML = 0; iML<(int)mL.size(); iML++)
-    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)
- 	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
- 	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
- 	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
- 	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
- 		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
- 		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
- 		    dummy = std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1)) *
- 		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
- 		      ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
- 		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
- 		      ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1) - 1, mS2.at(iMS2), mSlB.at(iMSlB))*
- 		      ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
- 		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
- 		    innerSum+=dummy;
- 		  }
-
-  innerSum = 0.;
-
-  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iML = 0; iML<(int)mL.size(); iML++)
-    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)	
- 	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
- 	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
- 	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
- 	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
- 		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
- 		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
- 		    dummy = std::sqrt((S2 + mS2.at(iMS2)) *(S2 - mS2.at(iMS2) + 1)) *
- 		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
- 		      ClebschGordan(m_wigner, L, SA, JA, mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
- 		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3), mSB.at(iMSB))*
- 		      ClebschGordan(m_wigner, S1, S2, SlB, mS1.at(iMS1), mS2.at(iMS2) - 1, mSlB.at(iMSlB))*
- 		      ClebschGordan(m_wigner, SlA, S3, SA, mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))* 
- 		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
- 		    innerSum+=dummy;
- 		  }
-
- innerSum = 0.;
-
-  //for(int iMJA = 0; iMJA<(int)mJA.size(); iMJA++)
-  for(int iML = 0; iML<(int)mL.size(); iML++)
-    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
-      for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++)	
-  	for(int iMSlB = 0; iMSlB<(int)mSlB.size(); iMSlB++)
-  	  for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
-  	    for(int iMS1 = 0; iMS1<(int)mS1.size(); iMS1++)
-  	      for(int iMS2 = 0; iMS2<(int)mS2.size(); iMS2++)
-  		for(int iMSlA = 0; iMSlA<(int)mSlA.size(); iMSlA++)
-  		  for(int iMS3 = 0; iMS3<(int)mS3.size(); iMS3++){
-  		    dummy =  std::sqrt((S3 + mS3.at(iMS3)) * (S3 - mS3.at(iMS3) + 1)) *
-  		      ClebschGordan(m_wigner, L, SB, JB, mL.at(iML), mSB.at(iMSB), mJB.at(iMJB))*
-  		      ClebschGordan(m_wigner, L, SA, JA,  mL.at(iML), mSA.at(iMSA), 0.5/*mJA.at(iMJA)*/)*
-  		      ClebschGordan(m_wigner, SlB, S3, SB, mSlB.at(iMSlB), mS3.at(iMS3) - 1, mSB.at(iMSB))*
-  		      ClebschGordan(m_wigner, S1, S2, SlB,  mS1.at(iMS1), mS2.at(iMS2), mSlB.at(iMSlB))*
-  		      ClebschGordan(m_wigner, SlA, S3, SA,  mSlA.at(iMSlA), mS3.at(iMS3), mSA.at(iMSA))*
-  		      ClebschGordan(m_wigner, S1, S2, SlA, mS1.at(iMS1), mS2.at(iMS2), mSlA.at(iMSlA));
-  		    innerSum+=dummy;
-  		  }
-
-
-  return innerSum;
 }
 
 #endif

@@ -1,31 +1,35 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''
+"""
 ---------------------------------------------------------------
  authors: A. Ramirez-Morales (andres.ramirez.morales@cern.ch)
           H. Garcia-Tecocoatzi
- ---------------------------------------------------------------
-'''
-
+---------------------------------------------------------------
+"""
 # htcondor job submitter
-# python3 scripts/submit_batch.py baryons three_quark/diquark n_jobs
+# usage: python3 scripts/submit_batch.py three_quark/diquark
 
 import sys
 from os import system,getenv,getuid,getcwd,popen
 
 workpath = getcwd()
 
-if len(sys.argv)!=4:
-  sys.exit('Not enough arguments to set the batch job')
+if len(sys.argv)!=1:
+  sys.exit('Please indicate wich quark structure to run for batch jobs')
 
-baryons  = sys.argv[1]
-three_di = sys.argv[2]
-n_jobs = sys.argv[3]
+baryons = "omegas"
+n_jobs  = 10
+with open(workpath+"/config/three_quark_config.json", "r") as jsonfile:
+    config = json.load(jsonfile)
+baryons = config["baryons"]
+n_jobs  = config["n_jobs"]
+
+three_di = sys.argv[1]
 py3_path = popen('which python3').read().strip()
 
-if three_di=='three_quark':
+if (three_di == 'three_quark'):
   run_bottom = 'scripts/bootstrap_three_quark.py'
-elif three_di=='diquark':
+elif (three_di=='diquark'):
   run_bottom = 'bottom_bootstrap_diquark.py'
 else:
   sys.exit('quark structure not supported')
@@ -34,7 +38,7 @@ classad='''
 universe = vanilla
 executable = {0}
 getenv = True
-arguments = {1}/{2} {3} $(Process) {1}
+arguments = {1}/{2} $(Process) {1}
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 output = {1}/output_batch/{3}/$(Process).out
