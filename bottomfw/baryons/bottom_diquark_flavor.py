@@ -186,44 +186,6 @@ class BottomDiquark:
         self.y_param = self.params['Y']
         self.z_param = self.params['Z']
         
-        # correlation matrix
-        self.rho_md2md1 = np.mean(self.corr_mat['rho_md2md1'])
-        self.rho_md3md1 = np.mean(self.corr_mat['rho_md3md1'])
-        self.rho_mbmd1  = np.mean(self.corr_mat['rho_mbmd1'])
-        self.rho_kmd1   = np.mean(self.corr_mat['rho_kmd1'])
-        self.rho_amd1   = np.mean(self.corr_mat['rho_amd1'])
-        self.rho_bmd1   = np.mean(self.corr_mat['rho_bmd1'])
-        self.rho_emd1   = np.mean(self.corr_mat['rho_emd1'])
-        self.rho_gmd1   = np.mean(self.corr_mat['rho_gmd1'])
-        self.rho_md3md2 = np.mean(self.corr_mat['rho_md3md2'])
-        self.rho_mbmd2  = np.mean(self.corr_mat['rho_mbmd2'])
-        self.rho_kmd2   = np.mean(self.corr_mat['rho_kmd2'])
-        self.rho_amd2   = np.mean(self.corr_mat['rho_amd2'])
-        self.rho_bmd2   = np.mean(self.corr_mat['rho_bmd2'])
-        self.rho_emd2   = np.mean(self.corr_mat['rho_emd2'])
-        self.rho_gmd2   = np.mean(self.corr_mat['rho_gmd2'])
-        self.rho_mbmd3  = np.mean(self.corr_mat['rho_mbmd3'])
-        self.rho_kmd3   = np.mean(self.corr_mat['rho_kmd3'])
-        self.rho_amd3   = np.mean(self.corr_mat['rho_amd3'])
-        self.rho_bmd3   = np.mean(self.corr_mat['rho_bmd3'])
-        self.rho_emd3   = np.mean(self.corr_mat['rho_emd3'])
-        self.rho_gmd3   = np.mean(self.corr_mat['rho_gmd3'])
-        self.rho_kmb    = np.mean(self.corr_mat['rho_kmb'])
-        self.rho_amb    = np.mean(self.corr_mat['rho_amb'])
-        self.rho_bmb    = np.mean(self.corr_mat['rho_bmb'])
-        self.rho_emb    = np.mean(self.corr_mat['rho_emb'])
-        self.rho_gmb    = np.mean(self.corr_mat['rho_gmb'])
-        self.rho_ak     = np.mean(self.corr_mat['rho_ak'])
-        self.rho_bk     = np.mean(self.corr_mat['rho_bk'])
-        self.rho_ek     = np.mean(self.corr_mat['rho_ek'])
-        self.rho_gk     = np.mean(self.corr_mat['rho_gk'])
-        self.rho_ba     = np.mean(self.corr_mat['rho_ba'])
-        self.rho_ea     = np.mean(self.corr_mat['rho_ea'])
-        self.rho_ga     = np.mean(self.corr_mat['rho_ga'])
-        self.rho_eb     = np.mean(self.corr_mat['rho_eb'])
-        self.rho_gb     = np.mean(self.corr_mat['rho_gb'])
-        self.rho_ge     = np.mean(self.corr_mat['rho_ge'])
-
               
     def reload_quantum_param(self,baryons):
         """

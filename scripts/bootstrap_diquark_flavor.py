@@ -105,7 +105,11 @@ rho_bmd2,rho_emd2,rho_gmd2,rho_mbmd3,rho_kmd3,rho_amd3     = ([]),([]),([]),([])
 rho_bmd3,rho_emd3,rho_gmd3,rho_kmb,rho_amb,rho_bmb         = ([]),([]),([]),([]),([]),([])
 rho_emb,rho_gmb,rho_ak,rho_bk,rho_ek,rho_gk                = ([]),([]),([]),([]),([]),([])
 rho_ba,rho_ea,rho_ga,rho_eb,rho_gb,rho_ge                  = ([]),([]),([]),([]),([]),([])
-
+rho_md4md1,rho_md5md1,rho_md4md2,rho_md5md2   = ([]),([]),([]),([])
+rho_md4md3,rho_md5md3,rho_md5md4,rho_mbmd4    = ([]),([]),([]),([])
+rho_kmd4,rho_amd4,rho_bmd4,rho_emd4,rho_gmd4  = ([]),([]),([]),([]),([])
+rho_mbmd5,rho_kmd5,rho_amd5,rho_bmd5,rho_emd5 = ([]),([]),([]),([]),([])
+rho_gmd5 = ([])
 
 # start bootstrap
 start = datetime.datetime.now()
@@ -192,8 +196,11 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
     # correlation matrix
     corr = m.covariance.correlation()
 
+
     rho_md2md1 = np.append(rho_md2md1, corr['md2','md1'])
     rho_md3md1 = np.append(rho_md3md1, corr['md3','md1'])
+    rho_md4md1 = np.append(rho_md4md1, corr['md4','md1'])
+    rho_md5md1 = np.append(rho_md5md1, corr['md5','md1'])
     rho_mbmd1  = np.append(rho_mbmd1, corr['mb','md1'])
     rho_kmd1   = np.append(rho_kmd1,  corr['k','md1'])
     rho_amd1   = np.append(rho_amd1,  corr['a','md1'])
@@ -202,6 +209,8 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
     rho_gmd1   = np.append(rho_gmd1,  corr['g','md1'])
 
     rho_md3md2 = np.append(rho_md3md2, corr['md3','md2'])
+    rho_md4md2 = np.append(rho_md4md2, corr['md4','md2'])
+    rho_md5md2 = np.append(rho_md5md2, corr['md5','md2'])
     rho_mbmd2  = np.append(rho_mbmd2,  corr['mb','md2'])
     rho_kmd2   = np.append(rho_kmd2 , corr['k','md2'])
     rho_amd2   = np.append(rho_amd2 , corr['a','md2'])
@@ -209,12 +218,29 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
     rho_emd2   = np.append(rho_emd2 , corr['e','md2'])
     rho_gmd2   = np.append(rho_gmd2 , corr['g','md2'])
 
-    rho_mbmd3  = np.append(rho_kmd3, corr['mb','md3'])
+    rho_md4md3 = np.append(rho_md4md3, corr['md4','md3'])
+    rho_md5md3 = np.append(rho_md5md3, corr['md5','md3'])
+    rho_mbmd3  = np.append(rho_mbmd3,  corr['mb','md3'])
     rho_kmd3   = np.append(rho_kmd3, corr['k','md3'])
     rho_amd3   = np.append(rho_amd3, corr['a','md3'])
     rho_bmd3   = np.append(rho_bmd3, corr['b','md3'])
     rho_emd3   = np.append(rho_emd3, corr['e','md3'])
     rho_gmd3   = np.append(rho_gmd3, corr['g','md3'])
+
+    rho_md5md4 = np.append(rho_md5md4, corr['md5','md4'])
+    rho_mbmd4  = np.append(rho_mbmd4,  corr['mb','md4'])
+    rho_kmd4   = np.append(rho_kmd4, corr['k','md4'])
+    rho_amd4   = np.append(rho_amd4, corr['a','md4'])
+    rho_bmd4   = np.append(rho_bmd4, corr['b','md4'])
+    rho_emd4   = np.append(rho_emd4, corr['e','md4'])
+    rho_gmd4   = np.append(rho_gmd4, corr['g','md4'])
+
+    rho_mbmd5  = np.append(rho_mbmd5,  corr['mb','md5'])
+    rho_kmd5   = np.append(rho_kmd5, corr['k','md5'])
+    rho_amd5   = np.append(rho_amd5, corr['a','md5'])
+    rho_bmd5   = np.append(rho_bmd5, corr['b','md5'])
+    rho_emd5   = np.append(rho_emd5, corr['e','md5'])
+    rho_gmd5   = np.append(rho_gmd5, corr['g','md5'])
 
     rho_kmb    = np.append(rho_kmb, corr['k','mb'])
     rho_amb    = np.append(rho_amb, corr['a','mb'])
@@ -278,6 +304,15 @@ corr_mat_diquark ={
     'rho_bmd3':rho_bmd3, 'rho_emd3':rho_emd3, 'rho_gmd3':rho_gmd3, 'rho_kmb':rho_kmb, 'rho_amb':rho_amb,'rho_bmb':rho_bmb,
     'rho_emb':rho_emb,'rho_gmb':rho_gmb,'rho_ak':rho_ak,'rho_bk':rho_bk,'rho_ek':rho_ek,'rho_gk':rho_gk,
     'rho_ba':rho_ba, 'rho_ea':rho_ea, 'rho_ga':rho_ga, 'rho_eb':rho_eb, 'rho_gb':rho_gb, 'rho_ge':rho_ge}
+
+
+
+
+
+
+
+
+
 
 # save bootstrap correlation parameters
 df = pd.DataFrame(corr_mat_diquark)

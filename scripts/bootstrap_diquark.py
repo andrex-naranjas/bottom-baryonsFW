@@ -233,7 +233,7 @@ while count < 10000: # max 10000 with decays included, computationally expensive
     rho_emd2   = np.append(rho_emd2 , corr['e','md2'])
     rho_gmd2   = np.append(rho_gmd2 , corr['g','md2'])
 
-    rho_mbmd3  = np.append(rho_kmd3, corr['mb','md3'])
+    rho_mbmd3  = np.append(rho_mbmd3,corr['mb','md3'])
     rho_kmd3   = np.append(rho_kmd3, corr['k','md3'])
     rho_amd3   = np.append(rho_amd3, corr['a','md3'])
     rho_bmd3   = np.append(rho_bmd3, corr['b','md3'])
