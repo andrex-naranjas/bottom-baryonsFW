@@ -113,7 +113,7 @@ rho_gmd5 = ([])
 
 # start bootstrap
 start = datetime.datetime.now()
-sigma_model = 0**2 # to be obtained with optimization (Li.Jin)
+sigma_model = 0.00**2 # to be obtained with optimization (Li.Jin)
 # gaussian pdf with the measured value and with experimental and model(sigma_model) uncertainties
 # Omega states
 gauss_6061 = sample_gauss(6045.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
@@ -121,22 +121,22 @@ gauss_6316 = sample_gauss(6315.6, np.power((0.00**2 + sigma_model), 0.5 ))  # al
 gauss_6330 = sample_gauss(6330.3, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3015), PDG
 gauss_6340 = sample_gauss(6339.7, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3044), PDG
 gauss_6350 = sample_gauss(6349.8, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3051), PDG
-# Cascade b sextet
+# Cascade b sextet                                    
 gauss_5935 = sample_gauss(5935.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2461), PDG Average
 gauss_5953 = sample_gauss(5953.8, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2796), PDG Average
 gauss_6328 = sample_gauss(6227.9, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2832), PDG Average
-# Sigma b
+# Sigma b                                             
 gauss_5813 = sample_gauss(5813.1, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2453), PDG Average
 gauss_5837 = sample_gauss(5837.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2517), PDG Average
 gauss_6097 = sample_gauss(6096.9, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2819), PDG Average
-# Lambda b
+# Lambda b                                            
 gauss_5617 = sample_gauss(5619.6, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
 gauss_5912 = sample_gauss(5912.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
 gauss_5920 = sample_gauss(5920.1, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
 gauss_6146 = sample_gauss(6146.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
 gauss_6152 = sample_gauss(6152.5, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
 gauss_6070 = sample_gauss(6072.3, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
-# Cascades anti-3-plet
+# Cascades anti-3-plet                                
 gauss_5794 = sample_gauss(5794.5, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2570), PDG Average
 gauss_6100 = sample_gauss(6100.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2635), PDG Average
 gauss_6327 = sample_gauss(6327.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2934), LHCb PhysRevLett
@@ -144,8 +144,9 @@ gauss_6333 = sample_gauss(6333.0, np.power((0.00**2 + sigma_model), 0.5 ))  # al
 
 # plug here the sigma_0 optimization lines from data_utils.py
 
+count = 0
 # construct the simulated sampling distribution (bootstrap technique)
-for _ in range(100): # max 10000 with decays included, computationally expensive
+for _ in range(1000): # max 10000 with decays included, computationally expensive
 
     exp_m = np.array([ # measured baryon masses        
         # omegas
@@ -180,6 +181,11 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
     # perform the parameter fitting (via minimizing squared distance)
     m = fit(least_squares)
 
+    # if type(m.covariance) != type(None):
+    #     count += 1
+    # else:
+    #     continue
+
     sampled_md1 = np.append(sampled_md1, m.values['md1'])
     sampled_md2 = np.append(sampled_md2, m.values['md2'])
     sampled_md3 = np.append(sampled_md3, m.values['md3'])
@@ -195,7 +201,6 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
 
     # correlation matrix
     corr = m.covariance.correlation()
-
 
     rho_md2md1 = np.append(rho_md2md1, corr['md2','md1'])
     rho_md3md1 = np.append(rho_md3md1, corr['md3','md1'])
@@ -278,9 +283,9 @@ print("G", sampled_g.mean())
                    
 
 # save bootstrap results
-df = pd.DataFrame({"Md1" : sampled_md1,"Md2" : sampled_md2,"Md3" : sampled_md3,
-                   "MB"  : sampled_mb,"K" : sampled_k, "A" : sampled_a,
-                   "B": sampled_b,    "E" : sampled_e, "G" : sampled_g})
+df = pd.DataFrame({"Md1":sampled_md1, "Md2":sampled_md2, "Md3":sampled_md3, "Md4":sampled_md4, "Md5":sampled_md5,
+                   "MB":sampled_mb, "K":sampled_k,  "A":sampled_a,
+                   "B":sampled_b,   "E":sampled_e,  "G":sampled_g})
 if batch_number is None:
     if not os.path.exists(workpath+"/tables/"):
         os.mkdir(workpath+"/tables/")
@@ -297,22 +302,16 @@ param   = {'is_omega':param_is_omega,'is_cascade_p':param_is_cascade_p,'is_sigma
 sampled = {'sampled_md1':sampled_md1,'sampled_md2':sampled_md2,'sampled_md3':sampled_md3,'sampled_md4':sampled_md4,'sampled_md5':sampled_md5,
            'sampled_mb':sampled_mb,
            'sampled_k':sampled_k,'sampled_a':sampled_a, 'sampled_b':sampled_b, 'sampled_e':sampled_e, 'sampled_g':sampled_g}
+
 corr_mat_diquark ={
-    'rho_md2md1':rho_md2md1,'rho_md3md1':rho_md3md1,'rho_mbmd1':rho_mbmd1, 'rho_kmd1':rho_kmd1, 'rho_amd1':rho_amd1, 'rho_bmd1':rho_bmd1,
-    'rho_emd1':rho_emd1, 'rho_gmd1':rho_gmd1, 'rho_md3md2':rho_md3md2, 'rho_mbmd2':rho_mbmd2, 'rho_kmd2':rho_kmd2, 'rho_amd2':rho_amd2,
-    'rho_bmd2':rho_bmd2, 'rho_emd2':rho_emd2, 'rho_gmd2':rho_gmd2, 'rho_mbmd3':rho_mbmd3, 'rho_kmd3':rho_kmd3, 'rho_amd3':rho_amd3,
-    'rho_bmd3':rho_bmd3, 'rho_emd3':rho_emd3, 'rho_gmd3':rho_gmd3, 'rho_kmb':rho_kmb, 'rho_amb':rho_amb,'rho_bmb':rho_bmb,
-    'rho_emb':rho_emb,'rho_gmb':rho_gmb,'rho_ak':rho_ak,'rho_bk':rho_bk,'rho_ek':rho_ek,'rho_gk':rho_gk,
+    'rho_md2md1':rho_md2md1, 'rho_md3md1':rho_md3md1, 'rho_md4md1':rho_md4md1, 'rho_md5md1':rho_md5md1, 'rho_mbmd1':rho_mbmd1, 'rho_kmd1':rho_kmd1,
+    'rho_amd1':rho_amd1,'rho_bmd1':rho_bmd1, 'rho_emd1':rho_emd1, 'rho_gmd1':rho_gmd1, 'rho_md3md2':rho_md3md2, 'rho_md4md2':rho_md4md2,'rho_md5md2':rho_md5md2,
+    'rho_mbmd2':rho_mbmd2, 'rho_kmd2':rho_kmd2, 'rho_amd2':rho_amd2, 'rho_bmd2':rho_bmd2, 'rho_emd2':rho_emd2, 'rho_gmd2':rho_gmd2, 'rho_md4md3':rho_md4md3,
+    'rho_md5md3':rho_md5md3, 'rho_mbmd3':rho_mbmd3, 'rho_kmd3':rho_kmd3, 'rho_amd3':rho_amd3, 'rho_bmd3':rho_bmd3, 'rho_emd3':rho_emd3, 'rho_gmd3':rho_gmd3,
+    'rho_md5md4':rho_md5md4, 'rho_mbmd4':rho_mbmd4, 'rho_kmd4':rho_kmd4, 'rho_amd4':rho_amd4, 'rho_bmd4':rho_bmd4, 'rho_emd4':rho_emd4, 'rho_gmd4':rho_gmd4,
+    'rho_mbmd5':rho_mbmd5, 'rho_kmd5':rho_kmd5, 'rho_amd5':rho_amd5, 'rho_bmd5':rho_bmd5, 'rho_emd5':rho_emd5, 'rho_gmd5':rho_gmd5, 'rho_kmb':rho_kmb,
+    'rho_amb':rho_amb, 'rho_bmb':rho_bmb, 'rho_emb':rho_emb, 'rho_gmb':rho_gmb, 'rho_ak':rho_ak, 'rho_bk':rho_bk, 'rho_ek':rho_ek, 'rho_gk':rho_gk,
     'rho_ba':rho_ba, 'rho_ea':rho_ea, 'rho_ga':rho_ga, 'rho_eb':rho_eb, 'rho_gb':rho_gb, 'rho_ge':rho_ge}
-
-
-
-
-
-
-
-
-
 
 # save bootstrap correlation parameters
 df = pd.DataFrame(corr_mat_diquark)
@@ -330,8 +329,8 @@ results = BottomDiquark(baryons=run_baryons, params=param, sampled=sampled, corr
 results.fetch_values()
 
 print('Getting paper results for:', run_baryons)
-# # omegas,cascades,sigmas,lambdas,cascades_anti3
+# omegas,cascades,sigmas,lambdas,cascades_anti3
 results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)
-
+print(count, "no. successes")
 end = datetime.datetime.now()
 elapsed_time = end - start
