@@ -101,7 +101,7 @@ rho_gk, rho_ba, rho_ea, rho_ga, rho_eb,rho_gb,rho_ge      = ([]),([]),([]),([]),
 # start bootstrap
 start = datetime.datetime.now()
 
-sigma_model = 00**2 # to be obtained with optimization (Li.Jin)
+sigma_model = 10**2 # to be obtained with optimization (Li.Jin)
 # gaussian pdf with the measured value and with experimental and model(sigma_model) uncertainties
 # Omega states
 gauss_6061 = sample_gauss(6045.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
@@ -177,7 +177,6 @@ for i in range(n_events): # max 10000 with decays included, computationally expe
 
     # correlation matrix
     corr = m.covariance.correlation()
-    print(corr['k','a'])
 
     rho_m2m1 = np.append(rho_m2m1, corr['m2','m1'])
     rho_m3m1 = np.append(rho_m3m1, corr['m3','m1'])
@@ -213,7 +212,18 @@ for i in range(n_events): # max 10000 with decays included, computationally expe
     rho_gb  = np.append(rho_gb, corr['g','b'])
     
     rho_ge  = np.append(rho_ge, corr['g','e'])
-    
+
+
+print(round(sampled_m1.mean()), "mb",  round(sampled_m1.std()) )
+print(round(sampled_m2.mean()), "ms",  round(sampled_m2.std()) )
+print(round(sampled_m3.mean()), "mn",  round(sampled_m3.std()) )
+
+
+print("K", pow(sampled_k.mean(), 2)/(1000**3),  "KB", pow(sampled_k.std(), 2)/(1000**3))
+print("A", sampled_a.mean(), " PS ",  sampled_a.std())
+print("B", sampled_b.mean(), " PSL ", sampled_b.std())
+print("E", sampled_e.mean(), " PI  ", sampled_e.std())
+print("G", sampled_g.mean(), " PF ",  sampled_g.std())
 
 # save bootstrap results
 df = pd.DataFrame({"M1" : sampled_m1,"M2" : sampled_m2,"M3" : sampled_m3,
