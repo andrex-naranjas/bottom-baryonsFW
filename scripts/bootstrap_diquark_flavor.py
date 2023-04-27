@@ -70,8 +70,8 @@ def fit(least_squares):
 
     m.limits['a'] = (5, 10)
     m.limits['b'] = (5, 10)
-    m.limits['e'] = (0, 0)
-    m.limits['g'] = (0, 0)
+    m.limits['e'] = (10, 20)
+    m.limits['g'] = (10, 20)
     m.errordef=Minuit.LEAST_SQUARES
     # m.errordef=Minuit.LIKELIHOOD
     m.migrad()
@@ -177,7 +177,7 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
         count += 1
     else:
         continue
-
+    
     sampled_md1 = np.append(sampled_md1, m.values['md1'])
     sampled_md2 = np.append(sampled_md2, m.values['md2'])
     sampled_md3 = np.append(sampled_md3, m.values['md3'])
@@ -191,7 +191,6 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
     sampled_e = np.append(sampled_e, m.values['e'])
     sampled_g = np.append(sampled_g, m.values['g'])
 
-    print(m.values['g'])
     # correlation matrix
     corr = m.covariance.correlation()
 
@@ -260,21 +259,7 @@ for _ in range(100): # max 10000 with decays included, computationally expensive
     
     rho_ge     = np.append(rho_ge, corr['g','e'])
 
-
-print(round(sampled_md1.mean()), "md1 omega  ",  round(sampled_md1.std()) )
-print(round(sampled_md2.mean()), "md2 cascade prime  ",  round(sampled_md2.std()) )
-print(round(sampled_md3.mean()), "md3 sigma",  round(sampled_md3.std()) )
-print(round(sampled_md4.mean()), "md4 lambda",  round(sampled_md4.std()) )
-print(round(sampled_md5.mean()), "md5 cascade",  round(sampled_md5.std()) )
-print(round(sampled_mb.mean()), "mb")
-
-print("K", pow(sampled_k.mean(), 2)/(1000**3),  "KB", pow(sampled_k.std(), 2)/(1000**3))
-print("A", sampled_a.mean(), " PS ",  sampled_a.std())
-print("B", sampled_b.mean(), " PSL ", sampled_b.std())
-print("E", sampled_e.mean(), " PI  ", sampled_e.std())
-print("G", sampled_g.mean(), " PF ",  sampled_g.std())
-                   
-
+    
 # save bootstrap results
 df = pd.DataFrame({"Md1":sampled_md1, "Md2":sampled_md2, "Md3":sampled_md3, "Md4":sampled_md4, "Md5":sampled_md5,
                    "MB":sampled_mb, "K":sampled_k,  "A":sampled_a,
