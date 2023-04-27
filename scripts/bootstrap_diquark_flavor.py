@@ -59,33 +59,25 @@ def least_squares(md1, md2, md3, md4, md5, mb, k, a, b, e, g):
     # return np.sum((pred_m - exp_m)**2 / (yvar_2**2)) #**2
 
 def fit(least_squares):
-    m = Minuit(least_squares, md1=900, md2=300, md3=600, md4=600, md5=300, mb=4000, k=0, a=5, b=5, e=10, g=10)
+    m = Minuit(least_squares, md1=900, md2=300, md3=600, md4=600, md5=300, mb=4000, k=0, a=5, b=5, e=0, g=0)
     m.limits['mb'] = (4600, 6000)
+    m.limits['md1'] = (900, 1900) # omega
+    m.limits['md2'] = (800, 1300) # cascade primer sextuplet
+    m.limits['md3'] = (200, 1100) # sigma
+    m.limits['md4'] = (800, 1000) # lambda
+    m.limits['md5'] = (800, 1300) # cascade
 
 
-    m.limits['md1'] =  (900, 1900) # omega
-    m.limits['md2'] =  (800, 1300) # cascade primer sextuplet
-    m.limits['md3'] =  (200, 1100) # sigma
-    m.limits['md4'] =  (800, 1000)  # lambda
-    m.limits['md5'] =  (800, 1300)  # cascade
-
-
-    # sigma in the limit :( but the rest OK
-    # m.limits['md1'] =  (900, 1900) # omega
-    # m.limits['md2'] =  (800, 1300) # cascade primer sextuplet
-    # m.limits['md3'] =  (700, 1100) # sigma
-    # m.limits['md4'] =  (700, 1000)  # lambda
-    # m.limits['md5'] =  (700, 1300)  # cascade
-    
-    # trad
-    # m.limits['md1'] =  (900, 1200)  # (850, 950) #omega (500, 1500)
-    # m.limits['md2'] =  (700, 950)   # (650, 850) #cascade prime
-    # m.limits['md3'] =  (500, 700)   # (500, 700) #sigma
-    # m.limits['md4'] =  (500, 700)   # (500, 700) #lambda
-    # m.limits['md5'] =  (700, 900)   # (650, 850) #cascade
+    m.limits['a'] = (5, 10)
+    m.limits['b'] = (5, 10)
+    m.limits['e'] = (8, 16)
+    m.limits['g'] = (8, 16)
     m.errordef=Minuit.LEAST_SQUARES
-    #m.errordef=Minuit.LIKELIHOOD
+    # m.errordef=Minuit.LIKELIHOOD
     m.migrad()
+    # m.migrad(ncall=1000000000)
+    # m.simplex()
+
     return m
 
 def sample_gauss(mu, sigma):
@@ -113,7 +105,7 @@ rho_gmd5 = ([])
 
 # start bootstrap
 start = datetime.datetime.now()
-sigma_model = 0.00**2 # to be obtained with optimization (Li.Jin)
+sigma_model = 10**2 # to be obtained with optimization (Li.Jin)
 # gaussian pdf with the measured value and with experimental and model(sigma_model) uncertainties
 # Omega states
 gauss_6061 = sample_gauss(6045.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
@@ -181,10 +173,10 @@ for _ in range(1000): # max 10000 with decays included, computationally expensiv
     # perform the parameter fitting (via minimizing squared distance)
     m = fit(least_squares)
 
-    # if type(m.covariance) != type(None):
-    #     count += 1
-    # else:
-    #     continue
+    if type(m.covariance) != type(None):
+        count += 1
+    else:
+        continue
 
     sampled_md1 = np.append(sampled_md1, m.values['md1'])
     sampled_md2 = np.append(sampled_md2, m.values['md2'])
@@ -199,6 +191,7 @@ for _ in range(1000): # max 10000 with decays included, computationally expensiv
     sampled_e = np.append(sampled_e, m.values['e'])
     sampled_g = np.append(sampled_g, m.values['g'])
 
+    print(m.values['g'])
     # correlation matrix
     corr = m.covariance.correlation()
 
@@ -268,18 +261,18 @@ for _ in range(1000): # max 10000 with decays included, computationally expensiv
     rho_ge     = np.append(rho_ge, corr['g','e'])
 
 
-print(round(sampled_md1.mean()), "md1 omega")
-print(round(sampled_md2.mean()), "md2 cascade prime")
-print(round(sampled_md3.mean()), "md3 sigma")
-print(round(sampled_md4.mean()), "md4 lambda")
-print(round(sampled_md5.mean()), "md5 cascade")
+print(round(sampled_md1.mean()), "md1 omega  ",  round(sampled_md1.std()) )
+print(round(sampled_md2.mean()), "md2 cascade prime  ",  round(sampled_md2.std()) )
+print(round(sampled_md3.mean()), "md3 sigma",  round(sampled_md3.std()) )
+print(round(sampled_md4.mean()), "md4 lambda",  round(sampled_md4.std()) )
+print(round(sampled_md5.mean()), "md5 cascade",  round(sampled_md5.std()) )
 print(round(sampled_mb.mean()), "mb")
 
-print("K", pow(sampled_k.mean(), 2)/(1000**3))
-print("A", sampled_a.mean())
-print("B", sampled_b.mean())
-print("E", sampled_e.mean())
-print("G", sampled_g.mean())
+print("K", pow(sampled_k.mean(), 2)/(1000**3),  "KB", pow(sampled_k.std(), 2)/(1000**3))
+print("A", sampled_a.mean(), " PS ",  sampled_a.std())
+print("B", sampled_b.mean(), " PSL ", sampled_b.std())
+print("E", sampled_e.mean(), " PI  ", sampled_e.std())
+print("G", sampled_g.mean(), " PF ",  sampled_g.std())
                    
 
 # save bootstrap results
