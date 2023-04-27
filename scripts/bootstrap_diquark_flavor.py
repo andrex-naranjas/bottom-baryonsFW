@@ -47,7 +47,7 @@ def model(is_omega, is_cascade_p, is_sigma, is_lambda, is_cascade, v, w, x, y, z
 
 def least_squares(md1, md2, md3, md4, md5, mb, k, a, b, e, g):
     # y_var_0 = sigma_0 # best sigma_0= 13.63
-    # yvar_0 = y_var_0*np.ones(17)
+    # yvar_0 = y_var_0*np.ones(16)
     # yvar = y_errors_exp
     # yvar_2 = np.power(yvar_0, 2) + np.power(yvar, 2)
     yvar_2 = 0.001
@@ -105,7 +105,7 @@ rho_gmd5 = ([])
 
 # start bootstrap
 start = datetime.datetime.now()
-sigma_model = 10**2 # to be obtained with optimization (Li.Jin)
+sigma_model = 20.38**2 # to be obtained with optimization (Li.Jin)
 # gaussian pdf with the measured value and with experimental and model(sigma_model) uncertainties
 # Omega states
 gauss_6061 = sample_gauss(6045.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
