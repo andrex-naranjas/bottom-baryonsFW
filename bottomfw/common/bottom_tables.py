@@ -249,40 +249,39 @@ class BottomTables:
         qntl_up = int(N*0.1587) # 68% C.L.
         qntl_dn = int(N*0.8413)
         
-        return '$'+str(round(np.mean(value),2)) +'^{+'+ str(abs(round(np.sort(value)[qntl_dn-1] - np.mean(value),2))) +'}_{-'+\
-            str(abs(round(np.sort(value)[qntl_up-1] - np.mean(value), 2)))+'}$ '+units
+        return '$'+str(round(np.mean(value),decimals)) +'^{+'+ str(abs(round(np.sort(value)[qntl_dn-1] - np.mean(value), decimals))) +'}_{-'+\
+            str(abs(round(np.sort(value)[qntl_up-1] - np.mean(value), decimals)))+'}$ '+units
 
         
     def parameter_combined(self):
         """
         Method to produce the combined parameter table
         """     
-        M1 = self.latex_string_value_error(self.m_sampled_m1, decimals=2, units='MeV')
-        M2 = self.latex_string_value_error(self.m_sampled_m2, decimals=2, units='MeV')
-        M3 = self.latex_string_value_error(self.m_sampled_m3, decimals=2, units='MeV')
+        M1 = self.latex_string_value_error(self.m_sampled_m1, decimals=0, units='MeV')
+        M2 = self.latex_string_value_error(self.m_sampled_m2, decimals=0, units='MeV')
+        M3 = self.latex_string_value_error(self.m_sampled_m3, decimals=0, units='MeV')
         K  = self.latex_string_value_error(self.m_sampled_k,  decimals=4, units='GeV$^{3}$')           
-        A  = self.latex_string_value_error(self.m_sampled_a, decimals=2, units='MeV')
-        B  = self.latex_string_value_error(self.m_sampled_b, decimals=2, units='MeV')
-        E  = self.latex_string_value_error(self.m_sampled_e, decimals=2, units='MeV')
-        G  = self.latex_string_value_error(self.m_sampled_g, decimals=2, units='MeV')
+        A  = self.latex_string_value_error(self.m_sampled_a, decimals=1, units='MeV')
+        B  = self.latex_string_value_error(self.m_sampled_b, decimals=1, units='MeV')
+        E  = self.latex_string_value_error(self.m_sampled_e, decimals=1, units='MeV')
+        G  = self.latex_string_value_error(self.m_sampled_g, decimals=1, units='MeV')
 
-        Md1 = self.latex_string_value_error(self.m_sampled_md1,  decimals=2, units='MeV')
-        Md2 = self.latex_string_value_error(self.m_sampled_md2,  decimals=2, units='MeV')
-        Md3 = self.latex_string_value_error(self.m_sampled_md3,  decimals=2, units='MeV')
-        MB  = self.latex_string_value_error(self.m_sampled_mb ,  decimals=2, units='MeV')
+        Md1 = self.latex_string_value_error(self.m_sampled_md1,  decimals=0, units='MeV')
+        Md2 = self.latex_string_value_error(self.m_sampled_md2,  decimals=0, units='MeV')
+        Md3 = self.latex_string_value_error(self.m_sampled_md3,  decimals=0, units='MeV')
+        MB  = self.latex_string_value_error(self.m_sampled_mb ,  decimals=0, units='MeV')
         K_di= self.latex_string_value_error(self.m_sampled_k_di, decimals=4, units='GeV$^{3}$')
-        A_di= self.latex_string_value_error(self.m_sampled_a_di, decimals=2, units='MeV')
-        B_di= self.latex_string_value_error(self.m_sampled_b_di, decimals=2, units='MeV')
-        E_di= self.latex_string_value_error(self.m_sampled_e_di, decimals=2, units='MeV')
-        G_di= self.latex_string_value_error(self.m_sampled_g_di, decimals=2, units='MeV')
+        A_di= self.latex_string_value_error(self.m_sampled_a_di, decimals=1, units='MeV')
+        B_di= self.latex_string_value_error(self.m_sampled_b_di, decimals=1, units='MeV')
+        E_di= self.latex_string_value_error(self.m_sampled_e_di, decimals=1, units='MeV')
+        G_di= self.latex_string_value_error(self.m_sampled_g_di, decimals=1, units='MeV')
 
         dd = '$\\dagger$'
         if not os.path.exists(self.m_workpath+"/tables/"):
             os.mkdir(self.m_workpath+"/tables/")
         f = open(self.m_workpath+'/tables/fit_parameters_combined.tex', "w")
         print("\\begin{tabular}{c | c c}\hline \hline", file=f)
-        print("            &  three-quark & diquark \\\ ", file=f)
-        print(" Parameter  &  Value       & Value    \\\ \hline", file=f)
+        print(" Parameter  &  Three-quark value       & Diquark value    \\\ \hline", file=f)
         print(" $m_{b}$ &",                   M1, '&', MB,  "\\\ ", file=f)
         print(" $m_{s}$ &",                   M2, '&', dd,  "\\\ ", file=f)
         print(" $m_{n}$ &",                   M3, '&', dd,  "\\\ ", file=f)
@@ -300,6 +299,58 @@ class BottomTables:
         print("\label{tab:comb_fit}", file=f)
         f.close()
 
+
+    def parameter_combined_flavor(self):
+        """
+        Method to produce the combined parameter table
+        """     
+        M1 = self.latex_string_value_error(self.m_sampled_m1, decimals=0, units='MeV')
+        M2 = self.latex_string_value_error(self.m_sampled_m2, decimals=0, units='MeV')
+        M3 = self.latex_string_value_error(self.m_sampled_m3, decimals=0, units='MeV')
+        K  = self.latex_string_value_error(self.m_sampled_k,  decimals=4, units='GeV$^{3}$')           
+        A  = self.latex_string_value_error(self.m_sampled_a, decimals=1, units='MeV')
+        B  = self.latex_string_value_error(self.m_sampled_b, decimals=1, units='MeV')
+        E  = self.latex_string_value_error(self.m_sampled_e, decimals=1, units='MeV')
+        G  = self.latex_string_value_error(self.m_sampled_g, decimals=1, units='MeV')
+
+        Md1 = self.latex_string_value_error(self.m_sampled_md1,  decimals=0, units='MeV')
+        Md2 = self.latex_string_value_error(self.m_sampled_md2,  decimals=0, units='MeV')
+        Md3 = self.latex_string_value_error(self.m_sampled_md3,  decimals=0, units='MeV')
+        Md4 = self.latex_string_value_error(self.m_sampled_md4,  decimals=0, units='MeV')
+        Md5 = self.latex_string_value_error(self.m_sampled_md5,  decimals=0, units='MeV')
+        MB  = self.latex_string_value_error(self.m_sampled_mb ,  decimals=0, units='MeV')
+        K_di= self.latex_string_value_error(self.m_sampled_k_di, decimals=4, units='GeV$^{3}$')
+        A_di= self.latex_string_value_error(self.m_sampled_a_di, decimals=1, units='MeV')
+        B_di= self.latex_string_value_error(self.m_sampled_b_di, decimals=1, units='MeV')
+        E_di= self.latex_string_value_error(self.m_sampled_e_di, decimals=1, units='MeV')
+        G_di= self.latex_string_value_error(self.m_sampled_g_di, decimals=1, units='MeV')
+
+        dd = '$\\dagger$'
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
+        f = open(self.m_workpath+'/tables/fit_parameters_combined_flavor.tex', "w")
+        print("\\begin{tabular}{c | c c}\hline \hline", file=f)
+        print(" Parameter  &  Three-quark value       & Diquark value    \\\ \hline", file=f)
+        print(" $m_{b}$ &",                   M1, '&', MB,  "\\\ ", file=f)
+        print(" $m_{s}$ &",                   M2, '&', dd,  "\\\ ", file=f)
+        print(" $m_{n}$ &",                   M3, '&', dd,  "\\\ ", file=f)
+        print(" $m_{D_{\\Omega}}$          &",dd, '&', Md1, "\\\ ", file=f)
+        print(" $m_{D_{\\Xi'}}$            &",dd, '&', Md2, "\\\ ", file=f)
+        print(" $m_{D_{\\Sigma}}$          &",dd, '&', Md3, "\\\ ", file=f)
+        print(" $m_{D_{\\Lambda}}$         &",dd, '&', Md4, "\\\ ", file=f)
+        print(" $m_{D_{\\Xi}}$             &",dd, '&', Md5, "\\\ ", file=f)
+        print(" $K_b$   &"                   ,K , '&', K_di,"\\\ ", file=f)
+        print(" $P_S$     &"                   ,A , '&', A_di,"\\\ ", file=f)
+        print(" $P_{SL}$     &"                   ,B , '&', B_di,"\\\ ", file=f)
+        print(" $P_{I}$     &"                   ,E , '&', E_di,"\\\ ", file=f)
+        print(" $P_{f}$     &"                   ,G , '&', G_di,"\\\ ", file=f)
+        print("\hline\hline", file=f)
+        print("\end{tabular}", file=f)
+        print("\caption{Model fitted paremeters parameters.}",file=f)
+        print("\label{tab:comb_fit}", file=f)
+        f.close()
+        
+
     def correlation_table_three(self):
         """
         Method to write correlation matrix table for the three quark system
@@ -313,41 +364,69 @@ class BottomTables:
         print(" $m_{s}$ &",self.m_rho_m2m1, "&  1   &   &   &   &   &   &  \\\ ", file=f)
         print(" $m_{n}$ &",self.m_rho_m3m1, "&", self.m_rho_m3m2,"&  1   &   &   &   &   & \\\ ", file=f)
         print(" $K_b$   &",self.m_rho_km1,  "&", self.m_rho_km2 ,"&", self.m_rho_km3, "&  1   &   &   &   &   \\\ ", file=f)
-        print(" $P_S$     &",self.m_rho_am1,  "&", self.m_rho_am2 ,"&", self.m_rho_am3, "&", self.m_rho_ak,"& 1 &   &   & \\\ ", file=f)
-        print(" $P_{SL}$     &",self.m_rho_bm1,  "&", self.m_rho_bm2 ,"&", self.m_rho_bm3, "&", self.m_rho_bk,"&",self.m_rho_ba,"& 1  &   & \\\ ", file=f)
-        print(" $P_I$     &",self.m_rho_em1,  "&", self.m_rho_em2 ,"&", self.m_rho_em3, "&", self.m_rho_ek,"&",self.m_rho_ea,"&",self.m_rho_eb,"& 1  &  \\\ ", file=f)
-        print(" $P_f$     &",self.m_rho_gm1,  "&", self.m_rho_gm2 ,"&", self.m_rho_gm3, "&", self.m_rho_gk,"&",self.m_rho_ga,"&",self.m_rho_gb,"&",self.m_rho_ge,"& 1 \\\ \hline \hline", file=f)
+        print(" $P_S$   &",self.m_rho_am1,  "&", self.m_rho_am2 ,"&", self.m_rho_am3, "&", self.m_rho_ak,"& 1 &   &   & \\\ ", file=f)
+        print(" $P_{SL}$&",self.m_rho_bm1,  "&", self.m_rho_bm2 ,"&", self.m_rho_bm3, "&", self.m_rho_bk,"&",self.m_rho_ba,"& 1  &   & \\\ ", file=f)
+        print(" $P_I$   &",self.m_rho_em1,  "&", self.m_rho_em2 ,"&", self.m_rho_em3, "&", self.m_rho_ek,"&",self.m_rho_ea,"&",self.m_rho_eb,"& 1  &  \\\ ", file=f)
+        print(" $P_f$   &",self.m_rho_gm1,  "&", self.m_rho_gm2 ,"&", self.m_rho_gm3, "&", self.m_rho_gk,"&",self.m_rho_ga,"&",self.m_rho_gb,"&",self.m_rho_ge,"& 1 \\\ \hline \hline", file=f)
         print('\end{tabular}', file=f)
         print("\caption{Correlation between fitted parameters, three-quark stystem }",file=f)
         print("\label{tab:3quark_corr}", file=f)
         f.close()
 
-    def correlation_table_di(self):
+    def correlation_table_di_flavor(self):
         """
         Method to write correlation matrix table for the diquark system    
-        """                
-        md1="$m_{D_{\\Omega}}$"
-        md2="$m_{D_{\\Xi}}$"
-        md3="$m_{D_{\\Sigma,\\Lambda}}$"
+        """
+        md1 = "$m_{D_{\\Omega}}$"
+        md2 = "$m_{D_{\\Xi'}}$"
+        md3 = "$m_{D_{\\Sigma}}$"
+        md4 = "$m_{D_{\\Lambda}}$"
+        md5 = "$m_{D_{\\Xi}}$"
+
         if not os.path.exists(self.m_workpath+"/tables/"):
             os.mkdir(self.m_workpath+"/tables/")
         f = open(self.m_workpath+'/tables/correlation_diquark.tex', "w")
-        print("\\begin{tabular}{c | c c c c c c c c c}\hline \hline", file=f)
-        print("         &  $m_{b}$",  "&",  md1, "&",  md2,  "&", md3  ,"&  $K_b$   & $P_S$ & $P_{SL}$ & $P_{I}$ & $P_f$ \\\ \hline", file=f)
-        print(" $m_{b}$ &     1   &   &   &   &    &   &   &  &  \\\ ", file=f)
-        print(md1,     "&",self.m_rho_md2md1, "&  1   &   &   &   &    &   &   &  \\\ ", file=f)
-        print(md2,     "&",self.m_rho_md3md1, "&",self.m_rho_md3md2,"&  1   &   &   &   &    &   & \\\ ", file=f)
-        print(md3,     "&",self.m_rho_mbmd1,  "&",self.m_rho_mbmd2 ,"&",self.m_rho_mbmd3, "&  1   &   &   &   &    &   \\\ ", file=f)
-        print(" $K_b$   &",self.m_rho_kmd1 ,  "&",self.m_rho_kmd2  ,"&",self.m_rho_kmd3 , "&", self.m_rho_kmb,"& 1   &   &   &   & \\\ ", file=f)
-        print(" $P_S$     &",self.m_rho_amd1 ,  "&",self.m_rho_amd2  ,"&",self.m_rho_amd3 , "&", self.m_rho_amb,"&",self.m_rho_ak,"& 1   &   &   & \\\ ", file=f)
-        print(" $P_{SL}$     &",self.m_rho_bmd1 ,  "&",self.m_rho_bmd2  ,"&",self.m_rho_bmd3 , "&", self.m_rho_bmb,"&",self.m_rho_bk,"&",self.m_rho_ba,"& 1   &   &  \\\ ", file=f)
-        print(" $P_I$     &",self.m_rho_emd1 ,  "&",self.m_rho_emd2  ,"&",self.m_rho_emd3 , "&", self.m_rho_emb,"&",self.m_rho_ek,"&",self.m_rho_ea,"&",self.m_rho_eb,"& 1   & \\\ ", file=f)
-        print(" $P_dddf$     &",self.m_rho_gmd1 ,  "&",self.m_rho_gmd2  ,"&",self.m_rho_gmd3 , "&", self.m_rho_gmb,"&",self.m_rho_gk,"&",self.m_rho_ga,"&",self.m_rho_gb,"&", self.m_rho_ge, "&","1 \\\ \hline \hline", file=f) 
+        print("\\begin{tabular}{c | c c c c c c c c c c c}\hline \hline", file=f)
+        print("         &  $m_{b}$",  "&",  md1, "&",  md2,  "&", md3, "&", md4, "&", md5, "&  $K_b$   & $P_S$ & $P_{SL}$ & $P_{I}$ & $P_f$ \\\ \hline", file=f)
+        print(" $m_{b}$ &     1   &   &   &   &    &   &   &  & & &  \\\ ", file=f)
+        print(md1,     "&",self.m_rho_mbmd1, "&  1   &   &  &   &   &   &    &   &   &  \\\ ", file=f)
+        print(md2,     "&",self.m_rho_mbmd2,  "&",self.m_rho_md2md1,"&  1   &   &   &   &  &  &  &  & \\\ ", file=f)
+        print(md3,     "&",self.m_rho_mbmd3,  "&",self.m_rho_md3md1,"&",self.m_rho_md3md2, "&  1   &   &   &   &   &   &  &  \\\ ", file=f)
+        print(md4,     "&",self.m_rho_mbmd4,  "&",self.m_rho_md4md1,"&",self.m_rho_md4md2,"&", self.m_rho_md4md3, "&  1   &   &   &   &    &   &  \\\ ", file=f)
+        print(md5,     "&",self.m_rho_mbmd5,  "&",self.m_rho_md5md1,"&",self.m_rho_md5md2,"&", self.m_rho_md5md3, "&",self.m_rho_md5md4,"&  1   &   &   &   &    &   \\\ ", file=f)
+        print(" $K_b$   &",self.m_rho_kmb_di, "&",self.m_rho_kmd1  ,"&",self.m_rho_kmd2  ,"&", self.m_rho_kmd3,   "&",self.m_rho_kmd4,  "&", self.m_rho_kmd5, "& 1   &   &   &   & \\\ ", file=f)
+        print(" $P_S$   &",self.m_rho_amb_di, "&",self.m_rho_amd1  ,"&",self.m_rho_amd2  ,"&", self.m_rho_amd3,   "&",self.m_rho_amd4,  "&", self.m_rho_amd5, "&",self.m_rho_ak_di,"& 1   &   &   & \\\ ", file=f)
+        print(" $P_{SL}$&",self.m_rho_bmb_di, "&",self.m_rho_bmd1  ,"&",self.m_rho_bmd2  ,"&", self.m_rho_bmd3,   "&",self.m_rho_bmd4,  "&", self.m_rho_bmd5, "&",self.m_rho_bk_di,"&", self.m_rho_ba_di, "& 1   &   &  \\\ ", file=f)
+        print(" $P_I$   &",self.m_rho_emb_di, "&",self.m_rho_emd1  ,"&",self.m_rho_emd2  ,"&", self.m_rho_emd3,   "&",self.m_rho_emd4,  "&", self.m_rho_emd5, "&",self.m_rho_ek_di,"&", self.m_rho_ea_di,"&",self.m_rho_eb,"& 1   & \\\ ", file=f)
+        print(" $P_f$   &",self.m_rho_gmb_di, "&",self.m_rho_gmd1  ,"&",self.m_rho_gmd2  ,"&", self.m_rho_gmd3,   "&",self.m_rho_gmd4,  "&", self.m_rho_gmd5, "&",self.m_rho_gb_di,"&", self.m_rho_ga_di,"&",self.m_rho_gb,"&", self.m_rho_ge_di, "&","1 \\\ \hline \hline", file=f) 
         print('\end{tabular}', file=f)
         print("\caption{Correlation between fitted parameters, diquark system.}",file=f)
         print("\label{tab:diquark_corr}", file=f)
         f.close()
 
+    def correlation_table_di(self):
+        """
+        Method to write correlation matrix table for the diquark system
+        """
+        md1="$m_{D_{\\Omega}}$"
+        md2="$m_{D_{\\Xi}}$"
+        md3="$m_{D_{\\Sigma,\\Lambda}}$"
+        f = open(self.m_workpath+'/tables/correlation_diquark.tex', "w")
+        print("\\begin{tabular}{c | c c c c c c c c c}\hline \hline", file=f)
+        print("         &  $m_{c}$",  "&",  md1, "&",  md2,  "&", md3  ,"&  $K_c$   & $A$ & $B$ & $E$ & $G$ \\\ \hline", file=f)
+        print(" $m_{c}$ &     1   &   &   &   &    &   &   &  &  \\\ ", file=f)
+        print(md1,     "&",self.m_rho_md2md1, "&  1   &   &   &   &    &   &   &  \\\ ", file=f)
+        print(md2,     "&",self.m_rho_md3md1, "&",self.m_rho_md3md2,"&  1   &   &   &   &    &   & \\\ ", file=f)
+        print(md3,     "&",self.m_rho_mcmd1,  "&",self.m_rho_mcmd2 ,"&",self.m_rho_mcmd3, "&  1   &   &   &   &    &   \\\ ", file=f)
+        print(" $K_c$   &",self.m_rho_kmd1 ,  "&",self.m_rho_kmd2  ,"&",self.m_rho_kmd3 , "&", self.m_rho_kmc,"& 1   &   &   &   & \\\ ", file=f)
+        print(" $A$     &",self.m_rho_amd1 ,  "&",self.m_rho_amd2  ,"&",self.m_rho_amd3 , "&", self.m_rho_amc,"&",self.m_rho_ak,"& 1   &   &   & \\\ ", file=f)
+        print(" $B$     &",self.m_rho_bmd1 ,  "&",self.m_rho_bmd2  ,"&",self.m_rho_bmd3 , "&", self.m_rho_bmc,"&",self.m_rho_bk,"&",self.m_rho_ba,"& 1   &   &  \\\ ", file=f)
+        print(" $E$     &",self.m_rho_emd1 ,  "&",self.m_rho_emd2  ,"&",self.m_rho_emd3 , "&", self.m_rho_emc,"&",self.m_rho_ek,"&",self.m_rho_ea,"&",self.m_rho_eb,"& 1   & \\\ ", file=f)
+        print(" $G$     &",self.m_rho_gmd1 ,  "&",self.m_rho_gmd2  ,"&",self.m_rho_gmd3 , "&", self.m_rho_gmc,"&",self.m_rho_gk,"&",self.m_rho_ga,"&",self.m_rho_gb,"&", self.m_rho_ge, "&","1 \\\ \hline \hline", file=f) 
+        print('\end{tabular}', file=f)
+        print("\caption{Correlation between fitted parameters, diquark system.}",file=f)
+        print("\label{tab:diquark_corr}", file=f)
+        f.close()
 
     def m_load_data(self, baryons):
         """
@@ -406,6 +485,8 @@ class BottomTables:
         self.m_sampled_md1  = data_frame_di["Md1"]
         self.m_sampled_md2  = data_frame_di["Md2"]
         self.m_sampled_md3  = data_frame_di["Md3"]
+        self.m_sampled_md4  = data_frame_di["Md4"]
+        self.m_sampled_md5  = data_frame_di["Md5"]
         self.m_sampled_mb   = data_frame_di["MB"]
         self.m_sampled_k_di = data_frame_di["K"].pow(2).div(pow(1000,3))
         self.m_sampled_a_di = data_frame_di["A"]
@@ -457,39 +538,58 @@ class BottomTables:
         else:
             data_frame = pd.read_csv(self.m_workpath+"/tables/bootstrap_correlation_diquark_"+baryons+".csv")
 
-        self.m_rho_md2md1 = round(np.mean(data_frame['rho_md2md1']), 2)
-        self.m_rho_md3md1 = round(np.mean(data_frame['rho_md3md1']), 2)
-        self.m_rho_mbmd1  = round(np.mean(data_frame['rho_mbmd1']), 2)
-        self.m_rho_kmd1   = round(np.mean(data_frame['rho_kmd1']), 2)
-        self.m_rho_amd1   = round(np.mean(data_frame['rho_amd1']), 2)
-        self.m_rho_bmd1   = round(np.mean(data_frame['rho_bmd1']), 2)
-        self.m_rho_emd1   = round(np.mean(data_frame['rho_emd1']), 2)
-        self.m_rho_gmd1   = round(np.mean(data_frame['rho_gmd1']), 2)
-        self.m_rho_md3md2 = round(np.mean(data_frame['rho_md3md2']), 2)
-        self.m_rho_mbmd2  = round(np.mean(data_frame['rho_mbmd2']), 2)
-        self.m_rho_kmd2   = round(np.mean(data_frame['rho_kmd2']), 2)
-        self.m_rho_amd2   = round(np.mean(data_frame['rho_amd2']), 2)
-        self.m_rho_bmd2   = round(np.mean(data_frame['rho_bmd2']), 2)
-        self.m_rho_emd2   = round(np.mean(data_frame['rho_emd2']), 2)
-        self.m_rho_gmd2   = round(np.mean(data_frame['rho_gmd2']), 2)
-        self.m_rho_mbmd3  = round(np.mean(data_frame['rho_kmd3']), 2)
-        self.m_rho_kmd3   = round(np.mean(data_frame['rho_kmd3']), 2)
-        self.m_rho_amd3   = round(np.mean(data_frame['rho_amd3']), 2)
-        self.m_rho_bmd3   = round(np.mean(data_frame['rho_bmd3']), 2)
-        self.m_rho_emd3   = round(np.mean(data_frame['rho_emd3']), 2)
-        self.m_rho_gmd3   = round(np.mean(data_frame['rho_gmd3']), 2)
-        self.m_rho_kmb    = round(np.mean(data_frame['rho_kmb']), 2)
-        self.m_rho_amb    = round(np.mean(data_frame['rho_amb']), 2)
-        self.m_rho_bmb    = round(np.mean(data_frame['rho_bmb']), 2)
-        self.m_rho_emb    = round(np.mean(data_frame['rho_emb']), 2)
-        self.m_rho_gmb    = round(np.mean(data_frame['rho_gmb']), 2)
-        self.m_rho_ak     = round(np.mean(data_frame['rho_ak']), 2)
-        self.m_rho_bk     = round(np.mean(data_frame['rho_bk']), 2)
-        self.m_rho_ek     = round(np.mean(data_frame['rho_ek']), 2)
-        self.m_rho_gk     = round(np.mean(data_frame['rho_gk']), 2)
-        self.m_rho_ba     = round(np.mean(data_frame['rho_ba']), 2)
-        self.m_rho_ea     = round(np.mean(data_frame['rho_ea']), 2)
-        self.m_rho_ga     = round(np.mean(data_frame['rho_ga']), 2)
-        self.m_rho_eb     = round(np.mean(data_frame['rho_eb']), 2)
-        self.m_rho_gb     = round(np.mean(data_frame['rho_gb']), 2)
-        self.m_rho_ge     = round(np.mean(data_frame['rho_ge']), 2)
+        self.m_rho_md2md1 =   round(np.mean(data_frame['rho_md2md1']), 2)
+        self.m_rho_md3md1 =   round(np.mean(data_frame['rho_md3md1']), 2)
+        self.m_rho_md4md1 =   round(np.mean(data_frame['rho_md4md1']), 2)
+        self.m_rho_md5md1 =   round(np.mean(data_frame['rho_md5md1']), 2)
+        self.m_rho_mbmd1  =   round(np.mean(data_frame['rho_mbmd1']), 2)
+        self.m_rho_kmd1   =   round(np.mean(data_frame['rho_kmd1']), 2)
+        self.m_rho_amd1   =   round(np.mean(data_frame['rho_amd1']), 2)
+        self.m_rho_bmd1   =   round(np.mean(data_frame['rho_bmd1']), 2)
+        self.m_rho_emd1   =   round(np.mean(data_frame['rho_emd1']), 2)
+        self.m_rho_gmd1   =   round(np.mean(data_frame['rho_gmd1']), 2)
+        self.m_rho_md3md2 =   round(np.mean(data_frame['rho_md3md2']), 2)
+        self.m_rho_md4md2 =   round(np.mean(data_frame['rho_md4md2']), 2)
+        self.m_rho_md5md2 =   round(np.mean(data_frame['rho_md5md2']), 2)
+        self.m_rho_mbmd2  =   round(np.mean(data_frame['rho_mbmd2']), 2)
+        self.m_rho_kmd2   =   round(np.mean(data_frame['rho_kmd2']), 2)
+        self.m_rho_amd2   =   round(np.mean(data_frame['rho_amd2']), 2)
+        self.m_rho_bmd2   =   round(np.mean(data_frame['rho_bmd2']), 2)
+        self.m_rho_emd2   =   round(np.mean(data_frame['rho_emd2']), 2)
+        self.m_rho_gmd2   =   round(np.mean(data_frame['rho_gmd2']), 2)
+        self.m_rho_md4md3 =   round(np.mean(data_frame['rho_md4md3']), 2)
+        self.m_rho_md5md3 =   round(np.mean(data_frame['rho_md5md3']), 2)
+        self.m_rho_mbmd3  =   round(np.mean(data_frame['rho_mbmd3']), 2)
+        self.m_rho_kmd3   =   round(np.mean(data_frame['rho_kmd3']), 2)
+        self.m_rho_amd3   =   round(np.mean(data_frame['rho_amd3']), 2)
+        self.m_rho_bmd3   =   round(np.mean(data_frame['rho_bmd3']), 2)
+        self.m_rho_emd3   =   round(np.mean(data_frame['rho_emd3']), 2)
+        self.m_rho_gmd3   =   round(np.mean(data_frame['rho_gmd3']), 2)
+        self.m_rho_md5md4 =   round(np.mean(data_frame['rho_md5md4']), 2)
+        self.m_rho_mbmd4  =   round(np.mean(data_frame['rho_mbmd4']), 2)
+        self.m_rho_kmd4   =   round(np.mean(data_frame['rho_kmd4']), 2)
+        self.m_rho_amd4   =   round(np.mean(data_frame['rho_amd4']), 2)
+        self.m_rho_bmd4   =   round(np.mean(data_frame['rho_bmd4']), 2)
+        self.m_rho_emd4   =   round(np.mean(data_frame['rho_emd4']), 2)
+        self.m_rho_gmd4   =   round(np.mean(data_frame['rho_gmd4']), 2)
+        self.m_rho_mbmd5  =   round(np.mean(data_frame['rho_mbmd5']), 2)
+        self.m_rho_kmd5   =   round(np.mean(data_frame['rho_kmd5']), 2)
+        self.m_rho_amd5   =   round(np.mean(data_frame['rho_amd5']), 2)
+        self.m_rho_bmd5   =   round(np.mean(data_frame['rho_bmd5']), 2)
+        self.m_rho_emd5   =   round(np.mean(data_frame['rho_emd5']), 2)
+        self.m_rho_gmd5   =   round(np.mean(data_frame['rho_gmd5']), 2)
+        self.m_rho_kmb_di =   round(np.mean(data_frame['rho_kmb']), 2)
+        self.m_rho_amb_di =   round(np.mean(data_frame['rho_amb']), 2)
+        self.m_rho_bmb_di =   round(np.mean(data_frame['rho_bmb']), 2)
+        self.m_rho_emb_di =   round(np.mean(data_frame['rho_emb']), 2)
+        self.m_rho_gmb_di =   round(np.mean(data_frame['rho_gmb']), 2)
+        self.m_rho_ak_di  =   round(np.mean(data_frame['rho_ak']), 2)
+        self.m_rho_bk_di  =   round(np.mean(data_frame['rho_bk']), 2)
+        self.m_rho_ek_di  =   round(np.mean(data_frame['rho_ek']), 2)
+        self.m_rho_gk_di  =   round(np.mean(data_frame['rho_gk']), 2)
+        self.m_rho_ba_di  =   round(np.mean(data_frame['rho_ba']), 2)
+        self.m_rho_ea_di  =   round(np.mean(data_frame['rho_ea']), 2)
+        self.m_rho_ga_di  =   round(np.mean(data_frame['rho_ga']), 2)
+        self.m_rho_eb_di  =   round(np.mean(data_frame['rho_eb']), 2)
+        self.m_rho_gb_di  =   round(np.mean(data_frame['rho_gb']), 2)
+        self.m_rho_ge_di  =   round(np.mean(data_frame['rho_ge']), 2)
