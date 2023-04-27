@@ -70,8 +70,8 @@ def fit(least_squares):
 
     m.limits['a'] = (5, 10)
     m.limits['b'] = (5, 10)
-    m.limits['e'] = (8, 16)
-    m.limits['g'] = (8, 16)
+    m.limits['e'] = (0, 0)
+    m.limits['g'] = (0, 0)
     m.errordef=Minuit.LEAST_SQUARES
     # m.errordef=Minuit.LIKELIHOOD
     m.migrad()
@@ -138,7 +138,7 @@ gauss_6333 = sample_gauss(6333.0, np.power((0.00**2 + sigma_model), 0.5 ))  # al
 
 count = 0
 # construct the simulated sampling distribution (bootstrap technique)
-for _ in range(1000): # max 10000 with decays included, computationally expensive
+for _ in range(100): # max 10000 with decays included, computationally expensive
 
     exp_m = np.array([ # measured baryon masses        
         # omegas
