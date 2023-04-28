@@ -43,6 +43,8 @@ if len(sys.argv) == 3:
     batch_number = sys.argv[1]
     workpath = sys.argv[2]
 
+print('Getting paper results for:', run_baryons)
+
 # input parameters
 param_v,param_w,param_x,param_y,param_z,param_q1,param_q2,param_q3,\
     param_is_rho,param_is_lam,param_is_omega,param_is_cascade,param_is_sigma = dp.fetch_data_extended()
@@ -58,8 +60,8 @@ def model(q1, q2, q3, is_rho, is_lam, is_omega, is_cascade, is_sigma, v, w, x, y
 
 
 def least_squares(m1, m2, m3, k, a, b, e, g):
-    # y_var_0 = sigma_0 # best sigma_0=15.42
-    # yvar_0 = y_var_0*np.ones(19)
+    # y_var_0 = sigma_0 # best sigma_0=12.47 (bottom)
+    # yvar_0 = y_var_0*np.ones(16)
     # yvar = y_errors_exp
     # yvar_2 = np.power(yvar_0, 2) + np.power(yvar, 2)
     yvar_2 = 0.001
@@ -101,37 +103,38 @@ rho_gk, rho_ba, rho_ea, rho_ga, rho_eb,rho_gb,rho_ge      = ([]),([]),([]),([]),
 # start bootstrap
 start = datetime.datetime.now()
 
-sigma_model = 10**2 # to be obtained with optimization (Li.Jin)
+sigma_model = 12.47**2 # to be obtained with optimization (Li.Jin)
 # gaussian pdf with the measured value and with experimental and model(sigma_model) uncertainties
 # Omega states
-gauss_6061 = sample_gauss(6045.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2702), PDG
-gauss_6316 = sample_gauss(6315.6, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2767), PDG
-gauss_6330 = sample_gauss(6330.3, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3015), PDG
-gauss_6340 = sample_gauss(6339.7, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3044), PDG
-gauss_6350 = sample_gauss(6349.8, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 3051), PDG
+gauss_6061 = sample_gauss(6045.2, np.power((1.20**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_6316 = sample_gauss(6315.6, np.power((0.58**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_6330 = sample_gauss(6330.3, np.power((0.60**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_6340 = sample_gauss(6339.7, np.power((0.60**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_6350 = sample_gauss(6349.8, np.power((0.60**2 + sigma_model), 0.5 ))  # all OK PDG
 # Cascade b sextet
-gauss_5935 = sample_gauss(5935.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2461), PDG Average
-gauss_5953 = sample_gauss(5953.8, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2796), PDG Average
-gauss_6328 = sample_gauss(6227.9, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2832), PDG Average
+gauss_5935 = sample_gauss(5935.0, np.power((0.05**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_5953 = sample_gauss(5952.3, np.power((0.60**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_6328 = sample_gauss(6227.9, np.power((1.60**2 + sigma_model), 0.5 ))  # all OK PDG cascade prime or cascade?
 # Sigma b
-gauss_5813 = sample_gauss(5813.1, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2453), PDG Average
-gauss_5837 = sample_gauss(5837.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2517), PDG Average
-gauss_6097 = sample_gauss(6096.9, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2819), PDG Average
+gauss_5813 = sample_gauss(5813.1, np.power((0.27**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_5837 = sample_gauss(5832.5, np.power((0.30**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_6097 = sample_gauss(6096.9, np.power((1.80**2 + sigma_model), 0.5 ))  # all OK PDG
 # Lambda b
-gauss_5617 = sample_gauss(5619.6, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
-gauss_5912 = sample_gauss(5912.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
-gauss_5920 = sample_gauss(5920.1, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
-gauss_6146 = sample_gauss(6146.2, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2283), PDG
-gauss_6152 = sample_gauss(6152.5, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2649), PDG
-gauss_6070 = sample_gauss(6072.3, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2685), PDG
+gauss_5617 = sample_gauss(5619.6, np.power((0.17**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_5912 = sample_gauss(5912.2, np.power((0.17**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_5920 = sample_gauss(5920.1, np.power((0.17**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_6146 = sample_gauss(6146.2, np.power((0.40**2 + sigma_model), 0.5 ))  # all OK PDG (not in the fit, check)
+gauss_6152 = sample_gauss(6152.5, np.power((0.40**2 + sigma_model), 0.5 ))  # all OK PDG (not in the fit, check)
+gauss_6070 = sample_gauss(6072.3, np.power((2.90**2 + sigma_model), 0.5 ))  # all OK PDG (not in the fit, check)
 # Cascades anti-3-plet
-gauss_5794 = sample_gauss(5794.5, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2570), PDG Average
-gauss_6100 = sample_gauss(6100.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2635), PDG Average
-gauss_6327 = sample_gauss(6327.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2934), LHCb PhysRevLett
-gauss_6333 = sample_gauss(6333.0, np.power((0.00**2 + sigma_model), 0.5 ))  # all OK (corresponds to predicted 2941), LHCb PhysRevLett
+gauss_5794 = sample_gauss(5794.5, np.power((0.60**2 + sigma_model), 0.5 ))  # all OK PDG  Average
+gauss_6100 = sample_gauss(6100.3, np.power((0.60**2 + sigma_model), 0.5 ))  # all OK PDG
+gauss_6327 = sample_gauss(6327.4, np.power((1.60**2 + sigma_model), 0.5 ))  # all OK PDG  (not in the fit, check) 6327 or 6227??
+gauss_6333 = sample_gauss(6332.7, np.power((0.30**2 + sigma_model), 0.5 ))  # all OK LHCb (not in the fit, check)
 
 # plug here the sigma_0 optimization lines from data_utils.py
 
+count = 0
 # construct the simulated sampling distribution (bootstrap technique)
 for i in range(n_events): # max 10000 with decays included, computationally expensive
     #if(states=='All'):
@@ -164,6 +167,11 @@ for i in range(n_events): # max 10000 with decays included, computationally expe
     ])    
     # perform the parameter fitting (via minimizing squared distance)
     m = fit(least_squares)
+    
+    if type(m.covariance) != type(None):
+        count += 1
+    else:
+        continue
 
     sampled_m1 = np.append(sampled_m1, m.values['m1'])
     sampled_m2 = np.append(sampled_m2, m.values['m2'])
@@ -218,7 +226,6 @@ print(round(sampled_m1.mean()), "mb",  round(sampled_m1.std()) )
 print(round(sampled_m2.mean()), "ms",  round(sampled_m2.std()) )
 print(round(sampled_m3.mean()), "mn",  round(sampled_m3.std()) )
 
-
 print("K", pow(sampled_k.mean(), 2)/(1000**3),  "KB", pow(sampled_k.std(), 2)/(1000**3))
 print("A", sampled_a.mean(), " PS ",  sampled_a.std())
 print("B", sampled_b.mean(), " PSL ", sampled_b.std())
@@ -265,8 +272,8 @@ else:
 results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=asymmetric,
                            decay_width=decay_width, bootstrap_width=bootstrap_width, decay_width_em=decay_width_em, bootstrap_width_em=bootstrap_width_em, batch_number=batch_number, workpath=workpath)
 results.fetch_values()
-print('Getting paper results for:', run_baryons)
 results.paper_results_predictions(bootstrap=bootstrap, bootstrap_width=bootstrap_width, prev_params=prev_params)
 end = datetime.datetime.now()
 elapsed_time = end - start
+print(count, "no. successes")
 print("Elapsed total time = " + str(elapsed_time))

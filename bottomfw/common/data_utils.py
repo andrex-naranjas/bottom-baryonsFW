@@ -17,31 +17,39 @@ def find_best_sigma_0():
     # not usable as it is, need to be plugged in bottom_bootstrap and uncomment the sigma_0 lines in least_squares method
     exp_m = np.array([
         # omegas
-        np.mean(gauss_2695), np.mean(gauss_2770), np.mean(gauss_3000),
-        np.mean(gauss_3090),
-        np.mean(gauss_3120),
-        # cascades six-plet
-        np.mean(gauss_2578), np.mean(gauss_2645),
-        np.mean(gauss_2965),
-        np.mean(gauss_3055),
-        np.mean(gauss_3080),
-        # sigma
-        np.mean(gauss_2453), np.mean(gauss_2518), np.mean(gauss_2801),
-        # lambda         
-        np.mean(gauss_2286), np.mean(gauss_2592), np.mean(gauss_2628),
-        # cascade anti-3plet
-        np.mean(gauss_2469), np.mean(gauss_2792), np.mean(gauss_2816)
+        random(gauss_6061),
+        random(gauss_6316),
+        random(gauss_6330),
+        random(gauss_6340),
+        random(gauss_6350),
+        # Cascade 
+        random(gauss_5935),
+        random(gauss_5953),
+        random(gauss_6328),
+        # Sigma b         
+        random(gauss_5813),
+        random(gauss_5837),
+        random(gauss_6097),
+        # Lambda b
+        random(gauss_5617),
+        random(gauss_5912),
+        random(gauss_5920),
+        # random(gauss_6146),
+        # random(gauss_6152),
+        # Cascades
+        random(gauss_5794),
+        random(gauss_6100),
     ])
 
     for i in range(5000):
         # find by eye sigma_0
-        y_errors_exp =np.array([1.7, 2.0, 0.22, 0.5, 1.0, 0.9, 0.7, 0.3, 0.4, 2.8, 0.9, 2.8, 20, 0.14, 0.28, 0.19, 1.77, 1.4, 2.07])
+        y_errors_exp = np.array([1.2, 0.58, 0.6, 0.6, 0.6, 0.05, 0.6, 1.6, 0.27, 0.3, 1.8, 0.17, 0.17, 0.17, 0.6, 0.6])
         # for diquark
-        # y_errors_exp =np.array([1.7, 2.00, 0.22, 0.50, 1.00, 0.90, 0.71, 0.33,0.90, 2.80, 20.1, 0.14, 0.28, 0.19, 1.77, 1.40, 2.07])
+        # check
         sigma_0 = i*0.01
         m = fit(least_squares)
-        if(0.9 < m.fval/(19-m.nfit) < 1.1):
-            print(m.fval/((19-m.nfit)), round(m.values['m1']), round(m.values['m2']), round(m.values['m3']), sigma_0)
+        if(0.9 < m.fval/(16-m.nfit) < 1.1):
+            print(m.fval/((16-m.nfit)), round(m.values['m1']), round(m.values['m2']), round(m.values['m3']), sigma_0)
             print(round(m.values['k']), round(m.values['a']),  round(m.values['b']),   round(m.values['e']), round(m.values['g']) )
             print('********************************************************')
     input()
@@ -214,6 +222,12 @@ def baryon_name_plots(baryons):
     else:
         return ''
 
+def compare_mass_latex(value=-1):
+    if value==-1:
+        return "..."
+    else:
+        return "$"+str(value)+"$"
+    
 def name_quantum_state(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
 
     if baryons=='omegas':
@@ -377,7 +391,7 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
         elif J_tot==3/2 and S_tot==3/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
             return '$5952.3\\pm 0.6$' , '$0.90\pm 0.18$'
         elif J_tot==5/2 and S_tot==3/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6227.9\\pm 0.9$' , '$19.9\pm 2.6$'
+            return '$6227.9\\pm 1.6$' , '$19.9\pm 2.6$'
         else:
             return '$\\dagger$', '$\\dagger$'
     if baryons=='sigmas':
@@ -406,11 +420,11 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
             return '$\\dagger$', '$\\dagger$'
     elif baryons=='cascades_anti3':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(4/3):
-            return '$5797.5\\pm 0.6$' , '$\\approx 0$'
+            return '$5794.5\\pm 0.6$' , '$\\approx 0$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):
             return '$6100.3\\pm 0.6$' , '$<1.9$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6327.4\\pm 1.6$' , '$1\\pm5$'
+            return '$6227.4\\pm 1.6$' , '$1\\pm5$'
         elif J_tot==5/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
             return '$6332.7\\pm 0.3$' , '$<1.60$'
         else:
