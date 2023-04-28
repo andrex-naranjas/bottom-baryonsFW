@@ -222,6 +222,12 @@ def baryon_name_plots(baryons):
     else:
         return ''
 
+def compare_mass_latex(value=-1):
+    if value==-1:
+        return "..."
+    else:
+        return "$"+str(value)+"$"
+    
 def name_quantum_state(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
 
     if baryons=='omegas':
@@ -385,7 +391,7 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
         elif J_tot==3/2 and S_tot==3/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
             return '$5952.3\\pm 0.6$' , '$0.90\pm 0.18$'
         elif J_tot==5/2 and S_tot==3/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6227.9\\pm 0.9$' , '$19.9\pm 2.6$'
+            return '$6227.9\\pm 1.6$' , '$19.9\pm 2.6$'
         else:
             return '$\\dagger$', '$\\dagger$'
     if baryons=='sigmas':
@@ -414,11 +420,11 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
             return '$\\dagger$', '$\\dagger$'
     elif baryons=='cascades_anti3':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(4/3):
-            return '$5797.5\\pm 0.6$' , '$\\approx 0$'
+            return '$5794.5\\pm 0.6$' , '$\\approx 0$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):
             return '$6100.3\\pm 0.6$' , '$<1.9$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6327.4\\pm 1.6$' , '$1\\pm5$'
+            return '$6227.4\\pm 1.6$' , '$1\\pm5$'
         elif J_tot==5/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
             return '$6332.7\\pm 0.3$' , '$<1.60$'
         else:

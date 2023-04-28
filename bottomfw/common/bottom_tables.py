@@ -93,7 +93,6 @@ class BottomTables:
                     print('\hline', file=f_paper)
                     print(" $N=2$  &  &  &  &  &  \\\ ", file=f_paper)
 
-
             if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible bug fix
             else: SU_tot_val = 4/3
 
@@ -124,10 +123,67 @@ class BottomTables:
         #print("\caption{Every quantity is in MeV, except for percentage differences. States: $", baryons, "$}",file=f_paper)
         #print("\label{tab:"+name+"_mass_"+label+"}", file=f_paper)
         f_paper.close()
+        
+
+    def comparison_three_quark_model_table(self):
+        """
+        Method to produce table that compares predictions from different references
+        """
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
+        f_paper = open(self.m_workpath+'/tables/comparison_masses_'+self.m_baryons+'_paper.tex', "w")
+        baryon_name = du.baryon_name(self.m_baryons)
+        flavor_name = du.flavor_label(self.m_baryons)
+        self.m_load_data_compare(self.m_baryons)
+        
+        print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
+        print(baryon_name+"&                  & This work   &   Yoshida     &  Hosaka      &  Roberts    & Kim        & Mohanta    & Experimental  \\\ ", file=f_paper)
+        print(flavor_name+"  & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &      mass (MeV) \\\ \hline", file=f_paper)
+
+        s_wave_count,p_wave_count,d_wave_count=0,0,0
+        for i in range(len(self.m_mass)):
+
+            if self.m_HO_n[i] == 0:                
+                if s_wave_count==0:
+                    s_wave_count+=1
+                    print('\hline', file=f_paper)
+                    print(" $N=0$  &  &  &  &  &  \\\ ", file=f_paper)
+            elif self.m_HO_n[i] == 1:
+                if p_wave_count==0:
+                    p_wave_count+=1
+                    print('\hline', file=f_paper)
+                    print(" $N=1$  &  &  &  &  &  \\\ ", file=f_paper)
+            elif self.m_HO_n[i] == 2:
+                if d_wave_count==0:
+                    d_wave_count+=1
+                    print('\hline', file=f_paper)
+                    print(" $N=2$  &  &  &  &  &  \\\ ", file=f_paper)
+
+            if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
+            else: SU_tot_val = 4/3
+
+            quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+            wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
+
+            mass_exp_latex,_= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+            mass_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+            mass_ysh_latex = du.compare_mass_latex(self.m_mass_ysh[i])
+            mass_hsk_latex = du.compare_mass_latex(self.m_mass_hsk[i])
+            mass_rob_latex = du.compare_mass_latex(self.m_mass_rob[i])
+            mass_kim_latex = du.compare_mass_latex(self.m_mass_kim[i])
+            mass_mon_latex = du.compare_mass_latex(self.m_mass_mon[i])
+            
+            print(quantum_state, wave_label,'&', mass_our_latex, '&', mass_ysh_latex,'&', mass_hsk_latex, '&', mass_rob_latex,'&', mass_kim_latex, '&', mass_mon_latex,'&', mass_exp_latex, '\\\ ', file=f_paper)
+        
+        print('\hline \hline', file=f_paper)
+        print('\end{tabular}', file=f_paper)
+        f_paper.close()
 
         
     def decay_indi_table(self):
-        
+        """
+        Method to save a latex table for individual strong decays
+        """
         df = pd.read_csv(self.m_workpath+'/tables/decays_indi_'+self.m_baryons+'_summary.csv')
         f_decay_indi = open(self.m_workpath+'/tables/decay_indi_'+self.m_baryons+'_paper.tex', "w")
         n_decay_channels = int((len(df.columns)-8)/3)
@@ -593,3 +649,11 @@ class BottomTables:
         self.m_rho_eb_di  =   round(np.mean(data_frame['rho_eb']), 2)
         self.m_rho_gb_di  =   round(np.mean(data_frame['rho_gb']), 2)
         self.m_rho_ge_di  =   round(np.mean(data_frame['rho_ge']), 2)
+
+    def m_load_data_compare(self, baryons):
+        data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/masses_" + baryons + "_compare.csv")
+        self.m_mass_ysh  = round(data_frame["Yoshida"])
+        self.m_mass_hsk  = round(data_frame["Hosaka"])
+        self.m_mass_rob  = round(data_frame["Roberts"])
+        self.m_mass_kim  = round(data_frame["Kim"])
+        self.m_mass_mon  = round(data_frame["Mohanta"])

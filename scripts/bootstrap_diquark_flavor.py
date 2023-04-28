@@ -35,8 +35,9 @@ else:
 
 fit_type = "flav" # sext or trip
 
-# input parameters
+print('Getting paper results for:', run_baryons)
 
+# input parameters
 param_v,param_w,param_x,param_y,param_z,\
     param_is_omega, param_is_cascade_p, param_is_sigma, param_is_lambda, param_is_cascade = dp.fetch_data_diquark(fit_type=fit_type)
 
@@ -306,9 +307,9 @@ else:
 results = BottomDiquark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_diquark, asymmetric=True, batch_number=batch_number, workpath=workpath)
 results.fetch_values()
 
-print('Getting paper results for:', run_baryons)
 # omegas,cascades,sigmas,lambdas,cascades_anti3
 results.paper_results_predictions(bootstrap=True, bootstrap_width=False, prev_params=False, decay_width=False)
-print(count, "no. successes")
 end = datetime.datetime.now()
 elapsed_time = end - start
+print(count, "no. successes")
+print("Elapsed total time = " + str(elapsed_time))

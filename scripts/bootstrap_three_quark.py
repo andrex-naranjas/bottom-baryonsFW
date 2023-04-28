@@ -43,6 +43,8 @@ if len(sys.argv) == 3:
     batch_number = sys.argv[1]
     workpath = sys.argv[2]
 
+print('Getting paper results for:', run_baryons)
+
 # input parameters
 param_v,param_w,param_x,param_y,param_z,param_q1,param_q2,param_q3,\
     param_is_rho,param_is_lam,param_is_omega,param_is_cascade,param_is_sigma = dp.fetch_data_extended()
@@ -132,6 +134,7 @@ gauss_6333 = sample_gauss(6332.7, np.power((0.30**2 + sigma_model), 0.5 ))  # al
 
 # plug here the sigma_0 optimization lines from data_utils.py
 
+count = 0
 # construct the simulated sampling distribution (bootstrap technique)
 for i in range(n_events): # max 10000 with decays included, computationally expensive
     #if(states=='All'):
@@ -164,6 +167,11 @@ for i in range(n_events): # max 10000 with decays included, computationally expe
     ])    
     # perform the parameter fitting (via minimizing squared distance)
     m = fit(least_squares)
+    
+    if type(m.covariance) != type(None):
+        count += 1
+    else:
+        continue
 
     sampled_m1 = np.append(sampled_m1, m.values['m1'])
     sampled_m2 = np.append(sampled_m2, m.values['m2'])
@@ -264,8 +272,8 @@ else:
 results = BottomThreeQuark(baryons=run_baryons, params=param, sampled=sampled, corr_mat=corr_mat_ext, asymmetric=asymmetric,
                            decay_width=decay_width, bootstrap_width=bootstrap_width, decay_width_em=decay_width_em, bootstrap_width_em=bootstrap_width_em, batch_number=batch_number, workpath=workpath)
 results.fetch_values()
-print('Getting paper results for:', run_baryons)
 results.paper_results_predictions(bootstrap=bootstrap, bootstrap_width=bootstrap_width, prev_params=prev_params)
 end = datetime.datetime.now()
 elapsed_time = end - start
+print(count, "no. successes")
 print("Elapsed total time = " + str(elapsed_time))

@@ -22,7 +22,7 @@ workpath = getcwd()
 
 # create summary of the results and store in a csv file
 dv.paper_tables_results(run_baryons, di_three_quark='three_quark', decay_width=True,
-                        asymmetric=True, prev_params=False, workpath=workpath, batch_number=True)
+                        asymmetric=True, prev_params=False, workpath=workpath, batch_number=True) # batch_number -> True, None ;)
 print('three-quark results created')
 
 # create summary of the results and store in a csv file
