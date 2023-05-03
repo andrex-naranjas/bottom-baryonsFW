@@ -1,12 +1,12 @@
 {
-    "baryons":"cascades_anti3",
-    "n_events": 10000,
-    "n_jobs": 10,
+    "baryons":"cascades",
+    "n_events": 100,
+    "n_jobs": 100,
     "asymmetric_errors": true,
-    "decay_width": false,
-    "decay_width_em": false,
+    "decay_width": true,
+    "decay_width_em": true,
     "bootstrap_mass": true,
-    "bootstrap_st_dec": false,
-    "bootstrap_em_dec": false,
+    "bootstrap_st_dec": true,
+    "bootstrap_em_dec": true,
     "previous_param": false
 }

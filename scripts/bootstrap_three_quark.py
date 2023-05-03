@@ -20,6 +20,13 @@ from bottomfw.baryons.bottom_three_quark import BottomThreeQuark
 
 
 workpath = os.getcwd()
+
+# for running batch jobs with htcondor
+batch_number = None
+if len(sys.argv) == 3:
+    batch_number = sys.argv[1]
+    workpath = sys.argv[2]
+
 config = None
 with open(workpath+"/config/three_quark_config.json", "r") as jsonfile:
     config = json.load(jsonfile)
@@ -37,11 +44,6 @@ if config is not None:
 else:
     sys.exit('Please provide a configuration file. Try again!')
 
-# for running batch jobs with htcondor
-batch_number = None
-if len(sys.argv) == 3:
-    batch_number = sys.argv[1]
-    workpath = sys.argv[2]
 
 print('Getting paper results for:', run_baryons)
 

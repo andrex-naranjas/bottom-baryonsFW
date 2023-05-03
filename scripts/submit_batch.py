@@ -10,11 +10,13 @@
 # usage: python3 scripts/submit_batch.py three_quark/diquark
 
 import sys
+import json
+import os
 from os import system,getenv,getuid,getcwd,popen
 
 workpath = getcwd()
 
-if len(sys.argv)!=1:
+if len(sys.argv)!=2:
   sys.exit('Please indicate wich quark structure to run for batch jobs')
 
 baryons = "omegas"
@@ -30,7 +32,7 @@ py3_path = popen('which python3').read().strip()
 if (three_di == 'three_quark'):
   run_bottom = 'scripts/bootstrap_three_quark.py'
 elif (three_di=='diquark'):
-  run_bottom = 'bottom_bootstrap_diquark.py'
+  run_bottom = 'bottom_bootstrap_diquark_flavor.py'
 else:
   sys.exit('quark structure not supported')
 
