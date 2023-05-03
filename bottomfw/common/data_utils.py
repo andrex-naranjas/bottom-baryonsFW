@@ -387,11 +387,11 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
             return '$\\dagger$', '$\\dagger$'
     elif baryons=='cascades':
         if J_tot==1/2 and S_tot==1/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$5935.02\\pm 0.05$' , '$<0.08$'
+            return '$5935.02\\pm 0.05$', '$<0.08$'
         elif J_tot==3/2 and S_tot==3/2 and L_tot==0 and ModEx=='grd' and SU_tot==float(10/3):
-            return '$5952.3\\pm 0.6$' , '$0.90\pm 0.18$'
+            return '$5953.8\\pm 0.6$', '$0.90\pm 0.18$'
         elif J_tot==5/2 and S_tot==3/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(10/3):
-            return '$6227.9\\pm 1.6$' , '$19.9\pm 2.6$'
+            return '$6227.9\\pm 1.6$', '$19.9\pm 2.6$'
         else:
             return '$\\dagger$', '$\\dagger$'
     if baryons=='sigmas':
@@ -424,9 +424,9 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
         elif J_tot==3/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):
             return '$6100.3\\pm 0.6$' , '$<1.9$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6227.4\\pm 1.6$' , '$1\\pm5$'
+            return '$6329.9\\pm 2.5$' , '$<1.6$'
         elif J_tot==5/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6332.7\\pm 0.3$' , '$<1.60$'
+            return '$\\dagger$' , '$\\dagger$'
         else:
             return '$\\dagger$', '$\\dagger$'
         
