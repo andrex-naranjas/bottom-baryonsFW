@@ -1,5 +1,5 @@
 {
-    "baryons":"cascades",
+    "baryons":"omegas",
     "n_events": 100,
     "n_jobs": 100,
     "asymmetric_errors": true,
