@@ -16,17 +16,18 @@ from os import system,getenv,getuid,getcwd,popen
 
 workpath = getcwd()
 
-if len(sys.argv)!=2:
+if len(sys.argv)!=3:
   sys.exit('Please indicate wich quark structure to run for batch jobs')
 
 baryons = "omegas"
 n_jobs  = 10
 with open(workpath+"/config/three_quark_config.json", "r") as jsonfile:
     config = json.load(jsonfile)
-baryons = config["baryons"]
+# baryons = config["baryons"] bug happening, need to feed directly the baryon name
 n_jobs  = config["n_jobs"]
 
 three_di = sys.argv[1]
+baryons = sys.argv[2]
 py3_path = popen('which python3').read().strip()
 
 if (three_di == 'three_quark'):
@@ -40,7 +41,7 @@ classad='''
 universe = vanilla
 executable = {0}
 getenv = True
-arguments = {1}/{2} $(Process) {1}
+arguments = {1}/{2} $(Process) {1} {3}
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 output = {1}/output_batch/{3}/$(Process).out

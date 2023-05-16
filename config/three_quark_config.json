@@ -1,5 +1,5 @@
 {
-    "baryons":"omegas",
+    "baryons":"lambdas",
     "n_events": 100,
     "n_jobs": 100,
     "asymmetric_errors": true,

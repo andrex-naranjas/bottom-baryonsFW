@@ -23,16 +23,19 @@ workpath = os.getcwd()
 
 # for running batch jobs with htcondor
 batch_number = None
-if len(sys.argv) == 3:
+run_baryons = None
+if len(sys.argv) == 4:
     batch_number = sys.argv[1]
     workpath = sys.argv[2]
+    run_baryons = sys.argv[3]
 
 config = None
 with open(workpath+"/config/three_quark_config.json", "r") as jsonfile:
     config = json.load(jsonfile)
 
 if config is not None:
-    run_baryons = config["baryons"]
+    if run_baryons is None:
+        run_baryons = config["baryons"]
     n_events = config["n_events"]
     asymmetric = config["asymmetric_errors"]
     decay_width = config["decay_width"]
@@ -43,7 +46,6 @@ if config is not None:
     prev_params = config["previous_param"]
 else:
     sys.exit('Please provide a configuration file. Try again!')
-
 
 print('Getting paper results for:', run_baryons)
 

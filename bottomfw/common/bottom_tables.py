@@ -184,6 +184,8 @@ class BottomTables:
         """
         Method to save a latex table for individual strong decays
         """
+        print(self.m_workpath+'/tables/decays_indi_'+self.m_baryons+'_summary.csv')
+        input()
         df = pd.read_csv(self.m_workpath+'/tables/decays_indi_'+self.m_baryons+'_summary.csv')
         f_decay_indi = open(self.m_workpath+'/tables/decay_indi_'+self.m_baryons+'_paper.tex', "w")
         n_decay_channels = int((len(df.columns)-8)/3)
@@ -473,12 +475,12 @@ class BottomTables:
         print(" $m_{c}$ &     1   &   &   &   &    &   &   &  &  \\\ ", file=f)
         print(md1,     "&",self.m_rho_md2md1, "&  1   &   &   &   &    &   &   &  \\\ ", file=f)
         print(md2,     "&",self.m_rho_md3md1, "&",self.m_rho_md3md2,"&  1   &   &   &   &    &   & \\\ ", file=f)
-        print(md3,     "&",self.m_rho_mcmd1,  "&",self.m_rho_mcmd2 ,"&",self.m_rho_mcmd3, "&  1   &   &   &   &    &   \\\ ", file=f)
-        print(" $K_c$   &",self.m_rho_kmd1 ,  "&",self.m_rho_kmd2  ,"&",self.m_rho_kmd3 , "&", self.m_rho_kmc,"& 1   &   &   &   & \\\ ", file=f)
-        print(" $A$     &",self.m_rho_amd1 ,  "&",self.m_rho_amd2  ,"&",self.m_rho_amd3 , "&", self.m_rho_amc,"&",self.m_rho_ak,"& 1   &   &   & \\\ ", file=f)
-        print(" $B$     &",self.m_rho_bmd1 ,  "&",self.m_rho_bmd2  ,"&",self.m_rho_bmd3 , "&", self.m_rho_bmc,"&",self.m_rho_bk,"&",self.m_rho_ba,"& 1   &   &  \\\ ", file=f)
-        print(" $E$     &",self.m_rho_emd1 ,  "&",self.m_rho_emd2  ,"&",self.m_rho_emd3 , "&", self.m_rho_emc,"&",self.m_rho_ek,"&",self.m_rho_ea,"&",self.m_rho_eb,"& 1   & \\\ ", file=f)
-        print(" $G$     &",self.m_rho_gmd1 ,  "&",self.m_rho_gmd2  ,"&",self.m_rho_gmd3 , "&", self.m_rho_gmc,"&",self.m_rho_gk,"&",self.m_rho_ga,"&",self.m_rho_gb,"&", self.m_rho_ge, "&","1 \\\ \hline \hline", file=f) 
+        print(md3,     "&",self.m_rho_mbmd1,  "&",self.m_rho_mbmd2 ,"&",self.m_rho_mbmd3, "&  1   &   &   &   &    &   \\\ ", file=f)
+        print(" $K_c$   &",self.m_rho_kmd1 ,  "&",self.m_rho_kmd2  ,"&",self.m_rho_kmd3 , "&", self.m_rho_kmb,"& 1   &   &   &   & \\\ ", file=f)
+        print(" $A$     &",self.m_rho_amd1 ,  "&",self.m_rho_amd2  ,"&",self.m_rho_amd3 , "&", self.m_rho_amb,"&",self.m_rho_ak,"& 1   &   &   & \\\ ", file=f)
+        print(" $B$     &",self.m_rho_bmd1 ,  "&",self.m_rho_bmd2  ,"&",self.m_rho_bmd3 , "&", self.m_rho_bmb,"&",self.m_rho_bk,"&",self.m_rho_ba,"& 1   &   &  \\\ ", file=f)
+        print(" $E$     &",self.m_rho_emd1 ,  "&",self.m_rho_emd2  ,"&",self.m_rho_emd3 , "&", self.m_rho_emb,"&",self.m_rho_ek,"&",self.m_rho_ea,"&",self.m_rho_eb,"& 1   & \\\ ", file=f)
+        print(" $G$     &",self.m_rho_gmd1 ,  "&",self.m_rho_gmd2  ,"&",self.m_rho_gmd3 , "&", self.m_rho_gmb,"&",self.m_rho_gk,"&",self.m_rho_ga,"&",self.m_rho_gb,"&", self.m_rho_ge, "&","1 \\\ \hline \hline", file=f) 
         print('\end{tabular}', file=f)
         print("\caption{Correlation between fitted parameters, diquark system.}",file=f)
         print("\label{tab:diquark_corr}", file=f)

@@ -201,7 +201,7 @@ class BottomThreeQuark:
                             dec_dir = self.m_workpath+"/batch_results/"+self.m_baryons+"/decays_indi/state_"+str(i)
                             if not os.path.exists(dec_dir):
                                 os.makedirs(dec_dir)
-                            df_decays_indi.to_csv(dec_dir+"/"+str(self.m_batch_number)+".csv", index=False)                                                   
+                            df_decays_indi.to_csv(dec_dir+"/"+str(self.m_batch_number)+".csv", index=False)                         
                 # last line of states loop
             if decay_width_em and self.L_tot[i]<=1 and (self.ModEx[i]=="grd" or self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # electromagnetic decays
                 decays_csv_em.append(pd.Series(dummy_decay_em))
@@ -228,7 +228,7 @@ class BottomThreeQuark:
                             dec_dir_em = self.m_workpath+"/batch_results/"+self.m_baryons+"/decays_indi_em/state_"+str(i)
                             if not os.path.exists(dec_dir_em):
                                 os.makedirs(dec_dir_em)
-                            df_decays_indi_em.to_csv(dec_dir+"/"+str(self.m_batch_number)+".csv", index=False)                                                   
+                            df_decays_indi_em.to_csv(dec_dir_em+"/"+str(self.m_batch_number)+".csv", index=False)                                                   
                 # last line of states loop
         df_masses = None
         df_omegas = None

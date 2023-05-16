@@ -152,6 +152,8 @@ def decay_indi_tables_results(baryons, decay_type="strong", asymmetric=False, pr
     for i in range(len(state)):
 
         if (decay_type == "electro" and i >= n_states):
+            input()
+            print("parrite test")
             break
         decay_indi_df = None
         if batch_number is None:
