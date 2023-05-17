@@ -68,7 +68,7 @@ class BottomPlots:
         elif self.m_baryons=='sigmas':
             ax.set_ylim([5500,7000])
             if self.m_model_flag=="diquark":
-                ax.set_ylim([5500,6000])
+                ax.set_ylim([5500,6800])
         elif self.m_baryons=='cascades':
             ax.set_ylim([5500,7000])
             if self.m_model_flag=="diquark":
