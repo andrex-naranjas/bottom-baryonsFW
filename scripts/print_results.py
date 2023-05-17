@@ -47,11 +47,8 @@ bottom_tables.parameter_combined()
 bottom_tables.correlation_table_three()
 bottom_tables.correlation_table_di_flavor()
 
-
 bottom_tables.decay_indi_table()
-
 bottom_tables.decay_indi_table_em(compare=False)
-
 bottom_tables.comparison_three_quark_model_table()
 
 

@@ -184,8 +184,6 @@ class BottomTables:
         """
         Method to save a latex table for individual strong decays
         """
-        print(self.m_workpath+'/tables/decays_indi_'+self.m_baryons+'_summary.csv')
-        input()
         df = pd.read_csv(self.m_workpath+'/tables/decays_indi_'+self.m_baryons+'_summary.csv')
         f_decay_indi = open(self.m_workpath+'/tables/decay_indi_'+self.m_baryons+'_paper.tex', "w")
         n_decay_channels = int((len(df.columns)-8)/3)

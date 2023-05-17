@@ -68,7 +68,7 @@ class BottomPlots:
         elif self.m_baryons=='sigmas':
             ax.set_ylim([5500,7000])
             if self.m_model_flag=="diquark":
-                ax.set_ylim([5500,7000])
+                ax.set_ylim([5500,6000])
         elif self.m_baryons=='cascades':
             ax.set_ylim([5500,7000])
             if self.m_model_flag=="diquark":
@@ -135,4 +135,4 @@ class BottomPlots:
         ax.add_artist(at)
         if not os.path.exists(self.m_workpath+"/plots/"):
             os.mkdir(self.m_workpath+"/plots/")
-        plt.savefig(self.m_workpath+'/plots/spectra_'+self.m_baryons+self.m_diquark+'.pdf')
+        plt.savefig(self.m_workpath+'/plots/spectra_'+self.m_baryons+self.m_diquark+'.png')

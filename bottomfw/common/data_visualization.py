@@ -150,11 +150,9 @@ def decay_indi_tables_results(baryons, decay_type="strong", asymmetric=False, pr
         n_states = 8 # we only have up to P-wave states for electro CHECK!!
 
     for i in range(len(state)):
-
         if (decay_type == "electro" and i >= n_states):
-            input()
-            print("parrite test")
             break
+
         decay_indi_df = None
         if batch_number is None:
             decay_indi_df = pd.read_csv(workpath+"/tables/decays_indi"+second_name+decay_name+"/decays_state_"+str(i)+"_"+baryons+".csv")
