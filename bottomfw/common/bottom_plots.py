@@ -64,23 +64,23 @@ class BottomPlots:
         if self.m_baryons=='omegas':
             ax.set_ylim([6000,7000])
             if self.m_model_flag=="diquark":
-                ax.set_ylim([6000,7000])
+                ax.set_ylim([6000,6700])
         elif self.m_baryons=='sigmas':
-            ax.set_ylim([5500,7000])
+            ax.set_ylim([5700,7000])
             if self.m_model_flag=="diquark":
-                ax.set_ylim([5500,6800])
+                ax.set_ylim([5700,6600])
         elif self.m_baryons=='cascades':
             ax.set_ylim([5500,7000])
             if self.m_model_flag=="diquark":
                 ax.set_ylim([5500,7000])
         elif self.m_baryons=='lambdas':
-            ax.set_ylim([5500,7000])
+            ax.set_ylim([5500,6800])
             if self.m_model_flag=="diquark":
-                ax.set_ylim([5500,7000])
+                ax.set_ylim([5500,6400])
         elif self.m_baryons=='cascades_anti3':
-            ax.set_ylim([5500,7000])
+            ax.set_ylim([5700,6900])
             if self.m_model_flag=="diquark":
-                ax.set_ylim([5500,7000])
+                ax.set_ylim([5700,6500])
 
         x1 = np.array([0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00])
         x2 = np.array([0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00, 2.25])
