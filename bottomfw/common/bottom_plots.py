@@ -62,7 +62,7 @@ class BottomPlots:
         ax.set_ylabel('Mass (MeV)')
 
         if self.m_baryons=='omegas':
-            ax.set_ylim([6000,7000])
+            ax.set_ylim([6000,7050])
             if self.m_model_flag=="diquark":
                 ax.set_ylim([6000,6700])
         elif self.m_baryons=='sigmas':

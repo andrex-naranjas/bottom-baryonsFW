@@ -70,9 +70,9 @@ class BottomTables:
         flavor_name = du.flavor_label(self.m_baryons)
         
         print("\\begin{tabular}{c| c c c c c c c}\hline \hline", file=f_paper)
-        print("        &    & Three-quark & & Quark-diquark    &               &              &  \\\ ", file=f_paper)
-        print(baryon_name+" & & Predicted   &  &  Predicted   &  Experimental &  Predicted            & Experimental \\\ ", file=f_paper)
-        print(" $^{2S+1}L_{J}$  &" +flavor_name+ "&  Mass (MeV)  & " +flavor_name+ "&  Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)
+        print(flavor_name+ "  & Quark-diquark & & Three-quark   &             &      &        &  \\\ ", file=f_paper)
+        print(baryon_name+" &   & Predicted  &   &  Predicted   &  Experimental &  Predicted            & Experimental \\\ ", file=f_paper)
+        print(" $^{2S+1}L_{J}$ & $\\vert l_{r}, k_{r} \\rangle$ & Mass (MeV)  & $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$  &  Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)
 
         s_wave_count,p_wave_count,d_wave_count=0,0,0
         for i in range(len(self.m_mass)):
@@ -114,7 +114,7 @@ class BottomTables:
                     mass_di_lat = '$'+str(abs(round(self.m_mass_di[j])))+'^{+'+str(abs(round(self.m_error_up_di[j])))+'}_{-'+str(abs(round(self.m_error_dn_di[j])))+'}$'
                     break
         
-            print( wave_label,'&' ,quantum_state, mass_lat, '&' ,quantum_state_di, mass_di_lat,'&', exp_mass, '&', decay_lat,'&', exp_width, '\\\ ', file=f_paper)
+            print( wave_label,'&' ,quantum_state_di, mass_di_lat,'&'  ,quantum_state, mass_lat, '&' ,exp_mass, '&', decay_lat,'&', exp_width, '\\\ ', file=f_paper)
         
     
         name = self.m_baryons
