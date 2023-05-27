@@ -304,7 +304,7 @@ def name_quantum_state(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
     else:
         flavour = 'x'
 
-    return  '$\\vert ' +l_lam + ','+l_rho + ',' + kappa_lam + ','+kappa_rho +' \\rangle $ &'
+    return  '$\\vert \,\,' +l_lam + '\,,\,' +l_rho + '\,,\,' + kappa_lam + '\,,\,'+kappa_rho +' \\rangle $ &'
         
     # return '$\\vert '+ quarks +','+ j_name + ',' + s_name +',' + l_lam + ',' + l_rho + ',' + kappa + ',' + flavour +' \\rangle$ &'
 
@@ -399,7 +399,7 @@ def name_quantum_state_di(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
     if l_rho != '0' or kappa_rho != '0':
         return "$\\dagger\\dagger$ &"
     else:
-        return '$\\vert ' + l_r + ',' + kappa_r +' \\rangle$ &'
+        return '$\\vert \,\,' + l_r + '\,,\,' + kappa_r +' \\rangle$ &'
         
     # return '$\\vert '+ quarks +','+ j_name + ',' + s_name +',' + l_lam + ',' + l_rho + ',' + kappa + ',' + flavour +' \\rangle$ &'
 

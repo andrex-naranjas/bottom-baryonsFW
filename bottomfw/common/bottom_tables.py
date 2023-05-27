@@ -70,9 +70,9 @@ class BottomTables:
         flavor_name = du.flavor_label(self.m_baryons)
         
         print("\\begin{tabular}{c| c c c c c c c}\hline \hline", file=f_paper)
-        print(flavor_name+ "  & Quark-diquark & & Three-quark   &             &      &        &  \\\ ", file=f_paper)
+        print(flavor_name+ "  & Three-quark & & Quark-diquark   &             &      &        &  \\\ ", file=f_paper)
         print(baryon_name+" &   & Predicted  &   &  Predicted   &  Experimental &  Predicted            & Experimental \\\ ", file=f_paper)
-        print(" $^{2S+1}L_{J}$ & $\\vert l_{r}, k_{r} \\rangle$ & Mass (MeV)  & $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$  &  Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)
+        print(" $^{2S+1}L_{J}$ & $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & Mass (MeV)  & $\\vert l_{r}, k_{r} \\rangle$  &  Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)
 
         s_wave_count,p_wave_count,d_wave_count=0,0,0
         for i in range(len(self.m_mass)):
@@ -114,7 +114,7 @@ class BottomTables:
                     mass_di_lat = '$'+str(abs(round(self.m_mass_di[j])))+'^{+'+str(abs(round(self.m_error_up_di[j])))+'}_{-'+str(abs(round(self.m_error_dn_di[j])))+'}$'
                     break
         
-            print( wave_label,'&' ,quantum_state_di, mass_di_lat,'&'  ,quantum_state, mass_lat, '&' ,exp_mass, '&', decay_lat,'&', exp_width, '\\\ ', file=f_paper)
+            print( wave_label,'&' ,quantum_state, mass_lat,'&'  ,quantum_state_di, mass_di_lat, '&' ,exp_mass, '&', decay_lat,'&', exp_width, '\\\ ', file=f_paper)
         
     
         name = self.m_baryons
@@ -138,8 +138,8 @@ class BottomTables:
         self.m_load_data_compare(self.m_baryons)
         
         print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
-        print(baryon_name+"&                  & This work   &   Yoshida     &  Hosaka      &  Roberts    & Kim        & Mohanta    & Experimental  \\\ ", file=f_paper)
-        print(flavor_name+"  & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &      mass (MeV) \\\ \hline", file=f_paper)
+        print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM \cite{Yoshida2015}     &  QCD sum rules \cite{Liu2008, Mao2015, Chen2016}      &  NRQM \cite{Roberts2008}    & $\chi$QM \cite{Kim2021}        & LQCD \cite{Mohanta2020}     & Experimental  \\\ ", file=f_paper)
+        print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &      mass (MeV) \\\ \hline", file=f_paper)
 
         s_wave_count,p_wave_count,d_wave_count=0,0,0
         for i in range(len(self.m_mass)):
