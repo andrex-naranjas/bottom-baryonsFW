@@ -70,7 +70,7 @@ class BottomTables:
         flavor_name = du.flavor_label(self.m_baryons)
         
         print("\\begin{tabular}{c| c c c c c c c}\hline \hline", file=f_paper)
-        print(flavor_name+ "  & Three-quark & & Quark-diquark   &             &      &        &  \\\ ", file=f_paper)
+        print(flavor_name+ " & \multicolumn{2}{c}{Three-quark} &  \multicolumn{2}{c}{Quark-diquark}   &    &  Three-quark  &\\\ ", file=f_paper)
         print(baryon_name+" &   & Predicted  &   &  Predicted   &  Experimental &  Predicted            & Experimental \\\ ", file=f_paper)
         print(" $^{2S+1}L_{J}$ & $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & Mass (MeV)  & $\\vert l_{r}, k_{r} \\rangle$  &  Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)
 
