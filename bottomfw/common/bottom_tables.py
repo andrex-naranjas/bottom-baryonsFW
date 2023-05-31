@@ -69,10 +69,10 @@ class BottomTables:
         baryon_name = du.baryon_name(self.m_baryons)
         flavor_name = du.flavor_label(self.m_baryons)
         
-        print("\\begin{tabular}{c c| c c c c c }\hline \hline", file=f_paper)
-        print("            &  & Three-quark &  Quark-diquark    &               &              &  \\\ ", file=f_paper)
-        print(baryon_name+"&  & Predicted   &    Predicted   &  Experimental &  Predicted            & Experimental \\\ ", file=f_paper)
-        print(flavor_name+"  & $^{2S+1}L_{J}$ & Mass (MeV)  &   Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)
+        print("\\begin{tabular}{c| c c c c c c c}\hline \hline", file=f_paper)
+        print(flavor_name+ " & \multicolumn{2}{c}{Three-quark} &  \multicolumn{2}{c}{Quark-diquark}   &    &  Three-quark  &\\\ ", file=f_paper)
+        print(baryon_name+" &   & Predicted  &   &  Predicted   &  Experimental &  Predicted            & Experimental \\\ ", file=f_paper)
+        print(" $^{2S+1}L_{J}$ & $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & Mass (MeV)  & $\\vert l_{r}, k_{r} \\rangle$  &  Mass (MeV)   &  Mass (MeV)   &  $\Gamma_{tot}$ (MeV) & $\Gamma$ (MeV) \\\ \hline", file=f_paper)
 
         s_wave_count,p_wave_count,d_wave_count=0,0,0
         for i in range(len(self.m_mass)):
@@ -97,6 +97,7 @@ class BottomTables:
             else: SU_tot_val = 4/3
 
             quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+            quantum_state_di = du.name_quantum_state_di(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
             exp_mass,exp_width= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
             exp_mass_val,exp_mass_err_val= du.exp_mass_val(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
 
@@ -113,7 +114,7 @@ class BottomTables:
                     mass_di_lat = '$'+str(abs(round(self.m_mass_di[j])))+'^{+'+str(abs(round(self.m_error_up_di[j])))+'}_{-'+str(abs(round(self.m_error_dn_di[j])))+'}$'
                     break
         
-            print(quantum_state, wave_label,'&', mass_lat, '&', mass_di_lat,'&', exp_mass, '&', decay_lat,'&', exp_width, '\\\ ', file=f_paper)
+            print( wave_label,'&' ,quantum_state, mass_lat,'&'  ,quantum_state_di, mass_di_lat, '&' ,exp_mass, '&', decay_lat,'&', exp_width, '\\\ ', file=f_paper)
         
     
         name = self.m_baryons
@@ -137,8 +138,8 @@ class BottomTables:
         self.m_load_data_compare(self.m_baryons)
         
         print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
-        print(baryon_name+"&                  & This work   &   Yoshida     &  Hosaka      &  Roberts    & Kim        & Mohanta    & Experimental  \\\ ", file=f_paper)
-        print(flavor_name+"  & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &      mass (MeV) \\\ \hline", file=f_paper)
+        print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM \cite{Yoshida2015}     &  QCD sum rules \cite{Liu2008, Mao2015, Chen2016}      &  NRQM \cite{Roberts2008}    & $\chi$QM \cite{Kim2021}        & LQCD \cite{Mohanta2020}     & Experimental  \\\ ", file=f_paper)
+        print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &      mass (MeV) \\\ \hline", file=f_paper)
 
         s_wave_count,p_wave_count,d_wave_count=0,0,0
         for i in range(len(self.m_mass)):

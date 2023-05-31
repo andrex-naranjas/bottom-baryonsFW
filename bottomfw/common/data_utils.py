@@ -304,10 +304,104 @@ def name_quantum_state(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
     else:
         flavour = 'x'
 
-    return '$\\vert l_{\\lambda}\\!\\!=\\!'+ l_lam + ', l_{\\rho}\\!\\!=\\!'+l_rho + ', k_{\\lambda}\\!\\!=\\!' + kappa_lam + ', k_{\\rho}\\!\\!=\\!'+kappa_rho +' \\rangle$ &'
+    return  '$\\vert \,' +l_lam + '\,,\,' +l_rho + '\,,\,' + kappa_lam + '\,,\,'+kappa_rho +' \,\\rangle $ &'
         
     # return '$\\vert '+ quarks +','+ j_name + ',' + s_name +',' + l_lam + ',' + l_rho + ',' + kappa + ',' + flavour +' \\rangle$ &'
 
+def name_quantum_state_di(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
+
+    if baryons=='omegas':
+        quarks = 'ssb'
+    elif baryons=='cascades' or baryons=='cascades_anti3':
+        quarks = 'snb'
+    elif baryons=='lambdas' or baryons=='sigmas':
+        quarks = 'nnb'
+    else:
+        quarks = 'x'
+        
+    if J_tot==0.5:
+        j_name = '1/2'
+    elif J_tot==1.5:
+        j_name = '3/2'
+    elif J_tot==2.5:
+        j_name = '5/2'
+    elif J_tot==3.5:
+        j_name = '7/2'
+    else:
+        j_name = 'x'
+
+    if S_tot==0.5:
+        s_name = '1/2'
+    elif S_tot==1.5:
+        s_name = '3/2'
+    else:
+        s_name = 'x'
+
+    if L_tot==0 and (ModEx=='lam' or ModEx=='rho' or ModEx=='grd'):
+        l_lam = '0'
+        l_rho = '0'
+        l_r = '0'
+    elif L_tot==1 and ModEx=='lam':
+        l_lam = '1'
+        l_rho = '0'
+        l_r = '1'
+    elif L_tot==1 and ModEx=='rho':
+        l_lam = '0'
+        l_rho = '1'
+        l_r = 'x'
+    elif L_tot==2 and ModEx=='lam':
+        l_lam = '2'
+        l_rho = '0'
+        l_r = '2'
+    elif L_tot==2 and ModEx=='rho':
+        l_lam = '0'
+        l_rho = '2'
+        l_r = 'x'
+    elif L_tot==0 and ModEx=='rpl':
+        l_lam = '0'
+        l_rho = '0'
+        l_r= '0'
+    elif L_tot==0 and ModEx=='rpr':
+        l_lam = '0'
+        l_rho = '0'
+        l_r = '0'
+    elif L_tot==2 and ModEx=='mix':
+        l_lam = '1'
+        l_rho = '1'
+        l_r = 'x'
+    elif L_tot==1 and ModEx=='mix':
+        l_lam = '1'
+        l_rho = '1'
+        l_r = 'x'
+    elif L_tot==0 and ModEx=='mix':
+        l_lam = '1'
+        l_rho = '1'
+        l_r = 'x'
+    else:
+        l_lam = 'x'
+        l_rho = 'x'
+        l_r = 'x'
+        
+    kappa_lam, kappa_rho, kappa_r='0','0','0'
+    if L_tot==0 and ModEx=='rpl':
+        kappa_lam = '1' # '1_{\\lambda}'
+        kappa_r = '1'
+    elif L_tot==0 and ModEx=='rpr':
+        kappa_rho = '1' #'1_{\\rho}'
+        kappa_r = 'x'
+
+    if SU_tot==float(10/3):
+        flavour = '{\\bf {6}}_{\\rm f}' # 6_{sf}
+    elif SU_tot==float(4/3):
+        flavour = '{\\bf {3}}_{\\rm c}' # 3_{c}
+    else:
+        flavour = 'x'
+    if l_rho != '0' or kappa_rho != '0':
+        return "$\\dagger\\dagger$ &"
+    else:
+        return '$\\vert \,' + l_r + '\,,\,' + kappa_r +' \,\\rangle$ &'
+        
+    # return '$\\vert '+ quarks +','+ j_name + ',' + s_name +',' + l_lam + ',' + l_rho + ',' + kappa + ',' + flavour +' \\rangle$ &'
 
 def exp_mass_val(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
     
@@ -424,9 +518,9 @@ def exp_mass_width(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot): # latex names
         elif J_tot==3/2 and S_tot==1/2 and L_tot==1 and ModEx=='lam' and SU_tot==float(4/3):
             return '$6100.3\\pm 0.6$' , '$<1.9$'
         elif J_tot==3/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$6329.9\\pm 2.5$' , '$<1.6$'
+            return '$6327.3\\pm 2.5$' , '$<2.2$'
         elif J_tot==5/2 and S_tot==1/2 and L_tot==2 and ModEx=='lam' and SU_tot==float(4/3):
-            return '$\\dagger$' , '$\\dagger$'
+            return '$6332.7\\pm 2.5$' , '$<1.6$'
         else:
             return '$\\dagger$', '$\\dagger$'
         
