@@ -10,11 +10,11 @@ class BottomDecayWidths{
 public:
   BottomDecayWidths();
   virtual ~BottomDecayWidths();
-  virtual double execute(double ma_val, double mb_val, double mc_val, double ga_val, double sa_val,
+  virtual double execute(double ma_avg_val, double mb_avg_val, double mc_avg_val, double ma_val, double mb_val, double mc_val,
+			 double ga_val, double sa_val,
 			 double la_val, double ja_val, double sl_val, double al_val, double ar_val,
 			 int baryon, int excMode, int prodDecay);
 private:
-
   double MA; double MB; double MC;
   int modeExcitation=0;
   double pi_val = 3.1415926536;
@@ -200,7 +200,6 @@ private:
   virtual double I01B0TOT_DWAVE_SECOND(double alpha_rho, double alpha_lam, double alpha_mes, double k_value);
   virtual double I02B0TOT_DWAVE_SECOND(double alpha_rho, double alpha_lam, double alpha_mes, double k_value);
 
-
   //SECOND DIAGRAM
   //D-WAVE RHO
   virtual double C0_DWAVE_RHO_SECOND(double alpha_rho, double alpha_lam, double alpha_mes);
@@ -261,12 +260,14 @@ private:
 
 //to talk to python
 extern "C"{
-  double bottom_execute(double ma_val, double mb_val, double mc_val, double ga_val, double sa_val,
+  double bottom_execute(double ma_avg_val, double mb_avg_val, double mc_avg_val, double ma_val, double mb_val, double mc_val,
+			double ga_val, double sa_val,
 			double la_val, double ja_val, double sl_val, double al_val, double ar_val,
 			int baryon, int excMode, int prodDecay){
 
     BottomDecayWidths* m_decays = new BottomDecayWidths();
-    return m_decays->execute(ma_val, mb_val, mc_val, ga_val, sa_val,
+    return m_decays->execute(ma_avg_val, mb_avg_val, mc_avg_val, ma_val, mb_val, mc_val,
+			     ga_val, sa_val,
 			     la_val, ja_val, sl_val, al_val, ar_val,
 			     baryon, excMode, prodDecay);
   }

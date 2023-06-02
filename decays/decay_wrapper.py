@@ -16,15 +16,21 @@ class decay(object):
     def __init__(self, workpath="."):
         self.workpath = os.path.dirname(os.path.realpath(__file__))
         
-    def decay_width(self, MA_val, MB_val, MC_val, GA_val, SA_val,
+    def decay_width(self, MA_avg_val, MB_avg_val, MC_avg_val, MA_val, MB_val, MC_val,
+                    GA_val, SA_val,
                     LA_val, JA_val, SL_val, AL_val, AR_val,
                     baryon, excMode, prodDecay):
         """
         Method to convert the python variables to c++ objects
         """
+        MA_avg_val = ctypes.c_double(MA_val)
+        MB_avg_val = ctypes.c_double(MB_val)
+        MC_avg_val = ctypes.c_double(MC_val)
+
         MA_val = ctypes.c_double(MA_val)
         MB_val = ctypes.c_double(MB_val)
         MC_val = ctypes.c_double(MC_val)
+
         GA_val = ctypes.c_double(GA_val)
         SA_val = ctypes.c_double(SA_val)
         LA_val = ctypes.c_double(LA_val)
@@ -38,8 +44,9 @@ class decay(object):
         m_lib = ctypes.CDLL(os.path.join(self.workpath+"/DecayWidths", 'libbottomdecay.so'))
         m_lib.bottom_execute.restype = ctypes.c_double
         m_lib.bottom_execute.argtypes = [ctypes.c_double]
-        decay_value = m_lib.bottom_execute(MA_val, MB_val, MC_val, GA_val,
-                                           SA_val, LA_val, JA_val, SL_val, AL_val, AR_val,
+        decay_value = m_lib.bottom_execute(MA_avg_val, MB_avg_val, MC_avg_val, MA_val, MB_val, MC_val,
+                                           GA_val, SA_val,
+                                           LA_val, JA_val, SL_val, AL_val, AR_val,
                                            baryon, excMode, prodDecay)
         return decay_value
 

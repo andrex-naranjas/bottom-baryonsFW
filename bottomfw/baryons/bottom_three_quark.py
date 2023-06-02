@@ -117,10 +117,12 @@ class BottomThreeQuark:
             if bootstrap:
                 for j in range(len(self.sampled_k)): # sampled data loop (e.g. 10^4)
                     mass = self.model_mass(i, j, sampled=True)
+                    mass_avg = self.model_mass(i, 0, sampled=False)
                     omega_ho = self.get_omega_harmonic(i, j, sampled=False)
                     dummy = np.append(dummy, mass)
                     dummy_omega = np.append(dummy_omega, omega_ho)
                     if decay_width and bootstrap_width: # and self.L_tot[i]==1  # decayWidth calculation, DecayWidths class
+                        self.baryon_decay.load_average_mass(mass_avg) # load central value of massA to enforce energy conservation
                         decay_value = self.baryon_decay.total_decay_width(baryons, self.sampled_k[j], mass,
                                                                           self.S_tot[i], self.L_tot[i], self.J_tot[i], self.SL[i],
                                                                           self.ModEx[i], bootstrap=bootstrap_width, m1=self.sampled_m1[j],
