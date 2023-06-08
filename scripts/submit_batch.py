@@ -7,7 +7,7 @@
 ---------------------------------------------------------------
 """
 # htcondor job submitter
-# usage: python3 scripts/submit_batch.py three_quark/diquark
+# usage: python3 scripts/submit_batch.py three_quark omegas
 
 import sys
 import json

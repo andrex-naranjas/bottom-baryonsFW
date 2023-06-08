@@ -560,7 +560,7 @@ class DecayWidths:
             
     def set_gamma_val(self, bootstrap):
         
-        self.gamma_fit = 20.8
+        self.gamma_fit = 20.8 # this reproduces an specific decay width
         self.gauss_gamma = np.random.normal(20.8, np.power( 1.47**2 + 4.44**2, 0.5) , 10000)
         if(bootstrap):
-            self.gauss_gamma = np.random.normal(20.8, np.power( 1.47**2 + 4.44**2, 0.5) , 10000)
+            self.gauss_gamma = np.random.normal(20.8, np.power( 1.5**2 + 2.0**2, 0.5) , 10000) # error 2, is arbitrary
