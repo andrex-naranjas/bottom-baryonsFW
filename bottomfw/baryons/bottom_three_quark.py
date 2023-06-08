@@ -141,6 +141,7 @@ class BottomThreeQuark:
 
                 if decay_width and not bootstrap_width: # bootstrap mass but not bootstrap widhts
                     mass_single = self.model_mass(i, 0, sampled=False)
+                    self.baryon_decay.load_average_mass(mass_single) # load central value of massA to enforce energy conservation
                     decay = self.baryon_decay.total_decay_width(baryons, self.Kp, mass_single,
                                                                 self.S_tot[i], self.L_tot[i], self.J_tot[i], self.SL[i],
                                                                 self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
