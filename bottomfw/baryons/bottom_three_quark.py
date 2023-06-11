@@ -117,7 +117,8 @@ class BottomThreeQuark:
             if bootstrap:
                 for j in range(len(self.sampled_k)): # sampled data loop (e.g. 10^4)
                     mass = self.model_mass(i, j, sampled=True)
-                    mass_avg = self.model_mass(i, 0, sampled=False)
+                    # mass_avg = self.model_mass(i, 0, sampled=False)
+                    mass_avg = self.precomputed_mass(baryons, i) # self.S_tot[i], self.L_tot[i], self.J_tot[i], self.ModEx[i])
                     omega_ho = self.get_omega_harmonic(i, j, sampled=False)
                     dummy = np.append(dummy, mass)
                     dummy_omega = np.append(dummy_omega, omega_ho)
@@ -141,7 +142,8 @@ class BottomThreeQuark:
 
                 if decay_width and not bootstrap_width: # bootstrap mass but not bootstrap widhts
                     mass_single = self.model_mass(i, 0, sampled=False)
-                    self.baryon_decay.load_average_mass(mass_single) # load central value of massA to enforce energy conservation
+                    mass_avg = self.precomputed_mass(baryons, i)
+                    self.baryon_decay.load_average_mass(mass_avg) # load central value of massA to enforce energy conservation
                     decay = self.baryon_decay.total_decay_width(baryons, self.Kp, mass_single,
                                                                 self.S_tot[i], self.L_tot[i], self.J_tot[i], self.SL[i],
                                                                 self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
@@ -429,3 +431,14 @@ class BottomThreeQuark:
         self.sampled_b = np.random.normal(5.15,   0.31, N_boots)
         self.sampled_e = np.random.normal(26,   0.23, N_boots)
         self.sampled_g = np.random.normal(70.91,   0.49, N_boots)
+
+    def precomputed_mass(self, baryons, i): # S_tot, self.L_tot, J_tot, ModEx):
+        """
+        Method to use precomputed masses, this needed to get energy conservation for the decays
+        """
+        if baryons=="omegas" or baryons=="cascades" or baryons=="sigmas":        
+            data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/precomputed_masses_sextet_avg.csv")
+        elif baryons=="cascades_anti3" or baryons=="lambdas":
+            data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/precomputed_masses_triplet_avg.csv")
+        precom_mass = data_frame[baryons]
+        return precom_mass[i]

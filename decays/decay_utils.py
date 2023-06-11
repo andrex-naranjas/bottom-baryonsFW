@@ -177,9 +177,9 @@ def state_labels(baryon, ModEx, decPr, L_tot):
         elif(decPr==11):
             decPr_name = "Sig*+eta'"
         elif(decPr==12):
-            decPr_name = "Xi'+K'"
+            decPr_name = "Xi'+K"
         elif(decPr==13):
-            decPr_name = "Xi*+K'"
+            decPr_name = "Xi*+K"
         elif(decPr==14):
             decPr_name = "Xi+K*"
         elif(decPr==15):
@@ -400,9 +400,9 @@ def latex_decay_label(baryon, decPr):
         elif(decPr==11):                                                                            
             decPr_name = ("$\Sigma^{*}_{b}\eta'$",  sigma_s_mass, eta_p_mass)           
         elif(decPr==12):                                                                            
-            decPr_name = ("$\Xi'_{b}K'$", xi_p_mass, kaon_mass)               
+            decPr_name = ("$\Xi'_{b}K$", xi_p_mass, kaon_mass)               
         elif(decPr==13):                                                                            
-            decPr_name = ("$\Xi^{*}_{b}K'$", xi_s_mass, kaon_mass)               
+            decPr_name = ("$\Xi^{*}_{b}K$", xi_s_mass, kaon_mass)               
         elif(decPr==14):                                                                            
             decPr_name = ("$\Xi_{b} K^{*}$", xi_mass, kaon_s_mass)               
         elif(decPr==15):                                                                            

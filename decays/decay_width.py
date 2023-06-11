@@ -26,7 +26,7 @@ class DecayWidths:
         self.channel_widths_vector = []
 
     def load_average_mass(self, mass_avg=0):
-        self.MassA_avg = mass_avg # central value of the bootstrap distribution
+        self.MassA_avg = mass_avg/1000.0 # central value of the bootstrap distribution
         
     def total_decay_width(self, baryons, k_prim, massA, SA_val, L_val, JA_val, SL_val, ModEx_val, bootstrap=False, gamma_val=None, m1=0, m2=0, m3=0):
         """
@@ -60,6 +60,8 @@ class DecayWidths:
                                                           gamma, SA_qm,
                                                           LA_qm, JA_qm, SL_qm, alpha_lam, alpha_rho,
                                                           baryon, ModEx, decPr)
+            if (MassA_avg<MassB_avg+MassC_avg): # energy conservation
+                single_decay_value = 0.
             channel_widths = np.append(channel_widths, single_decay_value)
             baryon_name, ModEx_name, decPr_name = du.state_labels(baryon, ModEx, decPr, LA_qm)
             if not bootstrap:
