@@ -19,14 +19,16 @@ BottomDecayWidths::BottomDecayWidths()
 
 BottomDecayWidths::~BottomDecayWidths(){}
 
-double BottomDecayWidths::execute(double ma_val, double mb_val, double mc_val, double ga_val, double sa_val,
-				 double la_val, double ja_val, double sl_val, double al_val, double ar_val,
-				 int baryon, int excMode, int prodDecay){  
+double BottomDecayWidths::execute(double ma_avg_val, double mb_avg_val, double mc_avg_val, double ma_val, double mb_val, double mc_val,
+				  double ga_val, double sa_val,
+				  double la_val, double ja_val, double sl_val, double al_val, double ar_val,
+				  int baryon, int excMode, int prodDecay){  
+
+  if(ma_avg_val<mb_avg_val+mc_avg_val) return 0.; //energy conservation
   // decay product masses
   MA = ma_val;
   MB = mb_val;
   MC = mc_val;
-  if(MA<MB+MC) return 0.; //energy conservation
 
   // which baryon, mode, decay product
   baryonFlag = baryon;

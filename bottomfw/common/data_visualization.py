@@ -79,6 +79,9 @@ def paper_tables_results(baryons, di_three_quark='diquark', decay_width=False,
     baryons_name = baryons
     if prev_params: baryons_name+='_previous'
     if di_three_quark=='diquark': di_label='diquark_'
+
+    if not os.path.exists(workpath+"/tables/"):
+        os.mkdir(workpath+"/tables/")    
     f_summary = open(workpath+'/tables/masses_'+di_label+baryons_name+'_summary.csv', "w")
     print('mass,error_up,error_dn,exp_mass,exp_mass_err,decay,decay_up,decay_dn,J_tot,S_tot,L_tot,SU_tot,ModEx,HO_n', file=f_summary)
 
@@ -141,6 +144,8 @@ def decay_indi_tables_results(baryons, decay_type="strong", asymmetric=False, pr
         second_name = "_"
     
     baryons_name = baryons
+    if not os.path.exists(workpath+"/tables/"):
+        os.mkdir(workpath+"/tables/")
     f_indi = open(workpath+'/tables/decays_indi_'+decay_name+second_name+baryons_name+'_summary.csv', "w")    
     state,sum_mass,J_tot,S_tot,L_tot,I_tot,SU_tot,HO_n,SL,ModEx = bs.states_mass(baryons)
 

@@ -24,12 +24,16 @@ class DecayWidths:
         self.fetch_decay_masses(bootstrap)
         self.set_gamma_val(bootstrap)
         self.channel_widths_vector = []
+
+    def load_average_mass(self, mass_avg=0):
+        self.MassA_avg = mass_avg/1000.0 # central value of the bootstrap distribution
         
     def total_decay_width(self, baryons, k_prim, massA, SA_val, L_val, JA_val, SL_val, ModEx_val, bootstrap=False, gamma_val=None, m1=0, m2=0, m3=0):
         """
         Method that calls the wrapper and sums the individual decay widths
         """
         MassA = massA/1000.0
+        MassA_avg = self.MassA_avg
         SA_qm = SA_val
         LA_qm = L_val
         JA_qm = JA_val
@@ -51,9 +55,13 @@ class DecayWidths:
         for i in range(nChannels):
             decPr = i+1
             MassB,MassC = self.decay_masses(bootstrap, baryons, decPr)
-            single_decay_value = self.m_width.decay_width(MassA, MassB, MassC, gamma, SA_qm,
+            MassB_avg,MassC_avg = self.decay_masses(False, baryons, decPr)
+            single_decay_value = self.m_width.decay_width(MassA_avg, MassB_avg, MassC_avg, MassA, MassB, MassC,
+                                                          gamma, SA_qm,
                                                           LA_qm, JA_qm, SL_qm, alpha_lam, alpha_rho,
                                                           baryon, ModEx, decPr)
+            if (MassA_avg<MassB_avg+MassC_avg): # energy conservation
+                single_decay_value = 0.
             channel_widths = np.append(channel_widths, single_decay_value)
             baryon_name, ModEx_name, decPr_name = du.state_labels(baryon, ModEx, decPr, LA_qm)
             if not bootstrap:
@@ -260,16 +268,16 @@ class DecayWidths:
                 else: return np.random.choice(self.gauss_xi_s, size=None), np.random.choice(self.gauss_phi, size=None)
                 # START OF SECOND DIAGRAM DECAYS
             elif(decPr==25):
-                if not bootstrap: return self.Sigma_8_mass, self.B0_mass #//Sigma_8_lam+D
+                if not bootstrap: return self.Sigma_8_mass, self.B0_mass #//Sigma_8_lam+B
                 else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==26):
-                if not bootstrap: return self.Xi_8_mass, self.Bs_mass # //Xi_8_lam+Ds
+                if not bootstrap: return self.Xi_8_mass, self.Bs_mass # //Xi_8_lam+Bs
                 else: return np.random.choice(self.gauss_Xi_8, size=None), np.random.choice(self.gauss_Bs, size=None)
             elif(decPr==27):
-                if not bootstrap: return self.Sigma_8_mass, self.B_star_mass #  //Sigma_8_lam+D*
+                if not bootstrap: return self.Sigma_8_mass, self.B_star_mass #  //Sigma_8_lam+B*
                 else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_B_star, size=None)                
             elif(decPr==28):
-                if not bootstrap: return self.Sigma_10_mass, self.B0_mass #  //Sigma_10_lam+D
+                if not bootstrap: return self.Sigma_10_mass, self.B0_mass #  //Sigma_10_lam+B
                 else: return np.random.choice(self.gauss_Sigma_10, size=None), np.random.choice(self.gauss_B0, size=None)
                 
         elif(baryons=='sigmas'):
