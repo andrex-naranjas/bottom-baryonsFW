@@ -124,11 +124,11 @@ gauss_6350 = sample_gauss(6349.8, np.power((0.60**2 + sigma_model), 0.5 )) # PDG
 # Cascade b sextet
 gauss_5935 = sample_gauss(5935.0, np.power((0.05**2 + sigma_model), 0.5 )) # PDG::Direct
 gauss_5953 = sample_gauss(5953.8, np.power((0.60**2 + sigma_model), 0.5 )) # PDG::Average
-gauss_6328 = sample_gauss(6227.4, np.power((1.60**2 + sigma_model), 0.5 )) # PDG::Average (decided to be cascade prime)
+gauss_6328 = sample_gauss(6227.4, np.power((1.69**2 + sigma_model), 0.5 )) # PDG::Average (decided to be cascade prime)
 # Sigma b
-gauss_5813 = sample_gauss(5813.1, np.power((0.27**2 + sigma_model), 0.5 )) # PDG::Average
-gauss_5837 = sample_gauss(5832.5, np.power((0.30**2 + sigma_model), 0.5 )) # PDG::Average
-gauss_6097 = sample_gauss(6096.9, np.power((1.80**2 + sigma_model), 0.5 )) # PDG::Average
+gauss_5813 = sample_gauss(5813.1, np.power((2.55**2 + sigma_model), 0.5 )) # PDG::Average
+gauss_5837 = sample_gauss(5832.5, np.power((2.23**2 + sigma_model), 0.5 )) # PDG::Average
+gauss_6097 = sample_gauss(6096.9, np.power((2.10**2 + sigma_model), 0.5 )) # PDG::Average
 # Lambda b
 gauss_5617 = sample_gauss(5619.6, np.power((0.17**2 + sigma_model), 0.5 )) # PDG::Direct
 gauss_5912 = sample_gauss(5912.2, np.power((0.17**2 + sigma_model), 0.5 )) # PDG::Direct
@@ -137,9 +137,9 @@ gauss_6146 = sample_gauss(6146.2, np.power((0.40**2 + sigma_model), 0.5 )) # PDG
 gauss_6152 = sample_gauss(6152.5, np.power((0.40**2 + sigma_model), 0.5 )) # PDG::Direct (not in the fit)
 gauss_6070 = sample_gauss(6072.3, np.power((2.90**2 + sigma_model), 0.5 )) # PDG::Direct (not in the fit)
 # Cascades b anti-3-plet
-gauss_5794 = sample_gauss(5794.5, np.power((0.60**2 + sigma_model), 0.5 )) # PDG::Average
+gauss_5794 = sample_gauss(5794.5, np.power((2.61**2 + sigma_model), 0.5 )) # PDG::Average
 gauss_6100 = sample_gauss(6100.3, np.power((0.60**2 + sigma_model), 0.5 )) # PDG::Direct
-gauss_6327 = sample_gauss(6329.9, np.power((2.50**2 + sigma_model), 0.5 )) # LHCB::Average (not in the fit)
+gauss_6327 = sample_gauss(6329.9, np.power((2.72**2 + sigma_model), 0.5 )) # LHCB::Average (not in the fit)
 
 # plug here the sigma_0 optimization lines from data_utils.py
 
