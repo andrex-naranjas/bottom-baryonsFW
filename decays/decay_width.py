@@ -268,16 +268,16 @@ class DecayWidths:
                 else: return np.random.choice(self.gauss_xi_s, size=None), np.random.choice(self.gauss_phi, size=None)
                 # START OF SECOND DIAGRAM DECAYS
             elif(decPr==25):
-                if not bootstrap: return self.Sigma_8_mass, self.B0_mass #//Sigma_8_lam+D
+                if not bootstrap: return self.Sigma_8_mass, self.B0_mass #//Sigma_8_lam+B
                 else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_B0, size=None)
             elif(decPr==26):
-                if not bootstrap: return self.Xi_8_mass, self.Bs_mass # //Xi_8_lam+Ds
+                if not bootstrap: return self.Xi_8_mass, self.Bs_mass # //Xi_8_lam+Bs
                 else: return np.random.choice(self.gauss_Xi_8, size=None), np.random.choice(self.gauss_Bs, size=None)
             elif(decPr==27):
-                if not bootstrap: return self.Sigma_8_mass, self.B_star_mass #  //Sigma_8_lam+D*
+                if not bootstrap: return self.Sigma_8_mass, self.B_star_mass #  //Sigma_8_lam+B*
                 else: return np.random.choice(self.gauss_Sigma_8, size=None), np.random.choice(self.gauss_B_star, size=None)                
             elif(decPr==28):
-                if not bootstrap: return self.Sigma_10_mass, self.B0_mass #  //Sigma_10_lam+D
+                if not bootstrap: return self.Sigma_10_mass, self.B0_mass #  //Sigma_10_lam+B
                 else: return np.random.choice(self.gauss_Sigma_10, size=None), np.random.choice(self.gauss_B0, size=None)
                 
         elif(baryons=='sigmas'):
