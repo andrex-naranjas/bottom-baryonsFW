@@ -454,7 +454,7 @@ def latex_decay_label(baryon, decPr):
             decPr_name = ("$\Xi^{*}_{b} K$", xi_s_mass, kaon_mass)          
         elif(decPr==11):                                                                  
             decPr_name = ("$\Xi_{b} K^{*}$", xi_mass, kaon_s_mass)          
-        elif(decPr==12):                                                                  
+        elif(decPr==12):              
             decPr_name = ("$\Xi'_{b} K^{*}$", xi_p_mass, kaon_s_mass)        
         elif(decPr==13):
             decPr_name = ("$\Xi^{*}_{b} K^{*}$", xi_s_mass, kaon_s_mass)        
@@ -513,13 +513,15 @@ def print_row_latex(mass_a, masses_b, masses_c, state_name, state_decays, errors
             print(sum_value," \\\\", file=f_out)    
     
 
-def print_header_latex(name_states, f_out):
+def print_header_latex(name_header, name_states, f_out):
     nNames = len(name_states)    
-    print("\\begin{tabular}{c |", end='',file=f_out)
+    print("\\begin{tabular}{c c c |", end='',file=f_out)    
     for i in range(nNames-2):
-        print("  p{0.58cm}", end='',file=f_out)
+        print("p{0.58cm}", end='',file=f_out)
         
     print("p{0.75cm}} \hline \hline", file=f_out)
+    for i in range(nNames-1): print(name_header[i]," & ", end='',file=f_out)
+    print("\\\\", file=f_out)
     for i in range(nNames-1): print(name_states[i]," & ", end='',file=f_out)
     print(name_states[nNames-1]," \\\\ \hline", file=f_out)
 
