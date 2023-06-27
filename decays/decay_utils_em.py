@@ -191,7 +191,7 @@ def print_row_latex(compare, mass_a, masses_b, state_name, state_decays, errors_
                 print(value, end='', file=f_out)
                 if (i < nstate-1): print("  &", end='', file=f_out)
             else:
-                value = '-'
+                value = '0' # CHECK this, before was value="-"
                 print(value, end='', file=f_out)
                 if (i < nstate-1): print("  &", end='', file=f_out)
         else:
@@ -220,9 +220,9 @@ def print_row_latex(compare, mass_a, masses_b, state_name, state_decays, errors_
         print(" \\\\", file=f_out)
         return
 
-def print_header_latex(name_states, compare, f_out):
+def print_header_latex(name_header, name_states, compare, f_out):
     nNames = len(name_states)
-    print("\\begin{tabular}{c |", end='',file=f_out)
+    print("\\begin{tabular}{c c c|", end='',file=f_out)
     if compare : nNames=int(2*nNames)
     for i in range(nNames-1):
         print("  p{0.65cm}", end='',file=f_out)        
@@ -233,7 +233,10 @@ def print_header_latex(name_states, compare, f_out):
         print("} \hline \hline", file=f_out)
     else:
         # print("p{0.85cm}} \hline \hline", file=f_out) # Gamma total
-        print("} \hline \hline", file=f_out) # Gamma total
+        print("} \hline \hline", file=f_out)
+        
+    for i in range(nNames-1): print(name_header[i]," & ", end='',file=f_out)
+    print("\\\\", file=f_out)
     for i in range(nNames-1): print(name_states[i], separator, end='',file=f_out)
     print(name_states[nNames-1]," \\\\ \hline", file=f_out)
 
