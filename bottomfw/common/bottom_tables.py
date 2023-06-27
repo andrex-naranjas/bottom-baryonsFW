@@ -190,28 +190,35 @@ class BottomTables:
         n_decay_channels = int((len(df.columns)-8)/3)
         baryons = self.m_baryons
 
+        flavor = "$\\mathcal{F}={\\bf {6}}_{\\rm F}$ " # omegas, sigmas, cascades
+        if (baryons=="cascades_anti3" or baryons=="lambdas"): # cascades_anti3, lambdas
+            flavor = "$\\mathcal{F}={\\bf {\\bar{3}}}_{\\rm F}$"
+
         from decays import decay_utils as dec
         baryon_symbol = dec.baryon_symbol(baryons)
         baryon_quarks = "$" + baryon_symbol + "_b(" + dec.baryon_quarks(baryons) + ")$"
-        
+
+        name_header=[]
         name_decays=[]
         mass_decs_B=[]
         mass_decs_C=[]
         coulmn_sep = ""
-        name_decays.append(baryon_quarks)
+        name_header.append(baryon_quarks)
+        name_header.append(flavor)
+        name_header.append("Prediction")
+        name_decays.append("$\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$")
+        name_decays.append("$^{2S+1}L_{J}$")
+        name_decays.append("mass (MeV)")
         for k in range(n_decay_channels):
+            name_header.append(" ")
             name_decays.append(dec.latex_decay_label(baryons, k+1)[0])
             mass_decs_B.append(dec.latex_decay_label(baryons, k+1)[1])
             mass_decs_C.append(dec.latex_decay_label(baryons, k+1)[2])
             coulmn_sep += "&"
-        name_decays.append('Tot $\\Gamma$')
-        dec.print_header_latex(name_decays, f_decay_indi)
-        
-        flavor = "$\\mathcal{F}={\\bf {6}}_{\\rm f}$ " # omegas, sigmas, cascades
-        if (baryons=="cascades_anti3" or baryons=="lambdas"): # cascades_anti3, lambdas
-            flavor = "$\\mathcal{F}={\\bf {\\bar{3}}}_{\\rm f}$"
-        print(flavor +  coulmn_sep  +"\\\\ \hline", file=f_decay_indi)
+        name_decays.append('$\\Gamma^{Strong}_{ tot}$')
+        dec.print_header_latex(name_header, name_decays, f_decay_indi)        
 
+        s_wave_count,p_wave_count,d_wave_count=0,0,0
         for i in range(len(self.m_SU_tot)):
             channel_widths = []
             errors_up = []
@@ -226,7 +233,26 @@ class BottomTables:
             quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i],
                                                   self.m_S_tot[i], self.m_L_tot[i],
                                                   self.m_ModEx[i], SU_tot_val)
-            wave_label= "$"+baryon_symbol+'_b('+str(abs(round(self.m_mass[i])))+')$ ' +du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])+'&'
+            
+            # wave_label= "$"+baryon_symbol+'_b('+str(abs(round(self.m_mass[i])))+')$ ' +du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])+'&'            
+            if self.m_HO_n[i] == 0:                
+                if s_wave_count==0:
+                    s_wave_count+=1
+                    print('\hline', file=f_decay_indi)
+                    print(" $N=0$  &  &  &  &  &  \\\ ", file=f_decay_indi)
+            elif self.m_HO_n[i] == 1:
+                if p_wave_count==0:
+                    p_wave_count+=1
+                    print('\hline', file=f_decay_indi)
+                    print(" $N=1$  &  &  &  &  &  \\\ ", file=f_decay_indi)
+            elif self.m_HO_n[i] == 2:
+                if d_wave_count==0:
+                    d_wave_count+=1
+                    print('\hline', file=f_decay_indi)
+                    print(" $N=2$  &  &  &  &  &  \\\ ", file=f_decay_indi)
+                    
+            mass_lat = str(abs(round(self.m_mass[i])))
+            wave_label =  quantum_state + du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i]) + '&' +  mass_lat + '&'
             dec.print_row_latex(self.m_mass[i], mass_decs_B, mass_decs_C, wave_label, channel_widths, errors_up, errors_dn, f_decay_indi)
 
         dec.print_bottom_latex(baryons, f_decay_indi)
