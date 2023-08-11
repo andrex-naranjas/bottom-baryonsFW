@@ -41,11 +41,12 @@ To install the framework you need anaconda and git on a linux machine. In a term
 7. Edit the ```config/*.json``` to set options according your needs
 
 8. To run batch jobs there are two scripts for two systems:
-   8.1 HTCondor batch system
+
+   8.1. HTCondor batch system
    ```
    python3 ./scripts/submit_batch.py three_quark omegas
    ```
-   8.2 LSF batch system
+   8.2. LSF batch system
    ```
    python3 ./scripts/submit_batch_lsf.py three_quark omegas
    ```
