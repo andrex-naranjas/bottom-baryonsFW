@@ -1650,4 +1650,118 @@ double BottomDecayWidths::I02B0TOT_RADIAL_SECOND(double alpha_rho, double alpha_
   return value1*value2;
 }
 
+
+// New strong decays
+
+// D-wave-P-wave-lambda
+double BottomDecayWidths::CBARFIN_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_lam){
+  double value1 = std::pow(3, 0.75) * std::pow( (2.0*8.0)/(5.0*3.0*std::pow(pi_val, 0.5)), 0.5);
+  double value2 = std::pow(1.0/( std::pow(alpha_lam, 2) ), 1.75);
+  double value3 = std::pow(1.0/( pi_val * std::pow(alpha_rho, 2) ), 0.75);
+  return value1 * value2 * value3;// * mycomplex;//define complex if needed
+
+}
+
+double BottomDecayWidths::CBARIN_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_lam){
+  double value1 = std::pow(3, 0.75) * std::pow(8.0/(3.0*std::pow(pi_val, 0.5)), 0.5 );
+  double value2 = std::pow(1.0/( pi_val * std::pow(alpha_lam, 2) ), 1.25);
+  double value3 = std::pow(1.0/( pi_val * std::pow(alpha_rho, 2) ), 0.75);
+  return value1 * value2 * value3 ;
+}
+
+double BottomDecayWidths::CMESON_D_P_WAVE_LAMBDA(doble alpha_mes){
+  double value = std::pow(1.0/( pi_val * std::pow(alpha_mes, 2) ), 0.75);
+  return value;
+}
+
+double BottomDecayWidths::C0_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_lam, doble alpha_mes){
+  double value1 = 1.0 / (3*std::pow(3, 0.5));
+  double value2 = CBARIN_D_P_WAVE_LAMBDA(alpha_rho, alpha_lam) * CBARIN_D_P_WAVE_LAMBDA(alpha_rho, alpha_lam) * CMESON_D_P_WAVE_LAMBDA(alpha_mes);
+  return value1 * value2;
+}
+
+double BottomDecayWidths::ARO0_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_mes){
+  double value1 = 1./std::pow(alpha_rho, 2);
+  double value2 = 1./(4.*std::pow(alpha_mes, 2));
+  return std::pow(value1 + value2, 0.5);
+}
+
+double BottomDecayWidths::F0_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_lam, double k_value){
+  double value1 = (-1./4.0)/(alpha_rho*alpha_rho);
+  double value2 = (-1./12.)/(alpha_lam*alpha_lam);
+  return k_value*k_value*(value1 + value2);
+}
+
+double BottomDecayWidths::F01_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_lam, double alpha_mes, double k_value){
+  double value1p  = 1./(2*std::pow(2 ,0.5)*alpha_rho*alpha_rho) + 1./(4*std::pow(2, 0.5)*alpha_mes*alpha_mes);  
+  double value1pp = value1p*value1p;
+  double value1ppp= 1./std::pow(ARO0_D_P_WAVE_LAMBDA(alpha_rho, alpha_mes), 2);
+  double value1 = value1pp*value1ppp;
+  double value2 = 1./(8*std::pow(alpha_mes, 2));
+  return k_value*k_value*(value1-value2);
+}
+
+double BottomDecayWidths::BRO2_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_mes, double k_value){
+  double value1p  = 1./(2*alpha_rho*alpha_rho) + 1./(4*alpha_mes*alpha_mes);  
+  double value1pp = 1./std::pow(ARO0_D_P_WAVE_LAMBDA(alpha_rho, alpha_mes), 2);
+  double value1 = value1p*value1pp;
+  double value2 = 2.;  
+  return k_value*(value1-value2); 
+}
+
+double BottomDecayWidths::ARO1_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_mes){
+  double value1 = std::pow(2./3.,0.5);
+  double value2 = 1./(std::pow(6, 0.5)  * std::pow(alpha_mes, 2) * std::pow(ARO0_D_P_WAVE_LAMBDA(alpha_rho, alpha_mes), 2));
+  return value1-value2;
+}
+
+double BottomDecayWidths::ARO2_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_lam, double alpha_mes, double k_value){}
+
+double BottomDecayWidths::BRO1_D_P_WAVE_LAMBDA(double alpha_rho, double alpha_lam, double alpha_mes, double k_value){}
+
+double BottomDecayWidths::F0TOT_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I01B0_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I02B0_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I03B0_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I04B0_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I05B0_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I05B0_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I06B0_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I01B0TOT_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I02B0TOT_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I03B0TOT_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I04B0TOT_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I05B0TOT_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I05B0TOT_D_P_WAVE_LAMBDA(){}
+
+double BottomDecayWidths::I06B0TOT_D_P_WAVE_LAMBDA(){}
+
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
 #endif
