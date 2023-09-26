@@ -347,6 +347,105 @@ class BottomTables:
         dec.print_bottom_latex(baryons, f_decay_indi)
 
 
+    def decay_indi_table_em_err(self, compare=False):
+        """
+        Method to save a latex table for individual strong decays with errors
+        """
+        df = pd.read_csv(self.m_workpath+'/tables/decays_indi_em_'+self.m_baryons+'_summary.csv')    
+        f_decay_indi = open(self.m_workpath+'/tables/decay_indi_em_err_'+self.m_baryons+'_paper.tex', "w")
+
+        n_decay_channels = int((len(df.columns)-8)/3)
+        baryons = self.m_baryons
+
+        flavor = "$\\mathcal{F}={\\bf {6}}_{\\rm f}$ " # omegas, sigmas, cascades
+        if (baryons=="cascades_anti3" or baryons=="lambdas"): # cascades_anti3, lambdas
+            flavor = "$\\mathcal{F}={\\bf {\\bar{3}}}_{\\rm f}$"
+
+        from decays import decay_utils_em as dec
+        baryon_symbol = dec.baryon_symbol(baryons)
+        baryon_quarks = "$" + baryon_symbol + "_b(" + dec.baryon_quarks(baryons) + ")$"
+
+        name_header=[]
+        name_decays=[]
+        mass_decs_B=[]
+        coulmn_sep = ""
+        name_header.append(flavor)
+        name_header.append(" ")
+        name_header.append(" ")
+        name_header.append(" ")
+        
+        name_decays.append(baryon_quarks)
+        name_decays.append("$\mathbf{J^P}$")
+        name_decays.append("$\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$")
+        name_decays.append("$^{2S+1}L_{J}$")
+
+        for k in range(n_decay_channels):
+            name_decays.append("KeV")
+            name_header.append(dec.latex_decay_label(baryons, k+1)[0])
+            mass_decs_B.append(dec.latex_decay_label(baryons, k+1)[1])
+            coulmn_sep += "&"
+
+        dec.print_header_latex(name_header, name_decays, compare, f_decay_indi)
+        
+        if baryons == "omegas" or baryons=="sigmas" or baryons=="cascades":            
+            n_states = 9 # we only have up to P-wave  CHECK!!
+        else:
+            n_states = 8 # we only have up to P-wave  CHECK!!
+
+        s_wave_count,p_wave_count,d_wave_count=0,0,0
+        for i in range(n_states):
+            channel_widths = []
+            channel_widths_cqm = []
+            errors_up = []
+            errors_dn = []
+            for k in range(n_decay_channels):
+                channel_widths.append(df['decay_'+str(k)][i])
+                errors_up.append(df['dec_up_'+str(k)][i])
+                errors_dn.append(df['dec_dn_'+str(k)][i])
+
+            if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3
+            else: SU_tot_val = 4/3
+            quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i],
+                                                  self.m_S_tot[i], self.m_L_tot[i],
+                                                  self.m_ModEx[i], SU_tot_val)
+            if self.m_HO_n[i] == 0:                
+                if s_wave_count==0:
+                    s_wave_count+=1
+                    print('\hline', file=f_decay_indi)
+                    print(" $N=0$  &  &  &  &  &  \\\ ", file=f_decay_indi)
+            elif self.m_HO_n[i] == 1:
+                if p_wave_count==0:
+                    p_wave_count+=1
+                    print('\hline', file=f_decay_indi)
+                    print(" $N=1$  &  &  &  &  &  \\\ ", file=f_decay_indi)
+            elif self.m_HO_n[i] == 2:
+                if d_wave_count==0:
+                    d_wave_count+=1
+                    print('\hline', file=f_decay_indi)
+                    print(" $N=2$  &  &  &  &  &  \\\ ", file=f_decay_indi)
+
+            mass_lat = str(abs(round(self.m_mass[i])))
+            
+            parity = str(np.power(-1.0, self.m_L_tot[i]))
+            j_frac = "\\frac{1}{2}"
+            if self.m_J_tot[i] == 1.5:
+                j_frac = "\\frac{3}{2}"
+            elif self.m_J_tot[i] == 2.5:
+                j_frac = "\\frac{5}{2}"
+
+            parity = np.power(-1.0, self.m_L_tot[i])
+            if parity<0:
+                parity = "-"
+            else:
+                parity = "+"
+                                
+            JP = "$ \\mathbf{" + j_frac + "^" + parity +"}$"
+            wave_label= "$"+baryon_symbol+'_b('+str(abs(round(self.m_mass[i])))+')$  & ' + JP + ' & ' +  quantum_state + du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])+'&'
+            dec.print_row_latex(compare, self.m_mass[i], mass_decs_B, wave_label, channel_widths, errors_up, errors_dn, channel_widths_cqm, f_decay_indi)
+
+        dec.print_bottom_latex(baryons, f_decay_indi)
+
+
     def latex_string_value_error(self, value, decimals=2, units='Mev'):
         """
         Method to calculate the mean value, the asymmetric error and return a latex string
