@@ -33,11 +33,11 @@ class ElectroWidths:
         ms = m2
         ml = m3
 
-        # ml = 299.0
-        # ms = 465.0
-        # mb = 4928.0
-        # k_prim = 5044.799302252
-        # massA = 5.935 * 1000
+        ml = 299.0  # 291.53
+        ms = 464.0  # 461.24
+        mb = 4930.0 # 4944.34
+        k_prim = 5044.799302252 # k_prim = pow(k, 0.5); [k_prim]=MeV        
+        massA = 6.121 * 1000
 
         MassA = massA/1000.0
         mbottom  = mb/1000.0
