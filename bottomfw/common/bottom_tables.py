@@ -180,6 +180,60 @@ class BottomTables:
         print('\end{tabular}', file=f_paper)
         f_paper.close()
 
+def comparison_three_quark_model_table_decays(self):
+        """
+        Method to produce table that compares predictions from different references
+        """
+        if not os.path.exists(self.m_workpath+"/tables/"):
+            os.mkdir(self.m_workpath+"/tables/")
+        f_paper = open(self.m_workpath+'/tables/comparison_decays_'+self.m_baryons+'_paper.tex', "w")
+        baryon_name = du.baryon_name(self.m_baryons)
+        flavor_name = du.flavor_label(self.m_baryons)
+        self.m_load_data_compare(self.m_baryons)
+        
+        print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
+        print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM \cite{Yoshida2015}     &  QCD sum rules \cite{Liu2008, Mao2015, Chen2016}      &  NRQM \cite{Roberts2008}    & $\chi$QM \cite{Kim2021}        & LQCD \cite{Mohanta2020}     & Experimental  \\\ ", file=f_paper)
+        print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &      mass (MeV) \\\ \hline", file=f_paper)
+
+        s_wave_count,p_wave_count,d_wave_count=0,0,0
+        for i in range(len(self.m_mass)):
+
+            if self.m_HO_n[i] == 0:                
+                if s_wave_count==0:
+                    s_wave_count+=1
+                    print('\hline', file=f_paper)
+                    print(" $N=0$  &  &  &  &  &  \\\ ", file=f_paper)
+            elif self.m_HO_n[i] == 1:
+                if p_wave_count==0:
+                    p_wave_count+=1
+                    print('\hline', file=f_paper)
+                    print(" $N=1$  &  &  &  &  &  \\\ ", file=f_paper)
+            elif self.m_HO_n[i] == 2:
+                if d_wave_count==0:
+                    d_wave_count+=1
+                    print('\hline', file=f_paper)
+                    print(" $N=2$  &  &  &  &  &  \\\ ", file=f_paper)
+
+            if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
+            else: SU_tot_val = 4/3
+
+            quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+            wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
+
+            decays_exp_latex= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+            decays_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+            decays_ysh_latex = du.compare_mass_latex(self.m_mass_ysh[i])
+            decays_hsk_latex = du.compare_mass_latex(self.m_mass_hsk[i])
+            decays_rob_latex = du.compare_mass_latex(self.m_mass_rob[i])
+            decays_kim_latex = du.compare_mass_latex(self.m_mass_kim[i])
+            decays_mon_latex = du.compare_mass_latex(self.m_mass_mon[i])
+            
+            print(quantum_state, wave_label,'&', mass_our_latex, '&', mass_ysh_latex,'&', mass_hsk_latex, '&', mass_rob_latex,'&', mass_kim_latex, '&', mass_mon_latex,'&', mass_exp_latex, '\\\ ', file=f_paper)
+        
+        print('\hline \hline', file=f_paper)
+        print('\end{tabular}', file=f_paper)
+        f_paper.close()
+
         
     def decay_indi_table(self):
         """
@@ -803,6 +857,14 @@ class BottomTables:
 
     def m_load_data_compare(self, baryons):
         data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/masses_" + baryons + "_compare.csv")
+        self.m_mass_ysh  = round(data_frame["Yoshida"])
+        self.m_mass_hsk  = round(data_frame["Hosaka"])
+        self.m_mass_rob  = round(data_frame["Roberts"])
+        self.m_mass_kim  = round(data_frame["Kim"])
+        self.m_mass_mon  = round(data_frame["Mohanta"])
+
+    def m_load_data_compare_decays(self, baryons):
+        data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/strong_" + baryons + "_compare.csv")
         self.m_mass_ysh  = round(data_frame["Yoshida"])
         self.m_mass_hsk  = round(data_frame["Hosaka"])
         self.m_mass_rob  = round(data_frame["Roberts"])
