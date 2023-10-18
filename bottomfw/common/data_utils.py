@@ -227,6 +227,12 @@ def compare_mass_latex(value=-1):
         return "..."
     else:
         return "$"+str(value)+"$"
+
+def compare_decay_latex(value=-1):
+    if value==-1:
+        return "..."
+    else:
+        return "$"+str(value)+"$"
     
 def name_quantum_state(baryons, J_tot, S_tot, L_tot, ModEx, SU_tot):
 

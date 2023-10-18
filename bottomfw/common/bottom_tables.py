@@ -26,7 +26,7 @@ class BottomTables:
         self.m_workpath = workpath
         self.m_baryons = baryons
         self.m_batch = batch_results
-        self.m_load_data(baryons)        
+        self.m_load_data(baryons)
 
     def single_model_table(self):
         """
@@ -189,7 +189,7 @@ class BottomTables:
         f_paper = open(self.m_workpath+'/tables/comparison_decays_'+self.m_baryons+'_paper.tex', "w")
         baryon_name = du.baryon_name(self.m_baryons)
         flavor_name = du.flavor_label(self.m_baryons)
-        self.m_load_data_compare(self.m_baryons)
+        self.m_load_data_compare_decays(self.m_baryons)
         
         if self.m_baryons=="lambdas":
             print("\\begin{tabular}{c c| c c c c c c}\hline \hline", file=f_paper)
@@ -1047,33 +1047,33 @@ class BottomTables:
     def m_load_data_compare_decays(self, baryons):
         data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/strong_" + baryons + "_compare.csv")
 
-        if self.m_baryons =="lambdas":
-            self.m_decay_qflu7[i] = round(data_frame["QFLu7"])
-            self.m_decay_qflu9[i] = round(data_frame["QFLu9"])
-            self.m_decay_yao11[i] = round(data_frame["Yao-Wang11"])
-            self.m_decay_liu56[i] = round(data_frame["ChenLiu56"])
-        elif self.m_baryons =="cascades_anti3":        
-            self.m_decay_limp2[i] = round(data_frame["Limphirat2"])
-            self.m_decay_yao11[i] = round(data_frame["Yao-Wang11"])
-            self.m_decay_yao44[i] = round(data_frame["Wang-Yao44"])
-            self.m_decay_zhe53[i] = round(data_frame["He53"])
-            self.m_decay_che55[i] = round(data_frame["Chen55"])
-        elif self.m_baryons =="sigmas":
-            self.m_decay_qflu7[i] = round(data_frame["QFLu7"])
-            self.m_decay_qflu9[i] = round(data_frame["QFLu9"])
-            self.m_decay_yao11[i] = round(data_frame["Yao-Wang11"])
-            self.m_decay_yao44[i] = round(data_frame["Wang-Yao44"])
-            self.m_decay_che55[i] = round(data_frame["Chen55"])
-            self.m_decay_liu56[i] = round(data_frame["ChenLiu56"])
-        elif self.m_baryons =="cascades":        
-            self.m_decay_limp2[i] = round(data_frame["Limphirat2"])
-            self.m_decay_yao11[i] = round(data_frame["Yao-Wang11"])
-            self.m_decay_yao44[i] = round(data_frame["Wang-Yao44"])
-            self.m_decay_zhe53[i] = round(data_frame["He53"])
-            self.m_decay_che55[i] = round(data_frame["Chen55"])
-        elif self.m_baryons =="omegas":
-            self.m_decay_yao11[i] = round(data_frame["Yao-Wang11"])
-            self.m_decay_yao44[i] = round(data_frame["Wang-Yao44"])
-            self.m_decay_flu51[i] = round(data_frame["QFLu51"])
-            self.m_decay_liu56[i] = round(data_frame["ChenLiu56"])
+        if baryons =="lambdas":
+            self.m_decay_qflu7 = round(data_frame["QFLu7"])
+            self.m_decay_qflu9 = round(data_frame["QFLu9"])
+            self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
+            self.m_decay_liu56 = round(data_frame["ChenLiu56"])
+        elif baryons =="cascades_anti3":        
+            self.m_decay_limp2 = round(data_frame["Limphirat2"])
+            self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
+            self.m_decay_yao44 = round(data_frame["Wang-Yao44"])
+            self.m_decay_zhe53 = round(data_frame["He53"])
+            self.m_decay_che55 = round(data_frame["Chen55"])
+        elif baryons =="sigmas":
+            self.m_decay_qflu7 = round(data_frame["QFLu7"])
+            self.m_decay_qflu9 = round(data_frame["QFLu9"])
+            self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
+            self.m_decay_yao44 = round(data_frame["Wang-Yao44"])
+            self.m_decay_che55 = round(data_frame["Chen55"])
+            self.m_decay_liu56 = round(data_frame["ChenLiu56"])
+        elif m_baryons =="cascades":        
+            self.m_decay_limp2 = round(data_frame["Limphirat2"])
+            self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
+            self.m_decay_yao44 = round(data_frame["Wang-Yao44"])
+            self.m_decay_zhe53 = round(data_frame["He53"])
+            self.m_decay_che55 = round(data_frame["Chen55"])
+        elif m_baryons =="omegas":
+            self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
+            self.m_decay_yao44 = round(data_frame["Wang-Yao44"])
+            self.m_decay_flu51 = round(data_frame["QFLu51"])
+            self.m_decay_liu56 = round(data_frame["ChenLiu56"])
 
