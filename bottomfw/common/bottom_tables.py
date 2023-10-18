@@ -357,7 +357,7 @@ class BottomTables:
                 wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
 
                 decays_exp_latex= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
-                decays_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+                decays_our_latex = '$'+str(abs(round(self.m_decay[i])))+'$'
             
                 decays_limp2_latex = du.compare_decay_latex(self.m_decay_limp2[i])
                 decays_yao11_latex = du.compare_decay_latex(self.m_decay_yao11[i])
