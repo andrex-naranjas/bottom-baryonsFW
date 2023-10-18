@@ -180,7 +180,7 @@ class BottomTables:
         print('\end{tabular}', file=f_paper)
         f_paper.close()
 
-def comparison_three_quark_model_table_decays(self):
+    def comparison_three_quark_model_table_decays(self):
         """
         Method to produce table that compares predictions from different references
         """
@@ -229,7 +229,7 @@ def comparison_three_quark_model_table_decays(self):
                 decays_yao11_latex = du.compare_decay_latex(self.m_decay_yao11[i])                
                 decays_liu56_latex = du.compare_decay_latex(self.m_decay_liu56[i])
                 
-                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_qflu7_latex,'&', decays_qflu9_latex, '&', decays_yao11_latex,'&', decays_liu56_latex, '&',  decays_exp_latex '\\\ ', file=f_paper)
+                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_qflu7_latex,'&', decays_qflu9_latex, '&', decays_yao11_latex,'&', decays_liu56_latex, '&',  decays_exp_latex, '\\\ ', file=f_paper)
             
             print('\hline \hline', file=f_paper)
             print('\end{tabular}', file=f_paper)
@@ -274,7 +274,7 @@ def comparison_three_quark_model_table_decays(self):
                 decays_zhe53_latex = du.compare_decay_latex(self.m_decay_zhe53[i])
                 decays_che55_latex = du.compare_decay_latex(self.m_decay_che55[i])
                 
-                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_limp2_latex,'&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_zhe53_latex, '&', decays_che55_latex, '&',  decays_exp_latex '\\\ ', file=f_paper)
+                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_limp2_latex,'&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_zhe53_latex, '&', decays_che55_latex, '&',  decays_exp_latex, '\\\ ', file=f_paper)
             
             print('\hline \hline', file=f_paper)
             print('\end{tabular}', file=f_paper)
@@ -320,7 +320,7 @@ def comparison_three_quark_model_table_decays(self):
                 decays_che55_latex = du.compare_decay_latex(self.m_decay_che55[i])                
                 decays_liu56_latex = du.compare_decay_latex(self.m_decay_liu56[i])
                 
-                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_qflu7_latex,'&', decays_qflu9_latex, '&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_che55_latex, '&', decays_liu56_latex, '&',  decays_exp_latex '\\\ ', file=f_paper)
+                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_qflu7_latex,'&', decays_qflu9_latex, '&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_che55_latex, '&', decays_liu56_latex, '&',  decays_exp_latex, '\\\ ', file=f_paper)
             
             print('\hline \hline', file=f_paper)
             print('\end{tabular}', file=f_paper)
@@ -365,7 +365,7 @@ def comparison_three_quark_model_table_decays(self):
                 decays_zhe53_latex = du.compare_decay_latex(self.m_decay_zhe53[i])
                 decays_che55_latex = du.compare_decay_latex(self.m_decay_che55[i])
                 
-                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_limp2_latex,'&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_zhe53_latex, '&', decays_che55_latex, '&',  decays_exp_latex '\\\ ', file=f_paper)
+                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_limp2_latex,'&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_zhe53_latex, '&', decays_che55_latex, '&',  decays_exp_latex, '\\\ ', file=f_paper)
             
             print('\hline \hline', file=f_paper)
             print('\end{tabular}', file=f_paper)
