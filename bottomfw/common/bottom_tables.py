@@ -865,8 +865,8 @@ def comparison_three_quark_model_table_decays(self):
 
     def m_load_data_compare_decays(self, baryons):
         data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/strong_" + baryons + "_compare.csv")
-        self.m_mass_ysh  = round(data_frame["Yoshida"])
-        self.m_mass_hsk  = round(data_frame["Hosaka"])
-        self.m_mass_rob  = round(data_frame["Roberts"])
-        self.m_mass_kim  = round(data_frame["Kim"])
-        self.m_mass_mon  = round(data_frame["Mohanta"])
+        self.m_decay_ysh  = round(data_frame["Yoshida"])
+        self.m_decay_hsk  = round(data_frame["Hosaka"])
+        self.m_decay_rob  = round(data_frame["Roberts"])
+        self.m_decay_kim  = round(data_frame["Kim"])
+        self.m_decay_mon  = round(data_frame["Mohanta"])
