@@ -137,7 +137,7 @@ class BottomTables:
         flavor_name = du.flavor_label(self.m_baryons)
         self.m_load_data_compare(self.m_baryons)
         
-        print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
+        print("\\begin{tabular}{c c| c c c c c c }\hline \hline", file=f_paper)
         print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM \cite{Yoshida2015}     &  QCD sum rules \cite{Liu2008, Mao2015, Chen2016}      &  NRQM \cite{Roberts2008}    & $\chi$QM \cite{Kim2021}        & LQCD \cite{Mohanta2020}     & Experimental  \\\ ", file=f_paper)
         print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &      mass (MeV) \\\ \hline", file=f_paper)
 
@@ -148,17 +148,17 @@ class BottomTables:
                 if s_wave_count==0:
                     s_wave_count+=1
                     print('\hline', file=f_paper)
-                    print(" $N=0$  &  &  &  &  &  \\\ ", file=f_paper)
+                    print(" $N=0$  & &  &  &  &  & \\\ ", file=f_paper)
             elif self.m_HO_n[i] == 1:
                 if p_wave_count==0:
                     p_wave_count+=1
                     print('\hline', file=f_paper)
-                    print(" $N=1$  &  &  &  &  &  \\\ ", file=f_paper)
+                    print(" $N=1$  & &  &  &  &  & \\\ ", file=f_paper)
             elif self.m_HO_n[i] == 2:
                 if d_wave_count==0:
                     d_wave_count+=1
                     print('\hline', file=f_paper)
-                    print(" $N=2$  &  &  &  &  &  \\\ ", file=f_paper)
+                    print(" $N=2$  & &  &  &  &  &  \\\ ", file=f_paper)
 
             if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
             else: SU_tot_val = 4/3
@@ -193,8 +193,8 @@ class BottomTables:
         
         if self.m_baryons=="lambdas":
             print("\\begin{tabular}{c c| c c c c c c}\hline \hline", file=f_paper)
-            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Lu:2019rtg}      &  NRQM \cite{Yao:2018jmc}    & \cite{Chen:2018vuc}        & Experimental  \\\ ", file=f_paper)
-            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Lambda$ (MeV)  &   $\Lambda$  (MeV)  &  $\Lambda$  (MeV)  &  $\Lambda$  (MeV) & $\Lambda$  (MeV) & $\Lambda$  (MeV) \\\ \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Lu:2019rtg}     & \cite{Yao:2018jmc}    & \cite{Chen:2018vuc}        & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$ (MeV)  &   $\Gamma$  (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
 
             s_wave_count,p_wave_count,d_wave_count=0,0,0
             for i in range(len(self.m_mass)):
@@ -203,17 +203,17 @@ class BottomTables:
                     if s_wave_count==0:
                         s_wave_count+=1
                         print('\hline', file=f_paper)
-                        print(" $N=0$  &  &  &  &  \\\ ", file=f_paper)
+                        print(" $N=0$  & &  &  &  &  & \\\ ", file=f_paper)
                 elif self.m_HO_n[i] == 1:
                     if p_wave_count==0:
                         p_wave_count+=1
                         print('\hline', file=f_paper)
-                        print(" $N=1$  &  &  &  &  \\\ ", file=f_paper)
+                        print(" $N=1$  & &  &  &  &  & \\\ ", file=f_paper)
                 elif self.m_HO_n[i] == 2:
                     if d_wave_count==0:
                         d_wave_count+=1
                         print('\hline', file=f_paper)
-                        print(" $N=2$  &  &  &  &   \\\ ", file=f_paper)
+                        print(" $N=2$  & &  &  &  &  & \\\ ", file=f_paper)
 
                 if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
                 else: SU_tot_val = 4/3
@@ -221,8 +221,8 @@ class BottomTables:
                 quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
                 wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
 
-                decays_exp_latex= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
-                decays_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+                exp_mass,decays_exp_latex = du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                decays_our_latex = '$'+str(abs(round(self.m_decay[i])))+'$'
             
                 decays_qflu7_latex = du.compare_decay_latex(self.m_decay_qflu7[i])
                 decays_qflu9_latex = du.compare_decay_latex(self.m_decay_qflu9[i])
@@ -236,9 +236,9 @@ class BottomTables:
             f_paper.close()
 
         elif self.m_baryons=="cascades_anti3":
-            print("\\begin{tabular}{c c| c c c c c c}\hline \hline", file=f_paper)
-            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Limphirat:2010zz}     &  NRQM \cite{Yao:2018jmc}    & \cite{Wang:2017kfr}   & \cite{He:2021xrh}       & Experimental  \\\ ", file=f_paper)
-            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Lambda$ (MeV)  &   $\Lambda$  (MeV)  &  $\Lambda$  (MeV)  &  $\Lambda$  (MeV) & $\Lambda$  (MeV) & $\Lambda$  (MeV) \\\ \hline", file=f_paper)
+            print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Limphirat:2010zz}     &  \cite{Yao:2018jmc}    & \cite{Wang:2017kfr}   & \cite{He:2021xrh}    & \cite{Chen:2018orb}   & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$ (MeV)  &   $\Gamma$  (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
 
             s_wave_count,p_wave_count,d_wave_count=0,0,0
             for i in range(len(self.m_mass)):
@@ -247,17 +247,17 @@ class BottomTables:
                     if s_wave_count==0:
                         s_wave_count+=1
                         print('\hline', file=f_paper)
-                        print(" $N=0$  &  &  &  &  \\\ ", file=f_paper)
+                        print(" $N=0$  &  &  &  &  &  &  &  &  \\\ ", file=f_paper)
                 elif self.m_HO_n[i] == 1:
                     if p_wave_count==0:
                         p_wave_count+=1
                         print('\hline', file=f_paper)
-                        print(" $N=1$  &  &  &  &  \\\ ", file=f_paper)
+                        print(" $N=1$  &  &  &  &  &  &  &  &  \\\ ", file=f_paper)
                 elif self.m_HO_n[i] == 2:
                     if d_wave_count==0:
                         d_wave_count+=1
                         print('\hline', file=f_paper)
-                        print(" $N=2$  &  &  &  &   \\\ ", file=f_paper)
+                        print(" $N=2$  &  &  &  &  &  &  &  &  \\\ ", file=f_paper)
 
                 if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
                 else: SU_tot_val = 4/3
@@ -265,8 +265,8 @@ class BottomTables:
                 quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
                 wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
 
-                decays_exp_latex= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
-                decays_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+                exp_mass,decays_exp_latex = du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                decays_our_latex = '$'+str(abs(round(self.m_decay[i])))+'$'
             
                 decays_limp2_latex = du.compare_decay_latex(self.m_decay_limp2[i])
                 decays_yao11_latex = du.compare_decay_latex(self.m_decay_yao11[i])
@@ -281,9 +281,9 @@ class BottomTables:
             f_paper.close()
         
         elif self.m_baryons=="sigmas":
-            print("\\begin{tabular}{c c| c c c c c c}\hline \hline", file=f_paper)
-            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Lu:2019rtg}      &  NRQM \cite{Yao:2018jmc}    & \cite{Chen:2018vuc}        & Experimental  \\\ ", file=f_paper)
-            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Lambda$ (MeV)  &   $\Lambda$  (MeV)  &  $\Lambda$  (MeV)  &  $\Lambda$  (MeV) & $\Lambda$  (MeV) & $\Lambda$  (MeV) \\\ \hline", file=f_paper)
+            print("\\begin{tabular}{c c| c c c c c c c c}\hline \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Lu:2019rtg}      &  \cite{Yao:2018jmc} & \cite{Wang:2017kfr}  & \cite{Chen:2018orb}  & \cite{Chen:2018vuc}    & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$ (MeV)  &   $\Gamma$  (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
 
             s_wave_count,p_wave_count,d_wave_count=0,0,0
             for i in range(len(self.m_mass)):
@@ -310,8 +310,8 @@ class BottomTables:
                 quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
                 wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
 
-                decays_exp_latex= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
-                decays_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+                exp_mass,decays_exp_latex = du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                decays_our_latex = '$'+str(abs(round(self.m_decay[i])))+'$'
             
                 decays_qflu7_latex = du.compare_decay_latex(self.m_decay_qflu7[i])
                 decays_qflu9_latex = du.compare_decay_latex(self.m_decay_qflu9[i])
@@ -327,9 +327,9 @@ class BottomTables:
             f_paper.close()
 
         elif self.m_baryons=="cascades":
-            print("\\begin{tabular}{c c| c c c c c c}\hline \hline", file=f_paper)
-            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Limphirat:2010zz}     &  NRQM \cite{Yao:2018jmc}    & \cite{Wang:2017kfr}   & \cite{He:2021xrh}       & Experimental  \\\ ", file=f_paper)
-            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Lambda$ (MeV)  &   $\Lambda$  (MeV)  &  $\Lambda$  (MeV)  &  $\Lambda$  (MeV) & $\Lambda$  (MeV) & $\Lambda$  (MeV) \\\ \hline", file=f_paper)
+            print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Limphirat:2010zz}     & \cite{Yao:2018jmc}    & \cite{Wang:2017kfr}   & \cite{He:2021xrh}  & \cite{Chen:2018orb}    & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$ (MeV)  &   $\Gamma$  (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
 
             s_wave_count,p_wave_count,d_wave_count=0,0,0
             for i in range(len(self.m_mass)):
@@ -356,7 +356,7 @@ class BottomTables:
                 quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
                 wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
 
-                decays_exp_latex= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                exp_mass,decays_exp_latex = du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
                 decays_our_latex = '$'+str(abs(round(self.m_decay[i])))+'$'
             
                 decays_limp2_latex = du.compare_decay_latex(self.m_decay_limp2[i])
@@ -373,8 +373,8 @@ class BottomTables:
 
         elif self.m_baryons=="omegas":
             print("\\begin{tabular}{c c| c c c c c c}\hline \hline", file=f_paper)
-            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Lu:2019rtg}      &  NRQM \cite{Yao:2018jmc}    & \cite{Chen:2018vuc}        & Experimental  \\\ ", file=f_paper)
-            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Lambda$ (MeV)  &   $\Lambda$  (MeV)  &  $\Lambda$  (MeV)  &  $\Lambda$  (MeV) & $\Lambda$  (MeV) & $\Lambda$  (MeV) \\\ \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Yao:2018jmc}     &  \cite{Wang:2017kfr}  & \cite{Liang:2020hbo}  & \cite{Chen:2018vuc}        & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$ (MeV)  &   $\Gamma$  (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
 
             s_wave_count,p_wave_count,d_wave_count=0,0,0
             for i in range(len(self.m_mass)):
@@ -401,13 +401,13 @@ class BottomTables:
                 quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
                 wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
 
-                decays_exp_latex= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
-                decays_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+                exp_mass,decays_exp_latex = du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                decays_our_latex = '$'+str(abs(round(self.m_decay[i])))+'$'
             
-                decays_yao11_latex = du.compare_mass_latex(self.m_mass_yao11[i])
-                decays_yao44_latex = du.compare_mass_latex(self.m_mass_yao44[i])
-                decays_flu51_latex = du.compare_mass_latex(self.m_mass_flu51[i])
-                decays_liu56_latex = du.compare_mass_latex(self.m_mass_liu56[i])
+                decays_yao11_latex = du.compare_decay_latex(self.m_decay_yao11[i])
+                decays_yao44_latex = du.compare_decay_latex(self.m_decay_yao44[i])
+                decays_flu51_latex = du.compare_decay_latex(self.m_decay_flu51[i])
+                decays_liu56_latex = du.compare_decay_latex(self.m_decay_liu56[i])
                 
                 print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_flu51_latex,'&', decays_liu56_latex, '&', decays_exp_latex, '\\\ ', file=f_paper)
                 
@@ -1065,13 +1065,13 @@ class BottomTables:
             self.m_decay_yao44 = round(data_frame["Wang-Yao44"])
             self.m_decay_che55 = round(data_frame["Chen55"])
             self.m_decay_liu56 = round(data_frame["ChenLiu56"])
-        elif m_baryons =="cascades":        
+        elif baryons =="cascades":        
             self.m_decay_limp2 = round(data_frame["Limphirat2"])
             self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
             self.m_decay_yao44 = round(data_frame["Wang-Yao44"])
             self.m_decay_zhe53 = round(data_frame["He53"])
             self.m_decay_che55 = round(data_frame["Chen55"])
-        elif m_baryons =="omegas":
+        elif baryons =="omegas":
             self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
             self.m_decay_yao44 = round(data_frame["Wang-Yao44"])
             self.m_decay_flu51 = round(data_frame["QFLu51"])
