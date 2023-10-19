@@ -192,9 +192,9 @@ class BottomTables:
         self.m_load_data_compare_decays(self.m_baryons)
         
         if self.m_baryons=="lambdas":
-            print("\\begin{tabular}{c c| c c c c c c}\hline \hline", file=f_paper)
-            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Lu:2019rtg}     & \cite{Yao:2018jmc}    & \cite{Chen:2018vuc}        & Experimental  \\\ ", file=f_paper)
-            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$ (MeV)  &   $\Gamma$  (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
+            print("\\begin{tabular}{c c| c c c c c}\hline \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Yao:2018jmc}    & \cite{Chen:2018vuc}        & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$  (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
 
             s_wave_count,p_wave_count,d_wave_count=0,0,0
             for i in range(len(self.m_mass)):
@@ -225,11 +225,10 @@ class BottomTables:
                 decays_our_latex = '$'+str(abs(round(self.m_decay[i])))+'$'
             
                 decays_qflu7_latex = du.compare_decay_latex(self.m_decay_qflu7[i])
-                decays_qflu9_latex = du.compare_decay_latex(self.m_decay_qflu9[i])
                 decays_yao11_latex = du.compare_decay_latex(self.m_decay_yao11[i])                
                 decays_liu56_latex = du.compare_decay_latex(self.m_decay_liu56[i])
                 
-                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_qflu7_latex,'&', decays_qflu9_latex, '&', decays_yao11_latex,'&', decays_liu56_latex, '&',  decays_exp_latex, '\\\ ', file=f_paper)
+                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_qflu7_latex,'&', decays_yao11_latex,'&', decays_liu56_latex, '&',  decays_exp_latex, '\\\ ', file=f_paper)
             
             print('\hline \hline', file=f_paper)
             print('\end{tabular}', file=f_paper)
@@ -281,9 +280,9 @@ class BottomTables:
             f_paper.close()
         
         elif self.m_baryons=="sigmas":
-            print("\\begin{tabular}{c c| c c c c c c c c}\hline \hline", file=f_paper)
-            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Lu:2019rtg}      &  \cite{Yao:2018jmc} & \cite{Wang:2017kfr}  & \cite{Chen:2018orb}  & \cite{Chen:2018vuc}    & Experimental  \\\ ", file=f_paper)
-            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$ (MeV)  &   $\Gamma$  (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
+            print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   \cite{Liang:2020kvn}     &  \cite{Yao:2018jmc} & \cite{Wang:2017kfr}  & \cite{Chen:2018orb}  & \cite{Chen:2018vuc}    & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & $\Gamma$ (MeV)  &  $\Gamma$  (MeV)  &  $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) & $\Gamma$  (MeV) \\\ \hline", file=f_paper)
 
             s_wave_count,p_wave_count,d_wave_count=0,0,0
             for i in range(len(self.m_mass)):
@@ -314,13 +313,12 @@ class BottomTables:
                 decays_our_latex = '$'+str(abs(round(self.m_decay[i])))+'$'
             
                 decays_qflu7_latex = du.compare_decay_latex(self.m_decay_qflu7[i])
-                decays_qflu9_latex = du.compare_decay_latex(self.m_decay_qflu9[i])
                 decays_yao11_latex = du.compare_decay_latex(self.m_decay_yao11[i])
                 decays_yao44_latex = du.compare_decay_latex(self.m_decay_yao44[i])
                 decays_che55_latex = du.compare_decay_latex(self.m_decay_che55[i])                
                 decays_liu56_latex = du.compare_decay_latex(self.m_decay_liu56[i])
                 
-                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_qflu7_latex,'&', decays_qflu9_latex, '&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_che55_latex, '&', decays_liu56_latex, '&',  decays_exp_latex, '\\\ ', file=f_paper)
+                print(quantum_state, wave_label,'&', decays_our_latex, '&', decays_qflu7_latex,'&', decays_yao11_latex,'&', decays_yao44_latex, '&', decays_che55_latex, '&', decays_liu56_latex, '&',  decays_exp_latex, '\\\ ', file=f_paper)
             
             print('\hline \hline', file=f_paper)
             print('\end{tabular}', file=f_paper)
