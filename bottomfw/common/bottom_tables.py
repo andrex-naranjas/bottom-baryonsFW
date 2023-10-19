@@ -1047,7 +1047,6 @@ class BottomTables:
 
         if baryons =="lambdas":
             self.m_decay_qflu7 = round(data_frame["QFLu7"])
-            self.m_decay_qflu9 = round(data_frame["QFLu9"])
             self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
             self.m_decay_liu56 = round(data_frame["ChenLiu56"])
         elif baryons =="cascades_anti3":        
@@ -1058,7 +1057,6 @@ class BottomTables:
             self.m_decay_che55 = round(data_frame["Chen55"])
         elif baryons =="sigmas":
             self.m_decay_qflu7 = round(data_frame["QFLu7"])
-            self.m_decay_qflu9 = round(data_frame["QFLu9"])
             self.m_decay_yao11 = round(data_frame["Yao-Wang11"])
             self.m_decay_yao44 = round(data_frame["Wang-Yao44"])
             self.m_decay_che55 = round(data_frame["Chen55"])
