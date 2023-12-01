@@ -1020,15 +1020,27 @@ double EMDecayWidths::T3r(){
 
 //Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave lambda
 // SPIN-FLIP INTEGRALS
-double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+double EMDecayWidths::SPINFLIP_U1_l2_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = std::exp(value1 * (value2 + value3));
+  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
   return value;
 }
-(Complex(0,-0.5)*Sqrt(3)*k*M)/(Power(E,(Power(k,2)*((3*Power(M,2))/(Power(M + 2*\[Mu],2)*Power(Subscript(\[Alpha],\[Lambda]),2)) + Power(Subscript(\[Alpha],\[Rho]),-2)))/8.)*(M + 2*\[Mu])*
-     Subscript(\[Alpha],\[Lambda]))
+
+double EMDecayWidths::SPINFLIP_U1_l2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+(Complex(0,0.125)*k*M*(3*Power(k,2)*Power(M,2) - 8*Power(M + 2*\[Mu],2)*Power(Subscript(\[Alpha],\[Lambda]),2)))/
+   (Power(E,(Power(k,2)*((3*Power(M,2))/(Power(M + 2*\[Mu],2)*Power(Subscript(\[Alpha],\[Lambda]),2)) + Power(Subscript(\[Alpha],\[Rho]),-2)))/8.)*
+     Power(M + 2*\[Mu],3)*Power(Subscript(\[Alpha],\[Lambda]),3))
+
+
 
 double EMDecayWidths::SPINFLIP_U3_1r_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double mbottom, double mlight, double phik, double thetak){
   k_value=0; alpha_lam=0; alpha_rho=0; mbottom=0; mlight=0; phik=0;  thetak=0;
