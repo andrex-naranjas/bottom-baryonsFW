@@ -1018,8 +1018,39 @@ double EMDecayWidths::T3r(){
   return value;
 }
 
+//Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave lambda
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = std::exp(value1 * (value2 + value3));
+  return value;
+}
+(Complex(0,-0.5)*Sqrt(3)*k*M)/(Power(E,(Power(k,2)*((3*Power(M,2))/(Power(M + 2*\[Mu],2)*Power(Subscript(\[Alpha],\[Lambda]),2)) + Power(Subscript(\[Alpha],\[Rho]),-2)))/8.)*(M + 2*\[Mu])*
+     Subscript(\[Alpha],\[Lambda]))
+
+double EMDecayWidths::SPINFLIP_U3_1r_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double mbottom, double mlight, double phik, double thetak){
+  k_value=0; alpha_lam=0; alpha_rho=0; mbottom=0; mlight=0; phik=0;  thetak=0;
+  double value = 0;
+  return value * k_value * alpha_lam * alpha_rho * mbottom * mlight * phik * thetak;
+}
+
+// ORBIT-SPLIT INTEGRALS
+// U1_1lambda-1lambda
+double EMDecayWidths::ORBITALSPLIT_U1_1l_m1_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double mbottom, double mlight, double phik, double thetak){
+  double value1 = (-1.0) * std::pow(k_value, 2) / (8 * std::pow(alpha_rho, 2));
+  double value2 = (-3.0) * std::pow(mbottom, 2) * std::pow(k_value, 2) / (8 * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = std::exp(value1 + value2) * (1 - value2 * std::pow(std::sin(thetak), 2)) ;
+  return value;
+
+
+
 #endif
 
+
+
+}
 
   // // test function
   // double thetak = 0; double phik = 0; double mLlA=1;
