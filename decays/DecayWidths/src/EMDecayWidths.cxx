@@ -1032,13 +1032,11 @@ double EMDecayWidths::SPINFLIP_U1_l2_m0_l1_m0(double k_value, double alpha_lam, 
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 8. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-1.0) * p_imag * k_value * mbottom * value4 * std::exp(value1 * (value2 + value3)))/(8. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 3)));
   return value;
 }
 
-(Complex(0,0.125)*k*M*(3*Power(k,2)*Power(M,2) - 8*Power(M + 2*\[Mu],2)*Power(Subscript(\[Alpha],\[Lambda]),2)))/
-   (Power(E,(Power(k,2)*((3*Power(M,2))/(Power(M + 2*\[Mu],2)*Power(Subscript(\[Alpha],\[Lambda]),2)) + Power(Subscript(\[Alpha],\[Rho]),-2)))/8.)*
-     Power(M + 2*\[Mu],3)*Power(Subscript(\[Alpha],\[Lambda]),3))
 
 
 
