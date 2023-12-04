@@ -1312,6 +1312,24 @@ double EMDecayWidths::T2_r2_m0_r1_m1m(double k_value, double alpha_lam, double a
   return value;
 }
 
+//T3r2m2r1m1
+double EMDecayWidths::T3_r2_m2_r1_m1(){
+  double value = 0;
+  return value;
+}
+
+//T3r2m1r1m0
+double EMDecayWidths::T3_r2_m1_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r2m0r1m1m
+double EMDecayWidths::T3_r2_m0_r1_m1m(){
+  double value = 0;
+  return value;
+}
+
 
 
 
