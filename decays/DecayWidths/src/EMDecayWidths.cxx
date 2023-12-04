@@ -1045,9 +1045,26 @@ double EMDecayWidths::SPINFLIP_U1_l2_m1m_l1_m1m(double k_value, double alpha_lam
   return value;
 }
 
+double EMDecayWidths::SPINFLIP_U2_l2_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_l2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 8. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-1.0) * p_imag * k_value * mbottom * value4 * std::exp(value1 * (value2 + value3)))/(8. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 3)));
+  return value;
+}
 
 
 
+//Old Integrals for support
 double EMDecayWidths::SPINFLIP_U3_1r_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double mbottom, double mlight, double phik, double thetak){
   k_value=0; alpha_lam=0; alpha_rho=0; mbottom=0; mlight=0; phik=0;  thetak=0;
   double value = 0;
