@@ -1212,6 +1212,14 @@ double EMDecayWidths::SPINFLIP_U1_r2_m1m_r1_m1m(double k_value, double alpha_lam
   return value;
 }
 
+double EMDecayWidths::SPINFLIP_U2_r2_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
 
 
 
