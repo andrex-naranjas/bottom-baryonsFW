@@ -1236,8 +1236,20 @@ double EMDecayWidths::SPINFLIP_U2_r2_m1m_r1_m1m(double k_value, double alpha_lam
   return value;
 }
 
+double EMDecayWidths::SPINFLIP_U3_r2_m1_r1_m1(){
+  double value = 0;
+  return value;
+}
 
+double EMDecayWidths::SPINFLIP_U3_r2_m0_r1_m0(){
+  double value = 0;
+  return value;
+}
 
+double EMDecayWidths::SPINFLIP_U3_r2_m1m_r1_m1m(){
+  double value = 0;
+  return value;
+}
 
 
 
@@ -1248,8 +1260,6 @@ double EMDecayWidths::SPINFLIP_U2_r2_m1m_r1_m1m(double k_value, double alpha_lam
 #endif
 
 
-
-}
 
   // // test function
   // double thetak = 0; double phik = 0; double mLlA=1;
