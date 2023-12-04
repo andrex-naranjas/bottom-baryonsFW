@@ -1251,6 +1251,67 @@ double EMDecayWidths::SPINFLIP_U3_r2_m1m_r1_m1m(){
   return value;
 }
 
+// ORBIT-FLIP Tensor operators
+//T1r2m2r1m1
+double EMDecayWidths::T1_r2_m2_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = (2. * p_imag * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T1r2m1r1m0
+double EMDecayWidths::T1_r2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * (std::pow(k_value, 2) - 4. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2.) * alpha_rho);
+  return value;
+}
+
+//T1r2m0r1m1m
+double EMDecayWidths::T1_r2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * (std::pow(k_value, 2) - 4. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6.) * alpha_rho);
+  return value;
+}
+
+//T2r2m2r1m1
+double EMDecayWidths::T2_r2_m2_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-2.0) * p_imag * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r2m1r1m0
+double EMDecayWidths::T2_r2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * (std::pow(k_value, 2) - 4. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2.) * alpha_rho);
+  return value;
+}
+
+//T2r2m0r1m1m
+double EMDecayWidths::T2_r2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * (std::pow(k_value, 2) - 4. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6.) * alpha_rho);
+  return value;
+}
+
 
 
 
