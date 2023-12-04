@@ -1187,25 +1187,6 @@ double EMDecayWidths::T3_l2_m0_l1_m1m(double k_value, double alpha_lam, double a
 }
 
 
-
-
-//Old Integrals for support
-double EMDecayWidths::SPINFLIP_U3_1r_m1m_GS(double k_value, double alpha_lam, double alpha_rho,  double mbottom, double mlight, double phik, double thetak){
-  k_value=0; alpha_lam=0; alpha_rho=0; mbottom=0; mlight=0; phik=0;  thetak=0;
-  double value = 0;
-  return value * k_value * alpha_lam * alpha_rho * mbottom * mlight * phik * thetak;
-}
-
-// ORBIT-SPLIT INTEGRALS
-// U1_1lambda-1lambda
-double EMDecayWidths::ORBITALSPLIT_U1_1l_m1_1l_m1(double k_value, double alpha_lam, double alpha_rho,  double mbottom, double mlight, double phik, double thetak){
-  double value1 = (-1.0) * std::pow(k_value, 2) / (8 * std::pow(alpha_rho, 2));
-  double value2 = (-3.0) * std::pow(mbottom, 2) * std::pow(k_value, 2) / (8 * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
-  double value = std::exp(value1 + value2) * (1 - value2 * std::pow(std::sin(thetak), 2)) ;
-  return value;
-
-
-
 #endif
 
 
