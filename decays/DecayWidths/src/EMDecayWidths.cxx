@@ -1062,6 +1062,16 @@ double EMDecayWidths::SPINFLIP_U2_l2_m0_l1_m0(double k_value, double alpha_lam, 
   return value;
 }
 
+double EMDecayWidths::SPINFLIP_U2_l2_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+
+
 
 
 //Old Integrals for support
