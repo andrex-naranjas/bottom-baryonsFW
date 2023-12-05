@@ -148,7 +148,7 @@ class ElectroWidths:
         """
         Method to set number of decay channels has each baryon
         """
-        if(baryons=='omegas'):           return 2
+        if(baryons=='omegas'):           return 2 + 7
         elif(baryons=='cascades'):       return 6
         elif(baryons=='sigmas'):         return 7
         elif(baryons=='lambdas'):        return 3
