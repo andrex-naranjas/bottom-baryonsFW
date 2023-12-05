@@ -200,8 +200,8 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
     else if(decayProd==20){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //-  4p5/2-rho
 
     // decay to cascade prime 0
-    else if(decayProd==3){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0 ground
-    else if(decayProd==5){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0 ground
+    else if(decayProd==3){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0   ground
+    else if(decayProd==5){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0   ground
     else if(decayProd==3){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0   2p1/2-lam
     else if(decayProd==4){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0	  4p1/2-lam
     else if(decayProd==5){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0	  2p3/2-lam
