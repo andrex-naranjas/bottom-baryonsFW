@@ -1469,7 +1469,7 @@ double EMDecayWidths::SPINFLIP_U1_l2_m0_r1_m0(double k_value, double alpha_lam, 
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = ( p_imag * std::sqrt(3) * std::pow(k_value, 3) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(8 * alpha_rho * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value = ( p_imag * std::sqrt(3) * std::pow(k_value, 3) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(8. * alpha_rho * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   return value;
 }
 
@@ -1477,7 +1477,7 @@ double EMDecayWidths::SPINFLIP_U2_l2_m0_r1_m0(double k_value, double alpha_lam, 
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = ((-1.0) * p_imag * std::sqrt(3) * std::pow(k_value, 3) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(8 * alpha_rho * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value = ((-1.0) * p_imag * std::sqrt(3) * std::pow(k_value, 3) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(8. * alpha_rho * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   return value;
 }
 
@@ -1485,6 +1485,63 @@ double EMDecayWidths::SPINFLIP_U3_l2_m0_r1_m0(){
   double value = 0;
   return value;
 }
+
+// ORBIT-FLIP Tensor operators
+//T1l2m0r1m1m
+double EMDecayWidths::T1_l2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * alpha_rho * std::pow(k_value, 2) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T1l2m1r1m0
+double EMDecayWidths::T1_l2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2l2m0r1m1m
+double EMDecayWidths::T2_l2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(1.5) * alpha_rho * std::pow(k_value, 2) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T2l2m1r1m0
+double EMDecayWidths::T2_l2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T3l2m0r1m1m
+double EMDecayWidths::T3_l2_m0_r1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3l2m1r1m0
+double EMDecayWidths::T3_l2_m1_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+
+
+
 
 
 
