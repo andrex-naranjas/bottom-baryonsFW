@@ -1615,7 +1615,31 @@ double EMDecayWidths::T3_r2_m1_l1_m0(){
   return value;
 }
 
+//Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave rho
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r1_m1_l1_m0_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
 
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(3) * k_value *  mbottom * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
 
 
 
