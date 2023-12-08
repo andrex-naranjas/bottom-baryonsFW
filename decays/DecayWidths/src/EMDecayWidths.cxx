@@ -1788,7 +1788,41 @@ double EMDecayWidths::T2_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, 
   return value;
 }
 
+//T3r1m0l1m0r1m1m
+double EMDecayWidths::T3_r1_m0_l1_m0_r1_m1m(){
+  double value = 0;
+  return value;
+}
 
+//T3r1m1l1m0r1m0
+double EMDecayWidths::T3_r1_m1_l1_m0_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m1r1m1
+double EMDecayWidths::T3_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
+
+//T3r1m0l1m1r1m0
+double EMDecayWidths::T3_r1_m0_l1_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
+
+//T3r1m1ml1m1r1m1m
+double EMDecayWidths::T3_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
 
 
 
