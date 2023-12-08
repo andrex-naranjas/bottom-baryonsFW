@@ -1716,6 +1716,19 @@ double EMDecayWidths::T1_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, dou
   return value;
 }
 
+//T2r1m0l1m1r1m0
+double EMDecayWidths::T1_r1_m0_l1_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( (-1.0) * p_imag * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * std::pow(alpha_rho, 2));
+  return value;
+}
+
+
+
 
 
 
