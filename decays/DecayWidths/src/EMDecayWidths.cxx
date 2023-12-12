@@ -249,6 +249,52 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   double sum_value = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value, modeExcitation);
   double decayWidth = DecayWidth(fi2_value, sum_value);
 
+  //testing integrals
+
+  double thetak=1, phik=1;
+    
+  std::cout<<T1_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T1_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T1_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T2_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T2_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T2_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T3_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T3_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T3_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+
+  // Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave lambda
+  // SPIN-FLIP INTEGRALS
+  std::cout<<SPINFLIP_U1_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U1_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U1_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U2_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U2_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U2_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U3_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U3_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U3_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  
+  // Definitions of the Integrals and Tensor Operators for decays from D-wave rho to P-wave rho
+  // SPIN-FLIP INTEGRALS
+  std::cout<<SPINFLIP_U1_r2_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U1_r2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U1_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U2_r2_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U2_r2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U2_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  std::cout<<SPINFLIP_U3_r2_m1_r1_m1()<<std::endl;
+  std::cout<<SPINFLIP_U3_r2_m0_r1_m0()<<std::endl;
+  std::cout<<SPINFLIP_U3_r2_m1m_r1_m1m()<<std::endl;
+  
+  // ORBIT-FLIP Tensor operators
+  std::cout<<T1_r2_m2_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T1_r2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T1_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T2_r2_m2_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T2_r2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  std::cout<<T2_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<std::endl;  
+
   return decayWidth;
 }
 

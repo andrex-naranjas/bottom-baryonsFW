@@ -33,11 +33,11 @@ class ElectroWidths:
         ms = m2
         ml = m3
 
-        # ml = 299.0
-        # ms = 465.0
-        # mb = 4928.0
-        # k_prim = 5044.799302252
-        # massA = 5.935 * 1000
+        ml = 299.0
+        ms = 465.0
+        mb = 4928.0
+        k_prim = 5044.799302252
+        massA = 5.935 * 1000
 
         MassA = massA/1000.0
         mbottom  = mb/1000.0
@@ -239,3 +239,19 @@ class ElectroWidths:
             self.gauss_xi_p_s   = np.random.normal(5.95500, 0.00500, 10000)
             self.gauss_xi       = np.random.normal(5.80600, 0.00700, 10000)
             self.gauss_lambda   = np.random.normal(5.61400, 0.00700, 10000)
+
+
+decay_em = ElectroWidths()
+
+baryons = "omegas"
+k_prim = 1
+massA = 1
+SA_val = 1
+JA_val = 1 
+LA_val = 1
+SlA_val = 1
+ModEx_val = 'grd'
+
+decay_em.total_decay_width(baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val,
+                           ModEx_val, bootstrap=False, m1=0, m2=0, m3=0)
+
