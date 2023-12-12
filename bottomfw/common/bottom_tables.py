@@ -137,9 +137,9 @@ class BottomTables:
         flavor_name = du.flavor_label(self.m_baryons)
         self.m_load_data_compare(self.m_baryons)
         
-        print("\\begin{tabular}{c c| c c c c c c }\hline \hline", file=f_paper)
-        print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM \cite{Yoshida2015}     &  HQET \cite{Liu2008, Mao2015, Chen2016}      &  NRQM \cite{Roberts2008}    & $\chi$QM \cite{Kim2021}        & LQCD \cite{Mohanta2020}     & Experimental  \\\ ", file=f_paper)
-        print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &      mass (MeV) \\\ \hline", file=f_paper)
+        print("\\begin{tabular}{c c| c c c c c c c}\hline \hline", file=f_paper)
+        print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM \cite{Yoshida2015}     &  HQET \cite{Liu2008, Mao2015, Chen2016}      &  NRQM \cite{Roberts2008}    & $\chi$QM \cite{Kim2021}        & LQCD \cite{Mohanta2020}     & CQC \cite{Valcarce:2008dr}   & Experimental  \\\ ", file=f_paper)
+        print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &  mass (MeV) &  mass (MeV) \\\ \hline", file=f_paper)
 
         s_wave_count,p_wave_count,d_wave_count=0,0,0
         for i in range(len(self.m_mass)):
@@ -148,17 +148,17 @@ class BottomTables:
                 if s_wave_count==0:
                     s_wave_count+=1
                     print('\hline', file=f_paper)
-                    print(" $N=0$  & &  &  &  &  & \\\ ", file=f_paper)
+                    print(" $N=0$  & &  &  &  &  & & \\\ ", file=f_paper)
             elif self.m_HO_n[i] == 1:
                 if p_wave_count==0:
                     p_wave_count+=1
                     print('\hline', file=f_paper)
-                    print(" $N=1$  & &  &  &  &  & \\\ ", file=f_paper)
+                    print(" $N=1$  & &  &  &  &  & & \\\ ", file=f_paper)
             elif self.m_HO_n[i] == 2:
                 if d_wave_count==0:
                     d_wave_count+=1
                     print('\hline', file=f_paper)
-                    print(" $N=2$  & &  &  &  &  &  \\\ ", file=f_paper)
+                    print(" $N=2$  & &  &  &  &  &  & \\\ ", file=f_paper)
 
             if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
             else: SU_tot_val = 4/3
@@ -173,8 +173,9 @@ class BottomTables:
             mass_rob_latex = du.compare_mass_latex(self.m_mass_rob[i])
             mass_kim_latex = du.compare_mass_latex(self.m_mass_kim[i])
             mass_mon_latex = du.compare_mass_latex(self.m_mass_mon[i])
+            mass_val_latex = du.compare_mass_latex(self.m_mass_val[i])
             
-            print(quantum_state, wave_label,'&', mass_our_latex, '&', mass_ysh_latex,'&', mass_hsk_latex, '&', mass_rob_latex,'&', mass_kim_latex, '&', mass_mon_latex,'&', mass_exp_latex, '\\\ ', file=f_paper)
+            print(quantum_state, wave_label,'&', mass_our_latex, '&', mass_ysh_latex,'&', mass_hsk_latex, '&', mass_rob_latex,'&', mass_kim_latex, '&', mass_mon_latex,'&', mass_val_latex,'&', mass_exp_latex, '\\\ ', file=f_paper)
         
         print('\hline \hline', file=f_paper)
         print('\end{tabular}', file=f_paper)
@@ -1041,6 +1042,7 @@ class BottomTables:
         self.m_mass_rob  = round(data_frame["Roberts"])
         self.m_mass_kim  = round(data_frame["Kim"])
         self.m_mass_mon  = round(data_frame["Mohanta"])
+        self.m_mass_val  = round(data_frame["Valcarce"])
 
     def m_load_data_compare_decays(self, baryons):
         data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/strong_" + baryons + "_compare.csv")
