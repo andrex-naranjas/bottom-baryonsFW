@@ -1509,6 +1509,567 @@ double EMDecayWidths::T3_r2_m0_r1_m1m(){
   return value;
 }
 
+//Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave rho
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_l2_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(3) * std::pow(k_value, 3) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(8. * alpha_rho * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_l2_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * std::pow(k_value, 3) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(8. * alpha_rho * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_l2_m0_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1l2m0r1m1m
+double EMDecayWidths::T1_l2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * alpha_rho * std::pow(k_value, 2) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T1l2m1r1m0
+double EMDecayWidths::T1_l2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2l2m0r1m1m
+double EMDecayWidths::T2_l2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(1.5) * alpha_rho * std::pow(k_value, 2) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T2l2m1r1m0
+double EMDecayWidths::T2_l2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T3l2m0r1m1m
+double EMDecayWidths::T3_l2_m0_r1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3l2m1r1m0
+double EMDecayWidths::T3_l2_m1_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+//Definitions of the Integrals and Tensor Operators for decays from D-wave rho to P-wave lambda
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 3) * mbottom * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 3) * mbottom * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r2_m0_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1r2m0l1m1m
+double EMDecayWidths::T1_r2_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * alpha_rho);
+  return value;
+}
+
+//T1r2m1l1m0
+double EMDecayWidths::T1_r2_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r2m0l1m1m
+double EMDecayWidths::T1_r2_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * alpha_rho);
+  return value;
+}
+
+//T2r2m1l1m0
+double EMDecayWidths::T1_r2_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T3r2m0l1m1m
+double EMDecayWidths::T3_r2_m0_l1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3r2m1l1m0
+double EMDecayWidths::T3_r2_m1_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+//Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave rho
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r1_m1_l1_m0_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( p_imag * std::sqrt(3) * k_value *  mbottom * value4 * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m1_l1_m0_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m0_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( p_imag * std::sqrt(3) * k_value *  mbottom * value4 * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m1m_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m1_l1_m0_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * std::sqrt(3.) * k_value * mlight * std::exp(value1))/(alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m0_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * std::sqrt(3.) * k_value * mlight * std::exp(value1))/(alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m1m_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * std::sqrt(3.) * k_value * mlight * std::exp(value1))/(alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1r1m0l1m0r1m1m
+double EMDecayWidths::T1_r1_m0_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T1r1m1l1m0r1m0
+double EMDecayWidths::T1_r1_m1_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T1r1m1l1m1r1m1
+double EMDecayWidths::T1_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(1.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T1r1m0l1m1r1m0
+double EMDecayWidths::T1_r1_m0_l1_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( (-1.0) * p_imag * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * std::pow(alpha_rho, 2));
+  return value;
+}
+
+//T1r1m1ml1m1r1m1m
+double EMDecayWidths::T1_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(1.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r1m0l1m0r1m1m
+double EMDecayWidths::T2_r1_m0_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r1m1l1m0r1m0
+double EMDecayWidths::T2_r1_m1_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r1m1l1m1r1m1
+double EMDecayWidths::T2_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(1.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r1m0l1m1r1m0
+double EMDecayWidths::T2_r1_m0_l1_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( (-1.0) * p_imag * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * std::pow(alpha_rho, 2));
+  return value;
+}
+
+//T2r1m1ml1m1r1m1m
+double EMDecayWidths::T2_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(1.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T3r1m0l1m0r1m1m
+double EMDecayWidths::T3_r1_m0_l1_m0_r1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m0r1m0
+double EMDecayWidths::T3_r1_m1_l1_m0_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m1r1m1
+double EMDecayWidths::T3_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
+
+//T3r1m0l1m1r1m0
+double EMDecayWidths::T3_r1_m0_l1_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
+
+//T3r1m1ml1m1r1m1m
+double EMDecayWidths::T3_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
+
+//Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave lambda
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value = ( p_imag * k_value * value4 * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m0_l1_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m0_l1_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value = ( (-1.0) * p_imag * k_value * value4 * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m0_l1_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m0_l1_m1_l1_m1(){
+  double value = 0;
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m0_l1_m0_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m0_l1_m1m_l1_m1m(){
+  double value = 0;
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1r1m0l1m0l1m1m
+double EMDecayWidths::T1_r1_m0_l1_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2.) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T1r1m0l1m1l1m0
+double EMDecayWidths::T1_r1_m0_l1_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T1r1m1l1m1l1m1
+double EMDecayWidths::T1_r1_m1_l1_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(2.) * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T1r1m1l1m0l1m0
+double EMDecayWidths::T1_r1_m1_l1_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2) - 3. * std::pow(k_value, 2) * std::pow(mbottom, 2));
+  double value = ( p_imag * alpha_rho * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T1r1m1l1m1ml1m1m
+double EMDecayWidths::T1_r1_m1_l1_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(2) * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r1m0l1m0l1m1m
+double EMDecayWidths::T2_r1_m0_l1_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2.) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r1m0l1m1l1m0
+double EMDecayWidths::T2_r1_m0_l1_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r1m1l1m1l1m1
+double EMDecayWidths::T2_r1_m1_l1_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(2.) * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r1m1l1m0l1m0
+double EMDecayWidths::T2_r1_m1_l1_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2) - 3. * std::pow(k_value, 2) * std::pow(mbottom, 2));
+  double value = ( (-1.0) * p_imag * alpha_rho * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T2r1m1l1m1ml1m1m
+double EMDecayWidths::T2_r1_m1_l1_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(2) * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T3r1m0l1m0l1m1m
+double EMDecayWidths::T3_r1_m0_l1_m0_l1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m0l1m1l1m0
+double EMDecayWidths::T3_r1_m0_l1_m1_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m1l1m1
+double EMDecayWidths::T3_r1_m1_l1_m1_l1_m1(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m0l1m0
+double EMDecayWidths::T3_r1_m1_l1_m0_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m1ml1m1m
+double EMDecayWidths::T3_r1_m1_l1_m1m_l1_m1m(){
+  double value = 0;
+  return value;
+}
+
 
 
 
