@@ -1873,7 +1873,7 @@ double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m0_l1_m0(double k_value, double alpha
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
   double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
-  double value = ( p_imag * k_value * value4 * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  double value = ( p_imag * k_value * value4 * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_lam, 2) * alpha_rho * (mbottom + 2. * mlight));
   return value;
 }
 
