@@ -1746,7 +1746,7 @@ double EMDecayWidths::T1_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, dou
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = ( p_imag * std::sqrt(2/3) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  double value = ( p_imag * std::pow(2./3., 0.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
   return value;
 }
 
@@ -1767,7 +1767,7 @@ double EMDecayWidths::T1_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, 
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = ( p_imag * std::sqrt(2/3) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  double value = ( p_imag * std::pow(2./3., 0.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
   return value;
 }
 
@@ -1797,7 +1797,7 @@ double EMDecayWidths::T2_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, dou
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = ( p_imag * std::sqrt(2/3) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  double value = ( p_imag * std::pow(2./3., 0.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
   return value;
 }
 
@@ -1818,7 +1818,7 @@ double EMDecayWidths::T2_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, 
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = ( p_imag * std::sqrt(2/3) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  double value = ( p_imag * std::pow(2./3., 0.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
   return value;
 }
 
