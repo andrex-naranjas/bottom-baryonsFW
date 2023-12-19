@@ -148,11 +148,11 @@ class ElectroWidths:
         """
         Method to set number of decay channels has each baryon
         """
-        if(baryons=='omegas'):           return 2
-        elif(baryons=='cascades'):       return 6
-        elif(baryons=='sigmas'):         return 7
-        elif(baryons=='lambdas'):        return 3
-        elif(baryons=='cascades_anti3'): return 6
+        if(baryons=='omegas'):           return 9  #2
+        elif(baryons=='cascades'):       return 34 #6
+        elif(baryons=='sigmas'):         return 35 #7
+        elif(baryons=='lambdas'):        return 17 #3
+        elif(baryons=='cascades_anti3'): return 34 #6
 
     def decay_mass(self, bootstrap, baryons, decPr):
         """
@@ -164,7 +164,9 @@ class ElectroWidths:
                 else: return np.random.choice(self.gauss_omega, size=None)
             if(decPr==2):
                 if not bootstrap:  return self.omega_s_mass
-                else: return np.random.choice(self.gauss_omega_s, size=None)         
+                else: return np.random.choice(self.gauss_omega_s, size=None)
+            return self.omega_s_mass # testing
+                
         elif(baryons=='cascades' or baryons=='cascades_anti3'):
             if(decPr==1):
                 if not bootstrap: return self.xi_mass
