@@ -60,6 +60,8 @@ def state_labels(baryon, ModEx, decPr, L_tot):
             decPr_name = "Xi'0*+gamma"
         elif(decPr==6):
             decPr_name = "Xi'*-+gamma"
+        else:
+            decPr_name = "Xi'XX*-+gamma"
     elif(baryon==3):
         baryon_name = "sigma"
         if(decPr==1):

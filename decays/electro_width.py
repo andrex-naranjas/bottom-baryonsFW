@@ -22,6 +22,7 @@ class ElectroWidths:
     def __init__(self, bootstrap=False, baryons='', workpath="."):
         self.m_width = decay(workpath)
         self.fetch_decay_masses(bootstrap)
+        self.fetch_decay_masses_cascade_anti3(bootstrap) # cascades_anti3
         self.channel_widths_vector = []
 
     def total_decay_width(self, baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val,
@@ -37,7 +38,7 @@ class ElectroWidths:
         ms = 465.0
         mb = 4928.0
         k_prim = 5044.799302252
-        massA = 5.935 * 1000
+        massA = 6.354 * 1000
 
         MassA = massA/1000.0
         mbottom  = mb/1000.0
@@ -52,16 +53,23 @@ class ElectroWidths:
             
         baryon = self.baryon_flag(baryons)
         ModEx = self.ModEx_flag(ModEx_val)
-        nChannels = self.n_channels(baryons)
+        nChannels_Swave = self.n_channels_Swave(baryons)
+        nChannels_Pwave = self.n_channels_Pwave(baryons)
+        nChannels_Dwave = self.n_channels_Dwave(baryons)
+        
         m_lam, m_rho = self.reduced_masses(baryons, mbottom*1000, mupdown*1000, mstrange*1000)
         channel_widths = ([])        
 
         alpha_lam = self.alphas(k_prim, m_lam)
         alpha_rho = self.alphas(k_prim, m_rho)
 
-        for i in range(nChannels):
+        # loop P-wave (por el momento tambien ground)
+        for i in range(nChannels_Pwave):
             decPr = i+1
+            #decPr = 19 # test
+            
             MassB = self.decay_mass(bootstrap, baryons, decPr)
+            MassB = 6.198 # test
             single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                             MassB,
                                                             alpha_lam, alpha_rho,
@@ -83,9 +91,11 @@ class ElectroWidths:
         self.channel_widths_vector.append(channel_widths) # for individual decay tables, this is a list of arrays!
         return total_decay_width
 
+    
+
     def orbital_projections(self, ModEx_val, LA_val):
         """
-        Method to fecth the orbital projection (up to P-wave)
+        Method to fecth the orbital projection (up to D-wave "new")
         """
         if(ModEx_val=="grd"):
             LlA = LA_val
@@ -96,6 +106,15 @@ class ElectroWidths:
         elif(ModEx_val=="rho"):
             LlA = 0
             LrA = LA_val
+        elif(ModEx_val=="rpl"):
+            LlA = -1
+            LrA = -1
+        elif(ModEx_val=="rpr"):            
+            LlA = -1
+            LrA = -1
+        elif(ModEx_val=="mix"):
+            LlA = 1
+            LrA = 1
         else:
             LlA = -1
             LrA = -1
@@ -138,13 +157,36 @@ class ElectroWidths:
     def ModEx_flag(self, ModEx_val):
         """
         Method to parse the h.o mode to integers
-        grd=0, lam =1 , rho=2
+        grd=0, lam =1, rho=2, rpl=3, rpr=4, mix=5
         """
         if(ModEx_val=='grd'):   return 0
         elif(ModEx_val=='lam'): return 1
         elif(ModEx_val=='rho'): return 2
+        elif(ModEx_val=='rpl'): return 3
+        elif(ModEx_val=='rpr'): return 4
+        elif(ModEx_val=='mix'): return 5
 
-    def n_channels(self, baryons):
+    def n_channels_Swave(self, baryons):
+        """
+        Method to set number of decay channels has each baryon
+        """
+        if(baryons=='omegas'):           return 9  #2
+        elif(baryons=='cascades'):       return 34 #6
+        elif(baryons=='sigmas'):         return 35 #7
+        elif(baryons=='lambdas'):        return 17 #3
+        elif(baryons=='cascades_anti3'): return 34 #6
+
+    def n_channels_Pwave(self, baryons):
+        """
+        Method to set number of decay channels has each baryon
+        """
+        if(baryons=='omegas'):           return 2
+        elif(baryons=='cascades'):       return 6
+        elif(baryons=='sigmas'):         return 7
+        elif(baryons=='lambdas'):        return 3
+        elif(baryons=='cascades_anti3'): return 6
+
+    def n_channels_Dwave(self, baryons):
         """
         Method to set number of decay channels has each baryon
         """
@@ -167,7 +209,7 @@ class ElectroWidths:
                 else: return np.random.choice(self.gauss_omega_s, size=None)
             return self.omega_s_mass # testing
                 
-        elif(baryons=='cascades' or baryons=='cascades_anti3'):
+        elif(baryons=='cascades'):
             if(decPr==1):
                 if not bootstrap: return self.xi_mass
                 else: return np.random.choice(self.gauss_xi, size=None)
@@ -186,6 +228,18 @@ class ElectroWidths:
             elif(decPr==6):
                 if not bootstrap: return self.xi_p_s_mass
                 else: return np.random.choice(self.gauss_xi_p_s, size=None)
+            else:
+                return self.xi_p_s_mass # test
+            
+        elif(baryons=='cascades_anti3'):
+            if(decPr==1):
+                if not bootstrap: return self.xi_mass
+                else: return np.random.choice(self.gauss_xi, size=None)
+            elif(decPr==2):
+                if not bootstrap: return self.xi_mass
+                else: return np.random.choice(self.gauss_xi, size=None)
+
+            
         elif(baryons=='sigmas'):
             if(decPr==1):
                 if not bootstrap: return self.sigma_mass
@@ -242,16 +296,50 @@ class ElectroWidths:
             self.gauss_xi       = np.random.normal(5.80600, 0.00700, 10000)
             self.gauss_lambda   = np.random.normal(5.61400, 0.00700, 10000)
 
+    def fetch_decay_masses_cascade_anti3(self, bootstrap):
+        '''
+        Method to fetch the decay products coming from our fit (mA)
+        '''
+        # decay to cascades anti-triplet
+        self.xi_1_decay = 5.80600 # 0 ground
+        self.xi_2_decay = 6.07900 # 0 2p1/2-lam 
+        self.xi_3_decay = 6.08500 # 0 2p3/2-lam
+        self.xi_4_decay = 6.248   # 0 2p1/2-rho
+        self.xi_5_decay = 6.271   # 0 4p1/2-rho
+        self.xi_6_decay = 6.255   # 0 2p3/2-rho
+        self.xi_7_decay = 6.277   # 0 4p3/2-rho
+        self.xi_8_decay = 6.287   # 0 4p5/2-rho
+
+        
+        self.xi_9_mass = 6.354
+        self.xi_10_mass = 6.364
+        self.xi_11_mass = 6.360
+        self.xi_12_mass = 6.699
+        self.xi_13_mass = 6.524
+        self.xi_14_mass = 6.534
+        self.xi_15_mass = 6.540
+        self.xi_16_mass = 6.546
+        self.xi_17_mass = 6.556
+        self.xi_18_mass = 6.570
+        self.xi_19_mass = 6.526
+        self.xi_20_mass = 6.532
+        self.xi_21_mass = 6.548
+        self.xi_22_mass = 6.554
+        self.xi_23_mass = 6.564
+        self.xi_24_mass = 6.558
+        self.xi_25_mass = 6.530
+        self.xi_26_mass = 6.693
+        self.xi_27_mass = 6.703
 
 decay_em = ElectroWidths()
 
-baryons = "omegas"
+baryons = "cascades_anti3"
 k_prim = 1
 massA = 1
-SA_val = 1
-JA_val = 1 
-LA_val = 1
-SlA_val = 1
+SA_val = 0.5
+JA_val = 1.5
+LA_val = 2
+SlA_val = 0
 ModEx_val = 'grd'
 
 decay_em.total_decay_width(baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val,
