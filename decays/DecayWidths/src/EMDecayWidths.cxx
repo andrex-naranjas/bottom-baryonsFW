@@ -192,48 +192,47 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
     else if(decayProd==17){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0 2p3/2-rho
 
   }else if(baryonFlag==5){// cascades anti3_plet
-    //&& lla_val==0 && lra_val==0
     // decay cascade anti-triplet    
-    if(decayProd==11)    {flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //0  ground
-    else if(decayProd==2){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p1/2-lam
-    else if(decayProd==3){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p3/2-lam
-    else if(decayProd==4){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //0  2p1/2-rho
-    else if(decayProd==5){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //0  4p1/2-rho
-    else if(decayProd==6){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //0  2p3/2-rho
-    else if(decayProd==7){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //0  4p3/2-rho
-    else if(decayProd==8){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //0  4p5/2-rho
+    if(decayProd==101)    {flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;}  //0  ground
+    else if(decayProd==201){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p1/2-lam
+    else if(decayProd==202){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p3/2-lam
+    else if(decayProd==203){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  2p1/2-rho
+    else if(decayProd==204){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p1/2-rho
+    else if(decayProd==205){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  2p3/2-rho
+    else if(decayProd==206){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p3/2-rho
+    else if(decayProd==207){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p5/2-rho
 
     // decay cascade anti-triplet -
-    else if(decayProd==12 || isPwaveL || isPwaveR){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;}  //-  ground
-    else if(decayProd==10){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;}  //-  2p1/2-lam
-    else if(decayProd==21){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;}  //-  2p3/2-lam
-    else if(decayProd==22){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  2p1/2-rho
-    else if(decayProd==23){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p1/2-rho
-    else if(decayProd==24){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  2p3/2-rho
-    else if(decayProd==25){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p3/2-rho
-    else if(decayProd==26){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p5/2-rho
+    else if(decayProd==102){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;}  //-  ground
+    else if(decayProd==208){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;}  //-  2p1/2-lam
+    else if(decayProd==209){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;}  //-  2p3/2-lam
+    else if(decayProd==210){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  2p1/2-rho
+    else if(decayProd==211){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p1/2-rho
+    else if(decayProd==212){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  2p3/2-rho
+    else if(decayProd==213){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p3/2-rho
+    else if(decayProd==214){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p5/2-rho
 
     // decay to cascade prime 0
-    else if(decayProd==13){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
-    else if(decayProd==14){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
-    else if(decayProd==29){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p1/2-lam
-    else if(decayProd==20){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p1/2-lam
-    else if(decayProd==21){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p3/2-lam
-    else if(decayProd==22){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p3/2-lam
-    else if(decayProd==23){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p5/2-lam
-    else if(decayProd==24){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p1/2-rho
-    else if(decayProd==25){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p3/2-rho
+    else if(decayProd==103){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==104){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==215){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p1/2-lam
+    else if(decayProd==216){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p1/2-lam
+    else if(decayProd==217){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p3/2-lam
+    else if(decayProd==218){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p3/2-lam
+    else if(decayProd==219){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p5/2-lam
+    else if(decayProd==220){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p1/2-rho
+    else if(decayProd==221){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p3/2-rho
 
     // decay to cascade prime -
-    else if(decayProd==15){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
-    else if(decayProd==16){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
-    else if(decayProd==28){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p1/2-lam
-    else if(decayProd==29){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p1/2-lam
-    else if(decayProd==30){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p3/2-lam
-    else if(decayProd==31){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p3/2-lam
-    else if(decayProd==32){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p5/2-lam
-    else if(decayProd==33){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p1/2-rho
-    else if(decayProd==34){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p3/2-rho
+    else if(decayProd==105){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==106){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==222){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p1/2-lam
+    else if(decayProd==223){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p1/2-lam
+    else if(decayProd==224){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p3/2-lam
+    else if(decayProd==225){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p3/2-lam
+    else if(decayProd==226){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p5/2-lam
+    else if(decayProd==227){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p1/2-rho
+    else if(decayProd==228){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p3/2-rho
   }
 
   //fetch quantum numbers and projections
@@ -352,7 +351,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
 			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
 			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-				dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode) *
+				dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode) *
 				  std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1))*
 				  ClebschGordan(m_wigner, LB,  SB,  JB,  mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
 				  ClebschGordan(m_wigner, LA,  SA,  JA,  mLA.at(iMLA),   mSA.at(iMSA),   mJA.at(iMJA))*
@@ -369,7 +368,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP1, ORBITAL SPLIT
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
-	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                         
+	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
 	    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
 	      for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
 		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
@@ -528,17 +527,27 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
   return 0.;
 }
 
-double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int mLrA, int mLlA, int excMode){
   double thetak=0., phik=0.;
   if(mLlA!=0 && excMode==0) return 0.;
   if(mLlA!=0 && excMode==1) return 0.;
   if(mLrA!=0 && excMode==2) return 0.;
   if(excMode==0) //ground 
     return SPINFLIP_U1_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
-  else if(excMode==1) //lambda excitation
-    return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==1){ // lambda excitation
+    if(LA==1)      return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+    else if(LA==2) return U1D2P2m1m * KroneckerDelta(MLB, MLA);}
+
+  //U1D2P2m1m = SPINFLIP_U1_l2_m0_l1_m0 + SPINFLIP_U1_l2_m1m_l1_m1m + SPINFLIP_U2_l2_m1_l1_m1;
+
+
+  
+
   else if(excMode==2) //rho excitation
-    return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+    if(LA==1) return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+    else if(LA==2) return 
+
+    
   return 0.;
 }
 
