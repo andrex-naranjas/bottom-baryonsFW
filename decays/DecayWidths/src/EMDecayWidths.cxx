@@ -538,7 +538,7 @@ double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1)      return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
     else if(LA==2) return U1D2P2m1m * KroneckerDelta(MLB, MLA);}
 
-  //U1D2P2m1m = SPINFLIP_U1_l2_m0_l1_m0 + SPINFLIP_U1_l2_m1m_l1_m1m + SPINFLIP_U2_l2_m1_l1_m1;
+  //U1D2P2m1m = SPINFLIP_U2_l2_m1_l1_m1 * KroneckerDelta(MLlA, 1) * KroneckerDelta(MLlB, 1) +  SPINFLIP_U1_l2_m0_l1_m0 * KroneckerDelta(MLlA, 0) * KroneckerDelta(MLlB, 0) + SPINFLIP_U1_l2_m1m_l1_m1m * KroneckerDelta(MLlA, -1) * KroneckerDelta(MLlB, -1);
 
 
   
