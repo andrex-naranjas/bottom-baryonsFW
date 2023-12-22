@@ -536,9 +536,14 @@ double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alp
     return SPINFLIP_U1_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
   else if(excMode==1){ // lambda excitation
     if(LA==1)      return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-    else if(LA==2) return U1D2P2m1m * KroneckerDelta(MLB, MLA);}
+    else if(LA==2) return U1Dl2Pl2m1m;}
 
-  //U1D2P2m1m = SPINFLIP_U2_l2_m1_l1_m1 * KroneckerDelta(MLlA, 1) * KroneckerDelta(MLlB, 1) +  SPINFLIP_U1_l2_m0_l1_m0 * KroneckerDelta(MLlA, 0) * KroneckerDelta(MLlB, 0) + SPINFLIP_U1_l2_m1m_l1_m1m * KroneckerDelta(MLlA, -1) * KroneckerDelta(MLlB, -1);
+  //U1Dl2Pl2m1m = SPINFLIP_U1_l2_m1_l1_m1 * KroneckerDelta(MLlA, 1) * KroneckerDelta(MLlB, 1) +  SPINFLIP_U1_l2_m0_l1_m0 * KroneckerDelta(MLlA, 0) * KroneckerDelta(MLlB, 0) + SPINFLIP_U1_l2_m1m_l1_m1m * KroneckerDelta(MLlA, -1) * KroneckerDelta(MLlB, -1);
+  //U2Dl2Pl2m1m = SPINFLIP_U2_l2_m1_l1_m1 * KroneckerDelta(MLlA, 1) * KroneckerDelta(MLlB, 1) +  SPINFLIP_U2_l2_m0_l1_m0 * KroneckerDelta(MLlA, 0) * KroneckerDelta(MLlB, 0) + SPINFLIP_U2_l2_m1m_l1_m1m * KroneckerDelta(MLlA, -1) * KroneckerDelta(MLlB, -1);
+  //U3Dl2Pl2m1m = SPINFLIP_U3_l2_m1_l1_m1 * KroneckerDelta(MLlA, 1) * KroneckerDelta(MLlB, 1) +  SPINFLIP_U3_l2_m0_l1_m0 * KroneckerDelta(MLlA, 0) * KroneckerDelta(MLlB, 0) + SPINFLIP_U3_l2_m1m_l1_m1m * KroneckerDelta(MLlA, -1) * KroneckerDelta(MLlB, -1);
+  //T1Dl2Pll2ml1m = T1_l2_m2_l1_m1 *  KroneckerDelta(mLlA, 2) * KroneckerDelta(mLlB, 1) +  T1_l2_m1_l1_m0 * KroneckerDelta(mLlA, 1) * KroneckerDelta(mLlB, 0) + T1_l2_m0_l1_m1m * KroneckerDelta(mLlA,0) * KroneckerDelta(mLlB, -1)
+  //T2Dl2Pll2ml1m = T2_l2_m2_l1_m1 *  KroneckerDelta(mLlA, 2) * KroneckerDelta(mLlB, 1) +  T2_l2_m1_l1_m0 * KroneckerDelta(mLlA, 1) * KroneckerDelta(mLlB, 0) + T2_l2_m0_l1_m1m * KroneckerDelta(mLlA,0) * KroneckerDelta(mLlB, -1)
+  //T3Dl2Pll2ml1m = T3_l2_m2_l1_m1 *  KroneckerDelta(mLlA, 2) * KroneckerDelta(mLlB, 1) +  T3_l2_m1_l1_m0 * KroneckerDelta(mLlA, 1) * KroneckerDelta(mLlB, 0) + T3_l2_m0_l1_m1m * KroneckerDelta(mLlA,0) * KroneckerDelta(mLlB, -1)
 
 
   
