@@ -351,7 +351,8 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
 			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
 			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-				dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode) *
+				//      U1_rho_lambda(k_value, alpha_rho, alpha_lam, LA, MLA, MLB, mLrA,     mLlA,     mLlB, int excMode)
+				dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLA.at(iMLA),  mLB.at(iMLB), mLrA.at(iMLrA), mLlA.at(iMLlA), mLlB.at(iMLlB), excMode) *
 				  std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1))*
 				  ClebschGordan(m_wigner, LB,  SB,  JB,  mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
 				  ClebschGordan(m_wigner, LA,  SA,  JA,  mLA.at(iMLA),   mSA.at(iMSA),   mJA.at(iMJA))*
@@ -365,7 +366,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			      }
     AMP1_1 *= flav_q1 * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP1, ORBITAL SPLIT
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP1, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
 	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
@@ -374,7 +375,8 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
 		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
 		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-		      dummy = T1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+		      //      T1_rho_lambda(k_value, alpha_rho, alpha_lam, int LA, int mLrA, int MLlA, int MLlB, int excMode)
+		      dummy = T1_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLrA.at(iMLrA), mLlA.at(iMLlA), mLlB.at(iMLlB), excMode)*
 			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
 			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA)) *
 			ClebschGordan(m_wigner, LB,  SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),    mJB.at(iMJB))*
@@ -400,7 +402,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
     			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
     			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-    				dummy = U2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+    				dummy = U2_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLA.at(iMLA),  mLB.at(iMLB), mLrA.at(iMLrA), mLlA.at(iMLlA), mLlB.at(iMLlB), excMode)*
     				  std::sqrt((S2 + mS2.at(iMS2)) * (S2 - mS2.at(iMS2) + 1))*
     				  ClebschGordan(m_wigner, LB,  SB,  JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
     				  ClebschGordan(m_wigner, LA,  SA,  JA,   mLA.at(iMLA),    mSA.at(iMSA),     mJA.at(iMJA))*
@@ -414,7 +416,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			      }
     AMP2_1 *= flav_q2 * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP2, ORBITAL SPLIT
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP2, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
     	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
     	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                    
@@ -423,7 +425,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
     		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
     		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-    		      dummy = T2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+    		      dummy = T2_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLrA.at(iMLrA), mLlA.at(iMLlA), mLlB.at(iMLlB), excMode)*
     			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
     			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
     			ClebschGordan(m_wigner, LB,   SB,  JB,  mLB.at(iMLB),    mSB.at(iMSB),    mJB.at(iMJB))*
@@ -449,7 +451,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
     			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
     			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-    				dummy = U3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+    				dummy = U3_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLA.at(iMLA),  mLB.at(iMLB), mLrA.at(iMLrA), mLlA.at(iMLlA), mLlB.at(iMLlB), excMode)*
     				  std::sqrt((S3 + mS3.at(iMS3))*(S3 - mS3.at(iMS3) + 1))*
     				  ClebschGordan(m_wigner, LB,   SB,   JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
     				  ClebschGordan(m_wigner, LA,   SA,   JA,   mLA.at(iMLA),    mSA.at(iMSA),     mJA.at(iMJA))*
@@ -463,7 +465,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			      }
     AMP3_1 *= flav_q3 * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP3, ORBITAL SPLIT
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP3, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
     	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
     	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
@@ -472,7 +474,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
     		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
     		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-    		      dummy = T3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+    		      dummy = T3_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLrA.at(iMLrA), mLlA.at(iMLlA), mLlB.at(iMLlB), excMode)*
     			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
     			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
     			ClebschGordan(m_wigner, LB,   SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
@@ -492,95 +494,141 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
   return SUM_SQUARED_AMP;
 }
 
-double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA, int MLlB, int excMode){
   double thetak=0., phik=0.;
   if(excMode==0) //ground
     return 0.;
-  else if(excMode==1) //lambda excitation
-    return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  else if(excMode==2) //rho excitation
-    return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  else if(excMode==1){ //lambda excitation
+    if(LA==1) return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);
+    else if(LA==2)  return T1Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB);}
+  else if(excMode==2){ //rho excitation
+    if(LA==1) return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);}
   
   return 0.;
 }
 
-double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA, int MLlB, int excMode){
   double thetak=0., phik=0.;
-  if(excMode==0) //ground 
-    return 0.;
-  else if(excMode==1) //lambda excitation
-    return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  else if(excMode==2) //rho excitation
-    return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
 
+  if(excMode==0){ //ground 
+    return 0.;}
+  else if(excMode==1){ //lambda excitation
+    if(LA==1) return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);
+    else if(LA==2) return T2Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB);
+  }
+  else if(excMode==2){ //rho excitation
+    return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);}
+  
   return 0.;
 }
 
-double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA, int MLlB, int excMode){
   double thetak=0., phik=0.;
   if(excMode==0)//ground 
     return 0.;
-  else if(excMode==1) //lambda excitation
-    return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  else if(excMode==1){ //lambda excitation
+    if(LA==1) return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);
+    else if(LA==2) return T3Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); }
   else if(excMode==2) //rho excitation
     return T3r();
   return 0.;
 }
 
-double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int mLrA, int mLlA, int excMode){
+// Dwave->Pwave lambda
+double EMDecayWidths::U1Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLlB_val){
+  double value1 = SPINFLIP_U1_l2_m1_l1_m1(  k_value, alpha_lam, alpha_rho, mbottom, mlight)   * KroneckerDelta((double)MLlA_val, 1)  * KroneckerDelta(MLlB_val, 1);
+  double value2 = SPINFLIP_U1_l2_m0_l1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight)   * KroneckerDelta(MLlA_val, 0)  * KroneckerDelta(MLlB_val, 0);
+  double value3 = SPINFLIP_U1_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)   * KroneckerDelta(MLlA_val, -1) * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::U2Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLlB_val){
+  double value1 = SPINFLIP_U2_l2_m1_l1_m1(  k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 1) * KroneckerDelta(MLlB_val, 1);
+  double value2 = SPINFLIP_U2_l2_m0_l1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLlB_val, 0);
+  double value3 = SPINFLIP_U2_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, -1) * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::U3Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLlB_val){
+  double value1 = SPINFLIP_U3_l2_m1_l1_m1(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLlB_val, 1);
+  double value2 = SPINFLIP_U3_l2_m0_l1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLlA_val, 0)  * KroneckerDelta(MLlB_val, 0);
+  double value3 = SPINFLIP_U3_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, -1) * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::T1Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLlB_val){
+  double value1 = T1_l2_m2_l1_m1( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLlA_val, 2) * KroneckerDelta(MLlB_val, 1);
+  double value2 = T1_l2_m1_l1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLlB_val, 0);
+  double value3 = T1_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val,0)   * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+    
+double EMDecayWidths::T2Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLlB_val){
+  double value1 = T2_l2_m2_l1_m1( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLlA_val, 2) * KroneckerDelta(MLlB_val, 1);
+  double value2 = T2_l2_m1_l1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLlB_val, 0);
+  double value3 = T2_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val,0)   * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::T3Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLlB_val){
+  double value1 = T3_l2_m2_l1_m1( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLlA_val, 2) * KroneckerDelta(MLlB_val, 1);
+  double value2 = T3_l2_m1_l1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  * KroneckerDelta(MLlA_val, 1) * KroneckerDelta(MLlB_val, 0);
+  double value3 = T3_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+
+double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLlB,  int excMode){
   double thetak=0., phik=0.;
-  if(mLlA!=0 && excMode==0) return 0.;
-  if(mLlA!=0 && excMode==1) return 0.;
-  if(mLrA!=0 && excMode==2) return 0.;
-  if(excMode==0) //ground 
+  
+  if(MLlA!=0 && excMode==0) return 0.;
+  // if(MLlA!=0 && excMode==1) return 0.;
+  // if(MLrA!=0 && excMode==2) return 0.;
+
+  if(excMode==0) //ground
     return SPINFLIP_U1_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
   else if(excMode==1){ // lambda excitation
-    if(LA==1)      return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-    else if(LA==2) return U1Dl2Pl2m1m;}
-
-  //U1Dl2Pl2m1m = SPINFLIP_U1_l2_m1_l1_m1 * KroneckerDelta(MLlA, 1) * KroneckerDelta(MLlB, 1) +  SPINFLIP_U1_l2_m0_l1_m0 * KroneckerDelta(MLlA, 0) * KroneckerDelta(MLlB, 0) + SPINFLIP_U1_l2_m1m_l1_m1m * KroneckerDelta(MLlA, -1) * KroneckerDelta(MLlB, -1);
-  //U2Dl2Pl2m1m = SPINFLIP_U2_l2_m1_l1_m1 * KroneckerDelta(MLlA, 1) * KroneckerDelta(MLlB, 1) +  SPINFLIP_U2_l2_m0_l1_m0 * KroneckerDelta(MLlA, 0) * KroneckerDelta(MLlB, 0) + SPINFLIP_U2_l2_m1m_l1_m1m * KroneckerDelta(MLlA, -1) * KroneckerDelta(MLlB, -1);
-  //U3Dl2Pl2m1m = SPINFLIP_U3_l2_m1_l1_m1 * KroneckerDelta(MLlA, 1) * KroneckerDelta(MLlB, 1) +  SPINFLIP_U3_l2_m0_l1_m0 * KroneckerDelta(MLlA, 0) * KroneckerDelta(MLlB, 0) + SPINFLIP_U3_l2_m1m_l1_m1m * KroneckerDelta(MLlA, -1) * KroneckerDelta(MLlB, -1);
-  //T1Dl2Pll2ml1m = T1_l2_m2_l1_m1 *  KroneckerDelta(mLlA, 2) * KroneckerDelta(mLlB, 1) +  T1_l2_m1_l1_m0 * KroneckerDelta(mLlA, 1) * KroneckerDelta(mLlB, 0) + T1_l2_m0_l1_m1m * KroneckerDelta(mLlA,0) * KroneckerDelta(mLlB, -1)
-  //T2Dl2Pll2ml1m = T2_l2_m2_l1_m1 *  KroneckerDelta(mLlA, 2) * KroneckerDelta(mLlB, 1) +  T2_l2_m1_l1_m0 * KroneckerDelta(mLlA, 1) * KroneckerDelta(mLlB, 0) + T2_l2_m0_l1_m1m * KroneckerDelta(mLlA,0) * KroneckerDelta(mLlB, -1)
-  //T3Dl2Pll2ml1m = T3_l2_m2_l1_m1 *  KroneckerDelta(mLlA, 2) * KroneckerDelta(mLlB, 1) +  T3_l2_m1_l1_m0 * KroneckerDelta(mLlA, 1) * KroneckerDelta(mLlB, 0) + T3_l2_m0_l1_m1m * KroneckerDelta(mLlA,0) * KroneckerDelta(mLlB, -1)
-
-
-  
+    if(LA==1)      return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak); // p-wave
+    else if(LA==2) return U1Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB);} //D-wave, lambda->lambda
 
   else if(excMode==2) //rho excitation
     if(LA==1) return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-    else if(LA==2) return 
+    else if(LA==2) return 0.; // falta  este caso
 
-    
-  return 0.;
+  return 0.;  
 }
 
-double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLlB,  int excMode){
   double thetak=0., phik=0.;
-  if(mLlA!=0 && excMode==0) return 0.;
-  if(mLlA!=0 && excMode==1) return 0.;
-  if(mLrA!=0 && excMode==2) return 0.;
+
+  if(MLlA!=0 && excMode==0) return 0.;
+  // if(MLlA!=0 && excMode==1) return 0.;
+  // if(MLrA!=0 && excMode==2) return 0.;
   if(excMode==0) //ground
     return SPINFLIP_U2_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
-  else if(excMode==1) //lambda excitation
-    return SPINFLIP_U2_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==1){ //lambda excitation
+    if (LA==1) return SPINFLIP_U2_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak); // p-wave
+    else if(LA==2) return U2Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB);} //D-wave, lambda->lambda
+  
   else if(excMode==2) //rho excitation
     return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
   return 0.;
 }
 
-double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLlB,  int excMode){
   double thetak=0., phik=0.;
-  if(mLlA!=0 && excMode==0) return 0.;
-  if(mLlA!=0 && excMode==1) return 0.;
-  if(mLrA!=0 && excMode==2) return 0.;
+  
+  if(MLlA!=0 && excMode==0) return 0.;
+  // if(MLlA!=0 && excMode==1) return 0.;
+  // if(MLrA!=0 && excMode==2) return 0.;
   if (excMode==0) //ground
     return SPINFLIP_U3_GS_GS(k_value, alpha_lam,  mbottom, mlight);
-  else if(excMode==1) //lambda excitation
-    return SPINFLIP_U3_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  else if(excMode==1){ //lambda excitation
+    if(LA==0) return SPINFLIP_U3_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+    else if(LA==2) return U3Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB);} //D-wave, lambda->lambda
   else if(excMode==2) //rho excitation
     return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+
   return 0.;
 }
 

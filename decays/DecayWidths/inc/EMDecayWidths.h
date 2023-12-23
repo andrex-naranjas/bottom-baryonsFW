@@ -67,12 +67,12 @@ class EMDecayWidths{
   virtual double FI2(double EB, double MA, double k_value);
 
   // SUMMARY INTEGRALS
-  virtual double U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
-  virtual double T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
-  virtual double U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
-  virtual double T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
-  virtual double U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
-  virtual double T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode);
+  virtual double U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int mLrA, int mLlA, int mLlB, int excMode);
+  virtual double T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int mLlA, int mLlB, int excMode);
+  virtual double U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int mLrA, int mLlA, int mLlB, int excMode);
+  virtual double T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int mLlA,  int mLlB, int excMode);
+  virtual double U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int mLrA, int mLlA, int mLlB, int excMode);
+  virtual double T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int mLlA,  int mLlB, int excMode);
 
   // SPIN-FLIP Integrals
   virtual double SPINFLIP_U1_GS_GS(double k_value, double alpha_lam, double alpha_rho, double MB, double ML);
@@ -295,7 +295,14 @@ class EMDecayWidths{
   virtual double T3_r1_m1_l1_m1_l1_m1();
   virtual double T3_r1_m1_l1_m0_l1_m0();
   virtual double T3_r1_m1_l1_m1m_l1_m1m();
-  
+
+  // Sum of integrals
+  virtual double U1Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA, int MLlB);
+  virtual double U2Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA, int MLlB);
+  virtual double U3Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA, int MLlB);
+  virtual double T1Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA, int MLlB);
+  virtual double T2Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA, int MLlB);
+  virtual double T3Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA, int MLlB);
 };
 
 
