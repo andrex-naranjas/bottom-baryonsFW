@@ -122,7 +122,6 @@ class ElectroWidths:
         return total_decay_width
 
     
-
     def orbital_projections(self, ModEx_val, LA_val):
         """
         Method to fecth the orbital projection (up to D-wave "new")
@@ -250,10 +249,10 @@ class ElectroWidths:
                 if not bootstrap: return self.xi_p_mass
                 else: return np.random.choice(self.gauss_xi_p, size=None)
             elif(decPr==104):
-                if not bootstrap: return self.xi_p_mass
+                if not bootstrap: return self.xi_p_s_mass
                 else: return np.random.choice(self.gauss_xi_p, size=None)
             elif(decPr==105):
-                if not bootstrap: return self.xi_p_s_mass
+                if not bootstrap: return self.xi_p_mass
                 else: return np.random.choice(self.gauss_xi_p_s, size=None)
             elif(decPr==106):
                 if not bootstrap: return self.xi_p_s_mass
