@@ -137,50 +137,98 @@ class BottomTables:
         flavor_name = du.flavor_label(self.m_baryons)
         self.m_load_data_compare(self.m_baryons)
         
-        print("\\begin{tabular}{c c| c c c c c c c c c}\hline \hline", file=f_paper)
-        print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM \cite{Yoshida:2015tia}     &  HQET \cite{Liu:2007fg, Mao:2015gya, Chen:2016phw}      &  NRQM \cite{Roberts:2007ni}  & $\chi$QM \cite{Kim:2021ywp}        & LQCD \cite{Mohanta:2019mxo}    & CQC \cite{Valcarce:2008dr} & NRQM \cite{Albertus:2003sx}  & Experimental  \\\ ", file=f_paper)
-        print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ & mass (MeV)  &   mass (MeV)  &  mass (MeV)  &  mass (MeV) & mass (MeV) & mass (MeV) &  mass (MeV) &  mass (MeV) &  mass (MeV) \\\ \hline", file=f_paper)
+        if self.m_baryons=="lambdas" or "sigmas":
+            print("\\begin{tabular}{c c| c c c c c c c c c c}\hline \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM     &  HQET      &  NRQM   & $\chi$QM       & LQCD    & CQC  & NRQM  & RQM  & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ &   &  \cite{Yoshida:2015tia}  &   \cite{Liu:2007fg, Mao:2015gya, Chen:2016phw}  &  \cite{Roberts:2007ni}  &  \cite{Kim:2021ywp} & \cite{Mohanta:2019mxo} & \cite{Valcarce:2008dr} &  \cite{Albertus:2003sx} &  \cite{Capstick:1986ter} &   \\\ \hline", file=f_paper)
 
-        s_wave_count,p_wave_count,d_wave_count=0,0,0
-        for i in range(len(self.m_mass)):
+            s_wave_count,p_wave_count,d_wave_count=0,0,0
+            for i in range(len(self.m_mass)):
 
-            if self.m_HO_n[i] == 0:                
-                if s_wave_count==0:
-                    s_wave_count+=1
-                    print('\hline', file=f_paper)
-                    print(" $N=0$  & &  &  &  &  & & & \\\ ", file=f_paper)
-            elif self.m_HO_n[i] == 1:
-                if p_wave_count==0:
-                    p_wave_count+=1
-                    print('\hline', file=f_paper)
-                    print(" $N=1$  & &  &  &  &  & & & \\\ ", file=f_paper)
-            elif self.m_HO_n[i] == 2:
-                if d_wave_count==0:
-                    d_wave_count+=1
-                    print('\hline', file=f_paper)
-                    print(" $N=2$  & &  &  &  &  &  &  &\\\ ", file=f_paper)
+                if self.m_HO_n[i] == 0:                
+                    if s_wave_count==0:
+                        s_wave_count+=1
+                        print('\hline', file=f_paper)
+                        print(" $N=0$  & &  &  &  &  & & & \\\ ", file=f_paper)
+                elif self.m_HO_n[i] == 1:
+                    if p_wave_count==0:
+                        p_wave_count+=1
+                        print('\hline', file=f_paper)
+                        print(" $N=1$  & &  &  &  &  & & & \\\ ", file=f_paper)
+                elif self.m_HO_n[i] == 2:
+                    if d_wave_count==0:
+                        d_wave_count+=1
+                        print('\hline', file=f_paper)
+                        print(" $N=2$  & &  &  &  &  &  &  &\\\ ", file=f_paper)
 
-            if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
-            else: SU_tot_val = 4/3
+                if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
+                else: SU_tot_val = 4/3
 
-            quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
-            wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
+                quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
 
-            mass_exp_latex,_= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
-            mass_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
-            mass_ysh_latex = du.compare_mass_latex(self.m_mass_ysh[i])
-            mass_hsk_latex = du.compare_mass_latex(self.m_mass_hsk[i])
-            mass_rob_latex = du.compare_mass_latex(self.m_mass_rob[i])
-            mass_kim_latex = du.compare_mass_latex(self.m_mass_kim[i])
-            mass_mon_latex = du.compare_mass_latex(self.m_mass_mon[i])
-            mass_val_latex = du.compare_mass_latex(self.m_mass_val[i])
-            mass_nie_latex = du.compare_mass_latex(self.m_mass_nie[i])
+                mass_exp_latex,_= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                mass_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+                mass_ysh_latex = du.compare_mass_latex(self.m_mass_ysh[i])
+                mass_hsk_latex = du.compare_mass_latex(self.m_mass_hsk[i])
+                mass_rob_latex = du.compare_mass_latex(self.m_mass_rob[i])
+                mass_kim_latex = du.compare_mass_latex(self.m_mass_kim[i])
+                mass_mon_latex = du.compare_mass_latex(self.m_mass_mon[i])
+                mass_val_latex = du.compare_mass_latex(self.m_mass_val[i])
+                mass_nie_latex = du.compare_mass_latex(self.m_mass_nie[i])
+                mass_isg_latex = du.compare_mass_latex(self.m_mass_isg[i])
             
-            print(quantum_state, wave_label,'&', mass_our_latex, '&', mass_ysh_latex,'&', mass_hsk_latex, '&', mass_rob_latex,'&', mass_kim_latex, '&', mass_mon_latex,'&', mass_val_latex,'&', mass_nie_latex,'&', mass_exp_latex, '\\\ ', file=f_paper)
+                print(quantum_state, wave_label,'&', mass_our_latex, '&', mass_ysh_latex,'&', mass_hsk_latex, '&', mass_rob_latex,'&', mass_kim_latex, '&', mass_mon_latex,'&', mass_val_latex,'&', mass_nie_latex,'&', mass_isg_latex,'&', mass_exp_latex, '\\\ ', file=f_paper)
         
-        print('\hline \hline', file=f_paper)
-        print('\end{tabular}', file=f_paper)
-        f_paper.close()
+            print('\hline \hline', file=f_paper)
+            print('\end{tabular}', file=f_paper)
+            f_paper.close()
+
+        elif self.m_baryons=="cascades_anti3" or "cascades" or "omegas":
+            print("\\begin{tabular}{c c| c c c c c c c c c}\hline \hline", file=f_paper)
+            print(baryon_name+ "& "  +flavor_name+  "& This work   &   NRQM     &  HQET      &  NRQM   & $\chi$QM       & LQCD    & CQC  & NRQM   & Experimental  \\\ ", file=f_paper)
+            print(" $\\vert l_{\\lambda}, l_{\\rho}, k_{\\lambda}, k_{\\rho} \\rangle$ & $^{2S+1}L_{J}$ &   &  \cite{Yoshida:2015tia}  &   \cite{Liu:2007fg, Mao:2015gya, Chen:2016phw}  &  \cite{Roberts:2007ni}  &  \cite{Kim:2021ywp} & \cite{Mohanta:2019mxo} & \cite{Valcarce:2008dr} &  \cite{Albertus:2003sx} &     \\\ \hline", file=f_paper)
+
+            s_wave_count,p_wave_count,d_wave_count=0,0,0
+            for i in range(len(self.m_mass)):
+
+                if self.m_HO_n[i] == 0:                
+                    if s_wave_count==0:
+                        s_wave_count+=1
+                        print('\hline', file=f_paper)
+                        print(" $N=0$  & &  &  &  &  & & & \\\ ", file=f_paper)
+                elif self.m_HO_n[i] == 1:
+                    if p_wave_count==0:
+                        p_wave_count+=1
+                        print('\hline', file=f_paper)
+                        print(" $N=1$  & &  &  &  &  & & & \\\ ", file=f_paper)
+                elif self.m_HO_n[i] == 2:
+                    if d_wave_count==0:
+                        d_wave_count+=1
+                        print('\hline', file=f_paper)
+                        print(" $N=2$  & &  &  &  &  &  &  &\\\ ", file=f_paper)
+
+                if self.m_SU_tot[i] > 3 and self.m_SU_tot[i] < 3.5 : SU_tot_val = 10/3 # horrible fix
+                else: SU_tot_val = 4/3
+
+                quantum_state = du.name_quantum_state(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                wave_label= du.wave_label(self.m_S_tot[i], self.m_J_tot[i], self.m_L_tot[i])
+
+                mass_exp_latex,_= du.exp_mass_width(self.m_baryons, self.m_J_tot[i], self.m_S_tot[i], self.m_L_tot[i], self.m_ModEx[i], SU_tot_val)
+                mass_our_latex = '$'+str(abs(round(self.m_mass[i])))+'^{+'+str(abs(round(self.m_error_up[i])))+'}_{-'+str(abs(round(self.m_error_dn[i])))+'}$'
+                mass_ysh_latex = du.compare_mass_latex(self.m_mass_ysh[i])
+                mass_hsk_latex = du.compare_mass_latex(self.m_mass_hsk[i])
+                mass_rob_latex = du.compare_mass_latex(self.m_mass_rob[i])
+                mass_kim_latex = du.compare_mass_latex(self.m_mass_kim[i])
+                mass_mon_latex = du.compare_mass_latex(self.m_mass_mon[i])
+                mass_val_latex = du.compare_mass_latex(self.m_mass_val[i])
+                mass_nie_latex = du.compare_mass_latex(self.m_mass_nie[i])
+            
+                print(quantum_state, wave_label,'&', mass_our_latex, '&', mass_ysh_latex,'&', mass_hsk_latex, '&', mass_rob_latex,'&', mass_kim_latex, '&', mass_mon_latex,'&', mass_val_latex,'&', mass_nie_latex,'&', mass_exp_latex, '\\\ ', file=f_paper)
+        
+            print('\hline \hline', file=f_paper)
+            print('\end{tabular}', file=f_paper)
+            f_paper.close()
 
     def comparison_three_quark_model_table_decays(self):
         """
@@ -1045,6 +1093,7 @@ class BottomTables:
         self.m_mass_mon  = round(data_frame["Mohanta"])
         self.m_mass_val  = round(data_frame["Valcarce"])
         self.m_mass_nie  = round(data_frame["Nieves"])
+        self.m_mass_isg  = round(data_frame["Isgur"])
 
     def m_load_data_compare_decays(self, baryons):
         data_frame = pd.read_csv(self.m_workpath+"/bottomfw/data/three_quark_comp/strong_" + baryons + "_compare.csv")
