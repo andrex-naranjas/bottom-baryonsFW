@@ -157,8 +157,8 @@ class BottomThreeQuark:
                                                                          self.S_tot[i], self.J_tot[i], self.L_tot[i], self.SL[i],
                                                                          self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
                     dummy_decay_em = np.append(dummy_decay_em, electro_decay) # total electro decay
-                    decays_electro_indi_csv.append(self.electro_decay.channel_widths_vector[0]) # individual channel electro decays
-                    self.electro_decay.channel_widths_vector=[] # clean decay object for next iteration
+                    decays_electro_indi_csv.append(self.electro_decay.channel_widths_vector_pwave[0]) # individual channel electro decays
+                    self.electro_decay.channel_widths_vector_pwave=[] # clean decay object for next iteration
 
             else: # no bootstrap at all, only one prediction using the average of the fitted parameters
                 mass = self.model_mass(i, 0, sampled=False)
@@ -170,13 +170,15 @@ class BottomThreeQuark:
                     dummy_decay    = np.append(dummy_decay, strong_decay) # total decay
                     decays_indi_csv.append(pd.DataFrame(self.baryon_decay.channel_widths_vector)) # individual channel strong decays
                     self.baryon_decay.channel_widths_vector=[]  # clean decay object for next iteration
-                if decay_width_em  and self.L_tot[i]<=1  and (self.ModEx[i]=="grd" or self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # electromagnetic decays only up to P-wave
+                # if decay_width_em and self.L_tot[i]<=1 and (self.ModEx[i]=="grd" or self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # electromagnetic decays only up to P-wave
+                if decay_width_em  and (self.ModEx[i]=="grd" or self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # electromagnetic decays up to D-wave
+                    print("perrito")
                     electro_decay = self.electro_decay.total_decay_width(baryons, self.Kp, mass,
                                                                          self.S_tot[i], self.J_tot[i], self.L_tot[i], self.SL[i],
                                                                          self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
                     dummy_decay_em = np.append(dummy_decay_em, electro_decay) # total electro decay
-                    decays_electro_indi_csv.append(pd.DataFrame(self.electro_decay.channel_widths_vector)) # individual channel electro decays
-                    self.electro_decay.channel_widths_vector=[] # clean decay object for next iteration
+                    decays_electro_indi_csv.append(pd.DataFrame(self.electro_decay.channel_widths_vector_pwave)) # individual channel electro decays
+                    self.electro_decay.channel_widths_vector_pwave=[] # clean decay object for next iteration
 
             # prepare data to a csv file
             masses_csv.append(pd.Series(dummy))

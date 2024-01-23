@@ -40,6 +40,9 @@ def state_labels(baryon, ModEx, decPr, L_tot):
             decPr_name = "Omg+gamma"
         elif(decPr==2):
             decPr_name = "Omg*+gamma"
+        else: # test
+            decPr_name = "OmgXX+gamma"
+            
     elif(baryon==2 or baryon==5):
         if(baryon==2):
             baryon_name = 'cas_6'
@@ -57,6 +60,8 @@ def state_labels(baryon, ModEx, decPr, L_tot):
             decPr_name = "Xi'0*+gamma"
         elif(decPr==6):
             decPr_name = "Xi'*-+gamma"
+        else:
+            decPr_name = "Xi'XX*-+gamma"
     elif(baryon==3):
         baryon_name = "sigma"
         if(decPr==1):
@@ -123,6 +128,8 @@ def latex_decay_label(baryon, decPr):
         if(decPr==1):
             decPr_name = ("$\Omega_{b} \gamma$", xi_mass)
         elif(decPr==2):                                                                         
+            decPr_name = ("$\Omega^{*}_{b} \gamma$", xi_p_mass)
+        else:                                                                     
             decPr_name = ("$\Omega^{*}_{b} \gamma$", xi_p_mass)
 
     elif(baryon==2 or baryon==5 or baryon=='cascades' or baryon=='cascades_anti3'):

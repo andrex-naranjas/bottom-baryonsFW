@@ -44,6 +44,20 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   else if(baryonFlag==2 or baryonFlag==5) mlight = 0.5*(mupdown_val + mstrange);
   else if(baryonFlag==3 or baryonFlag==4) mlight = mupdown;
 
+  bool isSwave  = false;
+  bool isPwaveL = false;
+  bool isPwaveR = false;
+  bool isDwaveL = false;
+  bool isDwaveR = false;
+  bool isMixed  = false;
+
+  // if(la_val==0)                             isSwave  = true;
+  // if(la_val==1 && lla_val==1 && lra_val==0) isPwaveL = true;
+  // if(la_val==1 && lla_val==0 && lra_val==1) isPwaveR = true;
+  // if(la_val==2 && lla_val==2 && lra_val==0) isDwaveL = true;
+  // if(la_val==2 && lla_val==0 && lra_val==2) isDwaveR = true;
+  // if(la_val==2 && lla_val==1 && lra_val==1) isMixed  = true;
+
   double alpha_rho = 0.,alpha_lam = 0.;
   alpha_rho = ar_val; alpha_lam = al_val;
 
@@ -61,39 +75,164 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   if(baryonFlag==1){// omegas
     if(decayProd== 1)    {flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Omega_-  ground
     else if(decayProd==2){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Omega_-* ground
-    else if(decayProd==3){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 2p1/2-lam
+    else if(decayProd==3){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-  2p1/2-lam
     else if(decayProd==4){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 4p1/2-lam
-    else if(decayProd==5){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 2p3/2-lam
+    else if(decayProd==5){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-  2p3/2-lam
     else if(decayProd==6){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 4p3/2-lam
     else if(decayProd==7){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 4p5/2-lam
-    else if(decayProd==8){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-* 2p1/2-rho
-    else if(decayProd==9){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-* 2p3/2-rho
+    else if(decayProd==8){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-  2p1/2-rho
+    else if(decayProd==9){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-  2p3/2-rh    
   }else if(baryonFlag==2){// cascades prime
-    if(decayProd==1)     {flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //Xi_0
-    else if(decayProd==2){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //Xi_b
-    else if(decayProd==3){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0_prime
-    else if(decayProd==4){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b_prime
-    else if(decayProd==5){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0_prime*
-    else if(decayProd==6){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b_prime*
+    // decaying cascade anti 0
+    if(decayProd==1)     {flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==2){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p1/2-lam
+    else if(decayProd==3){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p3/2-lam
+    else if(decayProd==4){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  2p1/2-rho
+    else if(decayProd==5){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p1/2-rho
+    else if(decayProd==6){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  2p3/2-rho
+    else if(decayProd==7){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p3/2-rho
+    else if(decayProd==8){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p5/2-rho
+
+    // decaying cascade anti -
+    else if(decayProd==9){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==10){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //-  2p1/2-lam
+    else if(decayProd==11){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;   sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //-  2p3/2-lam
+    else if(decayProd==12){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //-  2p1/2-rho
+    else if(decayProd==13){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;   sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //-  4p1/2-rho
+    else if(decayProd==14){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;   sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //-  2p3/2-rho
+    else if(decayProd==15){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;   sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //-  4p3/2-rho
+    else if(decayProd==16){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;   sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //-  4p5/2-rho
+
+    // decay to cascade prime 0
+    else if(decayProd==17){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==18){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==19){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p1/2-lam
+    else if(decayProd==20){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p1/2-lam
+    else if(decayProd==21){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p3/2-lam
+    else if(decayProd==22){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p3/2-lam
+    else if(decayProd==23){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p5/2-lam 
+    else if(decayProd==24){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p1/2-rho
+    else if(decayProd==25){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p3/2-rho
+
+    // decay to cascade prime -
+    else if(decayProd==26){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==27){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==28){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p1/2-lam
+    else if(decayProd==29){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p1/2-lam  
+    else if(decayProd==30){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p3/2-lam
+    else if(decayProd==31){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p3/2-lam
+    else if(decayProd==32){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p5/2-lam
+    else if(decayProd==33){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p1/2-rho
+    else if(decayProd==34){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p3/2-rho
+
   }else if(baryonFlag==3){// sigmas
-    if(decayProd==1)     {flav_q1=mu_qu;       flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_+
-    else if(decayProd==2){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_0
-    else if(decayProd==3){flav_q1=mu_qd;       flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_-
-    else if(decayProd==4){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //Lambda_0
-    else if(decayProd==5){flav_q1=mu_qu;       flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_+*
-    else if(decayProd==6){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_0*
-    else if(decayProd==7){flav_q1=mu_qd;       flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_-*    
+    // decay to sigma+
+    if(decayProd==1)     {flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //+  ground
+    else if(decayProd==2){flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //+  ground
+    else if(decayProd==3){flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //+  2p1/2-lam
+    else if(decayProd==4){flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //+  4p1/2-lam
+    else if(decayProd==5){flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //+  2p3/2-lam
+    else if(decayProd==6){flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //+  4p3/2-lam
+    else if(decayProd==7){flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //+  4p5/2-lam
+    else if(decayProd==8){flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //+  2p1/2-rho
+    else if(decayProd==9){flav_q1=mu_qu;      flav_q2=mu_qu;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //+  2p3/2-rho
+    
+    //decay to sigma 0
+    else if(decayProd==10){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==11){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==12){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p1/2-lam
+    else if(decayProd==13){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p1/2-lam
+    else if(decayProd==14){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p3/2-lam
+    else if(decayProd==15){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p3/2-lam
+    else if(decayProd==16){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p5/2-lam 
+    else if(decayProd==17){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p1/2-rho
+    else if(decayProd==18){flav_q1=mu_sum_u_d;  flav_q2=mu_sum_u_d;  flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p3/2-rho 
+
+    // decay to sigma -
+    else if(decayProd==19){flav_q1=mu_qd;      flav_q2=mu_qd;      flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==20){flav_q1=mu_qd;      flav_q2=mu_qd;      flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==21){flav_q1=mu_qd;      flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p1/2-lam
+    else if(decayProd==22){flav_q1=mu_qd;      flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p1/2-lam
+    else if(decayProd==23){flav_q1=mu_qd;      flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p3/2-lam
+    else if(decayProd==24){flav_q1=mu_qd;      flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p3/2-lam
+    else if(decayProd==25){flav_q1=mu_qd;      flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p5/2-lam
+    else if(decayProd==26){flav_q1=mu_qd;      flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p1/2-rho
+    else if(decayProd==27){flav_q1=mu_qd;      flav_q2=mu_qd;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p3/2-rho
+
+    // decay to lambda 0
+    else if(decayProd==28){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==29){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p1/2-lam
+    else if(decayProd==30){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p3/2-lam
+    else if(decayProd==31){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  2p1/2-rho
+    else if(decayProd==32){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p1/2-rho
+    else if(decayProd==33){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  2p3/2-rho
+    else if(decayProd==34){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p3/2-rho
+    else if(decayProd==35){flav_q1=mu_dif_u_d;  flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //0  4p5/2-rho
+    
   }else if(baryonFlag==4){// lambdas
-    if(decayProd==1)     {flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //Lambda_0
-    else if(decayProd==2){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_0
-    else if(decayProd==3){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Sigma_0*
+    // decay to lambda 0
+    if(decayProd==1)     {flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //0 ground
+    else if(decayProd==2){flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0 2p1/2-lam
+    else if(decayProd==3){flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0 2p3/2-lam
+    else if(decayProd==4){flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0 2p1/2-rho
+    else if(decayProd==5){flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0 4p1/2-rho
+    else if(decayProd==6){flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0 2p3/2-rho
+    else if(decayProd==7){flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0 4p3/2-rho
+    else if(decayProd==8){flav_q1=+mu_sum_u_d; flav_q2=+mu_sum_u_d; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0 4p5/2-rho
+
+    // decay to sigma 0
+    else if(decayProd==9){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0 ground
+    else if(decayProd==10){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0 ground
+    else if(decayProd==11){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0 2p1/2-lam
+    else if(decayProd==12){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0 4p1/2-lam
+    else if(decayProd==13){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0 2p3/2-lam
+    else if(decayProd==14){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0 4p3/2-lam
+    else if(decayProd==15){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0 4p5/2-lam
+    else if(decayProd==16){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0 2p1/2-rho
+    else if(decayProd==17){flav_q1=+mu_dif_u_d; flav_q2=-mu_dif_u_d; flav_q3=0.;   sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0 2p3/2-rho
+
   }else if(baryonFlag==5){// cascades anti3_plet
-    if(decayProd==1)     {flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //Xi_0
-    else if(decayProd==2){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //Xi_b
-    else if(decayProd==3){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0_prime   
-    else if(decayProd==4){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;    sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b_prime
-    else if(decayProd==5){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;    sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_0_prime*
-    else if(decayProd==6){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.;    sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //Xi_b_prime*  
+    // decay cascade anti-triplet    
+    if(decayProd==101)    { flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==201){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p1/2-lam
+    else if(decayProd==202){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;} //0  2p3/2-lam
+    else if(decayProd==203){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  2p1/2-rho
+    else if(decayProd==204){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p1/2-rho
+    else if(decayProd==205){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  2p3/2-rho
+    else if(decayProd==206){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p3/2-rho
+    else if(decayProd==207){flav_q1=+mu_sum_u_s; flav_q2=+mu_sum_u_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;} //0  4p5/2-rho
+
+    // decay cascade anti-triplet -
+    else if(decayProd==102){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;}  //-  ground
+    else if(decayProd==208){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;}  //-  2p1/2-lam
+    else if(decayProd==209){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=1; lrb_val=0;}  //-  2p3/2-lam
+    else if(decayProd==210){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  2p1/2-rho
+    else if(decayProd==211){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p1/2-rho
+    else if(decayProd==212){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  2p3/2-rho
+    else if(decayProd==213){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p3/2-rho
+    else if(decayProd==214){flav_q1=+mu_sum_d_s; flav_q2=+mu_sum_d_s; flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=0; lrb_val=1;}  //-  4p5/2-rho
+
+    // decay to cascade prime 0
+    else if(decayProd==103){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==104){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //0  ground
+    else if(decayProd==215){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p1/2-lam
+    else if(decayProd==216){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p1/2-lam
+    else if(decayProd==217){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  2p3/2-lam
+    else if(decayProd==218){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p3/2-lam
+    else if(decayProd==219){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //0  4p5/2-lam
+    else if(decayProd==220){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p1/2-rho
+    else if(decayProd==221){flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //0  2p3/2-rho
+
+    // decay to cascade prime -
+    else if(decayProd==105){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==106){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=0; slb_val=1; llb_val=0; lrb_val=0;} //-  ground
+    else if(decayProd==222){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p1/2-lam
+    else if(decayProd==223){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=0.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p1/2-lam
+    else if(decayProd==224){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  2p3/2-lam
+    else if(decayProd==225){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p3/2-lam
+    else if(decayProd==226){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //-  4p5/2-lam
+    else if(decayProd==227){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p1/2-rho
+    else if(decayProd==228){flav_q1=+mu_dif_d_s; flav_q2=-mu_dif_d_s; flav_q3=0.; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //-  2p3/2-rho
   }
 
   //fetch quantum numbers and projections
@@ -122,6 +261,17 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
 
   double sum_value = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value, modeExcitation);
   double decayWidth = DecayWidth(fi2_value, sum_value);
+
+  std::cout<<decayProd<<"    "<<MB<<std::endl;
+  std::cout<<sb_val<<"  sb_val  "<<std::endl;
+  std::cout<<flav_q1<<"  "<<flav_q2<<"   "<<flav_q3<<"   "<<sb_val<<"   "<<jb_val<<"   "<<lb_val<<"   "<<slb_val<<"   "<<llb_val<<"  "<<lrb_val<<std::endl;
+  // //testing integrals
+  // alpha_rho = 0.4132549850060273; alpha_lam =0.5246260684382235;
+  // k_value = 0.1422944563250534;
+  // mlight = 0.382;  
+  // std::cout<<mbottom<<"     QUARK MASSES    "<<mlight<<std::endl;
+  // double thetak=1, phik=1;
+
 
   return decayWidth;
 }
@@ -203,7 +353,8 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
 			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
 			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-				dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode) *
+				//    U1_rho_lambda(k_value, alpha_rho, alpha_lam, LA, MLA, MLB, mLrA,     mLlA,  mLrB,   mLlB, int excMode)
+				dummy = U1_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLA.at(iMLA), mLB.at(iMLB), mLrA.at(iMLrA), mLlA.at(iMLlA), mLrB.at(iMLrB), mLlB.at(iMLlB), excMode) *
 				  std::sqrt((S1 + mS1.at(iMS1)) * (S1 - mS1.at(iMS1) + 1))*
 				  ClebschGordan(m_wigner, LB,  SB,  JB,  mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
 				  ClebschGordan(m_wigner, LA,  SA,  JA,  mLA.at(iMLA),   mSA.at(iMSA),   mJA.at(iMJA))*
@@ -217,16 +368,17 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
 			      }
     AMP1_1 *= flav_q1 * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP1, ORBITAL SPLIT
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP1, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
 	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
-	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                         
+	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
 	    for(int iMJB = 0; iMJB<(int)mJB.size(); iMJB++)
 	      for(int iMSB = 0; iMSB<(int)mSB.size(); iMSB++)
 		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
 		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
 		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-		      dummy = T1_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+		      //      T1_rho_lambda(k_value, alpha_rho, alpha_lam, int LA, int mLrA, int MLlA, int MLrB, int MLlB, int excMode)
+		      dummy = T1_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLrA.at(iMLrA), mLlA.at(iMLlA), mLrB.at(iMLrB),  mLlB.at(iMLlB), excMode)*
 			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
 			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA)) *
 			ClebschGordan(m_wigner, LB,  SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),    mJB.at(iMJB))*
@@ -252,7 +404,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
     			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
     			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-    				dummy = U2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+    				dummy = U2_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLA.at(iMLA),  mLB.at(iMLB), mLrA.at(iMLrA), mLlA.at(iMLlA), mLrB.at(iMLrB), mLlB.at(iMLlB), excMode)*
     				  std::sqrt((S2 + mS2.at(iMS2)) * (S2 - mS2.at(iMS2) + 1))*
     				  ClebschGordan(m_wigner, LB,  SB,  JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
     				  ClebschGordan(m_wigner, LA,  SA,  JA,   mLA.at(iMLA),    mSA.at(iMSA),     mJA.at(iMJA))*
@@ -266,7 +418,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			      }
     AMP2_1 *= flav_q2 * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP2, ORBITAL SPLIT
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP2, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
     	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
     	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)                    
@@ -275,7 +427,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
     		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
     		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-    		      dummy = T2_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+    		      dummy = T2_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLrA.at(iMLrA), mLlA.at(iMLlA), mLrB.at(iMLrB), mLlB.at(iMLlB), excMode)*
     			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
     			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
     			ClebschGordan(m_wigner, LB,   SB,  JB,  mLB.at(iMLB),    mSB.at(iMSB),    mJB.at(iMJB))*
@@ -301,7 +453,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			  for(int iMS1 = 0; iMS1 <(int)mS1.size(); iMS1++)
     			    for(int iMS2 = 0; iMS2 <(int)mS2.size(); iMS2++)
     			      for(int iMS3 = 0; iMS3 <(int)mS3.size(); iMS3++){
-    				dummy = U3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+    				dummy = U3_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLA.at(iMLA),  mLB.at(iMLB), mLrA.at(iMLrA), mLlA.at(iMLlA), mLrB.at(iMLrB), mLlB.at(iMLlB), excMode)*
     				  std::sqrt((S3 + mS3.at(iMS3))*(S3 - mS3.at(iMS3) + 1))*
     				  ClebschGordan(m_wigner, LB,   SB,   JB,   mLB.at(iMLB),    mSB.at(iMSB),     mJB.at(iMJB))*
     				  ClebschGordan(m_wigner, LA,   SA,   JA,   mLA.at(iMLA),    mSA.at(iMSA),     mJA.at(iMJA))*
@@ -315,7 +467,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     			      }
     AMP3_1 *= flav_q3 * (2.*std::sqrt(pi_val * k_value));
 
-    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP3, ORBITAL SPLIT
+    for(int iMSA = 0; iMSA<(int)mSA.size(); iMSA++) // AMP3, ORBITAL FLIP
       for(int iMLA = 0; iMLA<(int)mLA.size(); iMLA++)
     	for(int iMLlA = 0; iMLlA<(int)mLlA.size(); iMLlA++)
     	  for(int iMLrA = 0; iMLrA<(int)mLrA.size(); iMLrA++)
@@ -324,7 +476,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
     		for(int iMLB = 0; iMLB<(int)mLB.size(); iMLB++)
     		  for(int iMLlB = 0; iMLlB<(int)mLlB.size(); iMLlB++)
     		    for(int iMLrB = 0; iMLrB<(int)mLrB.size(); iMLrB++){
-    		      dummy = T3_rho_lambda(k_value, alpha_rho, alpha_lam, mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
+    		      dummy = T3_rho_lambda(k_value, alpha_rho, alpha_lam, LA, mLrA.at(iMLrA), mLlA.at(iMLlA), mLrB.at(iMLrB), mLlB.at(iMLlB), excMode)*
     			KroneckerDelta_extended(mLrA.at(iMLrA), mLlA.at(iMLlA), excMode)*
     			KroneckerDelta(mSB.at(iMSB), mSA.at(iMSA))*
     			ClebschGordan(m_wigner, LB,   SB,  JB, mLB.at(iMLB),   mSB.at(iMSB),   mJB.at(iMJB))*
@@ -344,80 +496,233 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
   return SUM_SQUARED_AMP;
 }
 
-double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA, int MLrB, int MLlB, int excMode){
   double thetak=0., phik=0.;
-  if(excMode==0) //ground
+    
+  if(excMode==0){ //ground
     return 0.;
-  else if(excMode==1) //lambda excitation
-    return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  else if(excMode==2) //rho excitation
-    return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  }else if(excMode==1){ //lambda excitation initial baryon
+    if(LA==1){
+      return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA); // Plambda -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return T1Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
+      }else if(LB==1 && LrB==1){
+	return T1Dl2Prl2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrB); // Dlambda -> Prho
+      }
+    }
+  }else if(excMode==2){ //rho excitation initial baryon
+    if(LA==1){
+      return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);
+    }
+  }
   
   return 0.;
 }
 
-double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA,  int MLrB, int MLlB, int excMode){
   double thetak=0., phik=0.;
-  if(excMode==0) //ground 
+
+  if(excMode==0){ //ground
     return 0.;
-  else if(excMode==1) //lambda excitation
-    return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  else if(excMode==2) //rho excitation
-    return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
+  }else if(excMode==1){ //lambda excitation initial baryon
+    if(LA==1){
+      return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA); // Plambda -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return T2Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
+      }else if(LB==1 && LrB==1){
+	return T2Dl2Prl2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrB); // Dlambda -> Prho
+      }
+    }
+  }else if(excMode==2){ //rho excitation initial baryon
+    if(LA==1){
+      return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);
+    }
+  }
 
   return 0.;
 }
 
-double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA,  int MLrB, int MLlB, int excMode){
   double thetak=0., phik=0.;
-  if(excMode==0)//ground 
+
+  if(excMode==0){ //ground
     return 0.;
-  else if(excMode==1) //lambda excitation
-    return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, mLlA);
-  else if(excMode==2) //rho excitation
-    return T3r();
+  }else if(excMode==1){ //lambda excitation initial baryon
+    if(LA==1){
+      return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA); // Plambda -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return T3Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
+      }else if(LB==1 && LrB==1){
+	return T3Dl2Prl2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrB); // Dlambda -> Prho
+      }
+    }
+  }else if(excMode==2){ //rho excitation initial baryon
+    if(LA==1){
+      return T3r();
+    }
+  }
+  
   return 0.;
 }
 
-double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+// Dwave->Pwave lambda
+double EMDecayWidths::U1Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLlB_val){
+  double value1 = SPINFLIP_U1_l2_m1_l1_m1(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLlB_val, 1);
+  double value2 = SPINFLIP_U1_l2_m0_l1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLlA_val, 0)  * KroneckerDelta(MLlB_val, 0);
+  double value3 = SPINFLIP_U1_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLlA_val, -1) * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::U2Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLlB_val){
+  double value1 = SPINFLIP_U2_l2_m1_l1_m1(  k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 1) * KroneckerDelta(MLlB_val, 1);
+  double value2 = SPINFLIP_U2_l2_m0_l1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLlB_val, 0);
+  double value3 = SPINFLIP_U2_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, -1)* KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::U3Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLlB_val){
+  double value1 = SPINFLIP_U3_l2_m1_l1_m1(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLlB_val, 1);
+  double value2 = SPINFLIP_U3_l2_m0_l1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLlA_val, 0)  * KroneckerDelta(MLlB_val, 0);
+  double value3 = SPINFLIP_U3_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLlA_val, -1) * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::T1Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLlB_val){
+  double value1 = T1_l2_m2_l1_m1( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLlA_val, 2)* KroneckerDelta(MLlB_val, 1);
+  double value2 = T1_l2_m1_l1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  * KroneckerDelta(MLlA_val, 1) * KroneckerDelta(MLlB_val, 0);
+  double value3 = T1_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val,0)   * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+    
+double EMDecayWidths::T2Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLlB_val){
+  double value1 = T2_l2_m2_l1_m1( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val, 2)  * KroneckerDelta(MLlB_val, 1);
+  double value2 = T2_l2_m1_l1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLlB_val, 0);
+  double value3 = T2_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val,0)   * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::T3Dl2Pll2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLlB_val){
+  double value1 = T3_l2_m2_l1_m1( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) *  KroneckerDelta(MLlA_val, 2) * KroneckerDelta(MLlB_val, 1);
+  double value2 = T3_l2_m1_l1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLlB_val, 0);
+  double value3 = T3_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLlA_val, 0)  * KroneckerDelta(MLlB_val, -1);
+  return value1 + value2 + value3;
+}
+
+// Dwave lambda ->Pwave rho 
+double EMDecayWidths::U1Dl2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLrB_val){
+  double value = SPINFLIP_U1_l2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLrB_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U2Dl2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLrB_val){
+  double value = SPINFLIP_U2_l2_m0_r1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 0)  * KroneckerDelta(MLrB_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U3Dl2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA_val, int MLrB_val){
+  double value = SPINFLIP_U3_l2_m0_r1_m0() * KroneckerDelta(MLlA_val, 0)  * KroneckerDelta(MLrB_val, 0); // check
+  return value;
+}
+
+double EMDecayWidths::T1Dl2Prl2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrB_val){
+  double value1 = T1_l2_m0_r1_m1m( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLrB_val, -1);
+  double value2 = T1_l2_m1_r1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLrB_val, 0);
+  return value1 + value2;
+}
+
+double EMDecayWidths::T2Dl2Prl2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrB_val){
+  double value1 = T2_l2_m0_r1_m1m( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLrB_val, -1);
+  double value2 = T2_l2_m1_r1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLrB_val, 0);
+  return value1 + value2;
+}
+double EMDecayWidths::T3Dl2Prl2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrB_val){
+  double value1 = T3_l2_m0_r1_m1m()  *  KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLrB_val, -1); // check
+  double value2 = T3_l2_m1_r1_m0()  * KroneckerDelta(MLlA_val, 1)  * KroneckerDelta(MLrB_val, 0); // check
+  return value1 + value2;
+}
+
+
+double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLrB, int MLlB,  int excMode){
   double thetak=0., phik=0.;
-  if(mLlA!=0 && excMode==0) return 0.;
-  if(mLlA!=0 && excMode==1) return 0.;
-  if(mLrA!=0 && excMode==2) return 0.;
-  if(excMode==0) //ground 
-    return SPINFLIP_U1_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
-  else if(excMode==1) //lambda excitation
-    return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-  else if(excMode==2) //rho excitation
-    return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+    
+  // if(MLlA!=0 && excMode==0) return 0.;
+  // if(MLlA!=0 && excMode==1) return 0.;
+  // if(MLrA!=0 && excMode==2) return 0.;
+
+  if(excMode==0){ //ground
+    return SPINFLIP_U1_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA, 0);
+  }else if(excMode==1){ //lambda excitation initial baryon
+    if(LA==1){
+      return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLlA, 0); // Plambda -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return U1Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB); // Dlambda -> Plambda
+      }else if(LB==1 && LrB==1){
+	return U1Dl2Pr2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLrB); // Dlambda -> Prho
+      }
+    }
+  }else if(excMode==2){ //rho excitation initial baryon
+    if(LA==1){
+      return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLrA, 0);
+    }
+  }
+  return 0.;  
+}
+
+double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLrB, int MLlB,  int excMode){
+  double thetak=0., phik=0.;
+  
+  // if(MLlA!=0 && excMode==0) return 0.;
+  // if(MLlA!=0 && excMode==1) return 0.;
+  // if(MLrA!=0 && excMode==2) return 0.;
+
+  if(excMode==0){ //ground
+    return SPINFLIP_U2_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA, 0);
+  }else if(excMode==1){ //lambda excitation initial baryon
+    if(LA==1){
+      return SPINFLIP_U2_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak) * KroneckerDelta(MLlA, 0); // Plambda -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return U2Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB); // Dlambda -> Plambda
+      }else if(LB==1 && LrB==1){
+	return U2Dl2Pr2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLrB); // Dlambda -> Prho
+      }
+    }
+  }else if(excMode==2){ //rho excitation initial baryon
+    if(LA==1){
+      return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak) * KroneckerDelta(MLrA, 0) ;
+    }
+  }
   return 0.;
 }
 
-double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
+double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLrB, int MLlB,  int excMode){
   double thetak=0., phik=0.;
-  if(mLlA!=0 && excMode==0) return 0.;
-  if(mLlA!=0 && excMode==1) return 0.;
-  if(mLrA!=0 && excMode==2) return 0.;
-  if(excMode==0) //ground
-    return SPINFLIP_U2_GS_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight);
-  else if(excMode==1) //lambda excitation
-    return SPINFLIP_U2_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-  else if(excMode==2) //rho excitation
-    return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-  return 0.;
-}
+  
+  // if(MLlA!=0 && excMode==0) return 0.;
+  // if(MLlA!=0 && excMode==1) return 0.;
+  // if(MLrA!=0 && excMode==2) return 0.;
 
-double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int mLrA, int mLlA, int excMode){
-  double thetak=0., phik=0.;
-  if(mLlA!=0 && excMode==0) return 0.;
-  if(mLlA!=0 && excMode==1) return 0.;
-  if(mLrA!=0 && excMode==2) return 0.;
-  if (excMode==0) //ground
-    return SPINFLIP_U3_GS_GS(k_value, alpha_lam,  mbottom, mlight);
-  else if(excMode==1) //lambda excitation
-    return SPINFLIP_U3_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
-  else if(excMode==2) //rho excitation
-    return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak);
+  if(excMode==0){ //ground
+    return SPINFLIP_U3_GS_GS(k_value, alpha_lam, mbottom, mlight) * KroneckerDelta(MLlA, 0);
+  }else if(excMode==1){ //lambda excitation initial baryon
+    if(LA==1){
+      return SPINFLIP_U3_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak)* KroneckerDelta(MLlA, 0); // Plambda -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return U3Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB); // Dlambda -> Plambda
+      }else if(LB==1 && LrB==1){
+	return U3Dl2Pr2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLrB); // Dlambda -> Prho
+      }
+    }
+  }else if(excMode==2){ //rho excitation initial baryon
+    if(LA==1){
+      return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLrA, 0);
+    }
+  }
   return 0.;
 }
 
@@ -1025,7 +1330,989 @@ double EMDecayWidths::T3r(){
   return value;
 }
 
+//Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave lambda
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_l2_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_l2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 8. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * k_value * mbottom * value4 * std::exp(value1 * (value2 + value3)))/(8. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 3)));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_l2_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_l2_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_l2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 8. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * k_value * mbottom * value4 * std::exp(value1 * (value2 + value3)))/(8. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 3)));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_l2_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3.) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_l2_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * std::sqrt(3.) * k_value * mlight * std::exp(value1))/(alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_l2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value2 = (3. * std::pow(k_value, 2) * std::pow(mlight, 2) - 2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-1.0) * p_imag * k_value * mlight * value2 * std::exp(value1))/(std::pow(alpha_lam * (mbottom + 2. * mlight), 3));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_l2_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * std::sqrt(3.) * k_value * mlight * std::exp(value1))/(alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1l2m2l1m1
+double EMDecayWidths::T1_l2_m2_l1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = (2. * p_imag * alpha_lam * std::exp(value1 * (value2 + value3)))/(std::sqrt(3.));
+  return value;
+}
+
+//T1l2m1l1m0
+double EMDecayWidths::T1_l2_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (4. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)) - 3. * std::pow(k_value, 2) * std::pow(mbottom, 2));
+  double value5  = (alpha_lam * std::pow((mbottom + 2. * mlight), 2));
+  double value = (p_imag * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6.) * value5);
+  return value;
+}
+
+//T1l2m0l1m1m
+double EMDecayWidths::T1_l2_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (4. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)) - 3. * std::pow(k_value, 2) * std::pow(mbottom, 2));
+  double value5  = (alpha_lam * std::pow((mbottom + 2. * mlight), 2));
+  double value = (p_imag * value4 * std::exp(value1 * (value2 + value3)))/(6. * std::sqrt(2.) * value5);
+  return value;
+}
+
+//T2l2m2l1m1
+double EMDecayWidths::T2_l2_m2_l1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = (2. * p_imag * alpha_lam * std::exp(value1 * (value2 + value3)))/(std::sqrt(3.));
+  return value;
+}
+
+//T2l2m1l1m0
+double EMDecayWidths::T2_l2_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (4. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)) - 3. * std::pow(k_value, 2) * std::pow(mbottom, 2));
+  double value5  = (alpha_lam * std::pow((mbottom + 2. * mlight), 2));
+  double value = (p_imag * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6.) * value5);
+  return value;
+}
+
+//T2l2m0l1m1m
+double EMDecayWidths::T2_l2_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (4. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)) - 3. * std::pow(k_value, 2) * std::pow(mbottom, 2));
+  double value5  = (alpha_lam * std::pow((mbottom + 2. * mlight), 2));
+  double value = (p_imag * value4 * std::exp(value1 * (value2 + value3)))/(6. * std::sqrt(2.) * value5);
+  return value;
+}
+
+//T3l2m2l1m1
+double EMDecayWidths::T3_l2_m2_l1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-4.0) * p_imag * alpha_lam * std::exp(value1))/(std::sqrt(3.));
+  return value;
+}
+
+//T3l2m1l1m0
+double EMDecayWidths::T3_l2_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value2 = ((std::pow(alpha_lam * (mbottom + 2. * mlight), 2)) - 3. * std::pow(k_value, 2) * std::pow(mlight, 2));
+  double value3  = (alpha_lam * std::pow((mbottom + 2. * mlight), 2));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * value2 * std::exp(value1))/(value3);
+  return value;
+}
+
+//T3l2m0l1m1m
+double EMDecayWidths::T3_l2_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value2 = ((std::pow(alpha_lam * (mbottom + 2. * mlight), 2)) - 3. * std::pow(k_value, 2) * std::pow(mlight, 2));
+  double value3  = (alpha_lam * std::pow((mbottom + 2. * mlight), 2));
+  double value = ((-2.0) * p_imag * std::sqrt(2.) * value2 * std::exp(value1))/(3. * value3);
+  return value;
+}
+
+//Definitions of the Integrals and Tensor Operators for decays from D-wave rho to P-wave rho
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r2_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r2_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * (std::pow(k_value, 2) - 8. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(8. * std::sqrt(3.) * std::pow(alpha_rho,3));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r2_m1m_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r2_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r2_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * (std::pow(k_value, 2) - 8. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(8. * std::sqrt(3.) * std::pow(alpha_rho,3));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r2_m1m_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r2_m1_r1_m1(){
+  double value = 0;
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r2_m0_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r2_m1m_r1_m1m(){
+  double value = 0;
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1r2m2r1m1
+double EMDecayWidths::T1_r2_m2_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = (2. * p_imag * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T1r2m1r1m0
+double EMDecayWidths::T1_r2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * (std::pow(k_value, 2) - 4. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2.) * alpha_rho);
+  return value;
+}
+
+//T1r2m0r1m1m
+double EMDecayWidths::T1_r2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * (std::pow(k_value, 2) - 4. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6.) * alpha_rho);
+  return value;
+}
+
+//T2r2m2r1m1
+double EMDecayWidths::T2_r2_m2_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-2.0) * p_imag * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r2m1r1m0
+double EMDecayWidths::T2_r2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * (std::pow(k_value, 2) - 4. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2.) * alpha_rho);
+  return value;
+}
+
+//T2r2m0r1m1m
+double EMDecayWidths::T2_r2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * (std::pow(k_value, 2) - 4. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6.) * alpha_rho);
+  return value;
+}
+
+//T3r2m2r1m1
+double EMDecayWidths::T3_r2_m2_r1_m1(){
+  double value = 0;
+  return value;
+}
+
+//T3r2m1r1m0
+double EMDecayWidths::T3_r2_m1_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r2m0r1m1m
+double EMDecayWidths::T3_r2_m0_r1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave rho
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_l2_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(3) * std::pow(k_value, 3) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(8. * alpha_rho * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_l2_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * std::pow(k_value, 3) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(8. * alpha_rho * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_l2_m0_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+
+// ORBIT-FLIP Tensor operators
+//T1l2m0r1m1m
+double EMDecayWidths::T1_l2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+				      double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * alpha_rho * std::pow(k_value, 2) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T1l2m1r1m0
+double EMDecayWidths::T1_l2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+				     double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2l2m0r1m1m
+double EMDecayWidths::T2_l2_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(1.5) * alpha_rho * std::pow(k_value, 2) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T2l2m1r1m0
+double EMDecayWidths::T2_l2_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T3l2m0r1m1m
+double EMDecayWidths::T3_l2_m0_r1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3l2m1r1m0
+double EMDecayWidths::T3_l2_m1_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+//Definitions of the Integrals and Tensor Operators for decays from D-wave rho to P-wave lambda
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 3) * mbottom * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r2_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 3) * mbottom * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r2_m0_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1r2m0l1m1m
+double EMDecayWidths::T1_r2_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * alpha_rho);
+  return value;
+}
+
+//T1r2m1l1m0
+double EMDecayWidths::T1_r2_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r2m0l1m1m
+double EMDecayWidths::T2_r2_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * alpha_rho);
+  return value;
+}
+
+//T2r2m1l1m0
+double EMDecayWidths::T2_r2_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T3r2m0l1m1m
+double EMDecayWidths::T3_r2_m0_l1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3r2m1l1m0
+double EMDecayWidths::T3_r2_m1_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+
+//Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave rho
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r1_m1_l1_m0_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( p_imag * std::sqrt(3) * k_value *  mbottom * value4 * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m1_l1_m0_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m0_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( p_imag * std::sqrt(3) * k_value *  mbottom * value4 * std::exp(value1 * (value2 + value3)))/(8. * std::pow(alpha_rho, 2) * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m1m_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * std::sqrt(3) * k_value * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m1_l1_m0_r1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * std::sqrt(3.) * k_value * mlight * std::exp(value1))/(alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m0_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * std::sqrt(3.) * k_value * mlight * std::exp(value1))/(alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m1m_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-3.0) * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( p_imag * std::sqrt(3.) * k_value * mlight * std::exp(value1))/(alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1r1m0l1m0r1m1m
+double EMDecayWidths::T1_r1_m0_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T1r1m1l1m0r1m0
+double EMDecayWidths::T1_r1_m1_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T1r1m1l1m1r1m1
+double EMDecayWidths::T1_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(2./3., 0.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T1r1m0l1m1r1m0
+double EMDecayWidths::T1_r1_m0_l1_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( (-1.0) * p_imag * alpha_lam * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * std::pow(alpha_rho, 2));
+  return value;
+}
+
+//T1r1m1ml1m1r1m1m
+double EMDecayWidths::T1_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(2./3., 0.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r1m0l1m0r1m1m
+double EMDecayWidths::T2_r1_m0_l1_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r1m1l1m0r1m0
+double EMDecayWidths::T2_r1_m1_l1_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r1m1l1m1r1m1
+double EMDecayWidths::T2_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(2./3., 0.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r1m0l1m1r1m0
+double EMDecayWidths::T2_r1_m0_l1_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (std::pow(k_value, 2) - 4. * std::pow(alpha_rho, 2));
+  double value = ( (-1.0) * p_imag * alpha_lam * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(6) * std::pow(alpha_rho, 2));
+  return value;
+}
+
+//T2r1m1ml1m1r1m1m
+double EMDecayWidths::T2_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(2./3., 0.5) * alpha_lam * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T3r1m0l1m0r1m1m
+double EMDecayWidths::T3_r1_m0_l1_m0_r1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m0r1m0
+double EMDecayWidths::T3_r1_m1_l1_m0_r1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m1r1m1
+double EMDecayWidths::T3_r1_m1_l1_m1_r1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
+
+//T3r1m0l1m1r1m0
+double EMDecayWidths::T3_r1_m0_l1_m1_r1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
+
+//T3r1m1ml1m1r1m1m
+double EMDecayWidths::T3_r1_m1_ml_1m_1r_1m_1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-2.0) * p_imag * std::sqrt(2. / 3.) * alpha_lam * std::exp(value1));
+  return value;
+}
+
+//Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave lambda
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value = ( p_imag * k_value * value4 * std::exp(value1 * (value2 + value3)))/(8. * alpha_rho * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U1_r1_m0_l1_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m0_l1_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m0_l1_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (3. * std::pow(k_value, 2) * std::pow(mbottom, 2) - 4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value = ( (-1.0) * p_imag * k_value * value4 * std::exp(value1 * (value2 + value3)))/(8. * alpha_rho * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r1_m0_l1_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * k_value * std::exp(value1 * (value2 + value3)))/(2. * alpha_rho);
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m0_l1_m1_l1_m1(){
+  double value = 0;
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m0_l1_m0_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r1_m0_l1_m1m_l1_m1m(){
+  double value = 0;
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1r1m0l1m0l1m1m
+double EMDecayWidths::T1_r1_m0_l1_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2.) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T1r1m0l1m1l1m0
+double EMDecayWidths::T1_r1_m0_l1_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T1r1m1l1m1l1m1
+double EMDecayWidths::T1_r1_m1_l1_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(2.) * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T1r1m1l1m0l1m0
+double EMDecayWidths::T1_r1_m1_l1_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2) - 3. * std::pow(k_value, 2) * std::pow(mbottom, 2));
+  double value = ( p_imag * alpha_rho * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T1r1m1l1m1ml1m1m
+double EMDecayWidths::T1_r1_m1_l1_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::sqrt(2) * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r1m0l1m0l1m1m
+double EMDecayWidths::T2_r1_m0_l1_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( p_imag * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2.) * alpha_rho * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r1m0l1m1l1m0
+double EMDecayWidths::T2_r1_m0_l1_m1_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(1.5) * std::pow(k_value, 2) * mbottom * std::exp(value1 * (value2 + value3)))/(2. * alpha_lam * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2r1m1l1m1l1m1
+double EMDecayWidths::T2_r1_m1_l1_m1_l1_m1(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(2.) * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T2r1m1l1m0l1m0
+double EMDecayWidths::T2_r1_m1_l1_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value4 = (4. * std::pow(alpha_lam * (mbottom + 2. * mlight), 2) - 3. * std::pow(k_value, 2) * std::pow(mbottom, 2));
+  double value = ( (-1.0) * p_imag * alpha_rho * value4 * std::exp(value1 * (value2 + value3)))/(2. * std::sqrt(2) * std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+//T2r1m1l1m1ml1m1m
+double EMDecayWidths::T2_r1_m1_l1_m1m_l1_m1m(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( (-1.0) * p_imag * std::sqrt(2) * alpha_rho * std::exp(value1 * (value2 + value3)));
+  return value;
+}
+
+//T3r1m0l1m0l1m1m
+double EMDecayWidths::T3_r1_m0_l1_m0_l1_m1m(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m0l1m1l1m0
+double EMDecayWidths::T3_r1_m0_l1_m1_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m1l1m1
+double EMDecayWidths::T3_r1_m1_l1_m1_l1_m1(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m0l1m0
+double EMDecayWidths::T3_r1_m1_l1_m0_l1_m0(){
+  double value = 0;
+  return value;
+}
+
+//T3r1m1l1m1ml1m1m
+double EMDecayWidths::T3_r1_m1_l1_m1m_l1_m1m(){
+  double value = 0;
+  return value;
+}
+
+
 #endif
+
+  // Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave lambda
+  // std::cout<<T1_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_l2_m2_l1_m1(k_"<<std::endl;
+  // std::cout<<T1_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_l2_m1_l1_m0(k_"<<std::endl;
+  // std::cout<<T1_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<"    T1_l2_m0_l1_m1m(k"<<std::endl;
+  // std::cout<<T2_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_l2_m2_l1_m1(k_"<<std::endl;
+  // std::cout<<T2_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_l2_m1_l1_m0(k_"<<std::endl;
+  // std::cout<<T2_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<"    T2_l2_m0_l1_m1m(k"<<std::endl;
+  // std::cout<<T3_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T3_l2_m2_l1_m1(k_"<<std::endl;
+  // std::cout<<T3_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T3_l2_m1_l1_m0(k_"<<std::endl;
+  // std::cout<<T3_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak,phik)<<"    T3_l2_m0_l1_m1m(k"<<std::endl;
+  // std::cout<<SPINFLIP_U1_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U1_l2_m1_l1_m1(k_v"<<std::endl;
+  // std::cout<<SPINFLIP_U1_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U1_l2_m0_l1_m0(k_v"<<std::endl;
+  // std::cout<<SPINFLIP_U1_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U1_l2_m1m_l1_m1m(k"<<std::endl;
+  // std::cout<<SPINFLIP_U2_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U2_l2_m1_l1_m1(k_v"<<std::endl;
+  // std::cout<<SPINFLIP_U2_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U2_l2_m0_l1_m0(k_v"<<std::endl;
+  // std::cout<<SPINFLIP_U2_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U2_l2_m1m_l1_m1m(k"<<std::endl;
+  // std::cout<<SPINFLIP_U3_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U3_l2_m1_l1_m1(k_v"<<std::endl;
+  // std::cout<<SPINFLIP_U3_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U3_l2_m0_l1_m0(k_v"<<std::endl;
+  // std::cout<<SPINFLIP_U3_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U3_l2_m1m_l1_m1m(k"<<std::endl;
+
+  
+  // // Definitions of the Integrals and Tensor Operators for decays from D-wave rho to P-wave rho
+  // // SPIN-FLIP INTEGRALS
+  // std::cout<<SPINFLIP_U1_r2_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  // std::cout<<SPINFLIP_U1_r2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  // std::cout<<SPINFLIP_U1_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  // std::cout<<SPINFLIP_U2_r2_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  // std::cout<<SPINFLIP_U2_r2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  // std::cout<<SPINFLIP_U2_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  // std::cout<<SPINFLIP_U3_r2_m1_r1_m1()<<std::endl;
+  // std::cout<<SPINFLIP_U3_r2_m0_r1_m0()<<std::endl;
+  // std::cout<<SPINFLIP_U3_r2_m1m_r1_m1m()<<std::endl;
+  
+  // // ORBIT-FLIP Tensor operators D_rho->P_rho
+  // std::cout<<T1_r2_m2_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T1_r2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T1_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T2_r2_m2_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T2_r2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T2_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<std::endl;  
+
+
+  ////Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave rho
+  // std::cout<<T1_l2_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T1_l2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T2_l2_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T2_l2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<SPINFLIP_U1_l2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  // std::cout<<SPINFLIP_U2_l2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+
+  // //Definitions of the Integrals and Tensor Operators for decays from D-wave rho to P-wave lambda
+  // std::cout<<T1_r2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T1_r2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T2_r2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<T2_r2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
+  // std::cout<<SPINFLIP_U1_r2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  // std::cout<<SPINFLIP_U2_r2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+
+
+
+  // //Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave rho
+  // std::cout<<T1_r1_m0_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)     <<"   T1_r1_m0_l1_m0_r1_m1m(k_value, "<<std::endl;
+  // std::cout<<T1_r1_m1_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m1_l1_m0_r1_m0(k_value, a"<<std::endl;
+  // std::cout<<T1_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
+  // std::cout<<T1_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
+  // std::cout<<T1_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T1_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
+  // std::cout<<T2_r1_m0_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)     <<"   T2_r1_m0_l1_m0_r1_m1m(k_value, "<<std::endl;
+  // std::cout<<T2_r1_m1_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m1_l1_m0_r1_m0(k_value, a"<<std::endl;
+  // std::cout<<T2_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
+  // std::cout<<T2_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
+  // std::cout<<T2_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T2_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
+  // std::cout<<T3_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T3_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
+  // std::cout<<T3_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T3_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
+  // std::cout<<T3_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T3_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
+  // std::cout<<SPINFLIP_U1_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U1_r1_m1_l1_m0_r1_m1(k"<<std::endl;
+  // std::cout<<SPINFLIP_U1_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U1_r1_m0_l1_m0_r1_m0(k"<<std::endl;
+  // std::cout<<SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m"<<std::endl;
+  // std::cout<<SPINFLIP_U2_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U2_r1_m1_l1_m0_r1_m1(k"<<std::endl;
+  // std::cout<<SPINFLIP_U2_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U2_r1_m0_l1_m0_r1_m0(k"<<std::endl;
+  // std::cout<<SPINFLIP_U2_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U2_r1_m1m_l1_m0_r1_m1m"<<std::endl;
+  // std::cout<<SPINFLIP_U3_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U3_r1_m1_l1_m0_r1_m1(k"<<std::endl;
+  // std::cout<<SPINFLIP_U3_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U3_r1_m0_l1_m0_r1_m0(k"<<std::endl;
+  // std::cout<<SPINFLIP_U3_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U3_r1_m1m_l1_m0_r1_m1m"<<std::endl;
+
+
+  // //Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave lambda
+  // std::cout<<T1_r1_m0_l1_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) <<"    T1_r1_m0_l1_m0_l1_m1m(k_value, alph"<<std::endl;
+  // std::cout<<T1_r1_m0_l1_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m0_l1_m1_l1_m0(k_value, alpha"<<std::endl;
+  // std::cout<<T1_r1_m1_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m1_l1_m1_l1_m1(k_value, alpha"<<std::endl;
+  // std::cout<<T1_r1_m1_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m1_l1_m0_l1_m0(k_value, alpha"<<std::endl;
+  // std::cout<<T1_r1_m1_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_r1_m1_l1_m1m_l1_m1m(k_value, alp"<<std::endl;
+  // std::cout<<T2_r1_m0_l1_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) <<"    T2_r1_m0_l1_m0_l1_m1m(k_value, alph"<<std::endl;
+  // std::cout<<T2_r1_m0_l1_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m0_l1_m1_l1_m0(k_value, alpha"<<std::endl;
+  // std::cout<<T2_r1_m1_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m1_l1_m1_l1_m1(k_value, alpha"<<std::endl;
+  // std::cout<<T2_r1_m1_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m1_l1_m0_l1_m0(k_value, alpha"<<std::endl;
+  // std::cout<<T2_r1_m1_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_r1_m1_l1_m1m_l1_m1m(k_value, alp"<<std::endl;
+  // std::cout<<SPINFLIP_U1_r1_m0_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U1_r1_m0_l1_m1_l1_m1(k_val"<<std::endl;
+  // std::cout<<SPINFLIP_U1_r1_m0_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U1_r1_m0_l1_m0_l1_m0(k_val"<<std::endl;
+  // std::cout<<SPINFLIP_U1_r1_m0_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)     <<"    SPINFLIP_U1_r1_m0_l1_m1m_l1_m1m(k_v"<<std::endl;
+  // std::cout<<SPINFLIP_U2_r1_m0_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U2_r1_m0_l1_m1_l1_m1(k_val"<<std::endl;
+  // std::cout<<SPINFLIP_U2_r1_m0_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U2_r1_m0_l1_m0_l1_m0(k_val"<<std::endl;
+  // std::cout<<SPINFLIP_U2_r1_m0_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)     <<"    SPINFLIP_U2_r1_m0_l1_m1m_l1_m1m(k_v"<<std::endl;
+
+
+
 
 
   // // test function
