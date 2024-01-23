@@ -36,10 +36,10 @@ class ElectroWidths:
         ms = m2
         ml = m3
 
-        ml = 299.0
-        ms = 465.0
-        mb = 4928.0
-        k_prim = 5044.799302252
+        # ml = 299.0
+        # ms = 465.0
+        # mb = 4928.0
+        # k_prim = 5044.799302252
         # massA = 6.354 * 1000
 
         MassA = massA/1000.0
