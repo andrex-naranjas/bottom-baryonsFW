@@ -177,9 +177,9 @@ def state_labels(baryon, ModEx, decPr, L_tot):
         elif(decPr==11):
             decPr_name = "Sig*+eta'"
         elif(decPr==12):
-            decPr_name = "Xi'+K'"
+            decPr_name = "Xi'+K"
         elif(decPr==13):
-            decPr_name = "Xi*+K'"
+            decPr_name = "Xi*+K"
         elif(decPr==14):
             decPr_name = "Xi+K*"
         elif(decPr==15):
@@ -316,7 +316,7 @@ def latex_decay_label(baryon, decPr):
             decPr_name = ("$\Xi_{b} \pi$", xi_mass, pion_mass)
         elif(decPr==3):                                                                                           
             decPr_name = ("$\Xi'_{b} \pi$", xi_p_mass, pion_mass)
-        elif(decPr==4):                                                                                           
+        elif(decPr==4):                           
             decPr_name = ("$\Xi^{*}_{b} \pi$", xi_s_mass, pion_mass)
         elif(decPr==5):                                                                                           
             decPr_name = ("$\Sigma_{b} K$", sigma_mass, kaon_mass)
@@ -363,11 +363,11 @@ def latex_decay_label(baryon, decPr):
         elif(decPr==25 and baryon=='cascades_anti3'):
             decPr_name = ("$\Lambda_{8} B$", Lambda_8_mass, B0_mass) # //Lambda_8_rho D    # ^{\\rho}
         elif(decPr==26 and baryon=='cascades'):
-            decPr_name = ("$\Xi_{8} D_{s}$", Xi_8_mass, Bs_mass) # //Xi_8_lam+Bs      ^{\lambda}     
+            decPr_name = ("$\Xi_{8} B_{s}$", Xi_8_mass, Bs_mass) # //Xi_8_lam+Bs      ^{\lambda}     
         elif(decPr==26 and baryon=='cascades_anti3'):
-            decPr_name = ("$\Lambda_{8} D^{*}$", Lambda_8_mass, B_star_mass) # //Lambda_8_rho D # ^{\\rho}
+            decPr_name = ("$\Lambda_{8} B^{*}$", Lambda_8_mass, B_star_mass) # //Lambda_8_rho D # ^{\\rho}
         elif(decPr==27 and baryon=='cascades'):          
-            decPr_name = ("$\Sigma_{8} D^{*}$", Sigma_8_mass, B_star_mass) #  //Sigma_8_lam+B* # ^{\lambda}
+            decPr_name = ("$\Sigma_{8} B^{*}$", Sigma_8_mass, B_star_mass) #  //Sigma_8_lam+B* # ^{\lambda}
         elif(decPr==27 and baryon=='cascades_anti3'):
             decPr_name = ("$\Sigma_{8} B$", Sigma_8_mass, B0_mass) #  //Sigma_8_rho D    # ^{\\rho}
         elif(decPr==28 and baryon=='cascades'):
@@ -400,9 +400,9 @@ def latex_decay_label(baryon, decPr):
         elif(decPr==11):                                                                            
             decPr_name = ("$\Sigma^{*}_{b}\eta'$",  sigma_s_mass, eta_p_mass)           
         elif(decPr==12):                                                                            
-            decPr_name = ("$\Xi'_{b}K'$", xi_p_mass, kaon_mass)               
+            decPr_name = ("$\Xi'_{b}K$", xi_p_mass, kaon_mass)               
         elif(decPr==13):                                                                            
-            decPr_name = ("$\Xi^{*}_{b}K'$", xi_s_mass, kaon_mass)               
+            decPr_name = ("$\Xi^{*}_{b}K$", xi_s_mass, kaon_mass)               
         elif(decPr==14):                                                                            
             decPr_name = ("$\Xi_{b} K^{*}$", xi_mass, kaon_s_mass)               
         elif(decPr==15):                                                                            
@@ -441,7 +441,7 @@ def latex_decay_label(baryon, decPr):
         elif(decPr==4):                                                                   
             decPr_name = ("$\Sigma_{b}\\rho$", sigma_mass, meson_rho_mass)    
         elif(decPr==5):                                                                   
-            decPr_name = ("$\Sigma^{*}\\rho$", sigma_s_mass, meson_rho_mass)  
+            decPr_name = ("$\Sigma_{b}^{*}\\rho$", sigma_s_mass, meson_rho_mass)  
         elif(decPr==6):                                                                   
             decPr_name = ("$\Lambda_{b}\eta'$", lambda_mass, eta_p_mass)       
         elif(decPr==7):                                                                   
@@ -454,7 +454,7 @@ def latex_decay_label(baryon, decPr):
             decPr_name = ("$\Xi^{*}_{b} K$", xi_s_mass, kaon_mass)          
         elif(decPr==11):                                                                  
             decPr_name = ("$\Xi_{b} K^{*}$", xi_mass, kaon_s_mass)          
-        elif(decPr==12):                                                                  
+        elif(decPr==12):              
             decPr_name = ("$\Xi'_{b} K^{*}$", xi_p_mass, kaon_s_mass)        
         elif(decPr==13):
             decPr_name = ("$\Xi^{*}_{b} K^{*}$", xi_s_mass, kaon_s_mass)        
@@ -513,13 +513,15 @@ def print_row_latex(mass_a, masses_b, masses_c, state_name, state_decays, errors
             print(sum_value," \\\\", file=f_out)    
     
 
-def print_header_latex(name_states, f_out):
+def print_header_latex(name_header, name_states, f_out):
     nNames = len(name_states)    
-    print("\\begin{tabular}{c |", end='',file=f_out)
+    print("\\begin{tabular}{c c c |", end='',file=f_out)    
     for i in range(nNames-2):
-        print("  p{0.58cm}", end='',file=f_out)
+        print("p{0.58cm}", end='',file=f_out)
         
     print("p{0.75cm}} \hline \hline", file=f_out)
+    for i in range(nNames-1): print(name_header[i]," & ", end='',file=f_out)
+    print("\\\\", file=f_out)
     for i in range(nNames-1): print(name_states[i]," & ", end='',file=f_out)
     print(name_states[nNames-1]," \\\\ \hline", file=f_out)
 
@@ -593,6 +595,6 @@ def baryon_quarks(baryons="omegas"):
     elif baryons=="lambdas":
         return "nnb"
     elif baryons=="cascades":
-        return "snb'"
+        return "snb"
     else:
         return "snb"

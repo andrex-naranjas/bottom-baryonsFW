@@ -38,4 +38,15 @@ To install the framework you need anaconda and git on a linux machine. In a term
   ```
 6. Check that your plots and tables are in the newly created directories
 
-7. Edit the config/*.json to set options according your needs
+7. Edit the ```config/*.json``` to set options according your needs
+
+8. To run batch jobs two systems are supported:
+
+   8.1. HTCondor batch system
+   ```
+   python3 ./scripts/submit_batch.py three_quark omegas
+   ```
+   8.2. LSF batch system (Genoa machines)
+   ```
+   python3 ./scripts/submit_batch_lsf.py three_quark omegas
+   ```

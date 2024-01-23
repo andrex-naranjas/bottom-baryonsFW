@@ -186,7 +186,7 @@ def print_row_latex(compare, mass_a, masses_b, state_name, state_decays, errors_
     if(errors_up is None or errors_dn is None):
         no_errors = True
         
-    no_errors = True
+    # no_errors = True
     cons_energy_count = 0
     print(state_name, end='',file=f_out)
     for i in range(nstate):
@@ -198,19 +198,19 @@ def print_row_latex(compare, mass_a, masses_b, state_name, state_decays, errors_
                 print(value, end='', file=f_out)
                 if (i < nstate-1): print("  &", end='', file=f_out)
             else:
-                value = '-'
+                value = '0' # CHECK this, before was value="-"
                 print(value, end='', file=f_out)
                 if (i < nstate-1): print("  &", end='', file=f_out)
         else:
-            value = round(state_decays[i], 1)
+            value = round(state_decays[i])
             value_comp = "$xx$"
             if compare and cqm_widths!=[]: value_comp = round(cqm_widths[i], 1)
             if not no_errors:
-                error_up = abs(round(errors_up[i],1))
-                error_dn = abs(round(errors_dn[i],1))
-                print("$",value,"$", end='', file=f_out)
+                error_up = abs(round(errors_up[i]))
+                error_dn = abs(round(errors_dn[i]))
+                # print("$",value,"$", end='', file=f_out)
+                print("$",value,"_{-",error_dn, "}^{+",error_up,"}$  ", end='', file=f_out)
                 if (i < nstate-1): print("  &  ", end='', file=f_out)
-                # print("$",value,"_{-",error_dn, "}^{+",error_up,"}$  &  ", end='', file=f_out)
             else:
                 print(value, end='', file=f_out)
                 if (i < nstate-1): print("  &", end='', file=f_out)
@@ -227,12 +227,12 @@ def print_row_latex(compare, mass_a, masses_b, state_name, state_decays, errors_
         print(" \\\\", file=f_out)
         return
 
-def print_header_latex(name_states, compare, f_out):
+def print_header_latex(name_header, name_states, compare, f_out):
     nNames = len(name_states)
-    print("\\begin{tabular}{c |", end='',file=f_out)
+    print("\\begin{tabular}{c c c c|", end='',file=f_out)
     if compare : nNames=int(2*nNames)
     for i in range(nNames-1):
-        print("  p{0.65cm}", end='',file=f_out)        
+        print("  p{1.0cm}", end='',file=f_out)        
     separator = " & "
     if compare:
         nNames=int(0.5*nNames)
@@ -240,9 +240,12 @@ def print_header_latex(name_states, compare, f_out):
         print("} \hline \hline", file=f_out)
     else:
         # print("p{0.85cm}} \hline \hline", file=f_out) # Gamma total
-        print("} \hline \hline", file=f_out) # Gamma total
+        print("} \hline \hline", file=f_out)
+        
+    for i in range(nNames-1): print(name_header[i]," & ", end='',file=f_out)
+    print(name_header[nNames-1], "\\\\", file=f_out)
     for i in range(nNames-1): print(name_states[i], separator, end='',file=f_out)
-    print(name_states[nNames-1]," \\\\ \hline", file=f_out)
+    print(name_states[nNames-1], " \\\\ \hline", file=f_out)
 
 def print_bottom_latex(baryons,f_decay):
     print('\hline \hline', file=f_decay)

@@ -6,8 +6,8 @@
           H. Garcia-Tecocoatzi
 ---------------------------------------------------------------
 """
-# htcondor job submitter
-# usage: python3 scripts/submit_batch.py three_quark omegas
+# lsf job submitter
+# usage: python3 scripts/submit_batch_lsf.py three_quark omegas
 
 import sys
 import json
@@ -25,7 +25,6 @@ with open(workpath+"/config/three_quark_config.json", "r") as jsonfile:
     config = json.load(jsonfile)
 # baryons = config["baryons"] bug happening, need to feed directly the baryon name
 n_jobs  = config["n_jobs"]
-
 three_di = sys.argv[1]
 baryons = sys.argv[2]
 py3_path = popen('which python3').read().strip()
@@ -37,24 +36,20 @@ elif (three_di=='diquark'):
 else:
   sys.exit('quark structure not supported')
 
+# prepare lsf option file
 classad='''
-universe = vanilla
-executable = {0}
-getenv = True
-arguments = {1}/{2} $(Process) {1} {3}
-should_transfer_files = YES
-when_to_transfer_output = ON_EXIT
-output = {1}/output_batch/{3}/$(Process).out
-error = {1}/output_batch/{3}/$(Process).err
-log = {1}/output_batch/{3}/$(Process).log
-Queue {4}
+#BSUB -J quark[1-{4}]
+#BSUB -L /bin/bash
+#BSUB -n 1
+#BSUB -o {1}/output_batch/{3}/%I.out
+#BSUB -e {1}/output_batch/{3}/%I.err
+{0} {1}/{2} $LSB_JOBINDEX {1} {3}
 '''.format(py3_path, workpath, run_bottom, baryons, n_jobs)
 
 logpath = '.'
 
-with open(logpath+'/condor.jdl','w') as jdlfile:
+with open(logpath+'/lsf_options.jdl','w') as jdlfile:
   jdlfile.write(classad)
 
 print("************************ Batch jobs for: ", baryons, " masses and decays  ************************")
-#print('condor_submit %s/condor.jdl'%logpath)
-system('condor_submit %s/condor.jdl'%logpath)
+system('bsub -q long < %s/lsf_options.jdl'%logpath)

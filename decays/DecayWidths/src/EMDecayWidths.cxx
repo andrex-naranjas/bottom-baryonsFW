@@ -81,8 +81,7 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
     else if(decayProd==6){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 4p3/2-lam
     else if(decayProd==7){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 4p5/2-lam
     else if(decayProd==8){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-  2p1/2-rho
-    else if(decayProd==9){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-  2p3/2-rho
-    
+    else if(decayProd==9){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-  2p3/2-rh    
   }else if(baryonFlag==2){// cascades prime
     // decaying cascade anti 0
     if(decayProd==1)     {flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //0  ground
