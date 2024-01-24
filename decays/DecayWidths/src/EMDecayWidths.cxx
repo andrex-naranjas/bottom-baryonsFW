@@ -503,7 +503,7 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
     return 0.;
   }else if(excMode==1){ //lambda excitation initial baryon
     if(LA==1){
-      return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA); // Plambda -> ground
+      return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLlA, 1); // Plambda -> ground
     }else if(LA==2){
       if(LB==1 && LlB==1){
 	return T1Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
@@ -513,7 +513,7 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);
+      return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(mLrA, 1);
     }
   }
   
@@ -527,7 +527,7 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
     return 0.;
   }else if(excMode==1){ //lambda excitation initial baryon
     if(LA==1){
-      return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA); // Plambda -> ground
+      return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLlA, 1); // Plambda -> ground
     }else if(LA==2){
       if(LB==1 && LlB==1){
 	return T2Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
@@ -537,7 +537,7 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA);
+      return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(mLrA, 1);
     }
   }
 
@@ -551,7 +551,7 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
     return 0.;
   }else if(excMode==1){ //lambda excitation initial baryon
     if(LA==1){
-      return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA); // Plambda -> ground
+      return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLlA, 1); // Plambda -> ground
     }else if(LA==2){
       if(LB==1 && LlB==1){
 	return T3Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
@@ -561,7 +561,7 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return T3r();
+      return T3r() * KroneckerDelta(mLrA, 1);
     }
   }
   
@@ -728,6 +728,7 @@ double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alp
 
 int EMDecayWidths::KroneckerDelta_extended(double mLrA, double mLlA, int excMode){
   double thetak=0., phik=0.;
+  return 1;
   if(excMode==0)
     return KroneckerDelta(0, 1);
   else if(excMode==1)
