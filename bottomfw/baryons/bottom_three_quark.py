@@ -151,8 +151,9 @@ class BottomThreeQuark:
                     decays_indi_csv.append(self.baryon_decay.channel_widths_vector[0]) # individual channel decays
                     self.baryon_decay.channel_widths_vector=[] # clean decay object for next iteration
 
-                if decay_width_em and not bootstrap_width_em and self.L_tot[i]<=1 and (self.ModEx[i]=="grd" or self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # bootstrap mass but not bootstrap widhts
+                if decay_width_em and not bootstrap_width_em and self.L_tot[i]<=2 and (self.ModEx[i]=="grd" or self.ModEx[i]=="lam" or self.ModEx[i]=="rho"): # bootstrap mass but not bootstrap widhts
                     mass_single = self.model_mass(i, 0, sampled=False)
+                    print("perrito")
                     electro_decay = self.electro_decay.total_decay_width(baryons, self.Kp, mass_single,
                                                                          self.S_tot[i], self.J_tot[i], self.L_tot[i], self.SL[i],
                                                                          self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
