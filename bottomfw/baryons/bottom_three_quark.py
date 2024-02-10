@@ -158,9 +158,13 @@ class BottomThreeQuark:
                                                                          self.S_tot[i], self.J_tot[i], self.L_tot[i], self.SL[i],
                                                                          self.ModEx[i], bootstrap=False, m1=self.m1, m2=self.m2, m3=self.m3)
                     dummy_decay_em = np.append(dummy_decay_em, electro_decay) # total electro decay
-                    decays_electro_indi_csv.append(self.electro_decay.channel_widths_vector_pwave[0]) # individual channel electro decays
-                    self.electro_decay.channel_widths_vector_pwave=[] # clean decay object for next iteration
-
+                    if self.L_tot[i]<=1:
+                        decays_electro_indi_csv.append(self.electro_decay.channel_widths_vector_pwave[0]) # individual channel electro decays
+                        self.electro_decay.channel_widths_vector_pwave=[] # clean decay object for next iteration
+                    elif self.L_tot[i]==2:
+                        decays_electro_indi_csv.append(self.electro_decay.channel_widths_vector_dwave[0]) # individual channel electro decays
+                        self.electro_decay.channel_widths_vector_dwave=[] # clean decay object for next iteration
+                        
             else: # no bootstrap at all, only one prediction using the average of the fitted parameters
                 mass = self.model_mass(i, 0, sampled=False)
                 dummy = np.append(dummy, mass)
