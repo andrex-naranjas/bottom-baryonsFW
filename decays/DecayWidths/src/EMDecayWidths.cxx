@@ -684,6 +684,49 @@ double EMDecayWidths::T3Dr2Plr2ml1m(double k_value, double alpha_lam, double alp
   return value1 + value2;
 }
 
+// Dwave->Pwave rho
+double EMDecayWidths::U1Dr2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLrB_val){
+  double value1 = SPINFLIP_U1_r2_m1_r1_m1(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLrA_val, 1)  * KroneckerDelta(MLrB_val, 1);
+  double value2 = SPINFLIP_U1_r2_m0_r1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLrA_val, 0)  * KroneckerDelta(MLrB_val, 0);
+  double value3 = SPINFLIP_U1_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLrA_val, -1) * KroneckerDelta(MLrB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::U2Dr2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLrB_val){
+  double value1 = SPINFLIP_U2_r2_m1_r1_m1(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLrA_val, 1)  * KroneckerDelta(MLrB_val, 1);
+  double value2 = SPINFLIP_U2_r2_m0_r1_m0(  k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLrA_val, 0)  * KroneckerDelta(MLrB_val, 0);
+  double value3 = SPINFLIP_U2_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  * KroneckerDelta(MLrA_val, -1) * KroneckerDelta(MLrB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::U3Dr2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLrB_val){
+  double value1 = SPINFLIP_U3_r2_m1_r1_m1()  * KroneckerDelta(MLrA_val, 1)  * KroneckerDelta(MLrB_val, 1);
+  double value2 = SPINFLIP_U3_r2_m0_r1_m0()  * KroneckerDelta(MLrA_val, 0)  * KroneckerDelta(MLrB_val, 0);
+  double value3 = SPINFLIP_U3_r2_m1m_r1_m1m()  * KroneckerDelta(MLrA_val, -1) * KroneckerDelta(MLrB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::T1Dr2Prr2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLrB_val){
+  double value1 = T1_r2_m2_r1_m1( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLrA_val, 2)* KroneckerDelta(MLrB_val, 1);
+  double value2 = T1_r2_m1_r1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  * KroneckerDelta(MLrA_val, 1) * KroneckerDelta(MLrB_val, 0);
+  double value3 = T1_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val,0)   * KroneckerDelta(MLrB_val, -1);
+  return value1 + value2 + value3;
+}
+    
+double EMDecayWidths::T2Dr2Prr2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLrB_val){
+  double value1 = T2_r2_m2_r1_m1( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLrA_val, 2)* KroneckerDelta(MLrB_val, 1);
+  double value2 = T2_r2_m1_r1_m0( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  * KroneckerDelta(MLrA_val, 1) * KroneckerDelta(MLrB_val, 0);
+  double value3 = T2_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val,0)   * KroneckerDelta(MLrB_val, -1);
+  return value1 + value2 + value3;
+}
+
+double EMDecayWidths::T3Dr2Prr2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLrB_val){
+  double value1 = T3_r2_m2_r1_m1()  *  KroneckerDelta(MLrA_val, 2)* KroneckerDelta(MLrB_val, 1);
+  double value2 = T3_r2_m1_r1_m0()  * KroneckerDelta(MLrA_val, 1) * KroneckerDelta(MLrB_val, 0);
+  double value3 = T3_r2_m0_r1_m1m() * KroneckerDelta(MLrA_val,0)   * KroneckerDelta(MLrB_val, -1);
+  return value1 + value2 + value3;
+}
+
 
 double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLrB, int MLlB,  int excMode){
   double thetak=0., phik=0.;
