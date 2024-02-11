@@ -516,9 +516,9 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
       return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(mLrA, 1); // Prho -> ground
     }else if(LA==2){
       if(LB==1 && LlB==1){
-	return T1Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Drho -> Plambda
+	return T1Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
-	return T1Dl2Prl2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrB); // Drho-> Prho
+	return T1Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLrB); // Drho-> Prho
       }
     }
   }
@@ -543,7 +543,13 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(mLrA, 1);
+      return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(mLrA, 1); // Prho -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return T2Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLlB); // Drho -> Plambda
+      }else if(LB==1 && LrB==1){
+	return T2Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLrB); // Drho-> Prho
+      }
     }
   }
 
@@ -567,7 +573,13 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return T3r() * KroneckerDelta(mLrA, 1);
+      return T3r() * KroneckerDelta(mLrA, 1); // Prho -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return T3Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLlB); // Drho -> Plambda
+      }else if(LB==1 && LrB==1){
+	return T3Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLrB); // Drho-> Prho
+      }
     }
   }
   
