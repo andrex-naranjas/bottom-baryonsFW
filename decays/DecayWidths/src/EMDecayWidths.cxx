@@ -761,7 +761,13 @@ double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLrA, 0);
+      return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLrA, 0); // Prho -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return U1Dr2Pl2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLlB); // Drho -> Plambda
+      }else if(LB==1 && LrB==1){
+	return U1Dr2Pr2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLrB); // Drho -> Prho
+      }
     }
   }
   return 0.;  
@@ -788,7 +794,13 @@ double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak) * KroneckerDelta(MLrA, 0) ;
+      return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak) * KroneckerDelta(MLrA, 0) ; // Prho -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return U2Dr2Pl2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLlB); // Drho -> Plambda
+      }else if(LB==1 && LrB==1){
+	return U2Dr2Pr2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLrB); // Drho -> Prho
+      }
     }
   }
   return 0.;
@@ -815,7 +827,13 @@ double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLrA, 0);
+      return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLrA, 0); // Prho -> ground
+    }else if(LA==2){
+      if(LB==1 && LlB==1){
+	return U3Dr2Pl2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLlB); // Drho -> Plambda
+      }else if(LB==1 && LrB==1){
+	return U3Dr2Pr2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLrB); // Drho -> Prho
+      }
     }
   }
   return 0.;
