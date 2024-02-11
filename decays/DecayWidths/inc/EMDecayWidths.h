@@ -311,8 +311,34 @@ class EMDecayWidths{
   virtual double T1Dl2Prl2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrB_val);
   virtual double T2Dl2Prl2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrB_val);
   virtual double T3Dl2Prl2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrB_val);
+
+  virtual double T1Dr2Plr2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlB_val);
+
+  virtual double T1Dr2Prr2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLrB_val);
+
+  virtual double T2Dr2Plr2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlB_val);
+
+  virtual double T2Dr2Prr2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLrB_val);
+
+  virtual double T3Dr2Plr2ml1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlB_val);
+
+  virtual double T3Dr2Prr2mr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLrB_val);
+
+  virtual double U1Dr2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlB_val);
+
+  virtual double U1Dr2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLrB_val);
+
+  virtual double U2Dr2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlB_val);
+
+  virtual double U2Dr2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLrB_val);
+
+  virtual double U3Dr2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlB_val);
+
+  virtual double U3Dr2Pr2m1m(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLrB_val);
+
   
 };
+
 
 
 //to talk to python
