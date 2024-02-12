@@ -496,7 +496,7 @@ double EMDecayWidths::ANGULAR_SUM_SQUARED(double alpha_rho, double alpha_lam, do
   return SUM_SQUARED_AMP;
 }
 
-double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA, int MLrB, int MLlB, int excMode){
+double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int MLrA, int MLlA, int MLrB, int MLlB, int excMode){
   double thetak=0., phik=0.;
     
   if(excMode==0){ //ground
@@ -513,12 +513,12 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(mLrA, 1); // Prho -> ground
+      return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLrA, 1); // Prho -> ground
     }else if(LA==2){
       if(LB==1 && LlB==1){
-	return T1Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLlB); // Drho -> Plambda
+	return T1Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
-	return T1Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLrB); // Drho-> Prho
+	return T1Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
       }
     }
   }
@@ -526,7 +526,7 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
   return 0.;
 }
 
-double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA,  int MLrB, int MLlB, int excMode){
+double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int MLrA, int MLlA,  int MLrB, int MLlB, int excMode){
   double thetak=0., phik=0.;
 
   if(excMode==0){ //ground
@@ -543,12 +543,12 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(mLrA, 1); // Prho -> ground
+      return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLrA, 1); // Prho -> ground
     }else if(LA==2){
       if(LB==1 && LlB==1){
-	return T2Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLlB); // Drho -> Plambda
+	return T2Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
-	return T2Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLrB); // Drho-> Prho
+	return T2Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
       }
     }
   }
@@ -556,7 +556,7 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
   return 0.;
 }
 
-double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int mLrA, int MLlA,  int MLrB, int MLlB, int excMode){
+double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alpha_lam, int LA, int MLrA, int MLlA,  int MLrB, int MLlB, int excMode){
   double thetak=0., phik=0.;
 
   if(excMode==0){ //ground
@@ -573,12 +573,12 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==2){ //rho excitation initial baryon
     if(LA==1){
-      return T3r() * KroneckerDelta(mLrA, 1); // Prho -> ground
+      return T3r() * KroneckerDelta(MLrA, 1); // Prho -> ground
     }else if(LA==2){
       if(LB==1 && LlB==1){
-	return T3Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLlB); // Drho -> Plambda
+	return T3Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
-	return T3Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, mLrA, MLrB); // Drho-> Prho
+	return T3Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
       }
     }
   }
@@ -1650,7 +1650,7 @@ double EMDecayWidths::SPINFLIP_U2_r2_m0_r1_m0(double k_value, double alpha_lam, 
   double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
   double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
   double value3 = 1./std::pow(alpha_rho, 2);
-  double value = ( p_imag * k_value * (std::pow(k_value, 2) - 8. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(8. * std::sqrt(3.) * std::pow(alpha_rho,3));
+  double value = ((-1.0) * p_imag * k_value * (std::pow(k_value, 2) - 8. * std::pow(alpha_rho,2)) * std::exp(value1 * (value2 + value3)))/(8. * std::sqrt(3.) * std::pow(alpha_rho,3));
   return value;
 }
 
