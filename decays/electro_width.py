@@ -16,7 +16,7 @@ class ElectroWidths:
     and masses
 
     baryon FLAG: 1 -> omega, 2->cascade_6, 3->sigma,# 4 -> lambda, 5-> cascade_3
-    ModEx  FLAG: 0 -> ground(grd), 1 -> lambda(lam), 2->rho
+    ModEx  FLAG: 0 -> ground(grd), 1 -> lambda(lam), 2->rho, rpl->3, rpr->4, mix->5
     decPr  FLAG: 0 -> ...  decayProduct Flag
     """
     def __init__(self, bootstrap=False, baryons='', workpath="."):

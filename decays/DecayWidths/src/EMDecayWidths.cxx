@@ -521,6 +521,12 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
 	return T1Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
       }
     }
+  }else if(excMode==5){ // mixed excitation initial baryon
+      if(LB==1 && LlB==1){
+	return T1Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
+      }else if(LB==1 && LrB==1){
+	return T1Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
+      }
   }
   
   return 0.;
@@ -551,8 +557,14 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
 	return T2Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
       }
     }
+  }else if(excMode==5){ // mixed excitation initial baryon
+      if(LB==1 && LlB==1){
+	return T1Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
+      }else if(LB==1 && LrB==1){
+	return T1Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
+      }
   }
-
+  
   return 0.;
 }
 
@@ -581,6 +593,12 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
 	return T3Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
       }
     }
+  }else if(excMode==5){ // mixed excitation initial baryon
+      if(LB==1 && LlB==1){
+	return T1Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
+      }else if(LB==1 && LrB==1){
+	return T1Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
+     }
   }
   
   return 0.;
