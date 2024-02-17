@@ -63,18 +63,23 @@ class ElectroWidths:
         
         alpha_lam = self.alphas(k_prim, m_lam)
         alpha_rho = self.alphas(k_prim, m_rho)
-
+        
         if LA_val<=1: # loop P-wave (por el momento tambien ground)
             nChannels_Pwave = self.n_channels_Pwave(baryons)
             channel_widths = ([])
             for i in range(nChannels_Pwave):
                 decPr = i + 100 + 1
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
-                single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                
+                if (ModEx!=5 and LA_qm!=1): # test                    
+                    single_decay_value =  0
+                else:
+                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                                 MassB,
                                                                 alpha_lam, alpha_rho,
                                                                 mbottom, mupdown, mstrange,
                                                                 baryon, ModEx, decPr)
+                    
                 channel_widths = np.append(channel_widths, single_decay_value)
                 baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
                 if not bootstrap:
@@ -97,7 +102,11 @@ class ElectroWidths:
                 decPr = i + 200 + 1
                 print(decPr)
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
-                single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+
+                if (ModEx==5 and (LA_qm==2 or LA_qm==0)): # test                    
+                    single_decay_value =  0
+                else:
+                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                                 MassB,
                                                                 alpha_lam, alpha_rho,
                                                                 mbottom, mupdown, mstrange,

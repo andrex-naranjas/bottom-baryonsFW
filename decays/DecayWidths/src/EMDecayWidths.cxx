@@ -39,6 +39,8 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   modeExcitation = excMode;
   decayProd  = prodDecay;
 
+  std::cout<< la_val <<"          MENSAJE GRANDE      !!!!!!!!!!!!!!     "<<excMode<<std::endl;   
+
   // define the light effective mass for the h.o.
   if (baryonFlag==1)                      mlight = mstrange;
   else if(baryonFlag==2 or baryonFlag==5) mlight = 0.5*(mupdown_val + mstrange);
