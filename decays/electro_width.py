@@ -335,27 +335,72 @@ class ElectroWidths:
                 return self.xi_p_s_mass # test
                         
         elif(baryons=='sigmas'):
-            if(decPr==1):
+            if(decPr==101):
                 if not bootstrap: return self.sigma_mass
                 else: return np.random.choice(self.gauss_sigma, size=None)
-            elif(decPr==2):
+            elif(decPr==102):
                 if not bootstrap: return self.sigma_mass
                 else: return np.random.choice(self.gauss_sigma, size=None)
-            elif(decPr==3):
+            elif(decPr==103):
                 if not bootstrap: return self.sigma_mass
                 else: return np.random.choice(self.gauss_sigma, size=None)
-            elif(decPr==4):
+            elif(decPr==104):
                 if not bootstrap: return self.lambda_mass
                 else: return np.random.choice(self.gauss_lambda, size=None)
-            elif(decPr==5):
+            elif(decPr==105):
                 if not bootstrap: return self.sigma_s_mass
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
-            elif(decPr==6):
+            elif(decPr==106):
                 if not bootstrap: return self.sigma_s_mass
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
-            elif(decPr==7):
+            elif(decPr==107):
                 if not bootstrap: return self.sigma_s_mass
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
+            # sigmas
+            elif(decPr==201 or decPr==208 or decPr==215):
+                if not bootstrap: return 6.108
+                else: return 6.108
+            elif(decPr==202 or decPr==209 or decPr==216):
+                if not bootstrap: return 6.131
+                else: return 6.131
+            elif(decPr==203 or decPr==210 or decPr==217):
+                if not bootstrap: return 6.114
+                else: return 6.114
+            elif(decPr==204 or decPr==211 or decPr==218):
+                if not bootstrap: return 6.137
+                else: return 6.137
+            elif(decPr==205 or decPr==212 or decPr==219):
+                if not bootstrap: return 6.147
+                else: return 6.147
+            elif(decPr==206 or decPr==213 or decPr==220):
+                if not bootstrap: return 6.304
+                else: return 6.304
+            elif(decPr==207 or decPr==214 or decPr==221):
+                if not bootstrap: return 6.311
+                else: return 6.311
+            # lambdas
+            elif(decPr==222):
+                if not bootstrap: return 5.918
+                else: return 5.918
+            elif(decPr==223):
+                if not bootstrap: return 5.924
+                else: return 5.924
+            elif(decPr==224):
+                if not bootstrap: return 6.114
+                else: return 6.114
+            elif(decPr==225):
+                if not bootstrap: return 6.137
+                else: return 6.137
+            elif(decPr==226):
+                if not bootstrap: return 6.121
+                else: return 6.121
+            elif(decPr==227):
+                if not bootstrap: return 6.143
+                else: return 6.143
+            elif(decPr==228):
+                if not bootstrap: return 6.153
+                else: return 6.153
+
         elif(baryons=='lambdas'):
             if(decPr==101):
                 if not bootstrap: return self.lambda_mass
@@ -392,7 +437,7 @@ class ElectroWidths:
             elif(decPr==208):
                 if not bootstrap: return 6.108
                 else: return 6.108
-            elif(decPr==208):
+            elif(decPr==209):
                 if not bootstrap: return 6.131
                 else: return 6.131
             elif(decPr==210):
