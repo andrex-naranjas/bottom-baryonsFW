@@ -357,15 +357,59 @@ class ElectroWidths:
                 if not bootstrap: return self.sigma_s_mass
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
         elif(baryons=='lambdas'):
-            if(decPr==1):
+            if(decPr==101):
                 if not bootstrap: return self.lambda_mass
                 else: return np.random.choice(self.gauss_lambda, size=None)
-            elif(decPr==2):
+            elif(decPr==102):
                 if not bootstrap: return self.sigma_mass
                 else: return np.random.choice(self.gauss_sigma, size=None)
-            elif(decPr==3):
+            elif(decPr==103):
                 if not bootstrap: return self.sigma_s_mass
                 else: return np.random.choice(self.gauss_sigma_s, size=None)
+            # lambdas
+            elif(decPr==201):
+                if not bootstrap: return 5.918
+                else: return 5.918
+            elif(decPr==202):
+                if not bootstrap: return 5.924
+                else: return 5.924
+            elif(decPr==203):
+                if not bootstrap: return 6.114
+                else: return 6.114
+            elif(decPr==204):
+                if not bootstrap: return 6.137
+                else: return 6.137
+            elif(decPr==205):
+                if not bootstrap: return 6.121
+                else: return 6.121
+            elif(decPr==206):
+                if not bootstrap: return 6.143
+                else: return 6.143
+            elif(decPr==207):
+                if not bootstrap: return 6.153
+                else: return 6.153
+            # sigmas0
+            elif(decPr==208):
+                if not bootstrap: return 6.108
+                else: return 6.108
+            elif(decPr==208):
+                if not bootstrap: return 6.131
+                else: return 6.131
+            elif(decPr==210):
+                if not bootstrap: return 6.114
+                else: return 6.114
+            elif(decPr==211):
+                if not bootstrap: return 6.137
+                else: return 6.137
+            elif(decPr==212):
+                if not bootstrap: return 6.147
+                else: return 6.147
+            elif(decPr==213):
+                if not bootstrap: return 6.304
+                else: return 6.304
+            elif(decPr==214):
+                if not bootstrap: return 6.311
+                else: return 6.311
         
     def fetch_decay_masses(self, bootstrap):
         '''
