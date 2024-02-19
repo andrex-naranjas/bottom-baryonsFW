@@ -239,14 +239,35 @@ class ElectroWidths:
         Method to fetch mass of the decay products
         """
         if(baryons=='omegas'):
-            if(decPr==1):
+            if(decPr==101):
                 if not bootstrap:  return self.omega_mass
                 else: return np.random.choice(self.gauss_omega, size=None)
-            if(decPr==2):
+            elif(decPr==102):
                 if not bootstrap:  return self.omega_s_mass
                 else: return np.random.choice(self.gauss_omega_s, size=None)
-            return self.omega_s_mass # testing
-                
+            # omega
+            elif(decPr==201):
+                if not bootstrap: return 6.315
+                else: return 6.315
+            elif(decPr==202):
+                if not bootstrap: return 6.337
+                else: return 6.337
+            elif(decPr==203):
+                if not bootstrap: return 6.321
+                else: return 6.321
+            elif(decPr==204):
+                if not bootstrap: return 6.343
+                else: return 6.343
+            elif(decPr==205):
+                if not bootstrap: return 6.353
+                else: return 6.353
+            elif(decPr==206):
+                if not bootstrap: return 6.465
+                else: return 6.465
+            elif(decPr==207):
+                if not bootstrap: return 6.471
+                else: return 6.471
+            return self.omega_s_mass # testing    
         elif(baryons=='cascades' or baryons=='cascades_anti3'):
             if(decPr==101):
                 if not bootstrap: return self.xi_mass
