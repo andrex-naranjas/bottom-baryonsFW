@@ -2539,6 +2539,59 @@ double EMDecayWidths::T3_r1_m1_l1_m1m_l1_m1m(){
   return value;
 }
 
+//Definitions of the Integrals and Tensor Operators for decays from D-lambda to ground state
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_l2_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * std::sqrt(3) * std::pow(k_value, 2) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(4. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_l2_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * std::sqrt(3) * std::pow(k_value, 2) * std::pow(mbottom, 2) * std::exp(value1 * (value2 + value3)))/(4. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_l2_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ((-1.0) * std::sqrt(3) * std::pow(k_value, 2) * std::pow(mlight, 2) * std::exp(value1))/ (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1rl2m1GS
+double EMDecayWidths::T1_l2_m1_GS(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( k_value * mbottom * std::exp(value1 * (value2 + value3)))/(std::sqrt(2.) * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T2rl2m1GS
+double EMDecayWidths::T2_l2_m1_GS(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( k_value * mbottom * std::exp(value1 * (value2 + value3)))/(std::sqrt(2.) * (mbottom + 2. * mlight));
+  return value;
+}
+
+//T3rl2m1GS
+double EMDecayWidths::T3_l2_m1_GS(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = ((-1.0) * 3. * std::pow(k_value, 2) * std::pow(mlight, 2)) / (2. * (std::pow(alpha_lam * (mbottom + 2. * mlight), 2)));
+  double value = ( 2. * std::sqrt(2) * k_value * mlight * std::exp(value1))/ (mbottom + 2. * mlight);
+  return value;
+}
+
 
 #endif
 

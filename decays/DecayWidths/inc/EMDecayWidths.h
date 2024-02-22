@@ -296,6 +296,17 @@ class EMDecayWidths{
   virtual double T3_r1_m1_l1_m0_l1_m0();
   virtual double T3_r1_m1_l1_m1m_l1_m1m();
 
+  //Definitions of the Integrals and Tensor Operators for decays from D-lambda to ground state
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_l2_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_l2_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_l2_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+
+  // ORBIT-FLIP Tensor operators
+  virtual double T1_l2_m1_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T2_l2_m1_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T3_l2_m1_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+
   // Sum of integrals
   virtual double U1Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA, int MLlB);
   virtual double U2Dl2Pl2m1m(double k_value, double alpha_lam, double alpha_rho, int MLlA, int MLlB);
