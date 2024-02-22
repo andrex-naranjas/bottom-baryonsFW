@@ -383,6 +383,14 @@ class EMDecayWidths{
   virtual double T1Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   virtual double T2Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   virtual double T3Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+
+  // Sum of integrals Dwave rho -> ground state
+  virtual double U1Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+  virtual double U2Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+  virtual double U3Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+  virtual double T1Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+  virtual double T2Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+  virtual double T3Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   
 };
 
