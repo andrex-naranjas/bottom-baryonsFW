@@ -2592,6 +2592,56 @@ double EMDecayWidths::T3_l2_m1_GS(double k_value, double alpha_lam, double alpha
   return value;
 }
 
+//Definitions of the Integrals and Tensor Operators for decays from D-rho to ground state
+// SPIN-FLIP INTEGRALS
+double EMDecayWidths::SPINFLIP_U1_r2_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * std::pow(k_value, 2) * std::exp(value1 * (value2 + value3)))/ (4. * std::sqrt(3) * std::pow(alpha_rho, 2));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U2_r2_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ((-1.0) * std::pow(k_value, 2) * std::exp(value1 * (value2 + value3)))/ (4. * std::sqrt(3) * std::pow(alpha_rho, 2));
+  return value;
+}
+
+double EMDecayWidths::SPINFLIP_U3_r2_m0_GS(){
+  double value = 0;
+  return value;
+}
+
+// ORBIT-FLIP Tensor operators
+//T1r2m1GS
+double EMDecayWidths::T1_r2_m1_GS(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( k_value * std::exp(value1 * (value2 + value3)))/ (std::sqrt(2));
+  return value;
+}
+
+//T2r2m1GS
+double EMDecayWidths::T2_r2_m1_GS(double k_value, double alpha_lam, double alpha_rho,
+			  double mbottom, double mlight, double thetak, double phik){
+  double value1 = (-1.0) * std::pow(k_value, 2) / 8.;
+  double value2 = (3. * std::pow(mbottom, 2)) / (std::pow(alpha_lam * (mbottom + 2. * mlight), 2));
+  double value3 = 1./std::pow(alpha_rho, 2);
+  double value = ( k_value * std::exp(value1 * (value2 + value3)))/ (std::sqrt(2));
+  return value;
+}
+
+//T3r2m1GS
+double EMDecayWidths::T3_r2_m1_GS(){
+  double value = 0;
+  return value;
+}
+
 
 #endif
 
