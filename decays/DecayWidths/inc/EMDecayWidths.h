@@ -375,6 +375,14 @@ class EMDecayWidths{
   virtual double T1Mix2Pr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrA_val, int MLrB_val);
   virtual double T2Mix2Pr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrA_val, int MLrB_val);
   virtual double T3Mix2Pr1m(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLlA_val, int MLrA_val, int MLrB_val);
+
+  // Sum of integrals Dwave lambda -> ground state
+  virtual double U1Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+  virtual double U2Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+  virtual double U3Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+  virtual double T1Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+  virtual double T2Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+  virtual double T3Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   
 };
 

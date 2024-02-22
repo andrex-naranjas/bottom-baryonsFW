@@ -899,6 +899,39 @@ double EMDecayWidths::T3Mix2Pr1m(double k_value, double alpha_lam, double alpha_
   return value1 + value2 + value3 + value4 + value5;
 }
 
+// Dwave lambda -> ground state 
+double EMDecayWidths::U1Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val){
+  double value = SPINFLIP_U1_l2_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U2Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val){
+  double value = SPINFLIP_U2_l2_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U3Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, int MLlA_val){
+  double value = SPINFLIP_U3_l2_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::T1Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val){
+  double value = T1_l2_m1_GS( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLrA_val, 0)* KroneckerDelta(MLlA_val, 1);
+  return value ;
+}
+
+double EMDecayWidths::T2Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val){
+  double value = T2_l2_m1_GS( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLrA_val, 0)* KroneckerDelta(MLlA_val, 1);
+  return value ;
+}
+
+double EMDecayWidths::T3Dl2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val){
+  double value = T3_l2_m1_GS( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  *  KroneckerDelta(MLrA_val, 0)* KroneckerDelta(MLlA_val, 1);
+  return value ;
+}
+
+// Dwave rho -> ground state
+
 
 double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLrB, int MLlB,  int excMode){
   double thetak=0., phik=0.;
