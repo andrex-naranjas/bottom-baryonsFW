@@ -507,7 +507,9 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return T1l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLlA, 1); // Plambda -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T1Dl2GS2mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // Dlambda-> GS
+      }else if(LB==1 && LlB==1){
 	return T1Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
       }else if(LB==1 && LrB==1){
 	return T1Dl2Prl2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrB); // Dlambda -> Prho
@@ -517,7 +519,9 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return T1r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLrA, 1); // Prho -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T1Dr2GS2mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // Drho-> GS
+      }else if(LB==1 && LlB==1){
 	return T1Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
 	return T1Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
@@ -525,19 +529,25 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==5){ // mixed excitation initial baryon
     if(LA==0){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T1Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T1Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T1Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==1){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T1Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T1Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T1Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T1Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T1Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T1Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
@@ -557,7 +567,9 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return T2l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLlA, 1); // Plambda -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T2Dl2GS2mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // Dlambda-> GS
+      }else if(LB==1 && LlB==1){
 	return T2Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
       }else if(LB==1 && LrB==1){
 	return T2Dl2Prl2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrB); // Dlambda -> Prho
@@ -567,7 +579,9 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return T2r(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLrA, 1); // Prho -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T2Dr2GS2mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // Drho-> GS
+      }else if(LB==1 && LlB==1){
 	return T2Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
 	return T2Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
@@ -575,19 +589,25 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==5){ // mixed excitation initial baryon
     if(LA==0){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T2Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T2Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T2Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==1){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T2Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T2Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T2Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T2Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T2Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T2Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
@@ -607,7 +627,9 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return T3l(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik, MLlA) * KroneckerDelta(MLlA, 1); // Plambda -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T3Dl2GS2mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // Dlambda-> GS
+      }else if(LB==1 && LlB==1){
 	return T3Dl2Pll2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLlB); // Dlambda -> Plambda
       }else if(LB==1 && LrB==1){
 	return T3Dl2Prl2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrB); // Dlambda -> Prho
@@ -617,7 +639,9 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return T3r() * KroneckerDelta(MLrA, 1); // Prho -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T3Dr2GS2mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // Drho-> GS
+      }else if(LB==1 && LlB==1){
 	return T3Dr2Plr2ml1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
 	return T3Dr2Prr2mr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLrB); // Drho-> Prho
@@ -625,19 +649,25 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
     }
   }else if(excMode==5){ // mixed excitation initial baryon
     if(LA==0){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T3Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T3Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T3Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==1){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T3Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T3Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T3Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return T3Mix2GS1mgs(k_value, alpha_lam, alpha_rho, thetak, phik, MLrA, MLlA); // mixed-> GS
+      }else if(LB==1 && LlB==1){
 	return T3Mix2Pl1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return T3Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
