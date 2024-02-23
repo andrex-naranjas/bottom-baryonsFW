@@ -1009,7 +1009,9 @@ double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return SPINFLIP_U1_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLlA, 0); // Plambda -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U1Dl2GS2mgs(k_value, alpha_lam, alpha_rho, MLlA); // Dlambda -> GS
+      }else if(LB==1 && LlB==1){
 	return U1Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB); // Dlambda -> Plambda
       }else if(LB==1 && LrB==1){
 	return U1Dl2Pr2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLrB); // Dlambda -> Prho
@@ -1019,7 +1021,9 @@ double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return SPINFLIP_U1_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLrA, 0); // Prho -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U1Dr2GS2mgs(k_value, alpha_lam, alpha_rho, MLrA); // Drho -> GS
+      }else if(LB==1 && LlB==1){
 	return U1Dr2Pl2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
 	return U1Dr2Pr2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLrB); // Drho -> Prho
@@ -1039,7 +1043,9 @@ double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alp
 	return U1Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U1Mix2GS1mgs(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // mixed -> GS
+      }else if(LB==1 && LlB==1){
 	return U1Mix2Pl1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return U1Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
@@ -1062,7 +1068,9 @@ double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return SPINFLIP_U2_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak) * KroneckerDelta(MLlA, 0); // Plambda -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U2Dl2GS2mgs(k_value, alpha_lam, alpha_rho, MLlA); // Dlambda -> GS
+      }else if(LB==1 && LlB==1){
 	return U2Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB); // Dlambda -> Plambda
       }else if(LB==1 && LrB==1){
 	return U2Dl2Pr2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLrB); // Dlambda -> Prho
@@ -1072,7 +1080,9 @@ double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return SPINFLIP_U2_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak) * KroneckerDelta(MLrA, 0) ; // Prho -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U2Dr2GS2mgs(k_value, alpha_lam, alpha_rho, MLrA); // Drho -> GS
+      }else if(LB==1 && LlB==1){
 	return U2Dr2Pl2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
 	return U2Dr2Pr2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLrB); // Drho -> Prho
@@ -1092,7 +1102,9 @@ double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alp
 	return U2Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U2Mix2GS1mgs(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // mixed -> GS
+      }else if(LB==1 && LlB==1){
 	return U2Mix2Pl1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return U2Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
@@ -1115,7 +1127,9 @@ double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return SPINFLIP_U3_1l_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik,thetak)* KroneckerDelta(MLlA, 0); // Plambda -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U3Dl2GS2mgs(k_value, alpha_lam, alpha_rho, MLlA); // Dlambda -> GS
+      }else if(LB==1 && LlB==1){
 	return U3Dl2Pl2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLlB); // Dlambda -> Plambda
       }else if(LB==1 && LrB==1){
 	return U3Dl2Pr2m1m(k_value, alpha_lam, alpha_rho, MLlA, MLrB); // Dlambda -> Prho
@@ -1125,7 +1139,9 @@ double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alp
     if(LA==1){
       return SPINFLIP_U3_1r_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, phik, thetak) * KroneckerDelta(MLrA, 0); // Prho -> ground
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U3Dr2GS2mgs(k_value, alpha_lam, alpha_rho, MLrA); // Drho -> GS
+      }else if(LB==1 && LlB==1){
 	return U3Dr2Pl2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLlB); // Drho -> Plambda
       }else if(LB==1 && LrB==1){
 	return U3Dr2Pr2m1m(k_value, alpha_lam, alpha_rho, MLrA, MLrB); // Drho -> Prho
@@ -1145,7 +1161,9 @@ double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alp
 	return U3Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }else if(LA==2){
-      if(LB==1 && LlB==1){
+      if(LB==0){
+	return U3Mix2GS1mgs(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // mixed -> GS
+      }else if(LB==1 && LlB==1){
 	return U3Mix2Pl1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLlB); // mixed-> Plambda
       }else if(LB==1 && LrB==1){
 	return U3Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
