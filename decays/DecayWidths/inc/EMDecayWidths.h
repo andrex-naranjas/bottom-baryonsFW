@@ -391,6 +391,14 @@ class EMDecayWidths{
   virtual double T1Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   virtual double T2Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   virtual double T3Dr2GS2mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+
+  // Sum of integrals Mixed -> ground state
+  virtual double U1Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U2Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U3Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double T1Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+  virtual double T2Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+  virtual double T3Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   
 };
 

@@ -961,6 +961,40 @@ double EMDecayWidths::T3Dr2GS2mgs(double k_value, double alpha_lam, double alpha
   return value ;
 }
 
+// Mixed -> ground state
+double EMDecayWidths::U1Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U1_r1_m0_l1_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U2Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U2_r1_m0_l1_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U3Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U3_r1_m0_l1_m0_GS() * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::T1Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val){
+  double value1 = T1_r1_m1_l1_m0_GS( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val, 1) * KroneckerDelta(MLlA_val, 0);
+  double value2 = T1_r1_m0_l1_m1_GS( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 1);
+  return value1 + value2;
+}
+
+double EMDecayWidths::T2Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val){
+  double value1 = T2_r1_m1_l1_m0_GS( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val, 1) * KroneckerDelta(MLlA_val, 0);
+  double value2 = T2_r1_m0_l1_m1_GS( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 1);
+  return value1 + value2;
+}
+
+double EMDecayWidths::T3Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val){
+  double value1 = T3_r1_m1_l1_m0_GS() * KroneckerDelta(MLrA_val, 1) * KroneckerDelta(MLlA_val, 0);
+  double value2 = T3_r1_m0_l1_m1_GS() * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 1);
+  return value1 + value2;
+}
+
 
 double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLrB, int MLlB,  int excMode){
   double thetak=0., phik=0.;
