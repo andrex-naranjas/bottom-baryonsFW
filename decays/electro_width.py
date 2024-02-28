@@ -65,16 +65,85 @@ class ElectroWidths:
         alpha_rho = self.alphas(k_prim, m_rho)
         
         if LA_val<=1: # loop P-wave (por el momento tambien ground)
+            if (ModEx == 0 or ModEx == 1 or ModEx == 2):
+                nChannels_Pwave = self.n_channels_Pwave(baryons)
+                channel_widths = ([])
+                for i in range(nChannels_Pwave):
+                    decPr = i + 100 + 1
+                    MassB = self.decay_mass(bootstrap, baryons, decPr)
+                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                                                                    MassB,
+                                                                    alpha_lam, alpha_rho,
+                                                                    mbottom, mupdown, mstrange,
+                                                                    baryon, ModEx, decPr)
+
+                    channel_widths = np.append(channel_widths, single_decay_value)
+                    baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
+                    if not bootstrap:
+                        print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.1f | %5.6f '
+                              %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
+                    
+                # sum the individual width to obtain total width
+                total_decay_width = np.sum(channel_widths)
+                # print(alpha_lam,alpha_rho)
+                if not bootstrap:
+                    print(' ******************   TOTAL ELECTROMAGNETIC WIDTH FOR', baryons, ModEx_name, round(total_decay_width,4), '   ******************')
+                    print('-------------------------------------------------------------------------------------------------------------')
+            
+                self.channel_widths_vector_pwave.append(channel_widths) # for individual decay tables, this is a list of arrays!
+            else:
+                nChannels_Pwave = self.n_channels_Pwave(baryons)
+                channel_widths = ([])
+                for i in range(nChannels_Pwave):
+                    decPr = i + 100 + 1
+                    MassB = self.decay_mass(bootstrap, baryons, decPr)
+                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                                                                    MassB,
+                                                                    alpha_lam, alpha_rho,
+                                                                    mbottom, mupdown, mstrange,
+                                                                    baryon, ModEx, decPr)
+                    
+                    channel_widths = np.append(channel_widths, single_decay_value)
+                    baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
+                    if not bootstrap:
+                        print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.1f | %5.6f '
+                              %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
+                    
+                # sum the individual width to obtain total width
+                total_decay_width = np.sum(channel_widths)
+
+                nChannels_Dwave = self.n_channels_Dwave(baryons)
+                #channel_widths = (channel_widths)
+                for i in range(nChannels_Dwave):
+                    decPr = i + 200 + 1
+                    MassB = self.decay_mass(bootstrap, baryons, decPr)
+                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                                                                    MassB,
+                                                                    alpha_lam, alpha_rho,
+                                                                    mbottom, mupdown, mstrange,
+                                                                    baryon, ModEx, decPr)
+                    channel_widths = np.append(channel_widths, single_decay_value)
+                    baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
+                    if not bootstrap:
+                        print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.1f | %5.6f '
+                              %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
+                    
+                # sum the individual width to obtain total width
+                total_decay_width = np.sum(channel_widths)
+                # print(alpha_lam,alpha_rho)
+                if not bootstrap:
+                    print(' ******************   TOTAL ELECTROMAGNETIC WIDTH FOR', baryons, ModEx_name, round(total_decay_width,4), '   ******************')
+                    print('-------------------------------------------------------------------------------------------------------------')
+            
+                self.channel_widths_vector_pwave.append(channel_widths) # for individual decay tables, this is a list of arrays!
+
+        if LA_val==2: # loop D-wave
             nChannels_Pwave = self.n_channels_Pwave(baryons)
             channel_widths = ([])
             for i in range(nChannels_Pwave):
                 decPr = i + 100 + 1
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
-                
-                if (ModEx!=5 and LA_qm!=1): # test                    
-                    single_decay_value =  0
-                else:
-                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                                 MassB,
                                                                 alpha_lam, alpha_rho,
                                                                 mbottom, mupdown, mstrange,
@@ -88,25 +157,13 @@ class ElectroWidths:
                     
             # sum the individual width to obtain total width
             total_decay_width = np.sum(channel_widths)
-            # print(alpha_lam,alpha_rho)
-            if not bootstrap:
-                print(' ******************   TOTAL ELECTROMAGNETIC WIDTH FOR', baryons, ModEx_name, round(total_decay_width,4), '   ******************')
-                print('-------------------------------------------------------------------------------------------------------------')
-            
-            self.channel_widths_vector_pwave.append(channel_widths) # for individual decay tables, this is a list of arrays!
 
-        if LA_val==2: # loop D-wave
-            nChannels_Pwave = self.n_channels_Dwave(baryons)
-            channel_widths = ([])
+            nChannels_Dwave = self.n_channels_Dwave(baryons)
+            channel_widths = (channel_widths)
             for i in range(nChannels_Dwave):
                 decPr = i + 200 + 1
-                print(decPr)
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
-
-                if (ModEx==5 and (LA_qm==2 or LA_qm==0)): # test                    
-                    single_decay_value =  0
-                else:
-                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
                                                                 MassB,
                                                                 alpha_lam, alpha_rho,
                                                                 mbottom, mupdown, mstrange,
