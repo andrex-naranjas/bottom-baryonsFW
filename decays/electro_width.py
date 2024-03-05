@@ -92,8 +92,9 @@ class ElectroWidths:
             
                 self.channel_widths_vector_pwave.append(channel_widths) # for individual decay tables, this is a list of arrays!
             else:
+                # mixed/radial -> ground
                 nChannels_Pwave = self.n_channels_Pwave(baryons)
-                channel_widths = ([])
+                channel_widths = ([])             
                 for i in range(nChannels_Pwave):
                     decPr = i + 100 + 1
                     MassB = self.decay_mass(bootstrap, baryons, decPr)
@@ -108,12 +109,8 @@ class ElectroWidths:
                     if not bootstrap:
                         print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.1f | %5.6f '
                               %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
-                    
-                # sum the individual width to obtain total width
-                total_decay_width = np.sum(channel_widths)
 
                 nChannels_Dwave = self.n_channels_Dwave(baryons)
-                #channel_widths = (channel_widths)
                 for i in range(nChannels_Dwave):
                     decPr = i + 200 + 1
                     MassB = self.decay_mass(bootstrap, baryons, decPr)
@@ -155,11 +152,8 @@ class ElectroWidths:
                     print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.1f | %5.6f '
                           %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
                     
-            # sum the individual width to obtain total width
-            total_decay_width = np.sum(channel_widths)
 
             nChannels_Dwave = self.n_channels_Dwave(baryons)
-            channel_widths = (channel_widths)
             for i in range(nChannels_Dwave):
                 decPr = i + 200 + 1
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
@@ -184,7 +178,6 @@ class ElectroWidths:
             self.channel_widths_vector_dwave.append(channel_widths) # for individual decay tables, this is a list of arrays!
 
             
-
         return total_decay_width
 
     
