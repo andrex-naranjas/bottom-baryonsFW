@@ -332,6 +332,40 @@ class EMDecayWidths{
   virtual double T3_r1_m1_l1_m0_GS();
   virtual double T3_r1_m0_l1_m1_GS();
 
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to ground state
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nl1_l0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nl1_l0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nl1_l0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial rho to ground state
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nr1_r0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nr1_r0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nr1_r0_m0_GS();
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to P wave lambda
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nl1_l0_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nl1_l0_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nl1_l0_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+
+  // ORBIT-FLIP Tensor operators
+  virtual double T1_nl1_l0_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T2_nl1_l0_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T3_nl1_l0_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to P wave rho
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nl1_l0_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nl1_l0_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nl1_l0_m0_r1_m0();
+
+  // ORBIT-FLIP Tensor operators
+  virtual double T1_nl1_l0_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T2_nl1_l0_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T3_nl1_l0_m0_r1_m1m();
+
 
 
 
