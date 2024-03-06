@@ -65,7 +65,7 @@ class ElectroWidths:
         alpha_rho = self.alphas(k_prim, m_rho)
         
         if LA_val<=1: # loop P-wave (por el momento tambien ground)
-            if (ModEx == 0 or ModEx == 1 or ModEx == 2):
+            if (ModEx == 0 or ModEx == 1 or ModEx == 2): # GS, P_lambda and P_rho initial states
                 nChannels_Pwave = self.n_channels_Pwave(baryons)
                 channel_widths = ([])
                 for i in range(nChannels_Pwave):
