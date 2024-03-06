@@ -553,6 +553,22 @@ double EMDecayWidths::T1_rho_lambda(double k_value, double alpha_rho, double alp
 	return T1Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }
+  }else if(excMode==3){
+    if(LB==0){
+	return 0; // radial lambda-> GS
+      }else if(LB==1 && LlB==1){
+	return T1Rl2Pl(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // radial lambda-> Plambda
+      }else if(LB==1 && LrB==1){
+	return T1Rl2Pr(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // radial lambda-> Prho
+      }
+  }else if(excMode==4){
+    if(LB==0){
+	return 0; // radial rho-> GS
+      }else if(LB==1 && LlB==1){
+	return T1Rr2Pl(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // radial rho-> Plambda
+      }else if(LB==1 && LrB==1){
+	return T1Rr2Pr(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // radial rho-> Prho
+      }
   }
   
   return 0.;
@@ -613,6 +629,22 @@ double EMDecayWidths::T2_rho_lambda(double k_value, double alpha_rho, double alp
 	return T2Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }
+  }else if(excMode==3){
+    if(LB==0){
+	return 0; // radial lambda-> GS
+      }else if(LB==1 && LlB==1){
+	return T2Rl2Pl(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // radial lambda-> Plambda
+      }else if(LB==1 && LrB==1){
+	return T2Rl2Pr(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // radial lambda-> Prho
+      }
+  }else if(excMode==4){
+    if(LB==0){
+	return 0; // radial rho-> GS
+      }else if(LB==1 && LlB==1){
+	return T2Rr2Pl(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // radial rho-> Plambda
+      }else if(LB==1 && LrB==1){
+	return T2Rr2Pr(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // radial rho-> Prho
+      }
   }
   
   return 0.;
@@ -673,6 +705,22 @@ double EMDecayWidths::T3_rho_lambda(double k_value, double alpha_rho, double alp
 	return T3Mix2Pr1m(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }
+  }else if(excMode==3){
+    if(LB==0){
+	return 0; // radial lambda-> GS
+      }else if(LB==1 && LlB==1){
+	return T3Rl2Pl(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // radial lambda-> Plambda
+      }else if(LB==1 && LrB==1){
+	return T3Rl2Pr(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // radial lambda-> Prho
+      }
+  }else if(excMode==4){
+    if(LB==0){
+	return 0; // radial rho-> GS
+      }else if(LB==1 && LlB==1){
+	return T3Rr2Pl(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLlB); // radial rho-> Plambda
+      }else if(LB==1 && LrB==1){
+	return T3Rr2Pr(k_value, alpha_lam, alpha_rho, thetak, phik, MLlA, MLrA, MLrB); // radial rho-> Prho
+      }
   }
   
   return 0.;
@@ -1237,6 +1285,22 @@ double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alp
 	return U1Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }
+  }else if(excMode==3){ // radial lambda excitation initial baryon
+    if(LB==0){
+	return U1Rl2GS(k_value, alpha_lam, alpha_rho, MLlA); // radial lambda-> GS
+      }else if(LB==1 && LlB==1){
+	return U1Rl2Pl(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial lambda-> Plambda
+      }else if(LB==1 && LrB==1){
+	return U1Rl2Pr(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial lambda-> Prho
+      }
+  }else if(excMode==4){ // radial rho excitation initial baryon
+    if(LB==0){
+	return U1Rr2GS(k_value, alpha_lam, alpha_rho, MLrA); // radial rho-> GS
+      }else if(LB==1 && LlB==1){
+	return U1Rr2Pl(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial rho-> Plambda
+      }else if(LB==1 && LrB==1){
+	return U1Rr2Pr(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial rho-> Prho
+      }
   }
   return 0.;  
 }
@@ -1296,6 +1360,22 @@ double EMDecayWidths::U2_rho_lambda(double k_value, double alpha_rho, double alp
 	return U2Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }
+  }else if(excMode==3){ // radial lambda excitation initial baryon
+    if(LB==0){
+	return U2Rl2GS(k_value, alpha_lam, alpha_rho, MLlA); // radial lambda-> GS
+      }else if(LB==1 && LlB==1){
+	return U2Rl2Pl(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial lambda-> Plambda
+      }else if(LB==1 && LrB==1){
+	return U2Rl2Pr(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial lambda-> Prho
+      }
+  }else if(excMode==4){ // radial rho excitation initial baryon
+    if(LB==0){
+	return U2Rr2GS(k_value, alpha_lam, alpha_rho, MLrA); // radial rho-> GS
+      }else if(LB==1 && LlB==1){
+	return U2Rr2Pl(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial rho-> Plambda
+      }else if(LB==1 && LrB==1){
+	return U2Rr2Pr(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial rho-> Prho
+      }
   }
   return 0.;
 }
@@ -1355,6 +1435,22 @@ double EMDecayWidths::U3_rho_lambda(double k_value, double alpha_rho, double alp
 	return U3Mix2Pr1m(k_value, alpha_lam, alpha_rho, MLlA, MLrA, MLrB); // mixed-> Prho
       }
     }
+  }else if(excMode==3){ // radial lambda excitation initial baryon
+    if(LB==0){
+	return U3Rl2GS(k_value, alpha_lam, alpha_rho, MLlA); // radial lambda-> GS
+      }else if(LB==1 && LlB==1){
+	return U3Rl2Pl(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial lambda-> Plambda
+      }else if(LB==1 && LrB==1){
+	return U3Rl2Pr(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial lambda-> Prho
+      }
+  }else if(excMode==4){ // radial rho excitation initial baryon
+    if(LB==0){
+	return U3Rr2GS(k_value, alpha_lam, alpha_rho, MLrA); // radial rho-> GS
+      }else if(LB==1 && LlB==1){
+	return U3Rr2Pl(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial rho-> Plambda
+      }else if(LB==1 && LrB==1){
+	return U3Rr2Pr(k_value, alpha_lam, alpha_rho, MLrA, MLlA); // radial rho-> Prho
+      }
   }
   return 0.;
 }
