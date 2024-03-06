@@ -1120,6 +1120,68 @@ double EMDecayWidths::T3Rl2Pr(double k_value, double alpha_lam, double alpha_rho
   return value;
 }
 
+// Radial rho -> P lambda  
+double EMDecayWidths::U1Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U1_nr1_r0_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U2Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U2_nr1_r0_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U3Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U3_nr1_r0_m0_l1_m0() * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::T1Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val){
+  double value = T1_nr1_r0_m0_l1_m1m( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLlB_val, -1);
+  return value;
+}
+
+double EMDecayWidths::T2Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val){
+  double value = T2_nr1_r0_m0_l1_m1m( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLlB_val, -1);
+  return value;
+}
+
+double EMDecayWidths::T3Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val){
+  double value = T3_nr1_r0_m0_l1_m1m() * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLlB_val, -1);
+  return value;
+}
+
+// Radial rho -> P rho  
+double EMDecayWidths::U1Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U1_nr1_r0_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U2Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U2_nr1_r0_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::U3Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val){
+  double value = SPINFLIP_U3_nr1_r0_m0_r1_m0() * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0);
+  return value;
+}
+
+double EMDecayWidths::T1Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val){
+  double value = T1_nr1_r0_m0_r1_m1m( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLrB_val, -1);
+  return value;
+}
+
+double EMDecayWidths::T2Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val){
+  double value = T2_nr1_r0_m0_r1_m1m( k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLrB_val, -1);
+  return value;
+}
+
+double EMDecayWidths::T3Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val){
+  double value = T3_nr1_r0_m0_r1_m1m() * KroneckerDelta(MLrA_val, 0) * KroneckerDelta(MLlA_val, 0) * KroneckerDelta(MLrB_val, -1);
+  return value;
+}
+
 double EMDecayWidths::U1_rho_lambda(double k_value, double alpha_rho, double alpha_lam, double LA, int MLA, int MLB, int MLrA, int MLlA, int MLrB, int MLlB,  int excMode){
   double thetak=0., phik=0.;
     

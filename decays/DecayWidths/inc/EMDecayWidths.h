@@ -481,7 +481,22 @@ class EMDecayWidths{
   virtual double T1Rl2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
   virtual double T2Rl2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
   virtual double T3Rl2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
-  
+
+  // Sum of integrals Radial rho -> P lambda
+  virtual double U1Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U2Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U3Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double T1Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+  virtual double T2Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+  virtual double T3Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+
+  // Sum of integrals Radial rho -> P rho
+  virtual double U1Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U2Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U3Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double T1Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val);
+  virtual double T2Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val);
+  virtual double T3Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val);
   
 };
 
