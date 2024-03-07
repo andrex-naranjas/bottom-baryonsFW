@@ -86,6 +86,8 @@ def state_labels(baryon, ModEx, decPr, L_tot):
             decPr_name = "Sig0+gamma"
         elif(decPr==3):
             decPr_name = "Sig0*+gamma"
+        else:
+            decPr_name = "Lambda_b XX*-+gamma"
     if(ModEx==0):
         ModEx_name ='Ground'
     elif(ModEx==1):
