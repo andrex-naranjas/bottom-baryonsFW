@@ -195,11 +195,11 @@ class ElectroWidths:
             LlA = 0
             LrA = LA_val
         elif(ModEx_val=="rpl"):
-            LlA = -1
-            LrA = -1
+            LlA = 0
+            LrA = 0
         elif(ModEx_val=="rpr"):            
-            LlA = -1
-            LrA = -1
+            LlA = 0
+            LrA = 0
         elif(ModEx_val=="mix"):
             LlA = 1
             LrA = 1
