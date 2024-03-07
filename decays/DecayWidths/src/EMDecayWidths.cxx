@@ -83,7 +83,7 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
     else if(decayProd==204){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=1.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 4p3/2-lam
     else if(decayProd==205){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=1.5; jb_val=2.5; lb_val=1; slb_val=1; llb_val=1; lrb_val=0;} //Omega_-* 4p5/2-lam
     else if(decayProd==206){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=0.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-  2p1/2-rho
-    else if(decayProd==207){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-  2p3/2-rh    
+    else if(decayProd==207){flav_q1=mu_qs;       flav_q2=mu_qs;       flav_q3=mu_qb; sb_val=0.5; jb_val=1.5; lb_val=1; slb_val=0; llb_val=0; lrb_val=1;} //Omega_-  2p3/2-rho    
   }else if(baryonFlag==2){// cascades prime
     // decaying cascade anti 0
     if(decayProd==101)     {flav_q1=+mu_dif_u_s; flav_q2=-mu_dif_u_s; flav_q3=0.;   sb_val=0.5; jb_val=0.5; lb_val=0; slb_val=0; llb_val=0; lrb_val=0;} //0  ground
@@ -264,9 +264,9 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   double sum_value = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value, modeExcitation);
   double decayWidth = DecayWidth(fi2_value, sum_value);
 
-  std::cout<<decayProd<<"    "<<MB<<std::endl;
-  std::cout<<sb_val<<"  sb_val  "<<std::endl;
-  std::cout<<flav_q1<<"  "<<flav_q2<<"   "<<flav_q3<<"   "<<sb_val<<"   "<<jb_val<<"   "<<lb_val<<"   "<<slb_val<<"   "<<llb_val<<"  "<<lrb_val<<std::endl;
+  std::cout<<decayProd<<"=decayProd "<<"  MB="<<MB<<std::endl;
+  std::cout<<"sb_val= "<<sb_val<<std::endl;
+  std::cout<<"flav_q1="<<flav_q1<<" flav_q2="<<flav_q2<<" flav_q3= "<<flav_q3<<" SB="<<sb_val<<" JB="<<jb_val<<" LB="<<lb_val<<" SlB="<<slb_val<<" LlamB="<<llb_val<<" LrhoB="<<lrb_val<<std::endl;
   // //testing integrals
   // alpha_rho = 0.4132549850060273; alpha_lam =0.5246260684382235;
   // k_value = 0.1422944563250534;
