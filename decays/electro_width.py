@@ -55,9 +55,8 @@ class ElectroWidths:
             
         baryon = self.baryon_flag(baryons)
         ModEx = self.ModEx_flag(ModEx_val)
-        nChannels_Swave = self.n_channels_Swave(baryons)
         
-        nChannels_Dwave = self.n_channels_Dwave(baryons)
+        nChannels_Pwave = self.n_channels_Pwave(baryons)
         
         m_lam, m_rho = self.reduced_masses(baryons, mbottom*1000, mupdown*1000, mstrange*1000)
         
@@ -66,9 +65,9 @@ class ElectroWidths:
         
         if LA_val<=1: # loop P-wave (por el momento tambien ground)
             if (ModEx == 0 or ModEx == 1 or ModEx == 2): # GS, P_lambda and P_rho initial states
-                nChannels_Pwave = self.n_channels_Pwave(baryons)
+                nChannels_Swave = self.n_channels_Swave(baryons)
                 channel_widths = ([])
-                for i in range(nChannels_Pwave):
+                for i in range(nChannels_Swave):
                     decPr = i + 100 + 1
                     MassB = self.decay_mass(bootstrap, baryons, decPr)
                     single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
@@ -93,9 +92,9 @@ class ElectroWidths:
                 self.channel_widths_vector_pwave.append(channel_widths) # for individual decay tables, this is a list of arrays!
             else:
                 # mixed/radial -> ground
-                nChannels_Pwave = self.n_channels_Pwave(baryons)
+                nChannels_Swave = self.n_channels_Swave(baryons)
                 channel_widths = ([])             
-                for i in range(nChannels_Pwave):
+                for i in range(nChannels_Swave):
                     decPr = i + 100 + 1
                     MassB = self.decay_mass(bootstrap, baryons, decPr)
                     single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
@@ -110,8 +109,8 @@ class ElectroWidths:
                         print('%6s |  %10s | %12s |  %5.3f |   %5.3f |  %5.1f |  %5.1f |  %5.1f | %5.1f | %5.6f '
                               %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
 
-                nChannels_Dwave = self.n_channels_Dwave(baryons)
-                for i in range(nChannels_Dwave):
+                nChannels_Pwave = self.n_channels_Pwave(baryons)
+                for i in range(nChannels_Pwave):
                     decPr = i + 200 + 1
                     MassB = self.decay_mass(bootstrap, baryons, decPr)
                     single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
@@ -135,9 +134,9 @@ class ElectroWidths:
                 self.channel_widths_vector_pwave.append(channel_widths) # for individual decay tables, this is a list of arrays!
 
         if LA_val==2: # loop D-wave
-            nChannels_Pwave = self.n_channels_Pwave(baryons)
+            nChannels_Swave = self.n_channels_Swave(baryons)
             channel_widths = ([])
-            for i in range(nChannels_Pwave):
+            for i in range(nChannels_Swave):
                 decPr = i + 100 + 1
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
                 single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
@@ -153,8 +152,8 @@ class ElectroWidths:
                           %(baryon_name, ModEx_name, decPr_name, MassA, MassB, JA_qm, LA_qm, SA_qm, SlA_qm, single_decay_value))
                     
 
-            nChannels_Dwave = self.n_channels_Dwave(baryons)
-            for i in range(nChannels_Dwave):
+            nChannels_Pwave = self.n_channels_Pwave(baryons)
+            for i in range(nChannels_Pwave):
                 decPr = i + 200 + 1
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
                 single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
@@ -254,19 +253,10 @@ class ElectroWidths:
         elif(ModEx_val=='rpr'): return 4
         elif(ModEx_val=='mix'): return 5
 
-    def n_channels_Swave(self, baryons):
+    def n_channels_Swave(self, baryons): 
         """
         Method to set number of decay channels has each baryon
-        """
-        if(baryons=='omegas'):           return 9  #2
-        elif(baryons=='cascades'):       return 34 #6
-        elif(baryons=='sigmas'):         return 35 #7
-        elif(baryons=='lambdas'):        return 17 #3
-        elif(baryons=='cascades_anti3'): return 34 #6
-
-    def n_channels_Pwave(self, baryons):
-        """
-        Method to set number of decay channels has each baryon
+        Defines the number of Ground states decays for any initial baryon
         """
         if(baryons=='omegas'):           return 2
         elif(baryons=='cascades'):       return 6
@@ -274,9 +264,10 @@ class ElectroWidths:
         elif(baryons=='lambdas'):        return 3
         elif(baryons=='cascades_anti3'): return 6
 
-    def n_channels_Dwave(self, baryons):
+    def n_channels_Pwave(self, baryons):
         """
         Method to set number of decay channels has each baryon
+        Defines the number of P wave states decays for any initial baryon
         """
         if(baryons=='omegas'):           return 7  #2
         elif(baryons=='cascades'):       return 28 #6
