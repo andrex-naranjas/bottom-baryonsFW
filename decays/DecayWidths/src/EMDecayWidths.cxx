@@ -268,11 +268,11 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   std::cout<<"sb_val= "<<sb_val<<std::endl;
   std::cout<<"flav_q1="<<flav_q1<<" flav_q2="<<flav_q2<<" flav_q3= "<<flav_q3<<" SB="<<sb_val<<" JB="<<jb_val<<" LB="<<lb_val<<" SlB="<<slb_val<<" LlamB="<<llb_val<<" LrhoB="<<lrb_val<<std::endl;
   // //testing integrals
-  // alpha_rho = 0.4132549850060273; alpha_lam =0.5246260684382235;
-  // k_value = 0.1422944563250534;
-  // mlight = 0.382;  
-  // std::cout<<mbottom<<"     QUARK MASSES    "<<mlight<<std::endl;
-  // double thetak=1, phik=1;
+  //alpha_rho = 0.4132549850060273; alpha_lam =0.5246260684382235;
+  //k_value = 0.1422944563250534;
+  //mlight = 0.382;  
+  //std::cout<<mbottom<<"     QUARK MASSES    "<<mlight<<std::endl;
+  //double thetak=1, phik=1;
 
 
   return decayWidth;
@@ -3378,109 +3378,176 @@ double EMDecayWidths::T3_nr1_r0_m0_r1_m1m(){
 #endif
 
   // Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave lambda
-  // std::cout<<T1_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_l2_m2_l1_m1(k_"<<std::endl;
-  // std::cout<<T1_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_l2_m1_l1_m0(k_"<<std::endl;
-  // std::cout<<T1_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<"    T1_l2_m0_l1_m1m(k"<<std::endl;
-  // std::cout<<T2_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_l2_m2_l1_m1(k_"<<std::endl;
-  // std::cout<<T2_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_l2_m1_l1_m0(k_"<<std::endl;
-  // std::cout<<T2_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<"    T2_l2_m0_l1_m1m(k"<<std::endl;
-  // std::cout<<T3_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T3_l2_m2_l1_m1(k_"<<std::endl;
-  // std::cout<<T3_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T3_l2_m1_l1_m0(k_"<<std::endl;
-  // std::cout<<T3_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak,phik)<<"    T3_l2_m0_l1_m1m(k"<<std::endl;
-  // std::cout<<SPINFLIP_U1_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U1_l2_m1_l1_m1(k_v"<<std::endl;
-  // std::cout<<SPINFLIP_U1_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U1_l2_m0_l1_m0(k_v"<<std::endl;
-  // std::cout<<SPINFLIP_U1_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U1_l2_m1m_l1_m1m(k"<<std::endl;
-  // std::cout<<SPINFLIP_U2_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U2_l2_m1_l1_m1(k_v"<<std::endl;
-  // std::cout<<SPINFLIP_U2_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U2_l2_m0_l1_m0(k_v"<<std::endl;
-  // std::cout<<SPINFLIP_U2_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U2_l2_m1m_l1_m1m(k"<<std::endl;
-  // std::cout<<SPINFLIP_U3_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U3_l2_m1_l1_m1(k_v"<<std::endl;
-  // std::cout<<SPINFLIP_U3_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U3_l2_m0_l1_m0(k_v"<<std::endl;
-  // std::cout<<SPINFLIP_U3_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U3_l2_m1m_l1_m1m(k"<<std::endl;
+  //std::cout<<T1_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_l2_m2_l1_m1(k_"<<std::endl;
+  //std::cout<<T1_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_l2_m1_l1_m0(k_"<<std::endl;
+  //std::cout<<T1_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<"    T1_l2_m0_l1_m1m(k"<<std::endl;
+  //std::cout<<T2_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_l2_m2_l1_m1(k_"<<std::endl;
+  //std::cout<<T2_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_l2_m1_l1_m0(k_"<<std::endl;
+  //std::cout<<T2_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<"    T2_l2_m0_l1_m1m(k"<<std::endl;
+  //std::cout<<T3_l2_m2_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T3_l2_m2_l1_m1(k_"<<std::endl;
+  //std::cout<<T3_l2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T3_l2_m1_l1_m0(k_"<<std::endl;
+  //std::cout<<T3_l2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak,phik)<<"    T3_l2_m0_l1_m1m(k"<<std::endl;
+  //std::cout<<SPINFLIP_U1_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U1_l2_m1_l1_m1(k_v"<<std::endl;
+  //std::cout<<SPINFLIP_U1_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U1_l2_m0_l1_m0(k_v"<<std::endl;
+  //std::cout<<SPINFLIP_U1_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U1_l2_m1m_l1_m1m(k"<<std::endl;
+  //std::cout<<SPINFLIP_U2_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U2_l2_m1_l1_m1(k_v"<<std::endl;
+  //std::cout<<SPINFLIP_U2_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U2_l2_m0_l1_m0(k_v"<<std::endl;
+  //std::cout<<SPINFLIP_U2_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U2_l2_m1m_l1_m1m(k"<<std::endl;
+  //std::cout<<SPINFLIP_U3_l2_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U3_l2_m1_l1_m1(k_v"<<std::endl;
+  //std::cout<<SPINFLIP_U3_l2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)    <<"    SPINFLIP_U3_l2_m0_l1_m0(k_v"<<std::endl;
+  //std::cout<<SPINFLIP_U3_l2_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)  <<"    SPINFLIP_U3_l2_m1m_l1_m1m(k"<<std::endl;
 
   
   // // Definitions of the Integrals and Tensor Operators for decays from D-wave rho to P-wave rho
   // // SPIN-FLIP INTEGRALS
-  // std::cout<<SPINFLIP_U1_r2_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
-  // std::cout<<SPINFLIP_U1_r2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
-  // std::cout<<SPINFLIP_U1_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
-  // std::cout<<SPINFLIP_U2_r2_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
-  // std::cout<<SPINFLIP_U2_r2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
-  // std::cout<<SPINFLIP_U2_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
-  // std::cout<<SPINFLIP_U3_r2_m1_r1_m1()<<std::endl;
-  // std::cout<<SPINFLIP_U3_r2_m0_r1_m0()<<std::endl;
-  // std::cout<<SPINFLIP_U3_r2_m1m_r1_m1m()<<std::endl;
+  //std::cout<<SPINFLIP_U1_r2_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight) <<" SPINFLIP_U1_r2_m1_r1_m1 "<<std::endl;
+  //std::cout<<SPINFLIP_U1_r2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight) <<" SPINFLIP_U1_r2_m0_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U1_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_r2_m1m_r1_m1m "<<std::endl;
+  //std::cout<<SPINFLIP_U2_r2_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_r2_m1_r1_m1 "<<std::endl;
+  //std::cout<<SPINFLIP_U2_r2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_r2_m0_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U2_r2_m1m_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_r2_m1m_r1_m1m "<<std::endl;
+  //std::cout<<SPINFLIP_U3_r2_m1_r1_m1()<<" SPINFLIP_U3_r2_m1_r1_m1 "<<std::endl;
+  //std::cout<<SPINFLIP_U3_r2_m0_r1_m0()<<" SPINFLIP_U3_r2_m0_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U3_r2_m1m_r1_m1m()<<" SPINFLIP_U3_r2_m1m_r1_m1m "<<std::endl;
   
   // // ORBIT-FLIP Tensor operators D_rho->P_rho
-  // std::cout<<T1_r2_m2_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T1_r2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T1_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T2_r2_m2_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T2_r2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T2_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<std::endl;  
+  //std::cout<<T1_r2_m2_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_r2_m2_r1_m1 "<<std::endl;
+  //std::cout<<T1_r2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_r2_m1_r1_m0 "<<std::endl;
+  //std::cout<<T1_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<" T1_r2_m0_r1_m1m "<<std::endl;
+  //std::cout<<T2_r2_m2_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_r2_m2_r1_m1 "<<std::endl;
+  //std::cout<<T2_r2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_r2_m1_r1_m0 "<<std::endl;
+  //std::cout<<T2_r2_m0_r1_m1m(k_value, alpha_lam, alpha_rho,mbottom, mlight, thetak, phik)<<" T2_r2_m0_r1_m1m "<<std::endl;  
 
 
   ////Definitions of the Integrals and Tensor Operators for decays from D-wave lambda to P-wave rho
-  // std::cout<<T1_l2_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T1_l2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T2_l2_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T2_l2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<SPINFLIP_U1_l2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
-  // std::cout<<SPINFLIP_U2_l2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  //std::cout<<T1_l2_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_l2_m0_r1_m1m "<<std::endl;
+  //std::cout<<T1_l2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_l2_m1_r1_m0 "<<std::endl;
+  //std::cout<<T2_l2_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_l2_m0_r1_m1m "<<std::endl;
+  //std::cout<<T2_l2_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_l2_m1_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U1_l2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_l2_m0_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U2_l2_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_l2_m0_r1_m0 "<<std::endl;
 
   // //Definitions of the Integrals and Tensor Operators for decays from D-wave rho to P-wave lambda
-  // std::cout<<T1_r2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T1_r2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T2_r2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<T2_r2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<std::endl;
-  // std::cout<<SPINFLIP_U1_r2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
-  // std::cout<<SPINFLIP_U2_r2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<std::endl;
+  //std::cout<<T1_r2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_r2_m1_l1_m0 "<<std::endl;
+  //std::cout<<T1_r2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_r2_m0_l1_m1m "<<std::endl;
+  //std::cout<<T2_r2_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_r2_m1_l1_m0 "<<std::endl;
+  //std::cout<<T2_r2_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_r2_m0_l1_m1m "<<std::endl;
+  //std::cout<<SPINFLIP_U1_r2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_r2_m0_l1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U2_r2_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_r2_m0_l1_m0 "<<std::endl;
 
 
 
   // //Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave rho
-  // std::cout<<T1_r1_m0_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)     <<"   T1_r1_m0_l1_m0_r1_m1m(k_value, "<<std::endl;
-  // std::cout<<T1_r1_m1_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m1_l1_m0_r1_m0(k_value, a"<<std::endl;
-  // std::cout<<T1_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
-  // std::cout<<T1_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
-  // std::cout<<T1_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T1_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
-  // std::cout<<T2_r1_m0_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)     <<"   T2_r1_m0_l1_m0_r1_m1m(k_value, "<<std::endl;
-  // std::cout<<T2_r1_m1_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m1_l1_m0_r1_m0(k_value, a"<<std::endl;
-  // std::cout<<T2_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
-  // std::cout<<T2_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
-  // std::cout<<T2_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T2_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
-  // std::cout<<T3_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T3_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
-  // std::cout<<T3_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T3_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
-  // std::cout<<T3_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T3_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
-  // std::cout<<SPINFLIP_U1_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U1_r1_m1_l1_m0_r1_m1(k"<<std::endl;
-  // std::cout<<SPINFLIP_U1_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U1_r1_m0_l1_m0_r1_m0(k"<<std::endl;
-  // std::cout<<SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m"<<std::endl;
-  // std::cout<<SPINFLIP_U2_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U2_r1_m1_l1_m0_r1_m1(k"<<std::endl;
-  // std::cout<<SPINFLIP_U2_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U2_r1_m0_l1_m0_r1_m0(k"<<std::endl;
-  // std::cout<<SPINFLIP_U2_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U2_r1_m1m_l1_m0_r1_m1m"<<std::endl;
-  // std::cout<<SPINFLIP_U3_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U3_r1_m1_l1_m0_r1_m1(k"<<std::endl;
-  // std::cout<<SPINFLIP_U3_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U3_r1_m0_l1_m0_r1_m0(k"<<std::endl;
-  // std::cout<<SPINFLIP_U3_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U3_r1_m1m_l1_m0_r1_m1m"<<std::endl;
+  //std::cout<<T1_r1_m0_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)     <<"   T1_r1_m0_l1_m0_r1_m1m(k_value, "<<std::endl;
+  //std::cout<<T1_r1_m1_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m1_l1_m0_r1_m0(k_value, a"<<std::endl;
+  //std::cout<<T1_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
+  //std::cout<<T1_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T1_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
+  //std::cout<<T1_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T1_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
+  //std::cout<<T2_r1_m0_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)     <<"   T2_r1_m0_l1_m0_r1_m1m(k_value, "<<std::endl;
+  //std::cout<<T2_r1_m1_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m1_l1_m0_r1_m0(k_value, a"<<std::endl;
+  //std::cout<<T2_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
+  //std::cout<<T2_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T2_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
+  //std::cout<<T2_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T2_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
+  //std::cout<<T3_r1_m1_l1_m1_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T3_r1_m1_l1_m1_r1_m1(k_value, a"<<std::endl;
+  //std::cout<<T3_r1_m0_l1_m1_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)      <<"   T3_r1_m0_l1_m1_r1_m0(k_value, a"<<std::endl;
+  //std::cout<<T3_r1_m1_ml_1m_1r_1m_1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)   <<"   T3_r1_m1_ml_1m_1r_1m_1m(k_value"<<std::endl;
+  //std::cout<<SPINFLIP_U1_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U1_r1_m1_l1_m0_r1_m1(k"<<std::endl;
+  //std::cout<<SPINFLIP_U1_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U1_r1_m0_l1_m0_r1_m0(k"<<std::endl;
+  //std::cout<<SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U1_r1_m1m_l1_m0_r1_m1m"<<std::endl;
+  //std::cout<<SPINFLIP_U2_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U2_r1_m1_l1_m0_r1_m1(k"<<std::endl;
+  //std::cout<<SPINFLIP_U2_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U2_r1_m0_l1_m0_r1_m0(k"<<std::endl;
+  //std::cout<<SPINFLIP_U2_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U2_r1_m1m_l1_m0_r1_m1m"<<std::endl;
+  //std::cout<<SPINFLIP_U3_r1_m1_l1_m0_r1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U3_r1_m1_l1_m0_r1_m1(k"<<std::endl;
+  //std::cout<<SPINFLIP_U3_r1_m0_l1_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)           <<"   SPINFLIP_U3_r1_m0_l1_m0_r1_m0(k"<<std::endl;
+  //std::cout<<SPINFLIP_U3_r1_m1m_l1_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)         <<"   SPINFLIP_U3_r1_m1m_l1_m0_r1_m1m"<<std::endl;
 
 
   // //Definitions of the Integrals and Tensor Operators for decays from Mixed to P-wave lambda
-  // std::cout<<T1_r1_m0_l1_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) <<"    T1_r1_m0_l1_m0_l1_m1m(k_value, alph"<<std::endl;
-  // std::cout<<T1_r1_m0_l1_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m0_l1_m1_l1_m0(k_value, alpha"<<std::endl;
-  // std::cout<<T1_r1_m1_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m1_l1_m1_l1_m1(k_value, alpha"<<std::endl;
-  // std::cout<<T1_r1_m1_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m1_l1_m0_l1_m0(k_value, alpha"<<std::endl;
-  // std::cout<<T1_r1_m1_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_r1_m1_l1_m1m_l1_m1m(k_value, alp"<<std::endl;
-  // std::cout<<T2_r1_m0_l1_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) <<"    T2_r1_m0_l1_m0_l1_m1m(k_value, alph"<<std::endl;
-  // std::cout<<T2_r1_m0_l1_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m0_l1_m1_l1_m0(k_value, alpha"<<std::endl;
-  // std::cout<<T2_r1_m1_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m1_l1_m1_l1_m1(k_value, alpha"<<std::endl;
-  // std::cout<<T2_r1_m1_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m1_l1_m0_l1_m0(k_value, alpha"<<std::endl;
-  // std::cout<<T2_r1_m1_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_r1_m1_l1_m1m_l1_m1m(k_value, alp"<<std::endl;
-  // std::cout<<SPINFLIP_U1_r1_m0_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U1_r1_m0_l1_m1_l1_m1(k_val"<<std::endl;
-  // std::cout<<SPINFLIP_U1_r1_m0_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U1_r1_m0_l1_m0_l1_m0(k_val"<<std::endl;
-  // std::cout<<SPINFLIP_U1_r1_m0_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)     <<"    SPINFLIP_U1_r1_m0_l1_m1m_l1_m1m(k_v"<<std::endl;
-  // std::cout<<SPINFLIP_U2_r1_m0_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U2_r1_m0_l1_m1_l1_m1(k_val"<<std::endl;
-  // std::cout<<SPINFLIP_U2_r1_m0_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U2_r1_m0_l1_m0_l1_m0(k_val"<<std::endl;
-  // std::cout<<SPINFLIP_U2_r1_m0_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)     <<"    SPINFLIP_U2_r1_m0_l1_m1m_l1_m1m(k_v"<<std::endl;
+  //std::cout<<T1_r1_m0_l1_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) <<"    T1_r1_m0_l1_m0_l1_m1m(k_value, alph"<<std::endl;
+  //std::cout<<T1_r1_m0_l1_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m0_l1_m1_l1_m0(k_value, alpha"<<std::endl;
+  //std::cout<<T1_r1_m1_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m1_l1_m1_l1_m1(k_value, alpha"<<std::endl;
+  //std::cout<<T1_r1_m1_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T1_r1_m1_l1_m0_l1_m0(k_value, alpha"<<std::endl;
+  //std::cout<<T1_r1_m1_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T1_r1_m1_l1_m1m_l1_m1m(k_value, alp"<<std::endl;
+  //std::cout<<T2_r1_m0_l1_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik) <<"    T2_r1_m0_l1_m0_l1_m1m(k_value, alph"<<std::endl;
+  //std::cout<<T2_r1_m0_l1_m1_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m0_l1_m1_l1_m0(k_value, alpha"<<std::endl;
+  //std::cout<<T2_r1_m1_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m1_l1_m1_l1_m1(k_value, alpha"<<std::endl;
+  //std::cout<<T2_r1_m1_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)  <<"    T2_r1_m1_l1_m0_l1_m0(k_value, alpha"<<std::endl;
+  //std::cout<<T2_r1_m1_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<"    T2_r1_m1_l1_m1m_l1_m1m(k_value, alp"<<std::endl;
+  //std::cout<<SPINFLIP_U1_r1_m0_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U1_r1_m0_l1_m1_l1_m1(k_val"<<std::endl;
+  //std::cout<<SPINFLIP_U1_r1_m0_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U1_r1_m0_l1_m0_l1_m0(k_val"<<std::endl;
+  //std::cout<<SPINFLIP_U1_r1_m0_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)     <<"    SPINFLIP_U1_r1_m0_l1_m1m_l1_m1m(k_v"<<std::endl;
+  //std::cout<<SPINFLIP_U2_r1_m0_l1_m1_l1_m1(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U2_r1_m0_l1_m1_l1_m1(k_val"<<std::endl;
+  //std::cout<<SPINFLIP_U2_r1_m0_l1_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)       <<"    SPINFLIP_U2_r1_m0_l1_m0_l1_m0(k_val"<<std::endl;
+  //std::cout<<SPINFLIP_U2_r1_m0_l1_m1m_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight)     <<"    SPINFLIP_U2_r1_m0_l1_m1m_l1_m1m(k_v"<<std::endl;
 
+  //Definitions of the Integrals and Tensor Operators for decays from D-lambda to ground state
+  //std::cout<<SPINFLIP_U1_l2_m0_GS(k_value, alpha_lam, alpha_rho, mbottom,  mlight)<<" SPINFLIP_U1_l2_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U2_l2_m0_GS(k_value, alpha_lam, alpha_rho, mbottom,  mlight)<<" SPINFLIP_U2_l2_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U3_l2_m0_GS(k_value, alpha_lam, alpha_rho, mbottom,  mlight)<<" SPINFLIP_U3_l2_m0_GS "<<std::endl;
+  //std::cout<<T1_l2_m1_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<< " T1_l2_m1_GS" <<std::endl;
+  //std::cout<<T2_l2_m1_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<< " T2_l2_m1_GS" <<std::endl;
+  //std::cout<<T3_l2_m1_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<< " T3_l2_m1_GS" <<std::endl;
 
+  //Definitions of the Integrals and Tensor Operators for decays from D-rho to ground state
+  //std::cout<<SPINFLIP_U1_r2_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_r2_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U2_r2_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_r2_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U3_r2_m0_GS()<<" SPINFLIP_U3_r2_m0_GS "<<std::endl;
+  //std::cout<<T1_r2_m1_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_r2_m1_GS "<<std::endl;
+  //std::cout<<T2_r2_m1_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_r2_m1_GS "<<std::endl;
+  //std::cout<<T3_r2_m1_GS()<<" T3_r2_m1_GS "<<std::endl;
+
+  //Definitions of the Integrals and Tensor Operators for decays from Mixed to ground state
+  //std::cout<<SPINFLIP_U1_r1_m0_l1_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_r1_m0_l1_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U2_r1_m0_l1_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_r1_m0_l1_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U3_r1_m0_l1_m0_GS()<<" SPINFLIP_U3_r1_m0_l1_m0_GS "<<std::endl;
+  //std::cout<<T1_r1_m1_l1_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_r1_m1_l1_m0_GS "<<std::endl;
+  //std::cout<<T1_r1_m0_l1_m1_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_r1_m0_l1_m1_GS "<<std::endl;
+  //std::cout<<T2_r1_m1_l1_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_r1_m1_l1_m0_GS "<<std::endl;
+  //std::cout<<T2_r1_m0_l1_m1_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_r1_m0_l1_m1_GS "<<std::endl;
+  //std::cout<<T3_r1_m1_l1_m0_GS()<<" T3_r1_m1_l1_m0_GS "<<std::endl;
+  //std::cout<<T3_r1_m0_l1_m1_GS()<<" T3_r1_m0_l1_m1_GS "<<std::endl;
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to ground state
+  //std::cout<<SPINFLIP_U1_nl1_l0_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_nl1_l0_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U2_nl1_l0_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_nl1_l0_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U3_nl1_l0_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U3_nl1_l0_m0_GS "<<std::endl;
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial rho to ground state
+  //std::cout<<SPINFLIP_U1_nr1_r0_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_nr1_r0_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U2_nr1_r0_m0_GS(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_nr1_r0_m0_GS "<<std::endl;
+  //std::cout<<SPINFLIP_U3_nr1_r0_m0_GS()<<" SPINFLIP_U3_nr1_r0_m0_GS "<<std::endl;
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to P wave lambda
+  //std::cout<<SPINFLIP_U1_nl1_l0_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_nl1_l0_m0_l1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U2_nl1_l0_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_nl1_l0_m0_l1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U3_nl1_l0_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U3_nl1_l0_m0_l1_m0 "<<std::endl;
+  //std::cout<<T1_nl1_l0_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_nl1_l0_m0_l1_m1m "<<std::endl;
+  //std::cout<<T2_nl1_l0_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_nl1_l0_m0_l1_m1m "<<std::endl;
+  //std::cout<<T3_nl1_l0_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T3_nl1_l0_m0_l1_m1m "<<std::endl;
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to P wave rho
+  //std::cout<<SPINFLIP_U1_nl1_l0_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_nl1_l0_m0_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U2_nl1_l0_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_nl1_l0_m0_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U3_nl1_l0_m0_r1_m0()<<" SPINFLIP_U3_nl1_l0_m0_r1_m0 "<<std::endl;
+  //std::cout<<T1_nl1_l0_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_nl1_l0_m0_r1_m1m "<<std::endl;
+  //std::cout<<T2_nl1_l0_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_nl1_l0_m0_r1_m1m "<<std::endl;
+  //std::cout<<T3_nl1_l0_m0_r1_m1m()<<" T3_nl1_l0_m0_r1_m1m "<<std::endl;
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial rho to P wave lambda
+  //std::cout<<SPINFLIP_U1_nr1_r0_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_nr1_r0_m0_l1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U2_nr1_r0_m0_l1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_nr1_r0_m0_l1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U3_nr1_r0_m0_l1_m0()<<" SPINFLIP_U3_nr1_r0_m0_l1_m0 "<<std::endl;
+  //std::cout<<T1_nr1_r0_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_nr1_r0_m0_l1_m1m "<<std::endl;
+  //std::cout<<T2_nr1_r0_m0_l1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_nr1_r0_m0_l1_m1m "<<std::endl;
+  //std::cout<<T3_nr1_r0_m0_l1_m1m()<<" T3_nr1_r0_m0_l1_m1m "<<std::endl;
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial rho to P rho
+  //std::cout<<SPINFLIP_U1_nr1_r0_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U1_nr1_r0_m0_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U2_nr1_r0_m0_r1_m0(k_value, alpha_lam, alpha_rho, mbottom, mlight)<<" SPINFLIP_U2_nr1_r0_m0_r1_m0 "<<std::endl;
+  //std::cout<<SPINFLIP_U3_nr1_r0_m0_r1_m0()<<" SPINFLIP_U3_nr1_r0_m0_r1_m0 "<<std::endl;
+  //std::cout<<T1_nr1_r0_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T1_nr1_r0_m0_r1_m1m "<<std::endl;
+  //std::cout<<T2_nr1_r0_m0_r1_m1m(k_value, alpha_lam, alpha_rho, mbottom, mlight, thetak, phik)<<" T2_nr1_r0_m0_r1_m1m "<<std::endl;
+  //std::cout<<T3_nr1_r0_m0_r1_m1m()<<" T3_nr1_r0_m0_r1_m1m "<<std::endl;
 
 
 
