@@ -39,7 +39,7 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   modeExcitation = excMode;
   decayProd  = prodDecay;
 
-  std::cout<< la_val <<"          MENSAJE GRANDE      !!!!!!!!!!!!!!     "<<excMode<<std::endl;   
+  // std::cout<< la_val <<"          MENSAJE GRANDE      !!!!!!!!!!!!!!     "<<excMode<<std::endl;   
 
   // define the light effective mass for the h.o.
   if (baryonFlag==1)                      mlight = mstrange;
@@ -264,9 +264,9 @@ double EMDecayWidths::execute(double ma_val, double sa_val, double ja_val, doubl
   double sum_value = ANGULAR_SUM_SQUARED(alpha_rho, alpha_lam, k_value, modeExcitation);
   double decayWidth = DecayWidth(fi2_value, sum_value);
 
-  std::cout<<decayProd<<"=decayProd "<<"  MB="<<MB<<std::endl;
-  std::cout<<"sb_val= "<<sb_val<<std::endl;
-  std::cout<<"flav_q1="<<flav_q1<<" flav_q2="<<flav_q2<<" flav_q3= "<<flav_q3<<" SB="<<sb_val<<" JB="<<jb_val<<" LB="<<lb_val<<" SlB="<<slb_val<<" LlamB="<<llb_val<<" LrhoB="<<lrb_val<<std::endl;
+  // std::cout<<decayProd<<"=decayProd "<<"  MB="<<MB<<std::endl;
+  // std::cout<<"sb_val= "<<sb_val<<std::endl;
+  // std::cout<<"flav_q1="<<flav_q1<<" flav_q2="<<flav_q2<<" flav_q3= "<<flav_q3<<" SB="<<sb_val<<" JB="<<jb_val<<" LB="<<lb_val<<" SlB="<<slb_val<<" LlamB="<<llb_val<<" LrhoB="<<lrb_val<<std::endl;
   // //testing integrals
   //alpha_rho = 0.4132549850060273; alpha_lam =0.5246260684382235;
   //k_value = 0.1422944563250534;

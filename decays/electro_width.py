@@ -78,7 +78,7 @@ class ElectroWidths:
 
                     channel_widths = np.append(channel_widths, single_decay_value)
                     baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
-                    if not bootstrap:
+                    if not bootstrap or True:
                         print('%6s |  %10s | %12s | %3s %5.3f | %3s %5.3f | %3s%5.1f | %3s%5.1f | %3s%5.1f | %3s%5.1f | %5.6f '
                               %(baryon_name, ModEx_name, decPr_name, "MA=", MassA, "MB=", MassB, "JA=", JA_qm, "LA=", LA_qm, "SA=", SA_qm, "SlA=", SlA_qm, single_decay_value))
                     
