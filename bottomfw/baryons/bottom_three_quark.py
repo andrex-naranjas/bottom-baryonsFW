@@ -146,13 +146,6 @@ class BottomThreeQuark:
 
                         print("perrito 2")
                         
-                        # electro_decay = self.electro_decay.total_decay_width(baryons, self.sampled_k[j], mass,
-                        #                                                      self.S_tot[i], self.J_tot[i], self.L_tot[i], self.SL[i],
-                        #                                                      self.ModEx[i], bootstrap=bootstrap_width_em, m1=self.sampled_m1[j], m2=self.sampled_m2[j], m3=self.sampled_m3[j])
-                        # dummy_decay_em = np.append(dummy_decay_em, electro_decay) # total electro decay
-                        # decays_electro_indi_csv.append(self.electro_decay.channel_widths_vector[0]) # individual channel electro decays
-                        # self.electro_decay.channel_widths_vector=[] # clean decay object for next iteration
-
                 if decay_width and not bootstrap_width: # bootstrap mass but not bootstrap widhts
                     mass_single = self.model_mass(i, 0, sampled=False)
                     mass_avg = self.precomputed_mass(baryons, i)

@@ -23,6 +23,7 @@ class ElectroWidths:
         self.m_width = decay(workpath)
         self.fetch_decay_masses(bootstrap)
         self.fetch_decay_masses_cascade_anti3(bootstrap) # cascades_anti3
+        self.fetch_decay_masses_cascade_prime(bootstrap) # cascades_anti3
         self.channel_widths_vector_swave = []
         self.channel_widths_vector_pwave = []
         self.channel_widths_vector_dwave = []
@@ -78,7 +79,7 @@ class ElectroWidths:
 
                     channel_widths = np.append(channel_widths, single_decay_value)
                     baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
-                    if not bootstrap or True:
+                    if not bootstrap:
                         print('%6s |  %10s | %12s | %3s %5.3f | %3s %5.3f | %3s%5.1f | %3s%5.1f | %3s%5.1f | %3s%5.1f | %5.6f '
                               %(baryon_name, ModEx_name, decPr_name, "MA=", MassA, "MB=", MassB, "JA=", JA_qm, "LA=", LA_qm, "SA=", SA_qm, "SlA=", SlA_qm, single_decay_value))
                     
@@ -311,69 +312,69 @@ class ElectroWidths:
             return self.omega_s_mass # testing    
         elif(baryons=='cascades' or baryons=='cascades_anti3'):
             if(decPr==101):
-                if not bootstrap: return self.xi_mass
-                else: return np.random.choice(self.gauss_xi, size=None)
+                if not bootstrap: return self.xi_1_decay
+                else: return np.random.choice(self.gauss_xi_1_decay, size=None)
             elif(decPr==102):
-                if not bootstrap: return self.xi_mass
-                else: return np.random.choice(self.gauss_xi, size=None)
+                if not bootstrap: return self.xi_1_decay
+                else: return np.random.choice(self.gauss_xi_1_decay, size=None)
             elif(decPr==103):
-                if not bootstrap: return self.xi_p_mass
+                if not bootstrap: return self.xi_p_1_decay
                 else: return np.random.choice(self.gauss_xi_p, size=None)
             elif(decPr==104):
-                if not bootstrap: return self.xi_p_s_mass
-                else: return np.random.choice(self.gauss_xi_p, size=None)
+                if not bootstrap: return self.xi_p_2_decay
+                else: return np.random.choice(self.gauss_xi_p_2_decay, size=None)
             elif(decPr==105):
-                if not bootstrap: return self.xi_p_mass
-                else: return np.random.choice(self.gauss_xi_p_s, size=None)
+                if not bootstrap: return self.xi_p_1_decay
+                else: return np.random.choice(self.gauss_xi_p_1_decay, size=None)
             elif(decPr==106):
-                if not bootstrap: return self.xi_p_s_mass
-                else: return np.random.choice(self.gauss_xi_p_s, size=None)
+                if not bootstrap: return self.xi_p_2_decay
+                else: return np.random.choice(self.gauss_xi_p_2_decay, size=None)
             # cascade anti_triplet
             elif(decPr==201 or decPr==208):
-                if not bootstrap: return 6.079
-                else: return 6.079
+                if not bootstrap: return self.xi_2_decay
+                else: return return np.random.choice(self.gauss_xi_2_decay, size=None)
             elif(decPr==202 or decPr==209):
-                if not bootstrap: return 6.085
-                else: return 6.085
+                if not bootstrap: return self.xi_3_decay
+                else: return np.random.choice(self.gauss_xi_3_decay, size=None)
             elif(decPr==203 or decPr==210):
-                if not bootstrap: return 6.248
-                else: return 6.248
+                if not bootstrap: return self.xi_4_decay
+                else: return np.random.choice(self.gauss_xi_4_decay, size=None)
             elif(decPr==204 or decPr==211):
-                if not bootstrap: return 6.271
-                else: return 6.271
+                if not bootstrap: return self.xi_5_decay
+                else: return np.random.choice(self.gauss_xi_5_decay, size=None)
             elif(decPr==205 or decPr==212):
-                if not bootstrap: return 6.255
-                else: return 6.255
+                if not bootstrap: return self.xi_6_decay
+                else: return np.random.choice(self.gauss_xi_6_decay, size=None)
             elif(decPr==206 or decPr==213):
-                if not bootstrap: return 6.277
-                else: return 6.277
+                if not bootstrap: return self.xi_7_decay
+                else: return np.random.choice(self.gauss_xi_7_decay, size=None)
             elif(decPr==207 or decPr==214):
-                if not bootstrap: return 6.287
-                else: return 6.287
+                if not bootstrap: return self.xi_8_decay
+                else: return np.random.choice(self.gauss_xi_8_decay, size=None)
             # cascade prime
             elif(decPr==215 or decPr==222):
-                if not bootstrap: return 6.198
-                else: return 6.198
+                if not bootstrap: return self.xi_p_3_decay
+                else: return np.random.choice(self.gauss_xi_p_3_decay, size=None)
             elif(decPr==216 or decPr==223):
-                if not bootstrap: return 6.220
-                else: return 6.220
+                if not bootstrap: return self.xi_p_4_decay
+                else: return np.random.choice(self.gauss_xi_p_4_decay, size=None)
             elif(decPr==217 or decPr==224):
-                if not bootstrap: return 6.204
-                else: return 6.204
+                if not bootstrap: return self.xi_p_5_decay
+                else: return np.random.choice(self.gauss_xi_p_5_decay, size=None)
             elif(decPr==218 or decPr==225):
-                if not bootstrap: return 6.226
-                else: return 6.226
+                if not bootstrap: return self.xi_p_6_decay
+                else: return np.random.choice(self.gauss_xi_p_6_decay, size=None)
             elif(decPr==219 or decPr==226):
-                if not bootstrap: return 6.237
-                else: return 6.237
+                if not bootstrap: return self.xi_p_7_decay
+                else: return np.random.choice(self.gauss_xi_p_7_decay, size=None)
             elif(decPr==220 or decPr==227):
-                if not bootstrap: return 6.367
-                else: return 6.367
+                if not bootstrap: return self.xi_p_8_decay
+                else: return np.random.choice(self.gauss_xi_p_8_decay, size=None)
             elif(decPr==221 or decPr==228):
-                if not bootstrap: return 6.374
-                else: return 6.374
+                if not bootstrap: return self.xi_p_9_decay
+                else: return np.random.choice(self.gauss_xi_p_8_decay, size=None)
             else:
-                return self.xi_p_s_mass # test
+                return self.xi_p_2_decay # test
                         
         elif(baryons=='sigmas'):
             if(decPr==101):
@@ -533,39 +534,60 @@ class ElectroWidths:
         self.xi_6_decay = 6.255   # 0 2p3/2-rho
         self.xi_7_decay = 6.277   # 0 4p3/2-rho
         self.xi_8_decay = 6.287   # 0 4p5/2-rho
+        if(bootstrap):
+            self.gauss_xi_1_decay  = np.random.normal(5.80600, 0.009, 10000) # 0 ground   
+            self.gauss_xi_2_decay  = np.random.normal(6.07900, 0.009, 10000) # 0 2p1/2-lam
+            self.gauss_xi_3_decay  = np.random.normal(6.08500, 0.009, 10000) # 0 2p3/2-lam
+            self.gauss_xi_4_decay  = np.random.normal(6.248  , 0.011, 10000) # 0 2p1/2-rho
+            self.gauss_xi_5_decay  = np.random.normal(6.271  , 0.015, 10000) # 0 4p1/2-rho
+            self.gauss_xi_6_decay  = np.random.normal(6.255  , 0.011, 10000) # 0 2p3/2-rho
+            self.gauss_xi_7_decay  = np.random.normal(6.277  , 0.014, 10000) # 0 4p3/2-rho
+            self.gauss_xi_8_decay  = np.random.normal(6.287  , 0.015, 10000) # 0 4p5/2-rho
+
+
+            
+    def fetch_decay_masses_cascade_prime(self, bootstrap):
+        '''
+        Method to fetch the decay products coming from our fit (mA)
+        '''
+        # decay to cascades prime
+        self.xi_p_1_decay = 5.925   # 0 ground
+        self.xi_p_2_decay = 5.953   # 0 ground
+        self.xi_p_3_decay = 6.198   # 0 2p1/2-lam 
+        self.xi_p_4_decay = 6.220   # 0 2p3/2-lam
+        self.xi_p_5_decay = 6.204   # 0 2p1/2-rho
+        self.xi_p_6_decay = 6.226   # 0 4p1/2-rho
+        self.xi_p_7_decay = 6.237   # 0 2p3/2-rho
+        self.xi_p_8_decay = 6.367   # 0 4p3/2-rho
+        self.xi_p_9_decay = 6.374   # 0 4p5/2-rho
+        if(bootstrap):
+            self.gauss_xi_p_1_decay  = np.random.normal(5.925, 0.006, 10000) # 0 ground
+            self.gauss_xi_p_2_decay  = np.random.normal(5.953, 0.007, 10000) # 0 ground   
+            self.gauss_xi_p_3_decay  = np.random.normal(6.198, 0.010, 10000) # 0 2p1/2-lam
+            self.gauss_xi_p_4_decay  = np.random.normal(6.220, 0.007, 10000) # 0 2p3/2-lam
+            self.gauss_xi_p_5_decay  = np.random.normal(6.204, 0.007, 10000) # 0 2p1/2-rho
+            self.gauss_xi_p_6_decay  = np.random.normal(6.226, 0.010, 10000) # 0 4p1/2-rho
+            self.gauss_xi_p_7_decay  = np.random.normal(6.237, 0.011, 10000) # 0 2p3/2-rho
+            self.gauss_xi_p_8_decay  = np.random.normal(6.367, 0.009, 10000) # 0 4p3/2-rho
+            self.gauss_xi_p_9_decay  = np.random.normal(6.374, 0.010, 10000) # 0 4p5/2-rho
 
         
-        self.xi_9_mass = 6.354
-        self.xi_10_mass = 6.364
-        self.xi_11_mass = 6.360
-        self.xi_12_mass = 6.699
-        self.xi_13_mass = 6.524
-        self.xi_14_mass = 6.534
-        self.xi_15_mass = 6.540
-        self.xi_16_mass = 6.546
-        self.xi_17_mass = 6.556
-        self.xi_18_mass = 6.570
-        self.xi_19_mass = 6.526
-        self.xi_20_mass = 6.532
-        self.xi_21_mass = 6.548
-        self.xi_22_mass = 6.554
-        self.xi_23_mass = 6.564
-        self.xi_24_mass = 6.558
-        self.xi_25_mass = 6.530
-        self.xi_26_mass = 6.693
-        self.xi_27_mass = 6.703
-
-# decay_em = ElectroWidths()
-
-# baryons = "cascades_anti3"
-# k_prim = 1
-# massA = 1
-# SA_val = 0.5
-# JA_val = 1.5
-# LA_val = 2
-# SlA_val = 0
-# ModEx_val = 'grd'
-
-# decay_em.total_decay_width(baryons, k_prim, massA, SA_val, JA_val, LA_val, SlA_val,
-#                            ModEx_val, bootstrap=False, m1=0, m2=0, m3=0)
-
+        # self.xi_9_mass = 6.354
+        # self.xi_10_mass = 6.364
+        # self.xi_11_mass = 6.360
+        # self.xi_12_mass = 6.699
+        # self.xi_13_mass = 6.524
+        # self.xi_14_mass = 6.534
+        # self.xi_15_mass = 6.540
+        # self.xi_16_mass = 6.546
+        # self.xi_17_mass = 6.556
+        # self.xi_18_mass = 6.570
+        # self.xi_19_mass = 6.526
+        # self.xi_20_mass = 6.532
+        # self.xi_21_mass = 6.548
+        # self.xi_22_mass = 6.554
+        # self.xi_23_mass = 6.564
+        # self.xi_24_mass = 6.558
+        # self.xi_25_mass = 6.530
+        # self.xi_26_mass = 6.693
+        # self.xi_27_mass = 6.703
