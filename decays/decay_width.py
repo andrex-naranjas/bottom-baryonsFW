@@ -32,8 +32,8 @@ class DecayWidths:
         """
         Method that calls the wrapper and sums the individual decay widths
         """
-        MassA = massA/1000.0
-        MassA_avg = self.MassA_avg
+        MassA = 6450/1000.0#massA/1000.0
+        MassA_avg = 6450/1000.0#self.MassA_avg
         SA_qm = SA_val
         LA_qm = L_val
         JA_qm = JA_val

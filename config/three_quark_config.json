@@ -6,7 +6,7 @@
     "decay_width": true,
     "decay_width_em": true,
     "bootstrap_mass": true,
-    "bootstrap_st_dec": true,
-    "bootstrap_em_dec": true,
+    "bootstrap_st_dec": false,
+    "bootstrap_em_dec": false,
     "previous_param": false
 }
