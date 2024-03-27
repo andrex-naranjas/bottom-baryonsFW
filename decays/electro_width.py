@@ -521,6 +521,31 @@ class ElectroWidths:
             self.gauss_xi       = np.random.normal(5.80600, 0.00700, 10000)
             self.gauss_lambda   = np.random.normal(5.61400, 0.00700, 10000)
 
+
+    def fetch_decay_masses_lambda(self, bootstrap):
+        '''
+        Method to fetch the decay products coming from our fit (mA)
+        '''
+        # decay to lambda
+        self.lambda_1_decay = 5.613   # 0 ground
+        self.lambda_2_decay = 5.918   # 0 2p1/2-lam 
+        self.lambda_3_decay = 5.924   # 0 2p3/2-lam
+        self.lambda_4_decay = 6.114   # 0 2p1/2-rho
+        self.lambda_5_decay = 6.137   # 0 4p1/2-rho
+        self.lambda_6_decay = 6.121   # 0 2p3/2-rho
+        self.lambda_7_decay = 6.143   # 0 4p3/2-rho
+        self.lambda_8_decay = 6.153   # 0 4p5/2-rho
+        if(bootstrap):
+            self.gauss_lambda_1_decay  = np.random.normal(5.61300, 0.009, 10000) # 0 ground   
+            self.gauss_lambda_2_decay  = np.random.normal(5.91800, 0.008, 10000) # 0 2p1/2-lam
+            self.gauss_lambda_3_decay  = np.random.normal(5.92400, 0.008, 10000) # 0 2p3/2-lam
+            self.gauss_lambda_4_decay  = np.random.normal(6.114  , 0.010, 10000) # 0 2p1/2-rho
+            self.gauss_lambda_5_decay  = np.random.normal(6.137  , 0.014, 10000) # 0 4p1/2-rho
+            self.gauss_lambda_6_decay  = np.random.normal(6.121  , 0.010, 10000) # 0 2p3/2-rho
+            self.gauss_lambda_7_decay  = np.random.normal(6.143  , 0.012, 10000) # 0 4p3/2-rho
+            self.gauss_lambda_8_decay  = np.random.normal(6.153  , 0.014, 10000) # 0 4p5/2-rho
+
+
     def fetch_decay_masses_cascade_anti3(self, bootstrap):
         '''
         Method to fetch the decay products coming from our fit (mA)
@@ -545,6 +570,31 @@ class ElectroWidths:
             self.gauss_xi_8_decay  = np.random.normal(6.287  , 0.015, 10000) # 0 4p5/2-rho
 
 
+    def fetch_decay_masses_sigma(self, bootstrap):
+        '''
+        Method to fetch the decay products coming from our fit (mA)
+        '''
+        # decay to sigma
+        self.sigma_1_decay = 5.804   # 0 ground
+        self.sigma_2_decay = 5.832  # 0 ground
+        self.sigma_3_decay = 6.108   # 0 2p1/2-lam 
+        self.sigma_4_decay = 6.131   # 0 4p1/2-lam
+        self.sigma_5_decay = 6.114   # 0 2p3/2-lam
+        self.sigma_6_decay = 6.137   # 0 4p3/2-lam
+        self.sigma_7_decay = 6.147   # 0 4p5/2-lam
+        self.sigma_8_decay = 6.304   # 0 2p1/2-rho
+        self.sigma_9_decay = 6.311   # 0 2p3/2-rho
+        if(bootstrap):
+            self.gauss_sigma_1_decay  = np.random.normal(5.804, 0.008, 10000) # 0 ground
+            self.gauss_sigma_2_decay  = np.random.normal(5.832, 0.008, 10000) # 0 ground   
+            self.gauss_sigma_3_decay  = np.random.normal(6.108, 0.010, 10000) # 0 2p1/2-lam
+            self.gauss_sigma_4_decay  = np.random.normal(6.131, 0.013, 10000) # 0 4p1/2-lam
+            self.gauss_sigma_5_decay  = np.random.normal(6.114, 0.010, 10000) # 0 2p3/2-lam
+            self.gauss_sigma_6_decay  = np.random.normal(6.137, 0.010, 10000) # 0 4p3/2-lam
+            self.gauss_sigma_7_decay  = np.random.normal(6.147, 0.012, 10000) # 0 4p5/2-lam
+            self.gauss_sigma_8_decay  = np.random.normal(6.304, 0.013, 10000) # 0 2p1/2-rho
+            self.gauss_sigma_9_decay  = np.random.normal(6.311, 0.013, 10000) # 0 2p3/2-rho
+
             
     def fetch_decay_masses_cascade_prime(self, bootstrap):
         '''
@@ -554,22 +604,48 @@ class ElectroWidths:
         self.xi_p_1_decay = 5.925   # 0 ground
         self.xi_p_2_decay = 5.953   # 0 ground
         self.xi_p_3_decay = 6.198   # 0 2p1/2-lam 
-        self.xi_p_4_decay = 6.220   # 0 2p3/2-lam
-        self.xi_p_5_decay = 6.204   # 0 2p1/2-rho
-        self.xi_p_6_decay = 6.226   # 0 4p1/2-rho
-        self.xi_p_7_decay = 6.237   # 0 2p3/2-rho
-        self.xi_p_8_decay = 6.367   # 0 4p3/2-rho
-        self.xi_p_9_decay = 6.374   # 0 4p5/2-rho
+        self.xi_p_4_decay = 6.220   # 0 4p1/2-lam
+        self.xi_p_5_decay = 6.204   # 0 2p3/2-lam
+        self.xi_p_6_decay = 6.226   # 0 4p3/2-lam
+        self.xi_p_7_decay = 6.237   # 0 4p5/2-lam
+        self.xi_p_8_decay = 6.367   # 0 2p1/2-rho
+        self.xi_p_9_decay = 6.374   # 0 2p3/2-rho
         if(bootstrap):
             self.gauss_xi_p_1_decay  = np.random.normal(5.925, 0.006, 10000) # 0 ground
             self.gauss_xi_p_2_decay  = np.random.normal(5.953, 0.007, 10000) # 0 ground   
-            self.gauss_xi_p_3_decay  = np.random.normal(6.198, 0.010, 10000) # 0 2p1/2-lam
-            self.gauss_xi_p_4_decay  = np.random.normal(6.220, 0.007, 10000) # 0 2p3/2-lam
-            self.gauss_xi_p_5_decay  = np.random.normal(6.204, 0.007, 10000) # 0 2p1/2-rho
-            self.gauss_xi_p_6_decay  = np.random.normal(6.226, 0.010, 10000) # 0 4p1/2-rho
-            self.gauss_xi_p_7_decay  = np.random.normal(6.237, 0.011, 10000) # 0 2p3/2-rho
-            self.gauss_xi_p_8_decay  = np.random.normal(6.367, 0.009, 10000) # 0 4p3/2-rho
-            self.gauss_xi_p_9_decay  = np.random.normal(6.374, 0.010, 10000) # 0 4p5/2-rho
+            self.gauss_xi_p_3_decay  = np.random.normal(6.198, 0.007, 10000) # 0 2p1/2-lam
+            self.gauss_xi_p_4_decay  = np.random.normal(6.220, 0.010, 10000) # 0 4p1/2-lam
+            self.gauss_xi_p_5_decay  = np.random.normal(6.204, 0.007, 10000) # 0 2p3/2-lam
+            self.gauss_xi_p_6_decay  = np.random.normal(6.226, 0.007, 10000) # 0 4p3/2-lam
+            self.gauss_xi_p_7_decay  = np.random.normal(6.237, 0.010, 10000) # 0 4p5/2-lam
+            self.gauss_xi_p_8_decay  = np.random.normal(6.367, 0.009, 10000) # 0 2p1/2-rho
+            self.gauss_xi_p_9_decay  = np.random.normal(6.374, 0.010, 10000) # 0 2p3/2-rho
+
+
+    def fetch_decay_masses_omega(self, bootstrap):
+        '''
+        Method to fetch the decay products coming from our fit (mA)
+        '''
+        # decay to cascades prime
+        self.omega_1_decay = 6.064   # 0 ground
+        self.omega_2_decay = 6.093   # 0 ground
+        self.omega_3_decay = 6.315   # 0 2p1/2-lam 
+        self.omega_4_decay = 6.337   # 0 4p1/2-lam
+        self.omega_5_decay = 6.321   # 0 2p3/2-lam
+        self.omega_6_decay = 6.343   # 0 4p3/2-lam
+        self.omega_7_decay = 6.353   # 0 4p5/2-lam
+        self.omega_8_decay = 6.465   # 0 2p1/2-rho
+        self.omega_9_decay = 6.471   # 0 2p3/2-rho
+        if(bootstrap):
+            self.gauss_omega_1_decay  = np.random.normal(6.064, 0.008, 10000) # 0 ground
+            self.gauss_omega_2_decay  = np.random.normal(6.093, 0.009, 10000) # 0 ground   
+            self.gauss_omega_3_decay  = np.random.normal(6.315, 0.007, 10000) # 0 2p1/2-lam
+            self.gauss_omega_4_decay  = np.random.normal(6.337, 0.010, 10000) # 0 4p1/2-lam
+            self.gauss_omega_5_decay  = np.random.normal(6.321, 0.008, 10000) # 0 2p3/2-lam
+            self.gauss_omega_6_decay  = np.random.normal(6.343, 0.007, 10000) # 0 4p3/2-lam
+            self.gauss_omega_7_decay  = np.random.normal(6.353, 0.011, 10000) # 0 4p5/2-lam
+            self.gauss_omega_8_decay  = np.random.normal(6.465, 0.009, 10000) # 0 2p1/2-rho
+            self.gauss_omega_9_decay  = np.random.normal(6.471, 0.010, 10000) # 0 2p3/2-rho
 
         
         # self.xi_9_mass = 6.354
