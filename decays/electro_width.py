@@ -21,9 +21,12 @@ class ElectroWidths:
     """
     def __init__(self, bootstrap=False, baryons='', workpath="."):
         self.m_width = decay(workpath)
-        self.fetch_decay_masses(bootstrap)
+        #self.fetch_decay_masses(bootstrap)
+        self.fetch_decay_masses_lambda(bootstrap) # lambdas
         self.fetch_decay_masses_cascade_anti3(bootstrap) # cascades_anti3
-        self.fetch_decay_masses_cascade_prime(bootstrap) # cascades_anti3
+        self.fetch_decay_masses_sigma(bootstrap) # sigmas
+        self.fetch_decay_masses_cascade_prime(bootstrap) # cascades
+        self.fetch_decay_masses_omega(bootstrap) # omegas
         self.channel_widths_vector_swave = []
         self.channel_widths_vector_pwave = []
         self.channel_widths_vector_dwave = []
@@ -577,7 +580,7 @@ class ElectroWidths:
         '''
         # decay to sigma
         self.sigma_1_decay = 5.804   # 0 ground
-        self.sigma_2_decay = 5.832  # 0 ground
+        self.sigma_2_decay = 5.832   # 0 ground
         self.sigma_3_decay = 6.108   # 0 2p1/2-lam 
         self.sigma_4_decay = 6.131   # 0 4p1/2-lam
         self.sigma_5_decay = 6.114   # 0 2p3/2-lam
