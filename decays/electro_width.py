@@ -383,69 +383,69 @@ class ElectroWidths:
         elif(baryons=='sigmas'):
             if(decPr==101):
                 if not bootstrap: return self.sigma_1_decay
-                else: return np.random.choice(self.sigma_1_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_1_decay, size=None)
             elif(decPr==102):
                 if not bootstrap: return self.sigma_2_decay
-                else: return np.random.choice(self.sigma_2_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_2_decay, size=None)
             elif(decPr==103):
                 if not bootstrap: return self.sigma_1_decay
-                else: return np.random.choice(self.sigma_1_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_1_decay, size=None)
             elif(decPr==104):
                 if not bootstrap: return self.sigma_2_decay
-                else: return np.random.choice(self.sigma_2_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_2_decay, size=None)
             elif(decPr==105):
                 if not bootstrap: return self.sigma_1_decay
-                else: return np.random.choice(self.sigma_1_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_1_decay, size=None)
             elif(decPr==106):
                 if not bootstrap: return self.sigma_2_decay
-                else: return np.random.choice(self.sigma_2_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_2_decay, size=None)
             elif(decPr==107):
                 if not bootstrap: return self.lambda_1_decay
-                else: return np.random.choice(self.lambda_1_decay, size=None)
+                else: return np.random.choice(self.gauss_lambda_1_decay, size=None)
             # sigmas
             elif(decPr==201 or decPr==208 or decPr==215):
                 if not bootstrap: return self.sigma_3_decay
-                else: return np.random.choice(self.sigma_3_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_3_decay, size=None)
             elif(decPr==202 or decPr==209 or decPr==216):
                 if not bootstrap: return self.sigma_4_decay
-                else: return np.random.choice(self.sigma_4_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_4_decay, size=None)
             elif(decPr==203 or decPr==210 or decPr==217):
                 if not bootstrap: return self.sigma_5_decay
-                else: return np.random.choice(self.sigma_5_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_5_decay, size=None)
             elif(decPr==204 or decPr==211 or decPr==218):
                 if not bootstrap: return self.sigma_6_decay
-                else: return np.random.choice(self.sigma_6_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_6_decay, size=None)
             elif(decPr==205 or decPr==212 or decPr==219):
                 if not bootstrap: return self.sigma_7_decay
-                else: return np.random.choice(self.sigma_7_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_7_decay, size=None)
             elif(decPr==206 or decPr==213 or decPr==220):
                 if not bootstrap: return self.sigma_8_decay
-                else: return np.random.choice(self.sigma_8_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_8_decay, size=None)
             elif(decPr==207 or decPr==214 or decPr==221):
                 if not bootstrap: return self.sigma_9_decay
-                else: return np.random.choice(self.sigma_9_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_9_decay, size=None)
             # lambdas
             elif(decPr==222):
                 if not bootstrap: return self.lambda_2_decay
-                else: return np.random.choice(self.lambda_2_decay, size=None)
+                else: return np.random.choice(self.gauss_lambda_2_decay, size=None)
             elif(decPr==223):
                 if not bootstrap: return self.lambda_3_decay
-                else: return np.random.choice(self.lambda_3_decay, size=None)
+                else: return np.random.choice(self.gauss_lambda_3_decay, size=None)
             elif(decPr==224):
                 if not bootstrap: return self.lambda_4_decay
-                else: return np.random.choice(self.lambda_4_decay, size=None)
+                else: return np.random.choice(self.gauss_lambda_4_decay, size=None)
             elif(decPr==225):
                 if not bootstrap: return self.lambda_5_decay
-                else: return np.random.choice(self.lambda_5_decay, size=None)
+                else: return np.random.choice(self.gauss_lambda_5_decay, size=None)
             elif(decPr==226):
                 if not bootstrap: return self.lambda_6_decay
-                else: return np.random.choice(self.lambda_6_decay, size=None)
+                else: return np.random.choice(self.gauss_lambda_6_decay, size=None)
             elif(decPr==227):
                 if not bootstrap: return self.lambda_7_decay
-                else: return np.random.choice(self.lambda_7_decay, size=None)
+                else: return np.random.choice(self.gauss_lambda_7_decay, size=None)
             elif(decPr==228):
                 if not bootstrap: return self.lambda_8_decay
-                else: return np.random.choice(self.lambda_8_decay, size=None)
+                else: return np.random.choice(self.gauss_lambda_8_decay, size=None)
 
         elif(baryons=='lambdas'):
             if(decPr==101):
@@ -482,25 +482,25 @@ class ElectroWidths:
             # sigmas0
             elif(decPr==208):
                 if not bootstrap: return self.sigma_3_decay
-                else: return np.random.choice(self.sigma_3_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_3_decay, size=None)
             elif(decPr==209):
                 if not bootstrap: return self.sigma_4_decay
-                else: return np.random.choice(self.sigma_4_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_4_decay, size=None)
             elif(decPr==210):
                 if not bootstrap: return self.sigma_5_decay
-                else: return np.random.choice(self.sigma_5_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_5_decay, size=None)
             elif(decPr==211):
                 if not bootstrap: return self.sigma_6_decay
-                else: return np.random.choice(self.sigma_6_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_6_decay, size=None)
             elif(decPr==212):
                 if not bootstrap: return self.sigma_7_decay
-                else: return np.random.choice(self.sigma_7_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_7_decay, size=None)
             elif(decPr==213):
                 if not bootstrap: return self.sigma_8_decay
-                else: return np.random.choice(self.sigma_8_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_8_decay, size=None)
             elif(decPr==214):
                 if not bootstrap: return self.sigma_9_decay
-                else: return np.random.choice(self.sigma_9_decay, size=None)
+                else: return np.random.choice(self.gauss_sigma_9_decay, size=None)
         
     #def fetch_decay_masses(self, bootstrap):
         '''
