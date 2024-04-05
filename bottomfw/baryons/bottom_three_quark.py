@@ -143,8 +143,6 @@ class BottomThreeQuark:
                         elif self.L_tot[i]==2:
                             decays_electro_indi_csv.append(self.electro_decay.channel_widths_vector_dwave[0]) # individual channel electro decays
                             self.electro_decay.channel_widths_vector_dwave=[] # clean decay object for next iteration
-
-                        print("perrito 2")
                         
                 if decay_width and not bootstrap_width: # bootstrap mass but not bootstrap widhts
                     mass_single = self.model_mass(i, 0, sampled=False)
