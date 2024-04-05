@@ -332,6 +332,62 @@ class EMDecayWidths{
   virtual double T3_r1_m1_l1_m0_GS();
   virtual double T3_r1_m0_l1_m1_GS();
 
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to ground state
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nl1_l0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nl1_l0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nl1_l0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial rho to ground state
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nr1_r0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nr1_r0_m0_GS(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nr1_r0_m0_GS();
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to P wave lambda
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nl1_l0_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nl1_l0_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nl1_l0_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+
+  // ORBIT-FLIP Tensor operators
+  virtual double T1_nl1_l0_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T2_nl1_l0_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T3_nl1_l0_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial lambda to P wave rho
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nl1_l0_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nl1_l0_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nl1_l0_m0_r1_m0();
+
+  // ORBIT-FLIP Tensor operators
+  virtual double T1_nl1_l0_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T2_nl1_l0_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T3_nl1_l0_m0_r1_m1m();
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial rho to P wave lambda
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nr1_r0_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nr1_r0_m0_l1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nr1_r0_m0_l1_m0();
+
+  // ORBIT-FLIP Tensor operators
+  virtual double T1_nr1_r0_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T2_nr1_r0_m0_l1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T3_nr1_r0_m0_l1_m1m();
+
+  //Definitions of the Integrals and Tensor Operators for decays from Radial rho to P rho
+  // SPIN-FLIP INTEGRALS
+  virtual double SPINFLIP_U1_nr1_r0_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U2_nr1_r0_m0_r1_m0(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight);
+  virtual double SPINFLIP_U3_nr1_r0_m0_r1_m0();
+
+  // ORBIT-FLIP Tensor operators
+  virtual double T1_nr1_r0_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T2_nr1_r0_m0_r1_m1m(double k_value, double alpha_lam, double alpha_rho, double mbottom, double mlight, double thetak, double phik);
+  virtual double T3_nr1_r0_m0_r1_m1m();
+
 
 
 
@@ -399,6 +455,48 @@ class EMDecayWidths{
   virtual double T1Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   virtual double T2Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
   virtual double T3Mix2GS1mgs(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik,  int MLrA_val, int MLlA_val);
+
+  // Sum of integrals Radial lambda -> ground state
+  virtual double U1Rl2GS(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+  virtual double U2Rl2GS(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+  virtual double U3Rl2GS(double k_value, double alpha_lam, double alpha_rho, int MLlA_val);
+
+  // Sum of integrals Radial rho -> ground state
+  virtual double U1Rr2GS(double k_value, double alpha_lam, double alpha_rho, int MLrA_val);
+  virtual double U2Rr2GS(double k_value, double alpha_lam, double alpha_rho, int MLrA_val);
+  virtual double U3Rr2GS(double k_value, double alpha_lam, double alpha_rho, int MLrA_val);
+
+  // Sum of integrals Radial lambda -> P lambda
+  virtual double U1Rl2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U2Rl2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U3Rl2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double T1Rl2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+  virtual double T2Rl2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+  virtual double T3Rl2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+
+  // Sum of integrals Radial lambda -> P rho
+  virtual double U1Rl2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U2Rl2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U3Rl2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double T1Rl2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+  virtual double T2Rl2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+  virtual double T3Rl2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+
+  // Sum of integrals Radial rho -> P lambda
+  virtual double U1Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U2Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U3Rr2Pl(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double T1Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+  virtual double T2Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+  virtual double T3Rr2Pl(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLlB_val);
+
+  // Sum of integrals Radial rho -> P rho
+  virtual double U1Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U2Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double U3Rr2Pr(double k_value, double alpha_lam, double alpha_rho, int MLrA_val, int MLlA_val);
+  virtual double T1Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val);
+  virtual double T2Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val);
+  virtual double T3Rr2Pr(double k_value, double alpha_lam, double alpha_rho, double thetak, double phik, int MLrA_val, int MLlA_val, int MLrB_val);
   
 };
 
