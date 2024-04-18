@@ -977,7 +977,7 @@ double BottomDecayWidths::I02B0TOT_DWAVE_RHO(double alpha_rho, double alpha_lam,
 // lambda wave functions
 double BottomDecayWidths::CBARFIN_RADIAL(double alpha_rho, double alpha_lam){
   double value1 = std::pow(3,0.75) * std::pow(2./3.,0.5);
-  double value2 = std::pow(1.0/( std::pow(pi_val, 4) * std::pow(alpha_lam, 2) *std::pow(alpha_rho, 2) ), 0.75);
+  double value2 = std::pow(1.0/( std::pow(pi_val, 2) * std::pow(alpha_lam, 2) *std::pow(alpha_rho, 2) ), 0.75); // corrected 18.04.24
   return value1 * value2 ;// * mycomplex;//define complex if needed
 }
 
@@ -1078,7 +1078,7 @@ double BottomDecayWidths::I02B0TOT_RADIAL(double alpha_rho, double alpha_lam, do
 // rho wave functions
 double BottomDecayWidths::CBARFIN_RADIAL_RHO(double alpha_rho, double alpha_lam){
   double value1 = std::pow(3,0.75) * std::pow(2./3.,0.5);
-  double value2 = std::pow(1.0/( std::pow(pi_val, 4) * std::pow(alpha_lam, 2) *std::pow(alpha_rho, 2) ), 0.75);
+  double value2 = std::pow(1.0/( std::pow(pi_val, 2) * std::pow(alpha_lam, 2) *std::pow(alpha_rho, 2) ), 0.75); // corrected 18.04.24
   return value1 * value2 ;// * mycomplex;//define complex if needed
 }
 

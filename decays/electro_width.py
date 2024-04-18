@@ -74,11 +74,12 @@ class ElectroWidths:
                 for i in range(nChannels_Swave):
                     decPr = i + 100 + 1
                     MassB = self.decay_mass(bootstrap, baryons, decPr)
-                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
-                                                                    MassB,
-                                                                    alpha_lam, alpha_rho,
-                                                                    mbottom, mupdown, mstrange,
-                                                                    baryon, ModEx, decPr)
+                    single_decay_value =  0                    
+                    # single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                    #                                                 MassB,
+                    #                                                 alpha_lam, alpha_rho,
+                    #                                                 mbottom, mupdown, mstrange,
+                    #                                                 baryon, ModEx, decPr)
 
                     channel_widths = np.append(channel_widths, single_decay_value)
                     baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
@@ -101,11 +102,12 @@ class ElectroWidths:
                 for i in range(nChannels_Swave):
                     decPr = i + 100 + 1
                     MassB = self.decay_mass(bootstrap, baryons, decPr)
-                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
-                                                                    MassB,
-                                                                    alpha_lam, alpha_rho,
-                                                                    mbottom, mupdown, mstrange,
-                                                                    baryon, ModEx, decPr)
+                    single_decay_value = 0
+                    # single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                    #                                                 MassB,
+                    #                                                 alpha_lam, alpha_rho,
+                    #                                                 mbottom, mupdown, mstrange,
+                    #                                                 baryon, ModEx, decPr)
                     
                     channel_widths = np.append(channel_widths, single_decay_value)
                     baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
@@ -117,11 +119,12 @@ class ElectroWidths:
                 for i in range(nChannels_Pwave):
                     decPr = i + 200 + 1
                     MassB = self.decay_mass(bootstrap, baryons, decPr)
-                    single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
-                                                                    MassB,
-                                                                    alpha_lam, alpha_rho,
-                                                                    mbottom, mupdown, mstrange,
-                                                                    baryon, ModEx, decPr)
+                    single_decay_value =  0
+                    # single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                    #                                                 MassB,
+                    #                                                 alpha_lam, alpha_rho,
+                    #                                                 mbottom, mupdown, mstrange,
+                    #                                                 baryon, ModEx, decPr)
                     channel_widths = np.append(channel_widths, single_decay_value)
                     baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
                     if not bootstrap:
@@ -143,11 +146,12 @@ class ElectroWidths:
             for i in range(nChannels_Swave):
                 decPr = i + 100 + 1
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
-                single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
-                                                                MassB,
-                                                                alpha_lam, alpha_rho,
-                                                                mbottom, mupdown, mstrange,
-                                                                baryon, ModEx, decPr)
+                single_decay_value = 0
+                # single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                #                                                 MassB,
+                #                                                 alpha_lam, alpha_rho,
+                #                                                 mbottom, mupdown, mstrange,
+                #                                                 baryon, ModEx, decPr)
                     
                 channel_widths = np.append(channel_widths, single_decay_value)
                 baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
@@ -160,11 +164,12 @@ class ElectroWidths:
             for i in range(nChannels_Pwave):
                 decPr = i + 200 + 1
                 MassB = self.decay_mass(bootstrap, baryons, decPr)
-                single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
-                                                                MassB,
-                                                                alpha_lam, alpha_rho,
-                                                                mbottom, mupdown, mstrange,
-                                                                baryon, ModEx, decPr)
+                single_decay_value = 0
+                # single_decay_value = self.m_width.electro_width(MassA, SA_qm, JA_qm, LA_qm, SlA_qm, LlA_qm, LrA_qm,
+                #                                                 MassB,
+                #                                                 alpha_lam, alpha_rho,
+                #                                                 mbottom, mupdown, mstrange,
+                #                                                 baryon, ModEx, decPr)
                 channel_widths = np.append(channel_widths, single_decay_value)
                 baryon_name, ModEx_name, decPr_name =  du.state_labels(baryon, ModEx, decPr, LA_qm)
                 if not bootstrap:
