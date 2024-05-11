@@ -477,12 +477,13 @@ def print_row_latex(mass_a, masses_b, masses_c, state_name, state_decays, errors
     print(state_name, end='',file=f_out)
     for i in range(nstate):
         value=0
-        if(state_decays[i]==0.000000000000000000000):
+        if(state_decays[i]!=0.0000000000):
             if mass_a < masses_b[i] + masses_c[i]: # check if the width is zero for energy conservation
                 cons_energy_count+=1
                 value = '$0$'
                 print(value,"  &", end='', file=f_out)
             else:
+                print(f"{state_decays[i]:.36f}" )
                 value = '-'
                 print(value,"  &", end='', file=f_out)
         else:
