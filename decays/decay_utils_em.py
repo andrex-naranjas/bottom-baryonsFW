@@ -275,6 +275,9 @@ def asymmetric_decay_indi_error(list_array_decays):
         
 def latex_decay_label(baryon, decPr):
 
+    # test
+    decPr_name = ("TEST", xi_p_mass)
+
     if(baryon==1 or baryon=='omegas'):
         baryon_name = "omega"
         if(decPr==1):

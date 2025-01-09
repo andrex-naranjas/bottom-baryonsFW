@@ -483,7 +483,7 @@ def print_row_latex(mass_a, masses_b, masses_c, state_name, state_decays, errors
                 value = '$0$'
                 print(value,"  &", end='', file=f_out)
             else:
-                print(f"{state_decays[i]:.36f}" )
+                # print(f"{state_decays[i]:.36f}" ) # TEST PRINT!!!
                 value = '-'
                 print(value,"  &", end='', file=f_out)
         else:

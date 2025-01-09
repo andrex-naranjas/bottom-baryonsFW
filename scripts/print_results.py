@@ -25,7 +25,7 @@ dv.paper_tables_results(run_baryons, di_three_quark='three_quark', decay_width=T
                         asymmetric=True, prev_params=False, workpath=workpath, batch_number=True) # batch_number -> True, None ;)
 print('three-quark results created')
 
-# # create summary of the results and store in a csv file
+# create summary of the results and store in a csv file
 dv.paper_tables_results(run_baryons, di_three_quark='diquark', decay_width=False,
                         asymmetric=True, prev_params=False, workpath=workpath, batch_number=None)
 print('diquark results created')
@@ -48,7 +48,8 @@ bottom_tables.correlation_table_three()
 bottom_tables.correlation_table_di_flavor()
 
 bottom_tables.decay_indi_table()
-bottom_tables.decay_indi_table_em_err(compare=False)
+bottom_tables.decay_indi_table_em_err(compare=False, charge="zero", n_states=19, off_set=8)
+bottom_tables.decay_indi_table_em_err(compare=False, charge="negative", n_states=19, off_set=8)
 bottom_tables.comparison_three_quark_model_table()
 
 
