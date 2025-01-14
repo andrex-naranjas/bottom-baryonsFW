@@ -290,8 +290,8 @@ class BottomTables:
         name_decays.append("mass (MeV)")
         for k in range(n_decay_channels):
             name_header.append(" ")
-            name_decays.append(dec.latex_decay_label(baryons, k+1)[0])
-            mass_decs_B.append(dec.latex_decay_label(baryons, k+1)[1])
+            name_decays.append(dec.latex_decay_label(baryons, k+1, charge)[0])
+            mass_decs_B.append(dec.latex_decay_label(baryons, k+1, charge)[1])
             if not compare:
                 coulmn_sep += "&"
             else:
@@ -390,9 +390,9 @@ class BottomTables:
         name_decays.append("$^{2S+1}L_{J}$")
 
         for k in range(n_decay_channels):
-            name_decays.append("KeV")
-            name_header.append(dec.latex_decay_label(baryons, k+1)[0])
-            mass_decs_B.append(dec.latex_decay_label(baryons, k+1)[1])
+            name_decays.append(dec.notation_spect(baryons, k+1, charge))
+            name_header.append(dec.latex_decay_label(baryons, k+1, charge)[0])
+            mass_decs_B.append(dec.latex_decay_label(baryons, k+1, charge)[1])
             coulmn_sep += "&"
 
         dec.print_header_latex(name_header, name_decays, compare, f_decay_indi)

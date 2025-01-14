@@ -162,15 +162,8 @@ def decay_indi_tables_results(baryons, decay_type="strong", asymmetric=False, pr
             f_indi_charged.append(f_indi)
 
             
-    if baryons == "omegas" or baryons=="sigmas" or baryons=="cascades":
-        n_states = 9 # we only have up to P-wave states for electro CHECK!!
-    else:
-        n_states = 8 # we only have up to P-wave states for electro CHECK!!
-
     for i in range(len(state)-corr_em):
-        # if (decay_type == "electro" and i >= n_states):
-        #     break
-
+        
         decay_indi_df = None
         if batch_number is None:
             decay_indi_df = pd.read_csv(workpath+"/tables/decays_indi"+second_name+decay_name+"/decays_state_"+str(i)+"_"+baryons+".csv")
@@ -188,6 +181,8 @@ def decay_indi_tables_results(baryons, decay_type="strong", asymmetric=False, pr
            charged_separated.append(decay_indi_em_zero)
            decay_indi_em_neg = decay_indi_df[["1_channel", "4_channel", "5_channel", "13_channel", "14_channel", "15_channel", "16_channel", "17_channel", "18_channel", "19_channel", "27_channel", "28_channel", "29_channel", "30_channel", "31_channel", "32_channel", "33_channel"]]
            charged_separated.append(decay_indi_em_neg)
+        elif decay_type=="electro" and (baryons=="lamabdas"):
+            charged_separated.append(decay_indi_df)
         
 
         for ch in range(len(charged_separated)):

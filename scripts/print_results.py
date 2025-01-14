@@ -48,9 +48,15 @@ bottom_tables.correlation_table_three()
 bottom_tables.correlation_table_di_flavor()
 
 bottom_tables.decay_indi_table()
-bottom_tables.decay_indi_table_em_err(compare=False, charge="zero", n_states=19, off_set=8)
-bottom_tables.decay_indi_table_em_err(compare=False, charge="negative", n_states=19, off_set=8)
 bottom_tables.comparison_three_quark_model_table()
+
+
+if run_baryons =="cascades" or run_baryons =="cascades_anti3":
+    bottom_tables.decay_indi_table_em_err(compare=False, charge="zero", n_states=19, off_set=8)
+    bottom_tables.decay_indi_table_em_err(compare=False, charge="negative", n_states=19, off_set=8)
+elif run_baryons =="lambdas":
+    bottom_tables.decay_indi_table_em_err(compare=False, charge=None, n_states=19, off_set=8)
+
 
 
 # plots
